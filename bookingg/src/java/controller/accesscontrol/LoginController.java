@@ -5,12 +5,13 @@
 package controller.accesscontrol;
 
 import dal.UserDBContext;
-import entity.accesscontrol.User;
+import model.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import model.User;
 
 /**
  *
