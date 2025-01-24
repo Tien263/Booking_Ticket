@@ -62,7 +62,7 @@ public class RegisterController extends HttpServlet {
             request.setAttribute("username", username);
             request.setAttribute("phone", phone);
             request.setAttribute("address", address);
-            request.getRequestDispatcher("register.jsp").forward(request, response);
+            request.getRequestDispatcher("login.jsp").forward(request, response);
             return;
         }
         if (cd.checkUsernameExist(username)) {
@@ -71,7 +71,8 @@ public class RegisterController extends HttpServlet {
             request.setAttribute("username", username);
             request.setAttribute("phone", phone);
             request.setAttribute("address", address);
-            request.getRequestDispatcher("register.jsp").forward(request, response);
+            request.getRequestDispatcher("login.jsp").forward(request, response);
+            return;
         }
         if (!phone.matches("\\d{10}")) {
             request.setAttribute("error", "Wrong phone format! Must be 10 digits!");
@@ -79,7 +80,7 @@ public class RegisterController extends HttpServlet {
             request.setAttribute("username", username);
             request.setAttribute("phone", phone);
             request.setAttribute("address", address);
-            request.getRequestDispatcher("register.jsp").forward(request, response);
+            request.getRequestDispatcher("login.jsp").forward(request, response);
             return;
         }
         if(cd.checkPhoneExist(phone)) {
@@ -88,11 +89,12 @@ public class RegisterController extends HttpServlet {
             request.setAttribute("username", username);
             request.setAttribute("phone", phone);
             request.setAttribute("address", address);
-            request.getRequestDispatcher("register.jsp").forward(request, response);
+            request.getRequestDispatcher("login.jsp").forward(request, response);
+            return;
         }
 
         cd.insert(c);
-        response.sendRedirect("login.html");
+        response.sendRedirect("login.jsp");
     }
 
     @Override

@@ -14,7 +14,7 @@
                     <span>Register</span>
                 </h2>
             </div>
-            <form action="register" method="POST">
+            <form action="register1" method="POST">
                 <div class="row justify-content-lg-between">
                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" data-aos="fade-up" data-aos-delay="500">
                         <div class="form_item">

@@ -16,6 +16,8 @@ import java.util.logging.Logger;
  */
 public class CustomerDao extends DBContext<Customer> {
 
+    
+    
     public boolean checkEmailExist(String email) {
         try {
             String sqlcheck = "select * from customer where c_email = ?";
@@ -116,5 +118,34 @@ public class CustomerDao extends DBContext<Customer> {
     public Customer get(int id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-   
+
+    public Customer getCustomerByEmail(String email, String password) {
+        try {
+            String sqlcheck = "select * from customer where c_email = ? and c_password = ?";
+            PreparedStatement stm = connection.prepareStatement(sqlcheck);
+            stm.setString(1, email);
+            stm.setString(2, password);
+            ResultSet rs = stm.executeQuery();
+            if(rs.next()){
+                Customer c = new Customer();
+                c.setEmail(email);
+                c.setFullname(rs.getString("c_fullname"));
+                c.setPhone(rs.getString("c_phone"));
+                c.setGender(rs.getBoolean("c_gender"));
+                c.setAddress(rs.getString("c_address"));
+                c.setUsername(rs.getString("c_username"));
+                c.setPassword(password);
+                return c;
+            }
+          
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+
+        return null;
+    }
+
+
+    
 }
