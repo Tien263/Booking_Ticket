@@ -8,6 +8,14 @@
         <servlet-name>CustomerLogin</servlet-name>
         <servlet-class>controller.accesscontrol.CustomerLogin</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AccountController</servlet-name>
+        <servlet-class>controller.accesscontrol.AccountController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangeAccountController</servlet-name>
+        <servlet-class>controller.accesscontrol.ChangeAccountController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Register</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -15,5 +23,13 @@
     <servlet-mapping>
         <servlet-name>CustomerLogin</servlet-name>
         <url-pattern>/cuslogin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AccountController</servlet-name>
+        <url-pattern>/account</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangeAccountController</servlet-name>
+        <url-pattern>/changeaccount</url-pattern>
     </servlet-mapping>
 </web-app>

@@ -16,8 +16,6 @@ import java.util.logging.Logger;
  */
 public class CustomerDao extends DBContext<Customer> {
 
-    
-    
     public boolean checkEmailExist(String email) {
         try {
             String sqlcheck = "select * from customer where c_email = ?";
@@ -37,7 +35,7 @@ public class CustomerDao extends DBContext<Customer> {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, username);
             ResultSet rs = ps.executeQuery();
-            
+
             if (rs.next()) {
                 return true;
             }
@@ -46,22 +44,22 @@ public class CustomerDao extends DBContext<Customer> {
         }
         return false;
     }
-    
+
     public boolean checkPhoneExist(String phone) {
-    try {
-        String sql = "select * from Customer where c_phone = ?";
-        PreparedStatement ps = connection.prepareStatement(sql);
-        ps.setString(1, phone);
-        ResultSet rs = ps.executeQuery();
-        
-        if (rs.next()) {
-            return true; // Trả về true nếu số điện thoại đã tồn tại
+        try {
+            String sql = "select * from Customer where c_phone = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, phone);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return true; // Trả về true nếu số điện thoại đã tồn tại
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-    } catch (SQLException e) {
-        e.printStackTrace();
+        return false;
     }
-    return false; 
-}
 
     @Override
     public void insert(Customer entity) {
@@ -101,7 +99,31 @@ public class CustomerDao extends DBContext<Customer> {
 
     @Override
     public void update(Customer entity) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String sql_update = "UPDATE [dbo].[Customer]\n"
+                + "   SET [c_email] = ?\n"
+                + "      ,[c_fullname] = ?\n"
+                + "      ,[c_phone] = ?\n"
+                + "      ,[c_gender] = ?\n"
+                + "      ,[c_address] = ?\n"
+                + "      ,[c_username] = ?\n"
+                + "      ,[c_password] = ?\n"
+                + " WHERE [c_email] = ?";
+
+        PreparedStatement stm_update = null;
+        try {
+            stm_update = connection.prepareStatement(sql_update);
+            stm_update.setString(1, entity.getEmail());
+            stm_update.setString(2, entity.getFullname());
+            stm_update.setString(3, entity.getPhone());
+            stm_update.setBoolean(4, entity.isGender());
+            stm_update.setString(5, entity.getUsername());
+            stm_update.setString(6, entity.getPassword());
+            stm_update.executeUpdate();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     @Override
@@ -126,7 +148,7 @@ public class CustomerDao extends DBContext<Customer> {
             stm.setString(1, email);
             stm.setString(2, password);
             ResultSet rs = stm.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 Customer c = new Customer();
                 c.setEmail(email);
                 c.setFullname(rs.getString("c_fullname"));
@@ -137,15 +159,12 @@ public class CustomerDao extends DBContext<Customer> {
                 c.setPassword(password);
                 return c;
             }
-          
+
         } catch (SQLException ex) {
             Logger.getLogger(CustomerDao.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
 
         return null;
     }
 
-
-    
 }
