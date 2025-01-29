@@ -52,43 +52,62 @@ public class RegisterController extends HttpServlet {
         String confirmpass = request.getParameter("confirmpass");
         String phone = request.getParameter("phone");
         String address = request.getParameter("address");
-        Boolean gender = true;
+        Boolean gender = Boolean.parseBoolean(request.getParameter("gender"));
 
+        
+        System.out.println(String.valueOf(gender));
         CustomerDao cd = new CustomerDao();
-        Customer c = new Customer(email, fullname, phone, address, true, username, password);
+        Customer c = new Customer(email, fullname, phone, address, gender, username, password);
         if (cd.checkEmailExist(email)) {
             request.setAttribute("error", "Email exists. Choose another email!");
             request.setAttribute("fullname", fullname);
             request.setAttribute("username", username);
+            request.setAttribute("password", password);
+            request.setAttribute("confirmpass", confirmpass);
             request.setAttribute("phone", phone);
             request.setAttribute("address", address);
+            request.setAttribute("gender", gender);
+
             request.getRequestDispatcher("login.jsp").forward(request, response);
             return;
         }
         if (cd.checkUsernameExist(username)) {
             request.setAttribute("error", "Username exists. Choose another username!");
             request.setAttribute("fullname", fullname);
-            request.setAttribute("username", username);
+            request.setAttribute("email", email);
+            request.setAttribute("password", password);
+            request.setAttribute("confirmpass", confirmpass);
             request.setAttribute("phone", phone);
             request.setAttribute("address", address);
+            request.setAttribute("gender", gender);
+
             request.getRequestDispatcher("login.jsp").forward(request, response);
             return;
         }
         if (!phone.matches("\\d{10}")) {
             request.setAttribute("error", "Wrong phone format! Must be 10 digits!");
             request.setAttribute("fullname", fullname);
+            request.setAttribute("email", email);
             request.setAttribute("username", username);
+            request.setAttribute("password", password);
+            request.setAttribute("confirmpass", confirmpass);
             request.setAttribute("phone", phone);
             request.setAttribute("address", address);
+            request.setAttribute("gender", gender);
+
             request.getRequestDispatcher("login.jsp").forward(request, response);
             return;
         }
-        if(cd.checkPhoneExist(phone)) {
+        if (cd.checkPhoneExist(phone)) {
             request.setAttribute("error", "Phone exists. Choose another phone!");
             request.setAttribute("fullname", fullname);
+            request.setAttribute("email", email);
             request.setAttribute("username", username);
-            request.setAttribute("phone", phone);
+            request.setAttribute("password", password);
+            request.setAttribute("confirmpass", confirmpass);
             request.setAttribute("address", address);
+            request.setAttribute("gender", gender);
+
             request.getRequestDispatcher("login.jsp").forward(request, response);
             return;
         }
@@ -97,10 +116,11 @@ public class RegisterController extends HttpServlet {
         response.sendRedirect("login.jsp");
     }
 
+    
     @Override
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
 
+    
 }
-

@@ -40,16 +40,30 @@ public class CustomerLogin extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.getRequestDispatcher("login.jsp").forward(request, response);
+        
+
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         CustomerDao cd = new CustomerDao();
         HttpSession session = request.getSession();
+        
+        if (email == null || password == null || email.isEmpty() || password.isEmpty()) {
+            request.setAttribute("loginerror", "Email and Password are required!");
+            request.getRequestDispatcher("login.jsp").forward(request, response);
+            return;
+        }
 
         if (cd.checkEmailExist(email)) {
             Customer c = cd.getCustomerByEmail(email, password);
-            
+
             if (c != null) {
-                
+
                 session.setAttribute("customer", c);
                 response.sendRedirect("car.html");
             } else {
@@ -62,13 +76,6 @@ public class CustomerLogin extends HttpServlet {
             request.getRequestDispatcher("login.jsp").forward(request, response);
 
         }
-
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
     }
 
     @Override

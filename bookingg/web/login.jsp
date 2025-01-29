@@ -7,6 +7,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
 <html lang="en">
 
     <head>
@@ -416,7 +417,7 @@
                                         Savings of up to 15% with our car rental solutions, global coverage and a dedicated customer team
                                     </p>
                                     <span class="new_account mb_15">Log In or <a href="#!">Create an Account?</a></span>
-                                    <form action="cuslogin" method="GET">
+                                    <form action="cuslogin" method="post">
                                         <div class="form_item">
                                             <input type="text" name="email" placeholder="Your email" required>
                                         </div>
@@ -442,43 +443,55 @@
                             </h2>
                         </div>
                         <form action="register" method="POST">
-                            <div class="row justify-content-lg-between">
+                            <div class="row">
+                                <!-- Cột bên trái -->
                                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" data-aos="fade-up" data-aos-delay="500">
                                     <div class="form_item">
-                                        <input type="text" name="fullname" placeholder="Your Name*" value="${fullname}" required>
+                                        <label for="fullname">Full Name*</label>
+                                        <input type="text" id="fullname" name="fullname" placeholder="Your Full Name" value="${fullname}" required>
                                     </div>
                                     <div class="form_item">
-                                        <input type="email" name="email" placeholder="Your Email*" value="${email}" required>
+                                        <label for="email">Email*</label>
+                                        <input type="email" id="email" name="email" placeholder="Your Email" value="${email}" required>
                                     </div>
                                     <div class="form_item">
-                                        <input type="text" name="username" placeholder="Username*" value="${username}" required>
+                                        <label for="username">Username*</label>
+                                        <input type="text" id="username" name="username" placeholder="Username" value="${username}" required>
                                     </div>
                                     <div class="form_item">
-                                        <input type="password" name="password" placeholder="Password*" required>
-                                    </div>
-                                    <div class="form_item">
-                                        <input type="password" name="confirmpass" placeholder="Confirm Password*" required>
-                                    </div>
-                                    <div class="form_item">
-                                        <input type="tel" name="phone" placeholder="Phone Number*" value="${phone}" required>
-                                    </div>
-                                    <div class="form_item">
-                                        <input type="text" name="address" placeholder="Address*" value="${address}">
-                                    </div>
-                                    <p style="color: red;">${error}</p>
-                                    <div class="form_item">
-                                        <!-- Nút bấm register -->
-                                        <button type="submit" name="register" class="btn btn-primary">Register</button>
+                                        <label for="phone">Phone Number*</label>
+                                        <input type="tel" id="phone" name="phone" placeholder="Phone Number" value="${phone}" required pattern="[0-9]{10}">
                                     </div>
                                 </div>
 
+                                <!-- Cột bên phải -->
                                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" data-aos="fade-up" data-aos-delay="700">
-                                    
-                                    
-                                    
-                                    <button type="submit" class="custom_btn bg_default_red text-uppercase mb-0">Login <img src="assets/images/icons/icon_01.png" alt="icon_not_found"></button>
+                                    <div class="form_item">
+                                        <label for="password">Password*</label>
+                                        <input type="password" id="password" name="password" placeholder="Password" required>
+                                    </div>
+                                    <div class="form_item">
+                                        <label for="confirmpass">Confirm Password*</label>
+                                        <input type="password" id="confirmpass" name="confirmpass" placeholder="Confirm Password" required>
+                                    </div>
+                                    <div class="form_item">
+                                        <label for="gender">Gender*</label>
+                                        <select id="gender" name="gender" required>
+                                            <option value="1" <c:if test="${gender}">selected</c:if>>Male</option>
+                                            <option value="0" <c:if test="${gender}">selected</c:if>>Female</option>
+                                            </select>
+                                        </div>
+                                        <div class="form_item">
+                                            <label for="address">Address</label>
+                                            <input type="text" id="address" name="address" placeholder="Address" value="${address}">
+                                    </div>
                                 </div>
                             </div>
+
+                            <div class="form_item text-center mt-4">
+                                <button type="submit" name="register" class="custom_btn bg_default_red text-uppercase">Register</button>
+                            </div>
+                            <p style="color: red; text-align: center;">${error}</p>
                         </form>
                     </div>
 

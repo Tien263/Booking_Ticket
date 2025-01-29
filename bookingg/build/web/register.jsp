@@ -36,7 +36,15 @@
                             <input type="tel" name="phone" placeholder="Phone Number*" value="${phone}" required>
                         </div>
                         <div class="form_item">
-                            <input type="text" name="address" placeholder="Address*" value="${address}">
+                            <label for="gender">Gender:</label>
+                            <div>
+                                <input type="radio" id="male" name="gender" value="true" required ${gender == true ? 'checked' : ''}>
+                                <label for="male">Male</label>
+                            </div>
+                            <div class="form_item">
+                                <input type="text" name="address" placeholder="Address*" value="${address}">
+                            </div>
+
                         </div>
                         <p style="color: red;">${error}</p>
                         <div class="form_item">
@@ -44,7 +52,6 @@
                             <button type="submit" name="register" class="btn btn-primary">Register</button>
                         </div>
                     </div>
-                </div>
             </form>
         </div>
     </body>

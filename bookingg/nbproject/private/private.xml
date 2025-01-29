@@ -4,12 +4,13 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/D:/Booking_Ticket/bookingg/web/register.jsp</file>
-            <file>file:/D:/Booking_Ticket/bookingg/web/WEB-INF/web.xml</file>
-            <file>file:/D:/Booking_Ticket/bookingg/src/java/controller/accesscontrol/RegisterController.java</file>
+            <file>file:/D:/Booking_Ticket/bookingg/src/java/controller/accesscontrol/ChangeAccountController.java</file>
+            <file>file:/D:/Booking_Ticket/bookingg/web/index.html</file>
             <file>file:/D:/Booking_Ticket/bookingg/src/java/controller/accesscontrol/CustomerLogin.java</file>
-            <file>file:/D:/Booking_Ticket/bookingg/src/java/dal/CustomerDao.java</file>
+            <file>file:/D:/Booking_Ticket/bookingg/src/java/model/Customer.java</file>
+            <file>file:/D:/Booking_Ticket/bookingg/web/account.jsp</file>
+            <file>file:/D:/Booking_Ticket/bookingg/web/change1.jsp</file>
             <file>file:/D:/Booking_Ticket/bookingg/web/login.jsp</file>
-            <file>file:/D:/Booking_Ticket/bookingg/web/index_1.html</file>
         </group>
     </open-files>
 </project-private>
