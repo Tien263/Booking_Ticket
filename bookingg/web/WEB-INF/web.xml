@@ -8,8 +8,16 @@
         <servlet-name>EmployeeLoginnController</servlet-name>
         <servlet-class>controller.accesscontrol.EmployeeLoginnController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdateEmployeeController</servlet-name>
+        <servlet-class>controller.accesscontrol.UpdateEmployeeController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>EmployeeLoginnController</servlet-name>
         <url-pattern>/employee_login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateEmployeeController</servlet-name>
+        <url-pattern>/employee_update</url-pattern>
     </servlet-mapping>
 </web-app>

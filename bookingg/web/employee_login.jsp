@@ -17,7 +17,7 @@
     <c:if test="${not empty loginerror}">
         <p style="color: red;">${loginerror}</p>
     </c:if>
-    <form action="employee_login" method="get">
+    <form action="employee_login" method="post">
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" required><br><br>
         

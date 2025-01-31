@@ -11,16 +11,25 @@ import java.util.ArrayList;
  * @author ADMIN
  */
 public class User {
-    
+
     private String username;
     private String password;
+    private int eId = -1; // Mặc định là -1 nếu chưa có Employee
     private ArrayList<Employee> emp = new ArrayList<>();
-    
 
-    public boolean hasEmployeeInfo(){
-        return !emp.isEmpty(); //trả về true nếu danh sách không trống
+    // Lấy e_id của nhân viên đầu tiên nếu có (tránh lỗi khi Employee trống)
+    public int getFirstEmployeeId() {
+        if (!emp.isEmpty()) {
+            return emp.get(0).getId(); // Lấy e_id của nhân viên đầu tiên
+        }
+        return -1; // Trả về -1 nếu không có Employee nào
     }
-    
+
+    public boolean hasEmployeeInfo() {
+        System.out.println("🔍 Checking Employee Info: e_id = " + eId);
+        return eId > 0; //trả về true nếu danh sách không trống
+    }
+
     public User() {
     }
 
@@ -52,8 +61,18 @@ public class User {
     public void setEmp(ArrayList<Employee> emp) {
         this.emp = emp;
     }
-    
-    
-    
-    
+
+    // Thêm Employee vào danh sách
+    public void addEmployee(Employee employee) {
+        this.emp.add(employee);
+    }
+
+    public int geteId() {
+        return eId;
+    }
+
+    public void seteId(int eId) {
+        this.eId = eId;
+    }
+
 }

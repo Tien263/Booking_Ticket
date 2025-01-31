@@ -19,6 +19,10 @@ public class Roles {
         this.id = id;
         this.name = name;
     }
+    
+    public Roles(int id) {
+        this.id = id;
+    }
 
     public int getId() {
         return id;

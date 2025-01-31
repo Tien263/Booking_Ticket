@@ -12,12 +12,81 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.User;
+import java.sql.*;
 
 /**
  *
  * @author ADMIN
  */
 public class EmployeeDao extends DBContext<Employee> {
+
+    public boolean updateUserEId(String username, int eId) {
+        String sql = "UPDATE Users SET e_id = ? WHERE u_username = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, eId);
+            ps.setString(2, username);
+
+            int rowsAffected = ps.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("✅ Updated e_id for user: " + username + " -> e_id: " + eId);
+                return true;
+            } else {
+                System.out.println("⚠️ Failed to update e_id for user: " + username);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean updateEmployee(Employee emp) {
+        String sql = "UPDATE Employee SET e_name = ?, e_phone = ?, e_address = ?, e_gender = ? WHERE e_id = ?";
+
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, emp.getName());
+            ps.setString(2, emp.getPhone());
+            ps.setString(3, emp.getAddress());
+            ps.setBoolean(4, emp.isGender());
+            ps.setInt(5, emp.getId());
+
+            int rowsAffected = ps.executeUpdate();
+
+            if (rowsAffected > 0) {
+                System.out.println("Employee updated successfully! e_id: " + emp.getId());
+                return true;
+            } else {
+                System.out.println("No rows updated! Check if e_id exists: " + emp.getId());
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean insertEmployee(Employee emp) {
+        String sql = "INSERT INTO Employee (e_name, e_phone, e_address, e_gender) VALUES (?, ?, ?, ?)";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, emp.getName());
+            ps.setString(2, emp.getPhone());
+            ps.setString(3, emp.getAddress());
+            ps.setBoolean(4, emp.isGender());
+
+            int rowsAffected = ps.executeUpdate();
+            if (rowsAffected > 0) {
+                ResultSet generatedKeys = ps.getGeneratedKeys();
+                if (generatedKeys.next()) {
+                    emp.setId(generatedKeys.getInt(1)); // Cập nhật e_id cho Employee
+                }
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 
     public boolean hasEmployeeInfo(int userId) {
         String sql = "SELECT COUNT(*) FROM Employee WHERE e_id = ?";
@@ -34,42 +103,32 @@ public class EmployeeDao extends DBContext<Employee> {
         return false; // Trả về false nếu có lỗi hoặc không tìm thấy
     }
 
-    public User getEmployeeByUsername(String username, String password) {
+    public User getUserByUsernameAndPassword(String username, String password) {
         User user = null;
-        String sql = "SELECT u.u_username, u.u_password, e.e_id, e.e_name, e.e_phone, e.e_address, e.e_gender "
-                + "FROM Users u LEFT JOIN Employee e ON u.e_id = e.e_id "
-                + "WHERE u.u_username = ? AND u.u_password = ?"; // Loại bỏ dấu nháy đơn xung quanh ?
+        String sql = "SELECT u.u_username, u.u_password, COALESCE(u.e_id, -1) AS e_id "
+                + "FROM Users u WHERE u.u_username = ? AND u.u_password = ?";
 
         try {
-            PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setString(1, username); // Thay thế ? đầu tiên bằng username
-            stm.setString(2, password); // Thay thế ? thứ hai bằng password
-            ResultSet rs = stm.executeQuery();
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, username);
+            ps.setString(2, password);
+            ResultSet rs = ps.executeQuery();
 
-            while (rs.next()) {
-                if (user == null) {
-                    // Tạo đối tượng User khi tìm thấy kết quả
-                    user = new User(rs.getString("u_username"), rs.getString("u_password"));
-                }
+            if (rs.next()) {
+                user = new User(rs.getString("u_username"), rs.getString("u_password"));
+                int retrievedEId = rs.getInt("e_id"); // Lấy e_id từ DB
+                user.seteId(retrievedEId);
 
-                int eId = rs.getInt("e_id");
-                if (!rs.wasNull()) {
-                    // Nếu có thông tin Employee
-                    Employee emp = new Employee();
-                    emp.setId(eId);
-                    emp.setName(rs.getString("e_name"));
-                    emp.setPhone(rs.getString("e_phone"));
-                    emp.setAddress(rs.getString("e_address"));
-                    emp.setGender(rs.getBoolean("e_gender"));
-                    user.getEmp().add(emp); // Thêm Employee vào danh sách của User
-                }
+                System.out.println("User found: " + user.getUsername() + ", e_id: " + retrievedEId);
+            } else {
+                System.out.println("User not found or incorrect password.");
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(EmployeeDao.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-
-        return user; // Trả về đối tượng User hoặc null nếu không tìm thấy
+        return user;
     }
+// địt mẹ mày
 
     public boolean checkUserNameExist(String username) {
         try {
