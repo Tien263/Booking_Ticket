@@ -228,7 +228,7 @@
                                             <li class="has_child">
                                                 <a href="#!">Blogs</a>
                                                 <ul class="submenu">
-                                                    <li><a href="blog.html">Blog</a></li>
+                                                    <li><a href="cuslistblog">Blog</a></li>
                                                     <li><a href="blog_details.html">Blog Details</a></li>
                                                 </ul>
                                             </li>
