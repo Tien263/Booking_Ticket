@@ -1,5 +1,6 @@
 package controller.accesscontrol;
 
+import MD5.BCrypt;
 import dal.EmployeeDao;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -35,9 +36,10 @@ public class EmployeeLoginnController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         String username = request.getParameter("username");
+        String username = request.getParameter("username");
         String password = request.getParameter("password");
-
+        BCrypt bCrypt = new BCrypt();
+        String password1= bCrypt.hashpw(password, bCrypt.gensalt());
         EmployeeDao ed = new EmployeeDao();
         HttpSession session = request.getSession();
         
@@ -56,7 +58,7 @@ public class EmployeeLoginnController extends HttpServlet {
             }
         } else {
             request.setAttribute("loginerror", "Invalid username or password!");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
+            request.getRequestDispatcher("employee_login.jsp").forward(request, response);
         }
     }
 

@@ -16,6 +16,22 @@ import java.util.logging.Logger;
  */
 public class UserDBContext extends DBContext<User> {
 
+    // Lấy thông tin User theo username
+public User getUserByUsername(String username) {
+    String query = "select * from Users where u_username = ?";
+    try {
+        PreparedStatement ps = connection.prepareStatement(query);
+        ps.setString(1, username);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            return new User(rs.getString("u_username"), rs.getString("u_password"));
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return null;
+}
+    
     public User get(String username, String password) {
     String sql = "SELECT u.UserName FROM [User] u " +
                  "WHERE u.UserName = ? AND u.[password] = ?";
@@ -43,6 +59,21 @@ public class UserDBContext extends DBContext<User> {
     }
     return user;
 }
+    
+     // Cập nhật mật khẩu
+    public boolean updatePassword(String username, String newPassword) {
+        String query = "UPDATE Users SET u_password = ? WHERE u_username = ?";
+        try  {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setString(1, newPassword);
+            ps.setString(2, username);
+            int rowsUpdated = ps.executeUpdate();
+            return rowsUpdated > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 
     @Override
     public void insert(User entity) {

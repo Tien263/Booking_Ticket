@@ -4,6 +4,7 @@
  */
 package dal;
 
+import MD5.BCrypt;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -105,6 +106,7 @@ public class EmployeeDao extends DBContext<Employee> {
 
     public User getUserByUsernameAndPassword(String username, String password) {
         User user = null;
+        BCrypt bCrypt = new BCrypt();
         String sql = "SELECT u.u_username, u.u_password, COALESCE(u.e_id, -1) AS e_id "
                 + "FROM Users u WHERE u.u_username = ? AND u.u_password = ?";
 
@@ -115,20 +117,15 @@ public class EmployeeDao extends DBContext<Employee> {
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-                user = new User(rs.getString("u_username"), rs.getString("u_password"));
-                int retrievedEId = rs.getInt("e_id"); // Lấy e_id từ DB
+                user = new User(rs.getString("u_username"), bCrypt.hashpw(rs.getString("u_password"),bCrypt.gensalt()));
+                int retrievedEId = rs.getInt("e_id"); // Lấy e_id từ DB, sql));
                 user.seteId(retrievedEId);
-
-                System.out.println("User found: " + user.getUsername() + ", e_id: " + retrievedEId);
-            } else {
-                System.out.println("User not found or incorrect password.");
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return user;
     }
-// địt mẹ mày
 
     public boolean checkUserNameExist(String username) {
         try {

@@ -12,6 +12,14 @@
         <servlet-name>UpdateEmployeeController</servlet-name>
         <servlet-class>controller.accesscontrol.UpdateEmployeeController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ResetPasswordController</servlet-name>
+        <servlet-class>controller.accesscontrol.ResetPasswordController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>VerifyUsernameController</servlet-name>
+        <servlet-class>controller.accesscontrol.VerifyUsernameController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>EmployeeLoginnController</servlet-name>
         <url-pattern>/employee_login</url-pattern>
@@ -19,5 +27,13 @@
     <servlet-mapping>
         <servlet-name>UpdateEmployeeController</servlet-name>
         <url-pattern>/employee_update</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ResetPasswordController</servlet-name>
+        <url-pattern>/reset_password</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>VerifyUsernameController</servlet-name>
+        <url-pattern>/verify_username</url-pattern>
     </servlet-mapping>
 </web-app>
