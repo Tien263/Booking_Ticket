@@ -4,13 +4,14 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/D:/Booking_Ticket/bookingg/web/register.jsp</file>
-            <file>file:/D:/Booking_Ticket/bookingg/web/blog.html</file>
-            <file>file:/D:/Booking_Ticket/bookingg/src/java/controller/accesscontrol/CusBlogDetailController.java</file>
-            <file>file:/D:/Booking_Ticket/bookingg/src/java/dal/BlogDao.java</file>
-            <file>file:/D:/Booking_Ticket/bookingg/web/blogdetail.jsp</file>
-            <file>file:/D:/Booking_Ticket/bookingg/src/java/controller/accesscontrol/CusListBlogController.java</file>
-            <file>file:/D:/Booking_Ticket/bookingg/web/blog.jsp</file>
-            <file>file:/D:/Booking_Ticket/bookingg/src/java/model/Blog.java</file>
+            <file>file:/D:/Booking_Ticket/bookingg/src/java/controller/accesscontrol/RegisterController.java</file>
+            <file>file:/D:/Booking_Ticket/bookingg/src/java/controller/accesscontrol/ChangeAccountController.java</file>
+            <file>file:/D:/Booking_Ticket/bookingg/web/car.html</file>
+            <file>file:/D:/Booking_Ticket/bookingg/src/java/controller/accesscontrol/CustomerLogin.java</file>
+            <file>file:/D:/Booking_Ticket/bookingg/src/java/dal/DBContext.java</file>
+            <file>file:/D:/Booking_Ticket/bookingg/web/changepassword.jsp</file>
+            <file>file:/D:/Booking_Ticket/bookingg/src/java/dal/CustomerDao.java</file>
+            <file>file:/D:/Booking_Ticket/bookingg/web/change1.jsp</file>
             <file>file:/D:/Booking_Ticket/bookingg/web/account.jsp</file>
         </group>
     </open-files>

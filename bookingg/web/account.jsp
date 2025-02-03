@@ -437,7 +437,6 @@
                                             <li><span>Full Name:</span> ${customer.getFullname()} </li>
                                             <li><span>E-mail:</span> ${customer.getEmail()} </li>
                                             <li><span>Username:</span> ${customer.getUsername()} </li>
-                                            <li><span>Password:</span> ${customer.getPassword()}</li>
                                             <li><span>Phone Number:</span> ${customer.getPhone()} </li>
                                             <li><span>Gender:</span> ${customer.isGender() ? 'Male' : 'Female'}</li>
                                             <li><span>Address:</span> ${customer.getAddress()}</li>
@@ -445,6 +444,11 @@
 
 
                                         <a class="text_btn text-uppercase" href="change1"><span>Change Account Information</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
+
+                                        <div>
+                                            <a class="text_btn text-uppercase" href="changepassword"><span>Change Password</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
+
+                                        </div>
                                     </div>
 
                                     <div class="account_info_list" data-aos="fade-up" data-aos-delay="300">

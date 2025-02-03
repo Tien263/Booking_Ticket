@@ -444,10 +444,7 @@
                                                     <input type="text" name="username" value="${customer.getUsername()}" required>
                                                 </div>
 
-                                                <div>
-                                                    <label for="password">Password</label>
-                                                    <input type="password" name="password" value="${customer.getPassword()}" required>
-                                                </div>
+                                                
 
                                                 <div>
                                                     <label for="phone">Phone</label>
@@ -473,6 +470,8 @@
 
 
                                         <a class="text_btn text-uppercase" href="changeaccount"><span>Change Account Information</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
+                                        
+
                                     </div>
 
                                     <div class="account_info_list" data-aos="fade-up" data-aos-delay="300">

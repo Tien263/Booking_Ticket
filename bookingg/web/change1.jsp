@@ -28,10 +28,7 @@
             <input type="text" name="username" value="${customer.getUsername()}" required>
         </div>
 
-        <div>
-            <label for="password">Password</label>
-            <input type="password" name="password" value="${customer.getPassword()}" required>
-        </div>
+        
 
         <div>
             <label for="phone">Phone</label>

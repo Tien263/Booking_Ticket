@@ -135,7 +135,6 @@ public class CustomerDao extends DBContext<Customer> {
                 + "      ,[c_gender] = ?\n"
                 + "      ,[c_address] = ?\n"
                 + "      ,[c_username] = ?\n"
-                + "      ,[c_password] = ?\n"
                 + " WHERE [c_email] = ?";
 
         // thay chua, dau,
@@ -147,8 +146,7 @@ public class CustomerDao extends DBContext<Customer> {
             stm_update.setBoolean(3, entity.isGender());
             stm_update.setString(4, entity.getAddress());
             stm_update.setString(5, entity.getUsername());
-            stm_update.setString(6, entity.getPassword());
-            stm_update.setString(7, entity.getEmail());
+            stm_update.setString(6, entity.getEmail());
             stm_update.executeUpdate();
 
         } catch (SQLException ex) {
@@ -173,28 +171,27 @@ public class CustomerDao extends DBContext<Customer> {
     }
 
     public Customer getByEmail(String email) {
-    String query = "SELECT * FROM Customer WHERE c_email = ?";
-    try (PreparedStatement ps = connection.prepareStatement(query)) {
-        ps.setString(1, email);
-        ResultSet rs = ps.executeQuery();
-        if (rs.next()) {
-            return new Customer(
-                rs.getString("c_email"),
-                rs.getString("c_fullname"),
-                rs.getString("c_phone"),
-                rs.getString("c_address"),
-                rs.getBoolean("c_gender"),
-                rs.getString("c_username"),
-                rs.getString("c_password")
-            );
+        String query = "SELECT * FROM Customer WHERE c_email = ?";
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return new Customer(
+                        rs.getString("c_email"),
+                        rs.getString("c_fullname"),
+                        rs.getString("c_phone"),
+                        rs.getString("c_address"),
+                        rs.getBoolean("c_gender"),
+                        rs.getString("c_username"),
+                        rs.getString("c_password")
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-    } catch (SQLException e) {
-        e.printStackTrace();
+        return null;
     }
-    return null;
-}
 
-    
     public Customer getCustomerByEmail(String email, String password) {
         try {
             String sqlcheck = "select * from customer where c_email = ? and c_password = ?";
@@ -219,6 +216,20 @@ public class CustomerDao extends DBContext<Customer> {
         }
 
         return null;
+    }
+
+    public String getPasswordByEmail(String email) {
+        String query = "SELECT c_password FROM Customer WHERE c_email = ?";
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getString("c_password");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null; // Nếu không tìm thấy email trong cơ sở dữ liệu
     }
 
 }
