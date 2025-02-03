@@ -4,6 +4,7 @@
  */
 package controller.accesscontrol;
 
+import MD5.BCrypt;
 import dal.CustomerDao;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -50,6 +51,8 @@ public class CustomerLogin extends HttpServlet {
             throws ServletException, IOException {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
+        BCrypt bCrypt = new BCrypt();
+        String password1 = bCrypt.hashpw(password,bCrypt.gensalt());
         CustomerDao cd = new CustomerDao();
         HttpSession session = request.getSession();
         

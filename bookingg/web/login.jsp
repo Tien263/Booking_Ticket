@@ -7,7 +7,6 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-
 <html lang="en">
 
     <head>
@@ -228,7 +227,7 @@
                                             <li class="has_child">
                                                 <a href="#!">Blogs</a>
                                                 <ul class="submenu">
-                                                    <li><a href="cuslistblog">Blog</a></li>
+                                                    <li><a href="blog.html">Blog</a></li>
                                                     <li><a href="blog_details.html">Blog Details</a></li>
                                                 </ul>
                                             </li>
@@ -417,7 +416,7 @@
                                         Savings of up to 15% with our car rental solutions, global coverage and a dedicated customer team
                                     </p>
                                     <span class="new_account mb_15">Log In or <a href="#!">Create an Account?</a></span>
-                                    <form action="cuslogin" method="post">
+                                    <form action="cuslogin" method="GET">
                                         <div class="form_item">
                                             <input type="text" name="email" placeholder="Your email" required>
                                         </div>

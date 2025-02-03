@@ -86,12 +86,10 @@ public class ChangeAccountController extends HttpServlet {
         }
 
         // Nếu không trùng, tiến hành cập nhật
-        cd.update(c);
-        Customer refreshedCustomer = cd.getByEmail(email);
-        request.getSession().setAttribute("customer", refreshedCustomer);
+        
 
-        request.getSession().setAttribute("successMessage", "Account updated successfully!");
-        response.sendRedirect("account");
+        cd.update(c);
+        response.sendRedirect("account1.jsp");
     }
 
     /**

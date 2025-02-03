@@ -194,7 +194,7 @@
                                         <ul class="ul_li_block clearfix">
                                             <li><a href="#!"><i class="fal fa-user-circle"></i> Profile</a></li>
                                             <li><a href="#!"><i class="fal fa-user-cog"></i> Settings</a></li>
-                                            <li><a href="cuslogin"><i class="fal fa-sign-out"></i> Logout</a></li>
+                                            <li><a href="#!"><i class="fal fa-sign-out"></i> Logout</a></li>
                                         </ul>
                                     </div>
                                 </li>
@@ -410,7 +410,7 @@
                                         <a class="active" data-toggle="tab" href="#admin_tab"><i class="fas fa-user"></i> ${customer.username}</a>
                                     </li>
                                     <li>
-                                        <a href="cuslogin"><i class="fas fa-sign-out-alt"></i> Log Out <img class="arrow" src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
+                                        <a href="login.jsp"><i class="fas fa-sign-out-alt"></i> Log Out <img class="arrow" src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
                                     </li>
                                     <li>
                                         <a data-toggle="tab" href="#profile_tab"><i class="fas fa-address-book"></i> Booking Profiles</a>
@@ -425,12 +425,6 @@
                         <div class="col-lg-8 col-md-8 col-sm-10 col-xs-12">
                             <div class="account_tab_content tab-content">
                                 <div id="admin_tab" class="tab-pane active">
-
-                                    <c:if test="${not empty sessionScope.successMessage}">
-                                        <p style="color: green; text-align: center;">${sessionScope.successMessage}</p>
-                                        <c:remove var="successMessage" scope="session"/>
-                                    </c:if>
-
                                     <div class="account_info_list" data-aos="fade-up" data-aos-delay="100">
                                         <h3 class="list_title mb_30">Account:</h3>
                                         <ul class="ul_li_block clearfix">
@@ -442,7 +436,6 @@
                                             <li><span>Gender:</span> ${customer.isGender() ? 'Male' : 'Female'}</li>
                                             <li><span>Address:</span> ${customer.getAddress()}</li>
                                         </ul>
-
 
                                         <a class="text_btn text-uppercase" href="change1"><span>Change Account Information</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
                                     </div>
