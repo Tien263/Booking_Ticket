@@ -54,7 +54,6 @@ public class RegisterController extends HttpServlet {
         String address = request.getParameter("address");
         Boolean gender = Boolean.parseBoolean(request.getParameter("gender"));
 
-        
         System.out.println(String.valueOf(gender));
         CustomerDao cd = new CustomerDao();
         Customer c = new Customer(email, fullname, phone, address, gender, username, password);
@@ -71,6 +70,19 @@ public class RegisterController extends HttpServlet {
             request.getRequestDispatcher("login.jsp").forward(request, response);
             return;
         }
+
+        if (!confirmpass.equals(password)) {
+            request.setAttribute("error", "Password is not matched. Type again!");
+            request.setAttribute("fullname", fullname);
+            request.setAttribute("email", email);
+            request.setAttribute("phone", phone);
+            request.setAttribute("address", address);
+            request.setAttribute("gender", gender);
+
+            request.getRequestDispatcher("login.jsp").forward(request, response);
+            return;
+        }
+
         if (cd.checkUsernameExist(username)) {
             request.setAttribute("error", "Username exists. Choose another username!");
             request.setAttribute("fullname", fullname);
@@ -116,11 +128,9 @@ public class RegisterController extends HttpServlet {
         response.sendRedirect("login.jsp");
     }
 
-    
     @Override
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
 
-    
 }
