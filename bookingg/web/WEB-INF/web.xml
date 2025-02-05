@@ -1,47 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="6.0" xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd">
-    <filter>
-        <filter-name>AuthFilter</filter-name>
-        <filter-class>filter.AuthFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>AuthFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
     <servlet>
-        <servlet-name>EmployeeLoginController</servlet-name>
-        <servlet-class>controller.accesscontrol.EmployeeLoginController</servlet-class>
+        <servlet-name>Register</servlet-name>
+        <servlet-class>controller.accesscontrol.RegisterController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>EmployeeLoginnController</servlet-name>
-        <servlet-class>controller.accesscontrol.EmployeeLoginnController</servlet-class>
+        <servlet-name>CustomerLogin</servlet-name>
+        <servlet-class>controller.accesscontrol.CustomerLogin</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>UpdateEmployeeController</servlet-name>
-        <servlet-class>controller.accesscontrol.UpdateEmployeeController</servlet-class>
+        <servlet-name>AccountController</servlet-name>
+        <servlet-class>controller.accesscontrol.AccountController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ResetPasswordController</servlet-name>
-        <servlet-class>controller.accesscontrol.ResetPasswordController</servlet-class>
+        <servlet-name>ChangeAccountController</servlet-name>
+        <servlet-class>controller.accesscontrol.ChangeAccountController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>VerifyUsernameController</servlet-name>
-        <servlet-class>controller.accesscontrol.VerifyUsernameController</servlet-class>
+        <servlet-name>CusListBlogController</servlet-name>
+        <servlet-class>controller.accesscontrol.CusListBlogController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CusBlogDetailController</servlet-name>
+        <servlet-class>controller.accesscontrol.CusBlogDetailController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangePasswordController</servlet-name>
+        <servlet-class>controller.accesscontrol.ChangePasswordController</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>EmployeeLoginnController</servlet-name>
-        <url-pattern>/employee_login</url-pattern>
+        <servlet-name>Register</servlet-name>
+        <url-pattern>/register</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>UpdateEmployeeController</servlet-name>
-        <url-pattern>/employee_update</url-pattern>
+        <servlet-name>CustomerLogin</servlet-name>
+        <url-pattern>/cuslogin</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ResetPasswordController</servlet-name>
-        <url-pattern>/reset_password</url-pattern>
+        <servlet-name>AccountController</servlet-name>
+        <url-pattern>/account</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>VerifyUsernameController</servlet-name>
-        <url-pattern>/verify_username</url-pattern>
+        <servlet-name>ChangeAccountController</servlet-name>
+        <url-pattern>/change1</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CusListBlogController</servlet-name>
+        <url-pattern>/cuslistblog</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CusBlogDetailController</servlet-name>
+        <url-pattern>/cusblogdetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangePasswordController</servlet-name>
+        <url-pattern>/changepassword</url-pattern>
     </servlet-mapping>
 </web-app>
