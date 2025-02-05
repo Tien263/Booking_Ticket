@@ -126,7 +126,6 @@ public class EmployeeDao extends DBContext<Employee> {
         }
         return user;
     }
-// địt mẹ mày
 
     public boolean checkUserNameExist(String username) {
         try {

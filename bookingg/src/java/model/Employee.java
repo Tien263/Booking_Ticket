@@ -21,7 +21,6 @@ public class Employee {
     private ArrayList<Roles> roles = new ArrayList<>();
     
     
-    
     public Employee() {
     }
 
