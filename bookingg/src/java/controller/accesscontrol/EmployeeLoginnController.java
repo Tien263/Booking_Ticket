@@ -2,6 +2,7 @@ package controller.accesscontrol;
 
 import MD5.BCrypt;
 import dal.EmployeeDao;
+import dal.UserDBContext;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -11,6 +12,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.Scanner;
 import model.User;
 
@@ -39,22 +41,35 @@ public class EmployeeLoginnController extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         BCrypt bCrypt = new BCrypt();
-        String password1= bCrypt.hashpw(password, bCrypt.gensalt());
         EmployeeDao ed = new EmployeeDao();
         HttpSession session = request.getSession();
-        
+
         User user = ed.getUserByUsernameAndPassword(username, password);
 
         if (user != null) {
             session.setAttribute("user", user);
-            System.out.println("Login success: " + user.getUsername() + ", e_id: " + user.geteId());
+            System.out.println("Login success: " + user.getUsername());
 
-            if (user.hasEmployeeInfo()) { 
-                // Nếu user đã có e_id, chuyển luôn đến car.html
+            // Lấy danh sách roles của user
+            UserDBContext userDB = new UserDBContext();
+            List<String> roles = userDB.getRolesByUsername(username);
+            session.setAttribute("roles", roles);
+
+            // Nếu không có vai trò nào, tức là khách hàng
+            if (roles.isEmpty()) {
+                response.sendRedirect("index_1.jsp");
+                return;
+            }
+
+            // Kiểm tra quyền và điều hướng
+            if (roles.contains("Marketing")) {
                 response.sendRedirect("car.html");
-            } else { 
-                // Nếu user chưa có e_id, yêu cầu cập nhật thông tin Employee
-                response.sendRedirect("update_employee.jsp");
+            } else if (roles.contains("History")) {
+                response.sendRedirect("history_dashboard.jsp");
+            } else if (roles.contains("Sale")) {
+                response.sendRedirect("sale_dashboard.jsp");
+            } else {
+                response.sendRedirect("access_denied.jsp");
             }
         } else {
             request.setAttribute("loginerror", "Invalid username or password!");
@@ -65,8 +80,7 @@ public class EmployeeLoginnController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        
+
 //        String username = request.getParameter("username");
 //        String password = request.getParameter("password");
 //        EmployeeDao ed = new EmployeeDao();
@@ -97,7 +111,7 @@ public class EmployeeLoginnController extends HttpServlet {
     public String getServletInfo() {
         return "Employee Login Controller";
     }
-    
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         EmployeeDao employeeDao = new EmployeeDao();
@@ -129,7 +143,7 @@ public class EmployeeLoginnController extends HttpServlet {
 
         scanner.close();
     }
-    
+
 //    public static void main(String[] args) {
 //        // Dữ liệu đầu vào để kiểm tra
 //        String username = "admin1"; // Thay bằng username muốn kiểm tra
@@ -160,4 +174,3 @@ public class EmployeeLoginnController extends HttpServlet {
 //        }
 //    }
 }
-
