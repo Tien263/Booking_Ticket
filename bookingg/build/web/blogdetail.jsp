@@ -1,3 +1,11 @@
+<%-- 
+    Document   : blogdetail.jsp
+    Created on : Jan 31, 2025, 9:57:26 PM
+    Author     : ADMIN
+--%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,7 +15,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<meta http-equiv="x-ua-compatible" content="ie=edge">
 
-		<title>My Account - Rotors - Car Rental HTML5 Template</title>
+		<title>Blog Details - Rotors - Car Rental HTML5 Template</title>
 		<link rel="shortcut icon" href="assets/images/logo/favourite_icon.png">
 
 		<!-- fraimwork - css include -->
@@ -369,17 +377,18 @@
 			<!-- breadcrumb_section - start
 			================================================== -->
 			<section class="breadcrumb_section text-center clearfix">
-				<div class="page_title_area has_overlay d-flex align-items-center clearfix" data-bg-image="assets/images/breadcrumb/bg_10.jpg">
+				<div class="page_title_area has_overlay d-flex align-items-center clearfix" data-bg-image="assets/images/breadcrumb/bg_07.jpg">
 					<div class="overlay"></div>
 					<div class="container" data-aos="fade-up" data-aos-delay="100">
-						<h1 class="page_title text-white mb-0">My Account</h1>
+						<h1 class="page_title text-white mb-0">Blog Details</h1>
 					</div>
 				</div>
 				<div class="breadcrumb_nav clearfix" data-bg-color="#F2F2F2">
 					<div class="container">
 						<ul class="ul_li clearfix">
 							<li><a href="index.html">Home</a></li>
-							<li>Account</li>
+							<li>Pages</li>
+							<li>Blog Details</li>
 						</ul>
 					</div>
 				</div>
@@ -388,136 +397,149 @@
 			================================================== -->
 
 
-			<!-- account_section - start
+			<!-- details_section - start
 			================================================== -->
-			<section class="account_section sec_ptb_100 clearfix">
+			<section class="details_section blog_details sec_ptb_100 clearfix">
 				<div class="container">
-					<div class="row justify-content-lg-between justify-content-md-center justify-content-sm-center">
-
-						<div class="col-lg-4 col-md-8 col-sm-10 col-xs-12">
-							<div class="account_tabs_menu clearfix" data-bg-color="#F2F2F2" data-aos="fade-up" data-aos-delay="100">
-								<h3 class="list_title mb_15">Account Details:</h3>
-								<ul class="ul_li_block nav" role="tablist">
-									<li>
-										<a class="active" data-toggle="tab" href="#admin_tab"><i class="fas fa-user"></i> John Doe</a>
-									</li>
-									<li>
-										<a href="login.html"><i class="fas fa-sign-out-alt"></i> Log Out <img class="arrow" src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
-									</li>
-									<li>
-										<a data-toggle="tab" href="#profile_tab"><i class="fas fa-address-book"></i> Booking Profiles</a>
-									</li>
-									<li>
-										<a data-toggle="tab" href="#history_tab"><i class="fas fa-file-alt"></i> Booking History</a>
-									</li>
-								</ul>
-							</div>
-						</div>
-
-						<div class="col-lg-8 col-md-8 col-sm-10 col-xs-12">
-							<div class="account_tab_content tab-content">
-								<div id="admin_tab" class="tab-pane active">
-									<div class="account_info_list" data-aos="fade-up" data-aos-delay="100">
-										<h3 class="list_title mb_30">Account:</h3>
-										<ul class="ul_li_block clearfix">
-											<li><span>Name:</span> Rakibul Islam Dewan</li>
-											<li><span>E-mail:</span> myname@email.com</li>
-											<li><span>Phone Number:</span> +1-202-555-0104</li>
-											<li><span>Country:</span> United States</li>
-											<li><span>Address:</span> 60 Stonybrook Lane Atlanta, GA 30303</li>
-										</ul>
-										<a class="text_btn text-uppercase" href="#!"><span>Change Account Information</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
-									</div>
-
-									<div class="account_info_list" data-aos="fade-up" data-aos-delay="300">
-										<h3 class="list_title mb_30">Booking Profiles:</h3>
-										<ul class="ul_li_block clearfix">
-											<li><span>Profile ID:</span> 1234557jt</li>
-											<li><span>Payment Method:</span> Visa Credit Card</li>
-											<li><span>Phone Number:</span> +1-202-555-0104</li>
-										</ul>
-									</div>
-
-									<div class="account_info_list" data-aos="fade-up" data-aos-delay="500">
-										<h3 class="list_title mb_30">Booking History:</h3>
-										<ul class="ul_li_block clearfix">
-											<li><span>Upcoming Reservations:</span> No Reservations Yet</li>
-											<li><span>Past Rentals:</span> 0</li>
-										</ul>
-										<a class="text_btn text-uppercase" href="#!"><span>Book A Car</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
-									</div>
+					<h2 data-aos="fade-up" data-aos-delay="100">
+						${blog.title}
+					</h2>
+					<ul class="post_meta ul_li mb_30 clearfix" data-aos="fade-up" data-aos-delay="200">
+						<li>${blog.updatedtime}</li>
+						<li>by <a href="#!">${blog.createdby}</a></li>
+						<li><a href="#!">No Comments</a></li>
+					</ul>
+					<div class="details_image mb_30" data-aos="fade-up" data-aos-delay="300">
+						<img src="" alt="image_not_found">
+					</div>
+					<div class="row justify-content-center">
+						<div class="col-lg-8 col-md-10 col-sm-11 col-xs-12">
+							<h3 class="mb_30" data-aos="fade-up" data-aos-delay="100">
+                                                            ${blog.content}
+                                                        </h3>
+							
+							<div class="row mb_60 align-items-center justify-content-lg-between" data-aos="fade-up" data-aos-delay="100">
+								<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+									<ul class="primary_social_links ul_li clearfix">
+										<li><a href="#!"><i class="fab fa-facebook-f"></i></a></li>
+										<li><a href="#!"><i class="fab fa-twitter"></i></a></li>
+										<li><a href="#!"><i class="fab fa-whatsapp"></i></a></li>
+									</ul>
 								</div>
 
-								<div id="profile_tab" class="tab-pane fade">
-									<div class="account_info_list" data-aos="fade-up" data-aos-delay="100">
-										<h3 class="list_title mb_30">Booking Profiles:</h3>
-										<ul class="ul_li_block clearfix">
-											<li><span>Profile ID:</span> 1234557jt</li>
-											<li><span>Payment Method:</span> Visa Credit Card</li>
-											<li><span>Phone Number:</span> +1-202-555-0104</li>
-										</ul>
-									</div>
-
-									<div class="account_info_list" data-aos="fade-up" data-aos-delay="300">
-										<h3 class="list_title mb_30">Booking History:</h3>
-										<ul class="ul_li_block clearfix">
-											<li><span>Upcoming Reservations:</span> No Reservations Yet</li>
-											<li><span>Past Rentals:</span> 0</li>
-										</ul>
-										<a class="text_btn text-uppercase" href="#!"><span>Book A Car</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
-									</div>
-
-									<div class="account_info_list" data-aos="fade-up" data-aos-delay="500">
-										<h3 class="list_title mb_30">Account:</h3>
-										<ul class="ul_li_block clearfix">
-											<li><span>Name:</span> Rakibul Islam Dewan</li>
-											<li><span>E-mail:</span> myname@email.com</li>
-											<li><span>Phone Number:</span> +1-202-555-0104</li>
-											<li><span>Country:</span> United States</li>
-											<li><span>Address:</span> 60 Stonybrook Lane Atlanta, GA 30303</li>
-										</ul>
-										<a class="text_btn text-uppercase" href="#!"><span>Change Account Information</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
-									</div>
-								</div>
-
-								<div id="history_tab" class="tab-pane fade">
-									<div class="account_info_list" data-aos="fade-up" data-aos-delay="100">
-										<h3 class="list_title mb_30">Booking History:</h3>
-										<ul class="ul_li_block clearfix">
-											<li><span>Upcoming Reservations:</span> No Reservations Yet</li>
-											<li><span>Past Rentals:</span> 0</li>
-										</ul>
-										<a class="text_btn text-uppercase" href="#!"><span>Book A Car</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
-									</div>
-
-									<div class="account_info_list" data-aos="fade-up" data-aos-delay="300">
-										<h3 class="list_title mb_30">Booking Profiles:</h3>
-										<ul class="ul_li_block clearfix">
-											<li><span>Profile ID:</span> 1234557jt</li>
-											<li><span>Payment Method:</span> Visa Credit Card</li>
-											<li><span>Phone Number:</span> +1-202-555-0104</li>
-										</ul>
-									</div>
-
-									<div class="account_info_list" data-aos="fade-up" data-aos-delay="500">
-										<h3 class="list_title mb_30">Account:</h3>
-										<ul class="ul_li_block clearfix">
-											<li><span>Name:</span> Rakibul Islam Dewan</li>
-											<li><span>E-mail:</span> myname@email.com</li>
-											<li><span>Phone Number:</span> +1-202-555-0104</li>
-											<li><span>Country:</span> United States</li>
-											<li><span>Address:</span> 60 Stonybrook Lane Atlanta, GA 30303</li>
-										</ul>
-										<a class="text_btn text-uppercase" href="#!"><span>Change Account Information</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
-									</div>
+								<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+									<a class="comment_btn" href="#!"><i class="fas fa-comment-dots mr-1"></i> No Comments</a>
 								</div>
 							</div>
+
+							<ul class="prev_next_post ul_li mb_100 clearfix">
+								<li class="text-left" data-aos="fade-up" data-aos-delay="100">
+									<span class="text-uppercase">previous</span>
+									<h3 class="item_title mb-0">
+										<a href="#!">
+											Nam molestie rhoncus volutpat…
+											<i class="far fa-angle-left"></i>
+										</a>
+									</h3>
+								</li>
+								<li class="text-right" data-aos="fade-up" data-aos-delay="200">
+									<span class="text-uppercase">Next</span>
+									<h3 class="item_title mb-0">
+										<a href="#!">
+											Donec eget mattis dolor. At nunc suscipit, turpis…
+											<i class="far fa-angle-right"></i>
+										</a>
+									</h3>
+								</li>
+							</ul>
+
+							<div class="section_title mb_30" data-aos="fade-up" data-aos-delay="100">
+								<h2 class="title_text mb_15">Leave a Reply:</h2>
+								<p class="mb-0">
+									Your email address will not be published. Required fields are marked *
+								</p>
+							</div>
+							<div class="comment_form" data-aos="fade-up" data-aos-delay="200">
+								<form action="#">
+									<div class="form_item">
+										<input type="text" name="name" placeholder="Your Name">
+									</div>
+									<div class="form_item">
+										<input type="email" name="email" placeholder="E-mail">
+									</div>
+									<div class="form_item">
+										<textarea name="comment" placeholder="Leave Your Reply"></textarea>
+									</div>
+									<div class="checkbox_input">
+										<label for="alart_input"><input id="alart_input" type="checkbox"> Save my name, email, and website in this browser for the next time I comment</label>
+									</div>
+									<button type="submit" class="custom_btn bg_default_red btn_width text-uppercase">Send a Message <img src="assets/images/icons/icon_01.png" alt="icon_not_found"></button>
+								</form>
+							</div>
 						</div>
-						
 					</div>
 				</div>
 			</section>
-			<!-- account_section - end
+			<!-- details_section - end
+			================================================== -->
+
+
+			<!-- blog_section - start
+			================================================== -->
+			<section class="blog_section clearfix">
+				<div class="updown_style_wrap">
+
+					<div class="updown_style">
+						<div class="blog_fullimage" data-aos="fade-up" data-aos-delay="100">
+							<img src="assets/images/blog/img_01.jpg" alt="image_not_found">
+							<div class="item_content text-white">
+								<h3 class="item_title text-white">Cras eu ante bibendum, lacinia velit sit amet, scelerisque enim</h3>
+								<p>
+									Phasellus porta pulvinar metus, sit amet bibendum lectus hendrerit vel. Duis ullamcorper, justo quis hendrerit venenatis, purus mi volutpat dui, vel commodo urna eros eget sapien
+								</p>
+								<a class="text_btn text-uppercase" href="#!"><span>Read in our blog</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
+							</div>
+						</div>
+
+						<div class="blog_fullimage" data-aos="fade-up" data-aos-delay="300">
+							<img src="assets/images/blog/img_02.jpg" alt="image_not_found">
+							<div class="item_content text-white">
+								<h3 class="item_title text-white">Phasellus porta pulvinar metus</h3>
+								<p>
+									Phasellus porta pulvinar metus, sit amet bibendum lectus hendrerit vel. Duis ullamcorper, justo quis hendrerit venenatis, purus mi volutpat dui, vel commodo urna eros eget sapien
+								</p>
+								<a class="text_btn text-uppercase" href="#!"><span>Read in our blog</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
+							</div>
+						</div>
+					</div>
+
+					<div class="updown_style">
+						<div class="blog_fullimage" data-aos="fade-up" data-aos-delay="100">
+							<img src="assets/images/blog/img_03.jpg" alt="image_not_found">
+							<div class="item_content text-white">
+								<h3 class="item_title text-white">Fed finibus mi et purus finibus, ut condimentum mauris fringilla</h3>
+								<p>
+									Phasellus porta pulvinar metus, sit amet bibendum lectus hendrerit vel. Duis ullamcorper, justo quis hendrerit venenatis, purus mi volutpat dui, vel commodo urna eros eget sapien
+								</p>
+								<a class="text_btn text-uppercase" href="#!"><span>Read in our blog</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
+							</div>
+						</div>
+
+						<div class="blog_fullimage" data-aos="fade-up" data-aos-delay="300">
+							<img src="assets/images/blog/img_04.jpg" alt="image_not_found">
+							<div class="item_content text-white">
+								<h3 class="item_title text-white">Maecenas sagittis turpis non pharetra pulvinar. Nullam mollis tortor eget</h3>
+								<p>
+									Phasellus porta pulvinar metus, sit amet bibendum lectus hendrerit vel. Duis ullamcorper, justo quis hendrerit venenatis, purus mi volutpat dui, vel commodo urna eros eget sapien
+								</p>
+								<a class="text_btn text-uppercase" href="#!"><span>Read in our blog</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</section>
+			<!-- blog_section - end
 			================================================== -->
 
 
@@ -528,7 +550,7 @@
 
 		<!-- footer_section - start
 		================================================== -->
-		<footer class="footer_section clearfix" data-bg-color="#F2F2F2">
+		<footer class="footer_section clearfix">
 			<div class="footer_widget_area sec_ptb_100 clearfix">
 				<div class="container">
 					<div class="row justify-content-lg-between">

@@ -1,3 +1,11 @@
+<%-- 
+    Document   : account
+    Created on : Jan 25, 2025, 1:26:53 PM
+    Author     : ADMIN
+--%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,7 +15,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-        <title>Login - Rotors - Car Rental HTML5 Template</title>
+        <title>My Account - Rotors - Car Rental HTML5 Template</title>
         <link rel="shortcut icon" href="assets/images/logo/favourite_icon.png">
 
         <!-- fraimwork - css include -->
@@ -85,8 +93,8 @@
                     <div class="row align-items-center">
                         <div class="col-lg-7">
                             <ul class="header_contact_info ul_li clearfix">
-                                <li><i class="fal fa-envelope"></i> xuantien50d@@email.com</li>
-                                <li><i class="fal fa-phone"></i> 0398996177</li>
+                                <li><i class="fal fa-envelope"></i> rotorsmail@email.com</li>
+                                <li><i class="fal fa-phone"></i> +1-202-555-0156</li>
                             </ul>
                         </div>
 
@@ -186,7 +194,7 @@
                                         <ul class="ul_li_block clearfix">
                                             <li><a href="#!"><i class="fal fa-user-circle"></i> Profile</a></li>
                                             <li><a href="#!"><i class="fal fa-user-cog"></i> Settings</a></li>
-                                            <li><a href="#!"><i class="fal fa-sign-out"></i> Logout</a></li>
+                                            <li><a href="cuslogin"><i class="fal fa-sign-out"></i> Logout</a></li>
                                         </ul>
                                     </div>
                                 </li>
@@ -369,17 +377,17 @@
             <!-- breadcrumb_section - start
             ================================================== -->
             <section class="breadcrumb_section text-center clearfix">
-                <div class="page_title_area has_overlay d-flex align-items-center clearfix" data-bg-image="assets/images/breadcrumb/bg_09.jpg">
+                <div class="page_title_area has_overlay d-flex align-items-center clearfix" data-bg-image="assets/images/breadcrumb/bg_10.jpg">
                     <div class="overlay"></div>
                     <div class="container" data-aos="fade-up" data-aos-delay="100">
-                        <h1 class="page_title text-white mb-0">Login</h1>
+                        <h1 class="page_title text-white mb-0">My Account</h1>
                     </div>
                 </div>
                 <div class="breadcrumb_nav clearfix" data-bg-color="#F2F2F2">
                     <div class="container">
                         <ul class="ul_li clearfix">
                             <li><a href="index.html">Home</a></li>
-                            <li>Login</li>
+                            <li>Account</li>
                         </ul>
                     </div>
                 </div>
@@ -388,100 +396,154 @@
             ================================================== -->
 
 
-            <!-- register_section - start
+            <!-- account_section - start
             ================================================== -->
-            <section class="register_section sec_ptb_100 clearfix">
+            <section class="account_section sec_ptb_100 clearfix">
                 <div class="container">
+                    <div class="row justify-content-lg-between justify-content-md-center justify-content-sm-center">
 
-                    <div class="register_card mb_60" data-bg-color="##F2F2F2" data-aos="fade-up" data-aos-delay="100">
-                        <div class="row align-items-center">
-                            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-                                <div class="reg_image" data-aos="fade-up" data-aos-delay="300">
-                                    <img src="assets/images/about/img_03.jpg" alt="image_not_found">
-                                </div>
+                        <div class="col-lg-4 col-md-8 col-sm-10 col-xs-12">
+                            <div class="account_tabs_menu clearfix" data-bg-color="#F2F2F2" data-aos="fade-up" data-aos-delay="100">
+                                <h3 class="list_title mb_15">Account Details:</h3>
+                                <ul class="ul_li_block nav" role="tablist">
+                                    <li>
+                                        <a class="active" data-toggle="tab" href="#admin_tab"><i class="fas fa-user"></i> ${customer.username}</a>
+                                    </li>
+                                    <li>
+                                        <a href="cuslogin"><i class="fas fa-sign-out-alt"></i> Log Out <img class="arrow" src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
+                                    </li>
+                                    <li>
+                                        <a data-toggle="tab" href="#profile_tab"><i class="fas fa-address-book"></i> Booking Profiles</a>
+                                    </li>
+                                    <li>
+                                        <a data-toggle="tab" href="#history_tab"><i class="fas fa-file-alt"></i> Booking History</a>
+                                    </li>
+                                </ul>
                             </div>
+                        </div>
 
-                            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-                                <div class="reg_form" data-aos="fade-up" data-aos-delay="500">
-                                    <h3 class="form_title">LogIn:</h3>
-                                    <p>
-                                        Savings of up to 15% with our car rental solutions, global coverage and a dedicated customer team
-                                    </p>
-                                    <span class="new_account mb_15">Log In or <a href="#!">Create an Account?</a></span>
-                                    <form action="LoginController" method="POST">
-                                        <div class="form_item">
-                                            <input type="text" name="username" placeholder="Your email" required>
-                                        </div>
-                                        <div class="form_item">
-                                            <input type="password" name="password" placeholder="Password" required>
-                                        </div>
-                                        <button type="submit" class="custom_btn bg_default_red text-uppercase">Login <img src="assets/images/icons/icon_01.png" alt="icon_not_found"></button>
-                                        <span class="reset_pass mb_15"><a href="#!">Reset Your Password by e-mail?</a></span>
-                                        <div class="checkbox_input mb-0">
-                                            <label for="input_save"><input id="input_save" type="checkbox"> Save my name, email, and website in this browser for the next time I comment</label>
-                                        </div>
-                                    </form>
+                        <div class="col-lg-8 col-md-8 col-sm-10 col-xs-12">
+                            <div class="account_tab_content tab-content">
+                                <div id="admin_tab" class="tab-pane active">
 
+                                    <c:if test="${not empty sessionScope.successMessage}">
+                                        <p style="color: green; text-align: center;">${sessionScope.successMessage}</p>
+                                        <c:remove var="successMessage" scope="session"/>
+                                    </c:if>
+
+                                    <div class="account_info_list" data-aos="fade-up" data-aos-delay="100">
+                                        <h3 class="list_title mb_30">Account:</h3>
+                                        <ul class="ul_li_block clearfix">
+                                            <li><span>Full Name:</span> ${customer.getFullname()} </li>
+                                            <li><span>E-mail:</span> ${customer.getEmail()} </li>
+                                            <li><span>Username:</span> ${customer.getUsername()} </li>
+                                            <li><span>Phone Number:</span> ${customer.getPhone()} </li>
+                                            <li><span>Gender:</span> ${customer.isGender() ? 'Male' : 'Female'}</li>
+                                            <li><span>Address:</span> ${customer.getAddress()}</li>
+                                        </ul>
+
+
+                                        <a class="text_btn text-uppercase" href="change1"><span>Change Account Information</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
+
+                                        <div>
+                                            <a class="text_btn text-uppercase" href="changepassword"><span>Change Password</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="account_info_list" data-aos="fade-up" data-aos-delay="300">
+                                        <h3 class="list_title mb_30">Booking Profiles:</h3>
+                                        <ul class="ul_li_block clearfix">
+                                            <li><span>Profile ID:</span> 0398996177</li>
+                                            <li><span>Payment Method:</span> TP Bank</li>
+                                            <li><span>Phone Number:</span> +1-202-555-0104</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="account_info_list" data-aos="fade-up" data-aos-delay="500">
+                                        <h3 class="list_title mb_30">Booking History:</h3>
+                                        <ul class="ul_li_block clearfix">
+                                            <li><span>Upcoming Reservations:</span> No Reservations Yet</li>
+                                            <li><span>Past Rentals:</span> 0</li>
+                                        </ul>
+                                        <a class="text_btn text-uppercase" href="#!"><span>Book A Car</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
+                                    </div>
+                                </div>
+
+                                <div id="profile_tab" class="tab-pane fade">
+                                    <div class="account_info_list" data-aos="fade-up" data-aos-delay="100">
+                                        <h3 class="list_title mb_30">Booking Profiles:</h3>
+                                        <ul class="ul_li_block clearfix">
+                                            <li><span>Profile ID:</span> 1234557jt</li>
+                                            <li><span>Payment Method:</span> Visa Credit Card</li>
+                                            <li><span>Phone Number:</span> +1-202-555-0104</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="account_info_list" data-aos="fade-up" data-aos-delay="300">
+                                        <h3 class="list_title mb_30">Booking History:</h3>
+                                        <ul class="ul_li_block clearfix">
+                                            <li><span>Upcoming Reservations:</span> No Reservations Yet</li>
+                                            <li><span>Past Rentals:</span> 0</li>
+                                        </ul>
+                                        <a class="text_btn text-uppercase" href="#!"><span>Book A Car</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
+                                    </div>
+
+                                    <div class="account_info_list" data-aos="fade-up" data-aos-delay="500">
+                                        <h3 class="list_title mb_30">Account:</h3>
+                                        <ul class="ul_li_block clearfix">
+                                            <li><span>Full Name:</span> Rakibul Islam Dewan</li>
+                                            <li><span>E-mail:</span> myname@email.com</li>
+                                            <li><span>Username:</span> myname@email.com</li>
+                                            <li><span>Password:</span> myname@email.com</li>
+                                            <li><span>Phone Number:</span> +1-202-555-0104</li>
+                                            <li><span>Gender:</span> +1-202-555-0104</li>
+                                            <li><span>Address:</span> 60 Stonybrook Lane Atlanta, GA 30303</li>
+                                        </ul>
+                                        <a class="text_btn text-uppercase" href="#!"><span>Change Account Information</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
+                                    </div>
+                                </div>
+
+                                <div id="history_tab" class="tab-pane fade">
+                                    <div class="account_info_list" data-aos="fade-up" data-aos-delay="100">
+                                        <h3 class="list_title mb_30">Booking History:</h3>
+                                        <ul class="ul_li_block clearfix">
+                                            <li><span>Upcoming Reservations:</span> No Reservations Yet</li>
+                                            <li><span>Past Rentals:</span> 0</li>
+                                        </ul>
+                                        <a class="text_btn text-uppercase" href="#!"><span>Book A Car</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
+                                    </div>
+
+                                    <div class="account_info_list" data-aos="fade-up" data-aos-delay="300">
+                                        <h3 class="list_title mb_30">Booking Profiles:</h3>
+                                        <ul class="ul_li_block clearfix">
+                                            <li><span>Profile ID:</span> 1234557jt</li>
+                                            <li><span>Payment Method:</span> Visa Credit Card</li>
+                                            <li><span>Phone Number:</span> +1-202-555-0104</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="account_info_list" data-aos="fade-up" data-aos-delay="500">
+                                        <h3 class="list_title mb_30">Account:</h3>
+                                        <ul class="ul_li_block clearfix">
+                                            <li><span>Full Name:</span> Rakibul Islam Dewan</li>
+                                            <li><span>E-mail:</span> myname@email.com</li>
+                                            <li><span>Username:</span> myname@email.com</li>
+                                            <li><span>Password:</span> myname@email.com</li>
+                                            <li><span>Phone Number:</span> +1-202-555-0104</li>
+                                            <li><span>Gender:</span> +1-202-555-0104</li>
+                                            <li><span>Address:</span> 60 Stonybrook Lane Atlanta, GA 30303</li>
+                                        </ul>
+                                        <a class="text_btn text-uppercase" href="#!"><span>Change Account Information</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+
                     </div>
-
-                    <div class="register_card mb-0" data-bg-color="##F2F2F2" data-aos="fade-up" data-aos-delay="100">
-                        <div class="section_title mb_30 text-center">
-                            <h2 class="title_text mb-0" data-aos="fade-up" data-aos-delay="300">
-                                <span>Register</span>
-                            </h2>
-                        </div>
-                        <form action="#">
-                            <div class="row justify-content-lg-between">
-                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" data-aos="fade-up" data-aos-delay="500">
-                                    <div class="form_item">
-                                        <input type="text" name="name" placeholder="Your Name*">
-                                    </div>
-                                    <div class="form_item">
-                                        <input type="email" name="email" placeholder="Your Email*">
-                                    </div>
-                                    <div class="form_item">
-                                        <input type="password" name="password" placeholder="Password*">
-                                    </div>
-                                    <div class="form_item">
-                                        <input type="password" name="confirmpass" placeholder="Confirm Password*">
-                                    </div>
-                                    <div class="form_item">
-                                        <input type="tel" name="Phone" placeholder="Phone Number*">
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" data-aos="fade-up" data-aos-delay="700">
-                                    <div class="form_item">
-                                        <h4 class="input_icon">Select Car Type</h4>
-                                        <select>
-                                            <option data-display="Choose Payment Details">Select Your Option</option>
-                                            <option value="1">Some option</option>
-                                            <option value="2">Another option</option>
-                                            <option value="3" disabled>A disabled option</option>
-                                            <option value="4">Potato</option>
-                                        </select>
-                                    </div>
-                                    <div class="form_item">
-                                        <input type="text" name="country" placeholder="Country*">
-                                    </div>
-                                    <div class="form_item">
-                                        <input type="text" name="address" placeholder="Billing Address*">
-                                    </div>
-                                    <p>
-                                        Your personal data will be used in mapping with the vehicles you added to the website, to manage access to your account, and for other purposes described in our 
-                                    </p>
-                                    <button type="submit" class="custom_btn bg_default_red text-uppercase mb-0">Login <img src="assets/images/icons/icon_01.png" alt="icon_not_found"></button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-
                 </div>
             </section>
-            <!-- register_section - end
+            <!-- account_section - end
             ================================================== -->
 
 
