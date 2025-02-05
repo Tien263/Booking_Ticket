@@ -135,6 +135,7 @@ public class CustomerDao extends DBContext<Customer> {
                 + "      ,[c_gender] = ?\n"
                 + "      ,[c_address] = ?\n"
                 + "      ,[c_username] = ?\n"
+                + "      ,[c_password] = ?\n"
                 + " WHERE [c_email] = ?";
 
         // thay chua, dau,
@@ -146,7 +147,8 @@ public class CustomerDao extends DBContext<Customer> {
             stm_update.setBoolean(3, entity.isGender());
             stm_update.setString(4, entity.getAddress());
             stm_update.setString(5, entity.getUsername());
-            stm_update.setString(6, entity.getEmail());
+            stm_update.setString(6, entity.getPassword());
+            stm_update.setString(7, entity.getEmail());
             stm_update.executeUpdate();
 
         } catch (SQLException ex) {

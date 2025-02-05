@@ -57,7 +57,7 @@ public class EmployeeLoginnController extends HttpServlet {
 
             // Nếu không có vai trò nào, tức là khách hàng
             if (roles.isEmpty()) {
-                response.sendRedirect("index_1.jsp");
+                response.sendRedirect("update_employee.jsp");
                 return;
             }
 
