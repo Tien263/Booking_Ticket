@@ -4,7 +4,7 @@
  */
 package controller.accesscontrol;
 
-import entity.accesscontrol.User;
+import model.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
