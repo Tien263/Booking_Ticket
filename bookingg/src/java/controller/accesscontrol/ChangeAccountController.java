@@ -86,7 +86,7 @@ public class ChangeAccountController extends HttpServlet {
         }
 
         // Nếu không trùng, tiến hành cập nhật
-        cd.update(c);
+        cd.updateacc(c);
         Customer refreshedCustomer = cd.getByEmail(email);
         request.getSession().setAttribute("customer", refreshedCustomer);
 
