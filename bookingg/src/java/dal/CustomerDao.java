@@ -4,6 +4,7 @@
  */
 package dal;
 
+import MD5.BCrypt;
 import java.util.ArrayList;
 import model.Customer;
 import java.sql.*;
@@ -138,7 +139,6 @@ public class CustomerDao extends DBContext<Customer> {
                 + "      ,[c_password] = ?\n"
                 + " WHERE [c_email] = ?";
 
-        // thay chua, dau,
         PreparedStatement stm_update = null;
         try {
             stm_update = connection.prepareStatement(sql_update);
@@ -149,6 +149,33 @@ public class CustomerDao extends DBContext<Customer> {
             stm_update.setString(5, entity.getUsername());
             stm_update.setString(6, entity.getPassword());
             stm_update.setString(7, entity.getEmail());
+            stm_update.executeUpdate();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    public void updateacc(Customer entity) {
+        String sql_update = "UPDATE [dbo].[Customer]\n"
+                + "   SET [c_fullname] = ?\n"
+                + "      ,[c_phone] = ?\n"
+                + "      ,[c_gender] = ?\n"
+                + "      ,[c_address] = ?\n"
+                + "      ,[c_username] = ?\n"
+                + " WHERE [c_email] = ?";
+
+        // thay chua, dau,
+        PreparedStatement stm_update = null;
+        try {
+            stm_update = connection.prepareStatement(sql_update);
+            stm_update.setString(1, entity.getFullname());
+            stm_update.setString(2, entity.getPhone());
+            stm_update.setBoolean(3, entity.isGender());
+            stm_update.setString(4, entity.getAddress());
+            stm_update.setString(5, entity.getUsername());
+            stm_update.setString(6, entity.getEmail());
             stm_update.executeUpdate();
 
         } catch (SQLException ex) {
@@ -198,6 +225,7 @@ public class CustomerDao extends DBContext<Customer> {
         try {
             String sqlcheck = "select * from customer where c_email = ? and c_password = ?";
             PreparedStatement stm = connection.prepareStatement(sqlcheck);
+            BCrypt bCrypt = new BCrypt();
             stm.setString(1, email);
             stm.setString(2, password);
             ResultSet rs = stm.executeQuery();
@@ -209,7 +237,7 @@ public class CustomerDao extends DBContext<Customer> {
                 c.setGender(rs.getBoolean("c_gender"));
                 c.setAddress(rs.getString("c_address"));
                 c.setUsername(rs.getString("c_username"));
-                c.setPassword(password);
+                bCrypt.hashpw(rs.getString("c_password"),bCrypt.gensalt());
                 return c;
             }
 
