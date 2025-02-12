@@ -28,6 +28,18 @@
         <servlet-name>ChangePasswordController</servlet-name>
         <servlet-class>controller.accesscontrol.ChangePasswordController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ForgotpasswordController</servlet-name>
+        <servlet-class>controller.accesscontrol.ForgotPasswordController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ResetPasswordCustomerController</servlet-name>
+        <servlet-class>controller.accesscontrol.ResetPasswordCustomerController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>OTPVerificationController</servlet-name>
+        <servlet-class>controller.accesscontrol.OTPVerificationController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Register</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -56,7 +68,7 @@
         <servlet-name>ChangePasswordController</servlet-name>
         <url-pattern>/changepassword</url-pattern>
     </servlet-mapping>
-     <servlet>
+    <servlet>
         <servlet-name>EmployeeLoginController</servlet-name>
         <servlet-class>controller.accesscontrol.EmployeeLoginController</servlet-class>
     </servlet>
@@ -91,5 +103,17 @@
     <servlet-mapping>
         <servlet-name>VerifyUsernameController</servlet-name>
         <url-pattern>/verify_username</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ForgotpasswordController</servlet-name>
+        <url-pattern>/forgotpassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ResetPasswordCustomerController</servlet-name>
+        <url-pattern>/resetpasswordcustomer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OTPVerificationController</servlet-name>
+        <url-pattern>/verification</url-pattern>
     </servlet-mapping>
 </web-app>
