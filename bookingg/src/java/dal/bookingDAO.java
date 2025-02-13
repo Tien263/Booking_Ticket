@@ -31,26 +31,21 @@ public class bookingDAO extends DBContext<Blog> {
     }
     public List<BusTrip> getBusTrips(String from, String to, String time){
         List<BusTrip> list = new ArrayList<>();
-        String sql = "SELECT br.br_id, bt.bt1_departureTime, bt.bt1_arrivalTime, t.t_price, " + 
+         String sql = "SELECT br.br_id, bt.bt1_departureTime, bt.bt1_arrivalTime, t.t_price, " + 
                "br.br_from, br.br_to, br.br_description, br.br_distance " +
                "FROM [PROJECTV012].[dbo].[BusRoutes] br " +
                "JOIN [PROJECTV012].[dbo].[BusTrips] bt ON bt.br_id = br.br_id " +
                "JOIN [PROJECTV012].[dbo].[Seats] s ON s.bt1_id = bt.bt1_id " +
                "JOIN [PROJECTV012].[dbo].[Tickets] t ON t.s_id = s.s_id AND t.bt1_id = bt.bt1_id " +
-               "WHERE br.br_from = ? AND br.br_to = ? " +
-               "AND bt.bt1_departureTime <= ? AND bt.bt1_arrivalTime >= ?";  
-        
-        
-        
+               "WHERE br.br_from = '" + from + "' AND br.br_to = '" + to + "' " +
+               "AND bt.bt1_departureTime <= '" + time + "' AND bt.bt1_arrivalTime >= '" + time + "'";  
+
         try  {
-       PreparedStatement st = connection.prepareStatement(sql);
+     
+      PreparedStatement st = connection.prepareStatement(sql);
       
             
-            st.setString(1, from);
-            st.setString(2, to);
-            st.setString(3, time);
-            st.setString(4, time);
-            
+          
             ResultSet rs = st.executeQuery();
           while (rs.next()) { 
     BusTrip busTrip = new BusTrip(

@@ -78,20 +78,33 @@
                     <th>Khoảng cách (km)</th>
                 </tr>
             </thead>
-            <tbody>
-                <% for (BusTrip trip : trips) { %>
-                    <tr>
-                        <td><%= trip.getBrId() %></td>
-                        <td><%= trip.getBrFrom() %></td>
-                        <td><%= trip.getBrTo() %></td>
-                        <td><%= trip.getBt1DepartureTime() %></td>
-                        <td><%= trip.getBt1ArrivalTime() %></td>
-                        <td><%= trip.getTPrice() %></td>
-                        <td><%= trip.getBrDescription() %></td>
-                        <td><%= trip.getBrDistance() %></td>
-                    </tr>
-                <% } %>
-            </tbody>
+           <tbody>
+    <% for (BusTrip trip : trips) { %>
+       <tr>
+            <td><%= trip.getBrId() %></td>
+            <td><%= trip.getBrFrom() %></td>
+            <td><%= trip.getBrTo() %></td>
+            <td><%= trip.getBt1DepartureTime() %></td>
+            <td><%= trip.getBt1ArrivalTime() %></td>
+            <td><%= trip.getTPrice() %></td>
+            <td><%= trip.getBrDescription() %></td>
+            <td><%= trip.getBrDistance() %></td>
+            <td>
+                <form action="booking.jsp" method="GET">
+                    <input type="hidden" name="brId" value="<%= trip.getBrId() %>">
+                    <input type="hidden" name="from" value="<%= trip.getBrFrom() %>">
+                    <input type="hidden" name="to" value="<%= trip.getBrTo() %>">
+                    <input type="hidden" name="departureTime" value="<%= trip.getBt1DepartureTime() %>">
+                    <input type="hidden" name="arrivalTime" value="<%= trip.getBt1ArrivalTime() %>">
+                    <input type="hidden" name="price" value="<%= trip.getTPrice() %>">
+                    <input type="hidden" name="description" value="<%= trip.getBrDescription() %>">
+                    <input type="hidden" name="distance" value="<%= trip.getBrDistance() %>">
+                    <button type="submit">Chọn chuyến</button>
+                </form>
+            </td>
+        </tr>
+    <% } %>
+</tbody>
         </table>
     <% } %>
 </body>
