@@ -38,7 +38,7 @@ public class bookingDAO extends DBContext<Blog> {
                "JOIN [PROJECTV012].[dbo].[Seats] s ON s.bt1_id = bt.bt1_id " +
                "JOIN [PROJECTV012].[dbo].[Tickets] t ON t.s_id = s.s_id AND t.bt1_id = bt.bt1_id " +
                "WHERE br.br_from = '" + from + "' AND br.br_to = '" + to + "' " +
-               "AND bt.bt1_departureTime <= '" + time + "' AND bt.bt1_arrivalTime >= '" + time + "'";  
+               "AND bt.bt1_departureTime >= '" + time + "' ";  
 
         try  {
      

@@ -13,10 +13,35 @@
     String hour = (String) request.getAttribute("hour");
     String minute = (String) request.getAttribute("minute");
     String time = (String) request.getAttribute("time");
+    String travelDate = request.getParameter("travelDate");
+
+    // Nếu `travelDate` chưa có giá trị, lấy ngày hiện tại
+    if (travelDate == null || travelDate.isEmpty()) {
+        java.util.Date today = new java.util.Date();
+        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
+        travelDate = sdf.format(today); // Ngày hiện tại theo định dạng yyyy-MM-dd
+    }
+
     String[] provinces = (String[]) request.getAttribute("provinces");
     List<BusTrip> trips = (List<BusTrip>) request.getAttribute("trips");
     String error = (String) request.getAttribute("error");
     String message = (String) request.getAttribute("message");
+    
+ // Xử lý ngày mặc định
+    if (time == null) {
+        java.util.Date today = new java.util.Date();
+        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
+        time = sdf.format(today); // Ngày hiện tại theo định dạng yyyy-MM-dd
+    }
+
+    if (hour == null) {
+        hour = "5"; // Mặc định 5h
+    }
+
+    if (minute == null) {
+        minute = "0"; // Mặc định 0 phút
+    }
+    
 %>
 
 <!DOCTYPE html>
@@ -57,8 +82,11 @@
         </select>
 
         <br><br>
-        Giờ: <input type="number" name="hour" min="0" max="23" value="<%= hour != null ? hour : "" %>" required>
-        Phút: <input type="number" name="minute" min="0" max="59" value="<%= minute != null ? minute : "" %>" required>
+      Ngày đi: <input type="date" name="travelDate" value="<%= travelDate %>" required><br><br>
+
+    Giờ: <input type="number" name="hour" min="0" max="23" value="<%= hour %>" required>
+    Phút: <input type="number" name="minute" min="0" max="59" value="<%= minute %>" required>
+
         <br><br>
         <button type="submit">Tìm kiếm</button>
     </form>
@@ -80,8 +108,7 @@
             </thead>
            <tbody>
     <% for (BusTrip trip : trips) { %>
-       <tr>
-            <td><%= trip.getBrId() %></td>
+       <tr> <td><%= trip.getBrId() %></td>
             <td><%= trip.getBrFrom() %></td>
             <td><%= trip.getBrTo() %></td>
             <td><%= trip.getBt1DepartureTime() %></td>

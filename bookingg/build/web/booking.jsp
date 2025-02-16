@@ -51,7 +51,7 @@
         <input type="hidden" name="description" value="<%= description %>">
         <input type="hidden" name="distance" value="<%= distance %>">
 
-        Ngày đi: <input type="date" name="travelDate" required><br><br>
+        
         <button type="submit">Đặt vé</button>
     </form>
 </body>
