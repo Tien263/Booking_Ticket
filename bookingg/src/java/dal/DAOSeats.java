@@ -20,6 +20,7 @@ import java.util.logging.Logger;
  */
 public class DAOSeats extends DBContext {
 
+    //Lấy danh sách ghế
     public List<Seats> getSeats(int tripId, int vehicleId) {
         List<Seats> seats = new ArrayList<>();
         String sql = "SELECT s_id, s_name, s_status, s_level FROM Seats WHERE bt1_id = ? AND v_id = ?";
@@ -42,6 +43,7 @@ public class DAOSeats extends DBContext {
         return seats;
     }
 
+    //Đổi trạng thái ghế 
     public void changeStatus(int pid, String value) {
         String sql = "UPDATE Seats SET s_status='" + value + "' WHERE s_id=" + pid;
         try {
@@ -55,12 +57,13 @@ public class DAOSeats extends DBContext {
         }
     }
 
-    public Boolean isSeatBooked(int pid) {
+    //Kiểm tra ghế và đổi trạng thái
+    public Boolean isSeatBooked(int pid, String status) {
         String checkSQL = "SELECT * FROM Tickets WHERE s_id=" + pid;
         try {
             ResultSet rs = connection.createStatement().executeQuery(checkSQL);
             if (rs.next()) {
-                changeStatus(pid, "Unavailable");
+                changeStatus(pid, status);
                 return true;
 
             }

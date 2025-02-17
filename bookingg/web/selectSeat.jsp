@@ -58,6 +58,7 @@
     <body>
         <h2>Chọn ghế</h2>
         <form action="BookTicketURL" method="get">
+            <input type="hidden" name="service" value="selectSeat">
             <div class="seat-container">
                 <!-- Tầng dưới -->
                 <div>
@@ -65,7 +66,7 @@
                     <div class="seat-section">
                         <%
                             DAOSeats seatDao = new DAOSeats();
-                            List<Seats> seats = seatDao.getSeats(3, 19); // Lấy danh sách ghế cho tripId=3, vehicleId=19
+                            List<Seats> seats = seatDao.getSeats(1, 1); // Lấy danh sách ghế cho tripId=1, vehicleId=1
                             boolean hasUpperDeck = false; // Biến kiểm tra có tầng trên không
 
                             for (Seats seat : seats) {
@@ -104,8 +105,8 @@
                     <% } %>
                 </div>
                 <!-- Thông tin ẩn -->
-                <input type="hidden" name="vehicleId" value="19">
-                <input type="hidden" name="tripId" value="3">
+                <input type="hidden" name="vehicleId" value="1">
+                <input type="hidden" name="tripId" value="1">
                 <input type="hidden" name="routeId" value="1">
                 <input type="hidden" name="customerId" value="1">
                 <input type="hidden" name="price" value="10.0">

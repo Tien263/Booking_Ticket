@@ -78,6 +78,6 @@ public class Seats {
     }
     
     public boolean isAvailable() {
-        return "Available".equalsIgnoreCase(s_status);
+        return "available".equalsIgnoreCase(s_status);
     }
 }
