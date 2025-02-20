@@ -7,6 +7,7 @@ package dal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -18,10 +19,10 @@ public class DatabaseCleanup extends DBContext {
 
             // DELETE bookTicket
             String sql1 = "DELETE FROM BookTickets WHERE bt_status ='pending'"
-                    + "AND bt_bookingDate < DATEADD(MINUTE, -15, GETDATE());";
+                    + "AND bt_bookingDate < DATEADD(MINUTE, -10, GETDATE());";
             try (PreparedStatement stmt = connection.prepareStatement(sql1)) {
                 int rows = stmt.executeUpdate();
-                System.out.println("✅ Đã xóa " + rows + " BookTickets (pending quá 5 phút).");
+                System.out.println("✅ Đã xóa " + rows + " BookTickets (pending quá 10 phút).");
             }
 
             // DELETE ticket
@@ -44,7 +45,32 @@ public class DatabaseCleanup extends DBContext {
             System.out.println("🔹 Cleanup hoàn tất!");
 
         } catch (SQLException ex) {
-            Logger.getLogger(DatabaseCleanup.class.getName()).log(Level.SEVERE, "❌ Lỗi khi cleanup: " + ex.getMessage(), ex);
+            Logger.getLogger(DatabaseCleanup.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
         }
+    }
+
+    @Override
+    public void insert(Object entity) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void update(Object entity) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void delete(Object entity) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public ArrayList list() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public Object get(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

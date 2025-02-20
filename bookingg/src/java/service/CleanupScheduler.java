@@ -13,7 +13,6 @@ import java.util.concurrent.TimeUnit;
  * @author Admin
  */
 
-
 public class CleanupScheduler {
     public static void main(String[] args) {
         DatabaseCleanup cleaner = new DatabaseCleanup();

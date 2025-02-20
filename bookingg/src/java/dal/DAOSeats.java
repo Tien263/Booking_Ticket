@@ -4,7 +4,7 @@
  */
 package dal;
 
-import entity.accesscontrol.Seats;
+import model.Seats;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.ResultSet;
@@ -88,13 +88,30 @@ public class DAOSeats extends DBContext {
         }
         return "Không xác định";
     }
-    
-    public static void main(String[] args) {
-        DAOSeats dao = new DAOSeats();
-        List<Seats> seats = dao.getSeats(3, 19);
-        for (Seats seat : seats) {
-            System.out.println(seat);
-        }
+
+    @Override
+    public void insert(Object entity) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void update(Object entity) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void delete(Object entity) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public ArrayList list() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public Object get(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }
