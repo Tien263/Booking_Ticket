@@ -25,6 +25,69 @@
         <servlet-class>controller.accesscontrol.ResetPasswordController</servlet-class>
     </servlet>
     <servlet>
+<<<<<<< Updated upstream
+        <servlet-name>VerifyUsernameController</servlet-name>
+        <servlet-class>controller.accesscontrol.VerifyUsernameController</servlet-class>
+=======
+        <servlet-name>CusListBlogController</servlet-name>
+        <servlet-class>controller.accesscontrol.CusListBlogController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CusBlogDetailController</servlet-name>
+        <servlet-class>controller.accesscontrol.CusBlogDetailController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangePasswordController</servlet-name>
+        <servlet-class>controller.accesscontrol.ChangePasswordController</servlet-class>
+>>>>>>> Stashed changes
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EmployeeLoginnController</servlet-name>
+        <url-pattern>/employee_login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateEmployeeController</servlet-name>
+        <url-pattern>/employee_update</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ResetPasswordController</servlet-name>
+        <url-pattern>/reset_password</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+<<<<<<< Updated upstream
+=======
+        <servlet-name>ChangeAccountController</servlet-name>
+        <url-pattern>/change1</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CusListBlogController</servlet-name>
+        <url-pattern>/cuslistblog</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CusBlogDetailController</servlet-name>
+        <url-pattern>/cusblogdetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangePasswordController</servlet-name>
+        <url-pattern>/changepassword</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>EmployeeLoginController</servlet-name>
+        <servlet-class>controller.accesscontrol.EmployeeLoginController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EmployeeLoginnController</servlet-name>
+        <servlet-class>controller.accesscontrol.EmployeeLoginnController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateEmployeeController</servlet-name>
+        <servlet-class>controller.accesscontrol.UpdateEmployeeController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ResetPasswordController</servlet-name>
+        <servlet-class>controller.accesscontrol.ResetPasswordController</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>VerifyUsernameController</servlet-name>
         <servlet-class>controller.accesscontrol.VerifyUsernameController</servlet-class>
     </servlet>
@@ -41,6 +104,7 @@
         <url-pattern>/reset_password</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+>>>>>>> Stashed changes
         <servlet-name>VerifyUsernameController</servlet-name>
         <url-pattern>/verify_username</url-pattern>
     </servlet-mapping>
