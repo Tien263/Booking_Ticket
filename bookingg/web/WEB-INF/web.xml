@@ -30,7 +30,7 @@
     </servlet>
     <servlet>
         <servlet-name>BookTicketController</servlet-name>
-        <servlet-class>controller.accesscontrol.BookTicketServlet</servlet-class>
+        <servlet-class>controller.bookTicket.BookTicketServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Register</servlet-name>
@@ -99,5 +99,13 @@
     <servlet-mapping>
         <servlet-name>BookTicketController</servlet-name>
         <url-pattern>/BookTicketURL</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>booking</servlet-name>
+        <servlet-class>controller.bookTicket.booking</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>booking</servlet-name>
+        <url-pattern>/booking</url-pattern>
     </servlet-mapping>
 </web-app>

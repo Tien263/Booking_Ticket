@@ -53,6 +53,6 @@
             </c:forEach>
         </table>
         <br>
-        <a href="selectSeat.jsp">Đặt vé mới</a>
+        <a href="search_results.jsp">Đặt vé mới</a>
     </body>
 </html>

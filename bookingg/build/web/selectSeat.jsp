@@ -6,8 +6,8 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %>
-<%@ page import="dal.DAOSeats" %>
-<%@ page import="model.Seats" %>
+<%@ page import="dal.bookTicket.DAOSeats" %>
+<%@ page import="model.bookTicket.Seats" %>
 
 <!DOCTYPE html>
 <html>
@@ -105,9 +105,12 @@
                     <% } %>
                 </div>
                 <!-- Thông tin ẩn -->
+                <%
+                    String brId = request.getParameter("brId");
+                %>
                 <input type="hidden" name="vehicleId" value="1">
                 <input type="hidden" name="tripId" value="1">
-                <input type="hidden" name="routeId" value="1">
+                <input type="hidden" name="routeId" value="<%= brId %>">
                 <input type="hidden" name="customerId" value="1">
                 <input type="hidden" name="price" value="10.0">
                 <input type="submit" value="Xác nhận đặt vé">
