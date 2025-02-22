@@ -26,7 +26,7 @@ public class ConfirmationDAO extends DBContext {
             String updateTicketsQuery = "UPDATE t "
                     + "SET t.t_status = 'confirmed' "
                     + "FROM Tickets t "
-                    + "JOIN BookTickets b ON t.t_id = b.t_id "
+                    + "JOIN BookTickets b ON t.bt_id = b.bt_id "
                     + "WHERE b.bt_id = ?";
 
             // Câu lệnh SQL cập nhật BookTickets

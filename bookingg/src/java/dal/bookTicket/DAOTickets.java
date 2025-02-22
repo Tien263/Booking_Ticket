@@ -13,30 +13,34 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  *
  * @author Admin
  */
 public class DAOTickets extends DBContext {
 
-    public List<Integer> createAndBookTickets(int userId, List<Integer> seatIds, int tripId, double price) {
-        List<Integer> bookingIds = new ArrayList<>();
-
+    public int createAndBookTickets(int userId, List<Integer> seatIds, int tripId) {
+        int n = -1;
         try {
             connection.setAutoCommit(false); // Bắt đầu transaction
 
-            // Tạo danh sách vé
-            List<Integer> ticketIds = createTickets(seatIds, tripId, price);
-            if (ticketIds.isEmpty()) {
+            // Tạo một bản ghi trong BookTickets trước
+            int btId = insertBookTicket(userId, seatIds.size());
+            if (btId == -1) {
                 connection.rollback();
-                return new ArrayList<>();
+                return n;
             }
 
-            // Đặt vé vào BookTickets
-            bookingIds = bookTickets(userId, ticketIds);
+            // Tạo danh sách vé và liên kết với BookTickets
+            boolean sucess = false;
+            sucess = createTickets(btId, seatIds, tripId);
+            if (!sucess) {
+                connection.rollback();
+                return n;
+            }
 
             connection.commit(); // Xác nhận transaction
+            n = btId;
         } catch (SQLException e) {
             try {
                 if (connection != null) {
@@ -46,99 +50,101 @@ public class DAOTickets extends DBContext {
                 rollbackEx.printStackTrace();
             }
             e.printStackTrace();
-        } finally {
-            try {
-                if (connection != null) {
-                    connection.setAutoCommit(true);
-                    connection.close();
-                }
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
         }
-        return bookingIds; // Trả về danh sách ID của BookTickets
+        return n; // Trả về ID của BookTickets
     }
 
-    // Tạo danh sách vé và lấy ID
-    private List<Integer> createTickets(List<Integer> seatIds, int tripId, double price) throws SQLException {
-        List<Integer> ticketIds = new ArrayList<>();
-        String ticketSQL = "INSERT INTO Tickets (s_id, bt1_id, t_price, t_status, t_purchaseDate) VALUES (?, ?, ?, 'pending', GETDATE())";
+// Tạo một bản ghi BookTickets và lấy ID
+    private int insertBookTicket(int userId, int ticketCount) throws SQLException {
+        String bookSQL = "INSERT INTO BookTickets (bt_status, bt_bookingDate, c_id, bt_ticketNumber) VALUES ('pending', GETDATE(), ?, ?)";
+
+        try (PreparedStatement psBook = connection.prepareStatement(bookSQL, Statement.RETURN_GENERATED_KEYS)) {
+            psBook.setInt(1, userId);
+            psBook.setInt(2, ticketCount);
+            psBook.executeUpdate();
+
+            try (ResultSet rs = psBook.getGeneratedKeys()) {
+                if (rs.next()) {
+                    return rs.getInt(1); // Trả về bt_id
+                }
+            }
+        }
+        return -1; // Lỗi
+    }
+
+// Tạo danh sách vé và liên kết với BookTickets
+    private boolean createTickets(int btId, List<Integer> seatIds, int tripId) throws SQLException {
+        if (seatIds.isEmpty()) {
+            return false; // Không có ghế nào để tạo vé
+        }
+        String ticketSQL = "INSERT INTO Tickets (bt_id, bt1_id, s_id, t_status, t_purchaseDate) VALUES (?, ?, ?, 'pending', GETDATE())";
+        int createdTickets = 0; // Đếm số vé được tạo thành công
 
         try (PreparedStatement psTicket = connection.prepareStatement(ticketSQL, Statement.RETURN_GENERATED_KEYS)) {
             for (int seatId : seatIds) {
-                psTicket.setInt(1, seatId);
+                psTicket.setInt(1, btId);  // Liên kết vé với BookTickets
                 psTicket.setInt(2, tripId);
-                psTicket.setDouble(3, price);
-                psTicket.executeUpdate();
-
-                try (ResultSet rs = psTicket.getGeneratedKeys()) {
-                    if (rs.next()) {
-                        ticketIds.add(rs.getInt(1));
+                psTicket.setInt(3, seatId);
+                int n = psTicket.executeUpdate();
+                if (n > 0) { // Kiểm tra nếu lệnh INSERT thành công
+                    try (ResultSet rs = psTicket.getGeneratedKeys()) {
+                        if (rs.next()) {
+                            createdTickets++; // Đếm số vé tạo thành công
+                        }
                     }
                 }
             }
+            return createdTickets == seatIds.size();
         }
-        return ticketIds;
-    }
-
-    // Đặt vé vào bảng BookTickets và lấy ID
-    private List<Integer> bookTickets(int userId, List<Integer> ticketIds) throws SQLException {
-        List<Integer> bookingIds = new ArrayList<>();
-        String bookSQL = "INSERT INTO BookTickets (bt_status, bt_bookingDate, c_id, bt_ticketNumber, t_id) VALUES ('pending', GETDATE(), ?, 1, ?)";
-
-        try (PreparedStatement psBook = connection.prepareStatement(bookSQL, Statement.RETURN_GENERATED_KEYS)) {
-            for (int ticketId : ticketIds) {
-                psBook.setInt(1, userId);
-                psBook.setInt(2, ticketId);
-                psBook.executeUpdate();
-
-                try (ResultSet rsBook = psBook.getGeneratedKeys()) {
-                    if (rsBook.next()) {
-                        bookingIds.add(rsBook.getInt(1));
-                    }
-                }
-            }
-        }
-        return bookingIds;
     }
 
     // Phương thức lấy danh sách thông tin vé dựa vào danh sách bookingId
-    public BookTicket getTicketByBookingId(int bookingId) {
-        String query = "SELECT bt.bt_id, c.c_fullname, c.c_phone, bt.bt_bookingDate, "
+    public List<BookTicket> getTicketByBookingId(int bookingId) {
+        List<BookTicket> tickets = new ArrayList<>(); // Danh sách lưu kết quả
+        String query = "SELECT t.t_id, c.c_fullname, c.c_phone, bt.bt_bookingDate, "
                 + "br.br_from, br.br_to, bt1.bt1_departureTime, bt1.bt1_arrivalTime, "
-                + "s.s_name, t.t_price "
-                + "FROM BookTickets bt "
+                + "s.s_name, Br.br_price "
+                + "FROM Tickets t "
+                + "JOIN BookTickets bt ON bt.bt_id = t.bt_id "
                 + "JOIN Customer c ON bt.c_id = c.c_id "
-                + "JOIN Tickets t ON bt.t_id = t.t_id "
                 + "JOIN Seats s ON t.s_id = s.s_id "
                 + "JOIN BusTrips bt1 ON s.bt1_id = bt1.bt1_id "
                 + "JOIN BusRoutes br ON bt1.br_id = br.br_id "
                 + "WHERE bt.bt_id = ?";
-
-        try {
-            PreparedStatement ps = connection.prepareStatement(query);
+        System.out.println("DEBUG: bookingId = " + bookingId);
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setInt(1, bookingId);
-            ResultSet rs = ps.executeQuery();
-
-            if (rs.next()) {
-                return new BookTicket(
-                        rs.getInt("bt_id"),
-                        rs.getString("c_fullname"),
-                        rs.getString("c_phone"),
-                        rs.getDate("bt_bookingDate"),
-                        rs.getString("br_from"),
-                        rs.getString("br_to"),
-                        rs.getString("bt1_departureTime"),
-                        rs.getString("bt1_arrivalTime"),
-                        rs.getString("s_name"),
-                        rs.getFloat("t_price")
-                );
+            try (ResultSet rs = ps.executeQuery()){ 
+                while(rs.next()) {
+                     BookTicket bookTicket = new BookTicket(
+                            rs.getInt("t_id"),
+                            rs.getString("c_fullname"),
+                            rs.getString("c_phone"),
+                            rs.getDate("bt_bookingDate"),
+                            rs.getString("br_from") + "-" + rs.getString("br_to"),
+                            rs.getString("bt1_departureTime") + "-" + rs.getString("bt1_arrivalTime"),
+                            rs.getString("s_name"),
+                            rs.getFloat("br_price")
+                    );
+                      tickets.add(bookTicket);
+                }
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            return tickets;
         }
 
-        return null; // Trả về null nếu không tìm thấy vé
+    
+
+    public static void main(String[] args) {
+        DAOTickets dao = new DAOTickets();
+        List<BookTicket> bookTicket = dao.getTicketByBookingId(275);
+        for (BookTicket bookTicket1 : bookTicket) {
+            System.out.println(bookTicket1.getT_id());
+        }
     }
 
     @Override

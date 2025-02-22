@@ -13,39 +13,35 @@ import java.util.Date;
  */
 public class BookTicket {
 
-    private int bt_id;
+    private int t_id;
     private String c_fullname;
     private String c_phone;
     private Date bt_bookingDate;
-    private String br_from;
-    private String br_to;
-    private String bt1_departureTime;
-    private String bt1_arrivalTime;
+    private String br_adress;
+    private String bt1_time;
     private String s_name;
-    private float t_price;
+    private float br_price;
 
     public BookTicket() {
     }
 
-    public BookTicket(int bt_id, String c_fullname, String c_phone, Date bt_bookingDate, String br_from, String br_to, String bt1_departureTime, String bt1_arrivalTime, String s_name, float t_price) {
-        this.bt_id = bt_id;
+    public BookTicket(int t_id, String c_fullname, String c_phone, Date bt_bookingDate, String br_adress, String bt1_time, String s_name, float br_price) {
+        this.t_id = t_id;
         this.c_fullname = c_fullname;
         this.c_phone = c_phone;
         this.bt_bookingDate = bt_bookingDate;
-        this.br_from = br_from;
-        this.br_to = br_to;
-        this.bt1_departureTime = bt1_departureTime;
-        this.bt1_arrivalTime = bt1_arrivalTime;
+        this.br_adress = br_adress;
+        this.bt1_time = bt1_time;
         this.s_name = s_name;
-        this.t_price = t_price;
+        this.br_price = br_price;
     }
 
-    public int getBt_id() {
-        return bt_id;
+    public int getT_id() {
+        return t_id;
     }
 
-    public void setBt_id(int bt_id) {
-        this.bt_id = bt_id;
+    public void setT_id(int t_id) {
+        this.t_id = t_id;
     }
 
     public String getC_fullname() {
@@ -72,36 +68,20 @@ public class BookTicket {
         this.bt_bookingDate = bt_bookingDate;
     }
 
-    public String getBr_from() {
-        return br_from;
+    public String getBr_adress() {
+        return br_adress;
     }
 
-    public void setBr_from(String br_from) {
-        this.br_from = br_from;
+    public void setBr_adress(String br_adress) {
+        this.br_adress = br_adress;
     }
 
-    public String getBr_to() {
-        return br_to;
+    public String getBt1_time() {
+        return bt1_time;
     }
 
-    public void setBr_to(String br_to) {
-        this.br_to = br_to;
-    }
-
-    public String getBt1_departureTime() {
-        return bt1_departureTime;
-    }
-
-    public void setBt1_departureTime(String bt1_departureTime) {
-        this.bt1_departureTime = bt1_departureTime;
-    }
-
-    public String getBt1_arrivalTime() {
-        return bt1_arrivalTime;
-    }
-
-    public void setBt1_arrivalTime(String bt1_arrivalTime) {
-        this.bt1_arrivalTime = bt1_arrivalTime;
+    public void setBt1_time(String bt1_time) {
+        this.bt1_time = bt1_time;
     }
 
     public String getS_name() {
@@ -112,12 +92,12 @@ public class BookTicket {
         this.s_name = s_name;
     }
 
-    public float getT_price() {
-        return t_price;
+    public float getBr_price() {
+        return br_price;
     }
 
-    public void setT_price(float t_price) {
-        this.t_price = t_price;
+    public void setBr_price(float br_price) {
+        this.br_price = br_price;
     }
     
     

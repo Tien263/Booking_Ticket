@@ -110,7 +110,7 @@
                 %>
                 <input type="hidden" name="vehicleId" value="1">
                 <input type="hidden" name="tripId" value="1">
-                <input type="hidden" name="routeId" value="<%= brId %>">
+                <input type="hidden" name="routeId" value="1">
                 <input type="hidden" name="customerId" value="1">
                 <input type="hidden" name="price" value="10.0">
                 <input type="submit" value="Xác nhận đặt vé">

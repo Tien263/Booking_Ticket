@@ -28,13 +28,11 @@ public class bookingDAO extends DBContext<Object> {
     public List<BusTrip> getBusTrips(String from, String to, String time) {
         List<BusTrip> list = new ArrayList<>();
         String sql = "SELECT br.br_id, bt.bt1_departureTime, bt.bt1_arrivalTime, t.t_price, "
-                + "br.br_from, br.br_to, br.br_description, br.br_distance, c.c_id  ,"
-                + "FROM [PROJECTV01].[dbo].[Customer] c"
-                + "JOIN [PROJECTV01].[dbo].[BusRoutes] br ON c.c_id = br.c_id " 
+                + "br.br_from, br.br_to, br.br_description, br.br_distance "
+                + "FROM [PROJECTV01].[dbo].[BusRoutes] br  " 
                 + "JOIN [PROJECTV01].[dbo].[BusTrips] bt ON bt.br_id = br.br_id "
                 + "JOIN [PROJECTV01].[dbo].[Seats] s ON s.bt1_id = bt.bt1_id "
                 + "JOIN [PROJECTV01].[dbo].[Tickets] t ON t.s_id = s.s_id AND t.bt1_id = bt.bt1_id "
-                + "JOIN [PROJECTV01].[dbo].[Vehicles] v ON s.v_id = v.v_id "
                 + "WHERE br.br_from = ? AND br.br_to = ? "
                 + "AND bt.bt1_departureTime >= ? ";
         System.out.println("Time parameter: " + time);

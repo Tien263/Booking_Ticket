@@ -30,7 +30,7 @@
     </servlet>
     <servlet>
         <servlet-name>BookTicketController</servlet-name>
-        <servlet-class>controller.bookTicket.BookTicketServlet</servlet-class>
+        <servlet-class>controller.bookTicket.SelectSeatController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Register</servlet-name>
@@ -60,7 +60,7 @@
         <servlet-name>ChangePasswordController</servlet-name>
         <url-pattern>/changepassword</url-pattern>
     </servlet-mapping>
-     <servlet>
+    <servlet>
         <servlet-name>EmployeeLoginController</servlet-name>
         <servlet-class>controller.accesscontrol.EmployeeLoginController</servlet-class>
     </servlet>
