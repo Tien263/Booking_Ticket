@@ -69,6 +69,7 @@ public class CustomerLogin extends HttpServlet {
             if (c != null) {
 
                 session.setAttribute("customer", c);
+                session.setAttribute("c_id", c.getId());
                 response.sendRedirect("car.html");
             } else {
                 request.setAttribute("loginerror", "Wrong passoword!");
