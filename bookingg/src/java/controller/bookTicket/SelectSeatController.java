@@ -50,7 +50,12 @@ public class SelectSeatController extends HttpServlet {
                 try {
                     int routeId = Integer.parseInt(request.getParameter("routeId"));
                     int tripId = Integer.parseInt(request.getParameter("tripId"));
+                    int vehicleId = Integer.parseInt(request.getParameter("vehicleId"));
                     double price = Double.parseDouble(request.getParameter("price"));
+                    String routeFrom = request.getParameter("from");
+                    String routeTo = request.getParameter("to");
+                    String departureTime = request.getParameter("departureTime");
+                    String arrivalTime = request.getParameter("arrivalTime");
                     int userId = Integer.parseInt(request.getParameter("customerId"));
 
                     String[] seatIdsArray = request.getParameterValues("seatIds");
@@ -63,10 +68,6 @@ public class SelectSeatController extends HttpServlet {
                     List<Integer> seatIds = Arrays.stream(seatIdsArray)
                             .map(Integer::parseInt)
                             .toList();
-
-                    // Lấy thông tin ghế, chuyến đi
-                    String routeName = tripsDAO.getRouteName(routeId);
-                    String tripName = tripsDAO.getTripName(tripId);
                     List<String> seatNames = seatIds.stream()
                             .map(seatsDAO::getSeatName)
                             .filter(Objects::nonNull)
@@ -75,13 +76,15 @@ public class SelectSeatController extends HttpServlet {
                     double totalPrice = price * seatIds.size();
                     request.setAttribute("customerId", userId);
                     request.setAttribute("routeId", routeId);
-                    request.setAttribute("tripId", tripId);                   
-                    request.setAttribute("routeName", routeName);
-                    request.setAttribute("tripName", tripName);
+                    request.setAttribute("tripId", tripId);
+                    request.setAttribute("vehicleId", vehicleId);
+                    request.setAttribute("routeFrom", routeFrom);
+                    request.setAttribute("routeTo", routeTo);
+                    request.setAttribute("departureTime", departureTime);
+                    request.setAttribute("arrivalTime", arrivalTime);
                     request.setAttribute("seatNames", seatNames);
                     request.setAttribute("seatIds", seatIds);
                     request.setAttribute("totalPrice", totalPrice);
-
                     request.getRequestDispatcher("payment.jsp").forward(request, response);
                 } catch (NumberFormatException e) {
                     request.setAttribute("message", "Lỗi dữ liệu payment: " + e.getMessage());

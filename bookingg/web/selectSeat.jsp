@@ -57,7 +57,7 @@
     </head>
     <body>
         <h2>Chọn ghế</h2>
-        <form action="BookTicketURL" method="get">
+        <form action="SelectSeatURL" method="get">
             <input type="hidden" name="service" value="selectSeat">
             <div class="seat-container">
                 <!-- Tầng dưới -->
@@ -65,8 +65,16 @@
                     <h3>Tầng dưới</h3>
                     <div class="seat-section">
                         <%
+                            // Lấy tripId và vehicleId từ request
+                            String tripIdStr = request.getParameter("bt1Id");
+                            String vehicleIdStr = request.getParameter("vId");
+
+//                            // Kiểm tra xem có giá trị hay không, nếu có thì chuyển đổi sang int
+                            int tripId = (tripIdStr != null && !tripIdStr.isEmpty()) ? Integer.parseInt(tripIdStr) : 0;
+                            int vehicleId = (vehicleIdStr != null && !vehicleIdStr.isEmpty()) ? Integer.parseInt(vehicleIdStr) : 0;
+
                             DAOSeats seatDao = new DAOSeats();
-                            List<Seats> seats = seatDao.getSeats(1, 1); // Lấy danh sách ghế cho tripId=1, vehicleId=1
+                            List<Seats> seats = seatDao.getSeats(tripId, vehicleId); // Lấy danh sách ghế cho tripId=1, vehicleId=1
                             boolean hasUpperDeck = false; // Biến kiểm tra có tầng trên không
 
                             for (Seats seat : seats) {
@@ -108,14 +116,18 @@
                 <%
                     String brId = request.getParameter("brId");
                 %>
-                <input type="hidden" name="vehicleId" value="1">
-                <input type="hidden" name="tripId" value="1">
-                <input type="hidden" name="routeId" value="1">
-                <input type="hidden" name="customerId" value="1">
-                <input type="hidden" name="price" value="10.0">
+                <input type="hidden" name="vehicleId" value="<%= request.getParameter("vId") %>">
+                <input type="hidden" name="tripId" value="<%= request.getParameter("bt1Id") %>">
+                <input type="hidden" name="routeId" value="<%= request.getParameter("brId") %>">
+                <input type="hidden" name="customerId" value="<%= request.getParameter("customerId") %>">
+                <input type="hidden" name="price" value="<%= request.getParameter("price") %>">
+                <input type="hidden" name="from" value="<%= request.getParameter("from") %>">
+                <input type="hidden" name="to" value="<%= request.getParameter("to") %>">
+                <input type="hidden" name="departureTime" value="<%= request.getParameter("departureTime") %>">
+                <input type="hidden" name="arrivalTime" value="<%= request.getParameter("arrivalTime") %>">
                 <input type="submit" value="Xác nhận đặt vé">
-        </form>
-    </body>
-</html>
+                </form>
+                </body>
+                </html>
 
 

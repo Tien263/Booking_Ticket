@@ -23,7 +23,6 @@ import model.bookTicket.BookTicket;
  *
  * @author Admin
  */
-@WebServlet(name = "ConfirmationController", urlPatterns = {"/ConfirmationURL"})
 public class BookTicketController extends HttpServlet {
 
     /**

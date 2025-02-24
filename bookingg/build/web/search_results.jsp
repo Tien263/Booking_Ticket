@@ -35,68 +35,77 @@
     }
 
     if (hour == null) {
-        hour = "6"; // Mặc định 5h
+        hour = "5"; // Mặc định 5h
     }
 
     if (minute == null) {
-        minute = "15"; // Mặc định 0 phút
+        minute = "0"; // Mặc định 0 phút
     }
     
 %>
 
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Kết quả tìm kiếm chuyến xe</title>
-    <style>
-        table { width: 100%; border-collapse: collapse; }
-        table, th, td { border: 1px solid black; }
-        th, td { padding: 10px; text-align: center; }
-        th { background-color: #f2f2f2; }
-    </style>
-</head>
-<body>
-    <h1>Tìm kiếm chuyến xe</h1>
+    <head>
+        <title>Kết quả tìm kiếm chuyến xe</title>
+        <style>
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+            table, th, td {
+                border: 1px solid black;
+            }
+            th, td {
+                padding: 10px;
+                text-align: center;
+            }
+            th {
+                background-color: #f2f2f2;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Tìm kiếm chuyến xe</h1>
 
-    <% if (error != null) { %>
+        <% if (error != null) { %>
         <p style="color: red;"><%= error %></p>
-    <% } %>
+        <% } %>
 
-    <% if (message != null) { %>
+        <% if (message != null) { %>
         <p><%= message %></p>
-    <% } %>
+        <% } %>
 
-    <form method="GET" action="booking">
-        Điểm đi: 
-        <select name="from" required>
-            <% for (String province : provinces) { %>
+        <form method="GET" action="booking">
+            Điểm đi: 
+            <select name="from" required>
+                <% for (String province : provinces) { %>
                 <option value="<%= province %>" <%= province.equals(from) ? "selected" : "" %>><%= province %></option>
-            <% } %>
-        </select>
+                <% } %>
+            </select>
 
-        Điểm đến: 
-        <select name="to" required>
-            <% for (String province : provinces) { %>
+            Điểm đến: 
+            <select name="to" required>
+                <% for (String province : provinces) { %>
                 <option value="<%= province %>" <%= province.equals(to) ? "selected" : "" %>><%= province %></option>
-            <% } %>
-        </select>
+                <% } %>
+            </select>
 
-        <br><br>
-      Ngày đi: <input type="date" name="travelDate" value="<%= travelDate %>" required><br><br>
+            <br><br>
+            Ngày đi: <input type="date" name="travelDate" value="<%= travelDate %>" min="<%= java.time.LocalDate.now() %>" required><br><br>
+            Giờ: <input type="number" name="hour" min="0" max="23" value="<%= hour %>" required>
+            Phút: <input type="number" name="minute" min="0" max="59" value="<%= minute %>" required>
 
-    Giờ: <input type="number" name="hour" min="0" max="23" value="<%= hour %>" required>
-    Phút: <input type="number" name="minute" min="0" max="59" value="<%= minute %>" required>
+            <br><br>
+            <button type="submit">Tìm kiếm</button>
+        </form>
 
-        <br><br>
-        <button type="submit">Tìm kiếm</button>
-    </form>
-
-    <% if (trips != null && !trips.isEmpty()) { %>
+        <% if (trips != null && !trips.isEmpty()) { %>
         <h2>Kết quả tìm kiếm</h2>
         <table>
             <thead>
                 <tr>
-                    <th>ID</th>
+                    <th>ID Tuyến</th>
                     <th>Điểm đi</th>
                     <th>Điểm đến</th>
                     <th>Giờ khởi hành</th>
@@ -104,35 +113,43 @@
                     <th>Giá vé</th>
                     <th>Mô tả</th>
                     <th>Khoảng cách (km)</th>
+                    <th>Xe</th>
+                    <th>Hành động</th>
                 </tr>
             </thead>
-           <tbody>
-    <% for (BusTrip trip : trips) { %>
-       <tr> <td><%= trip.getBrId() %></td>
-            <td><%= trip.getBrFrom() %></td>
-            <td><%= trip.getBrTo() %></td>
-            <td><%= trip.getBt1DepartureTime() %></td>
-            <td><%= trip.getBt1ArrivalTime() %></td>
-            <td><%= trip.getTPrice() %></td>
-            <td><%= trip.getBrDescription() %></td>
-            <td><%= trip.getBrDistance() %></td>
-            <td>
-                <form action="booking.jsp" method="GET">
-                    <input type="hidden" name="brId" value="<%= trip.getBrId() %>">
-                    <input type="hidden" name="from" value="<%= trip.getBrFrom() %>">
-                    <input type="hidden" name="to" value="<%= trip.getBrTo() %>">
-                    <input type="hidden" name="departureTime" value="<%= trip.getBt1DepartureTime() %>">
-                    <input type="hidden" name="arrivalTime" value="<%= trip.getBt1ArrivalTime() %>">
-                    <input type="hidden" name="price" value="<%= trip.getTPrice() %>">
-                    <input type="hidden" name="description" value="<%= trip.getBrDescription() %>">
-                    <input type="hidden" name="distance" value="<%= trip.getBrDistance() %>">
-                    <button type="submit">Chọn chuyến</button>
-                </form>
-            </td>
-        </tr>
-    <% } %>
-</tbody>
+            <tbody>
+                <% for (BusTrip trip : trips) { %>
+                <tr>
+                    <td><%= trip.getBrId() %></td>
+                    <td><%= trip.getBrFrom() %></td>
+                    <td><%= trip.getBrTo() %></td>
+                    <td><%= trip.getBt1DepartureTime() %></td>
+                    <td><%= trip.getBt1ArrivalTime() %></td>
+                    <td><%= trip.gettPrice() %></td>
+                    <td><%= trip.getBrDescription() %></td>
+                    <td><%= trip.getBrDistance() %></td>
+                    <td><%= trip.getV_id() %></td>
+
+                    <td>
+                        <form action="selectSeat.jsp" method="GET">
+                            <input type="hidden" name="customerId" value="1">
+                            <input type="hidden" name="brId" value="<%= trip.getBrId() %>">
+                            <input type="hidden" name="from" value="<%= trip.getBrFrom() %>">
+                            <input type="hidden" name="to" value="<%= trip.getBrTo() %>">
+                            <input type="hidden" name="departureTime" value="<%= trip.getBt1DepartureTime() %>">
+                            <input type="hidden" name="arrivalTime" value="<%= trip.getBt1ArrivalTime() %>">
+                            <input type="hidden" name="price" value="<%= trip.gettPrice() %>">
+                            <input type="hidden" name="description" value="<%= trip.getBrDescription() %>">
+                            <input type="hidden" name="distance" value="<%= trip.getBrDistance() %>">
+                            <input type="hidden" name="vId" value="<%= trip.getV_id() %>">
+                            <input type="hidden" name="bt1Id" value="<%= trip.getBt1_id() %>">
+                            <button type="submit">Chọn chuyến</button>
+                        </form>
+                    </td>
+                </tr>
+                <% } %>
+            </tbody>
         </table>
-    <% } %>
-</body>
+        <% } %>
+    </body>
 </html>

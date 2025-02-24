@@ -19,45 +19,42 @@ import model.bookTicket.BusTrip;
  * @author Nguyen Minh Duc
  */
 
-// <input type="hidden" name="vehicleId" value="1">
-//                <input type="hidden" name="tripId" value="1">
-//                <input type="hidden" name="routeId" value="<%= brId %>">
-//                <input type="hidden" name="customerId" value="1">
 public class bookingDAO extends DBContext<Object> {
 
     public List<BusTrip> getBusTrips(String from, String to, String time) {
         List<BusTrip> list = new ArrayList<>();
-        String sql = "SELECT br.br_id, bt.bt1_departureTime, bt.bt1_arrivalTime, t.t_price, "
-                + "br.br_from, br.br_to, br.br_description, br.br_distance "
-                + "FROM [PROJECTV01].[dbo].[BusRoutes] br  " 
-                + "JOIN [PROJECTV01].[dbo].[BusTrips] bt ON bt.br_id = br.br_id "
-                + "JOIN [PROJECTV01].[dbo].[Seats] s ON s.bt1_id = bt.bt1_id "
-                + "JOIN [PROJECTV01].[dbo].[Tickets] t ON t.s_id = s.s_id AND t.bt1_id = bt.bt1_id "
-                + "WHERE br.br_from = ? AND br.br_to = ? "
-                + "AND bt.bt1_departureTime >= ? ";
-        System.out.println("Time parameter: " + time);
-        try {
-
+        String sql = "SELECT br.br_id, bt.bt1_departureTime, bt.bt1_arrivalTime, br.br_price, " +
+             "br.br_from, br.br_to, br.br_description, br.br_distance, " +
+             "v.v_id, bt.bt1_id " +
+             "FROM [BusRoutes] br " +
+             "JOIN [BusTrips] bt ON bt.br_id = br.br_id " +
+             "JOIN [Seats] s ON bt.bt1_id = s.bt1_id " +
+             "JOIN [Vehicles] v ON v.v_id = s.v_id"+ 
+               " WHERE br.br_from = ? AND br.br_to = ? " + 
+               " AND bt.bt1_departureTime >= ? ";
+           try {
             PreparedStatement st = connection.prepareStatement(sql);
             // Đặt giá trị cho các tham số ?
             st.setString(1, from);
             st.setString(2, to);
             st.setString(3, time);
             ResultSet rs = st.executeQuery();
-            System.out.println(rs.next());
+           
             while (rs.next()) {
-                BusTrip busTrip = new BusTrip(
-                        rs.getInt("br_id"),
-                        rs.getString("bt1_departureTime"),
-                        rs.getString("bt1_arrivalTime"),
-                        rs.getDouble("t_price"),
-                        rs.getString("br_from"),
-                        rs.getString("br_to"),
-                        rs.getString("br_description"),
-                        rs.getDouble("br_distance")
-                );
-                list.add(busTrip);
-            }
+    int brId = rs.getInt("br_id");
+    String bt1DepartureTime = rs.getString("bt1_departureTime");
+    String bt1ArrivalTime = rs.getString("bt1_arrivalTime");
+    float tPrice = rs.getFloat("br_price");
+    String brFrom = rs.getString("br_from");
+    String brTo = rs.getString("br_to");
+    String brDescription = rs.getString("br_description");
+    double brDistance = rs.getDouble("br_distance");
+    int v_id = rs.getInt("v_id");
+    int bt1_id = rs.getInt("bt1_id");
+
+    BusTrip busTrip = new BusTrip(brId, bt1DepartureTime, bt1ArrivalTime, tPrice, brFrom, brTo, brDescription, brDistance, v_id, bt1_id);
+    list.add(busTrip);
+}
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -67,13 +64,7 @@ public class bookingDAO extends DBContext<Object> {
         return list;
     }
 
-    public static void main(String[] args) {
-        bookingDAO dao = new bookingDAO();
-        List<BusTrip> bt = dao.getBusTrips("HaNoi", "HaiPhong", "06:15:00");
-        for (BusTrip busTrip : bt) {
-            System.out.println(busTrip.getBrFrom() + busTrip.getBrTo() + busTrip.getBrId());
-        }
-    }
+    
 
     @Override
     public void insert(Object entity) {

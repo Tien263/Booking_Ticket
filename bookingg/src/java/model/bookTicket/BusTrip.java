@@ -13,13 +13,15 @@ public class BusTrip {
     private int brId;
     private String bt1DepartureTime;
     private String bt1ArrivalTime;
-    private double tPrice;
+    private float tPrice;
     private String brFrom;
     private String brTo;
     private String brDescription;
     private double brDistance;
+    private int v_id;
+    private int bt1_id;
 
-    public BusTrip(int brId, String bt1DepartureTime, String bt1ArrivalTime, double tPrice, String brFrom, String brTo, String brDescription, double brDistance) {
+    public BusTrip(int brId, String bt1DepartureTime, String bt1ArrivalTime, float tPrice, String brFrom, String brTo, String brDescription, double brDistance, int v_id, int bt1_id) {
         this.brId = brId;
         this.bt1DepartureTime = bt1DepartureTime;
         this.bt1ArrivalTime = bt1ArrivalTime;
@@ -28,6 +30,8 @@ public class BusTrip {
         this.brTo = brTo;
         this.brDescription = brDescription;
         this.brDistance = brDistance;
+        this.v_id = v_id;
+        this.bt1_id = bt1_id;
     }
 
     public int getBrId() {
@@ -54,11 +58,11 @@ public class BusTrip {
         this.bt1ArrivalTime = bt1ArrivalTime;
     }
 
-    public double getTPrice() {
+    public float gettPrice() {
         return tPrice;
     }
 
-    public void setTPrice(double tPrice) {
+    public void settPrice(float tPrice) {
         this.tPrice = tPrice;
     }
 
@@ -93,4 +97,22 @@ public class BusTrip {
     public void setBrDistance(double brDistance) {
         this.brDistance = brDistance;
     }
+
+    public int getV_id() {
+        return v_id;
+    }
+
+    public void setV_id(int v_id) {
+        this.v_id = v_id;
+    }
+
+    public int getBt1_id() {
+        return bt1_id;
+    }
+
+    public void setBt1_id(int bt1_id) {
+        this.bt1_id = bt1_id;
+    }
+
+    
 }
