@@ -13,13 +13,13 @@ public class BusTrip {
     private int brId;
     private String bt1DepartureTime;
     private String bt1ArrivalTime;
-    private double tPrice;
+    private float tPrice;
     private String brFrom;
     private String brTo;
     private String brDescription;
     private double brDistance;
 
-    public BusTrip(int brId, String bt1DepartureTime, String bt1ArrivalTime, double tPrice, String brFrom, String brTo, String brDescription, double brDistance) {
+    public BusTrip(int brId, String bt1DepartureTime, String bt1ArrivalTime, float tPrice, String brFrom, String brTo, String brDescription, double brDistance) {
         this.brId = brId;
         this.bt1DepartureTime = bt1DepartureTime;
         this.bt1ArrivalTime = bt1ArrivalTime;
@@ -58,7 +58,7 @@ public class BusTrip {
         return tPrice;
     }
 
-    public void setTPrice(double tPrice) {
+    public void setTPrice(float tPrice) {
         this.tPrice = tPrice;
     }
 
@@ -93,4 +93,11 @@ public class BusTrip {
     public void setBrDistance(double brDistance) {
         this.brDistance = brDistance;
     }
+
+    @Override
+    public String toString() {
+        return "BusTrip{" + "brId=" + brId + ", bt1DepartureTime=" + bt1DepartureTime + ", bt1ArrivalTime=" + bt1ArrivalTime + ", tPrice=" + tPrice + ", brFrom=" + brFrom + ", brTo=" + brTo + ", brDescription=" + brDescription + ", brDistance=" + brDistance + '}';
+    }
+    
+    
 }
