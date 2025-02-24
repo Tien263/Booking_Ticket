@@ -16,19 +16,22 @@ import java.util.logging.Logger;
  */
 public class BlogDao extends DBContext<Blog> {
 
+    @Override
     public void insert(Blog entity) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
+    @Override
     public void update(Blog entity) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
+    @Override
     public void delete(Blog entity) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-  
+    @Override
     public ArrayList<Blog> list() {
         ArrayList<Blog> list = new ArrayList<>();
         String sql = "SELECT \n"
@@ -72,7 +75,7 @@ public class BlogDao extends DBContext<Blog> {
         return list;
     }
 
-
+    @Override
     public Blog get(int id) {
         String sql = "SELECT \n"
                 + "                     b_id, \n"

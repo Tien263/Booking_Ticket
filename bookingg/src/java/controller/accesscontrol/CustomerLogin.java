@@ -4,6 +4,7 @@
  */
 package controller.accesscontrol;
 
+import MD5.BCrypt;
 import dal.CustomerDao;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,6 +13,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.Scanner;
 import model.Customer;
 
 /**
@@ -50,6 +52,8 @@ public class CustomerLogin extends HttpServlet {
             throws ServletException, IOException {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
+        BCrypt bCrypt = new BCrypt();
+//        String password1 =  bCrypt.hashpw(password, bCrypt.gensalt());
         CustomerDao cd = new CustomerDao();
         HttpSession session = request.getSession();
         
@@ -83,4 +87,28 @@ public class CustomerLogin extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        CustomerDao customerDao = new CustomerDao();
+
+        System.out.print("Enter email: ");
+        String email = scanner.nextLine();
+
+        System.out.print("Enter password: ");
+        String password = scanner.nextLine();
+
+        // Gọi DAO để lấy Customer từ Database
+         Customer c = customerDao.getCustomerByEmail(email, password);
+
+        if (c != null) {
+            System.out.println("\nLogin successful! ✅");
+            System.out.println("Email: " + c.getEmail());
+            System.out.println("password: " + c.getPassword());
+
+            // Kiểm tra thông tin khách hàng đã đầy đủ chưa
+            
+
+        scanner.close();
+    }
+    }
 }

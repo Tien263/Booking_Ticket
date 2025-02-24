@@ -5,7 +5,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
-<%@ page import="model.BusTrip" %>
+<%@ page import="model.bookTicket.BusTrip" %>
 
 <%
     String from = (String) request.getAttribute("from");
@@ -52,7 +52,7 @@
         table { width: 100%; border-collapse: collapse; }
         table, th, td { border: 1px solid black; }
         th, td { padding: 10px; text-align: center; }
-        th { background-color: #f2f2f2; }
+        th { background-color: #f2f2f2;}
     </style>
 </head>
 <body>
@@ -83,7 +83,6 @@
 
         <br><br>
       Ngày đi: <input type="date" name="travelDate" value="<%= travelDate %>" min="<%= java.time.LocalDate.now() %>" required><br><br>
-
     Giờ: <input type="number" name="hour" min="0" max="23" value="<%= hour %>" required>
     Phút: <input type="number" name="minute" min="0" max="59" value="<%= minute %>" required>
 
@@ -92,50 +91,54 @@
     </form>
 
     <% if (trips != null && !trips.isEmpty()) { %>
-        <h2>Kết quả tìm kiếm</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Điểm đi</th>
-                    <th>Điểm đến</th>
-                    <th>Giờ khởi hành</th>
-                    <th>Giờ đến</th>
-                    <th>Giá vé</th>
-                    <th>Mô tả</th>
-                    <th>Khoảng cách (km)</th>
-                     <th>Ngày đi</th>
-                </tr>
-            </thead>
-           <tbody>
-    <% for (BusTrip trip : trips) { %>
-       <tr> <td><%= trip.getBrId() %></td>
-            <td><%= trip.getBrFrom() %></td>
-            <td><%= trip.getBrTo() %></td>
-            <td><%= trip.getBt1DepartureTime() %></td>
-            <td><%= trip.getBt1ArrivalTime() %></td>
-            <td><%= trip.getTPrice() %></td>
-            <td><%= trip.getBrDescription() %></td>
-            <td><%= trip.getBrDistance() %></td>
-            <td><%= travelDate %></td>
-            <td>
-    <form action="booking.jsp" method="GET">
-        <input type="hidden" name="brId" value="<%= trip.getBrId() %>">
-        <input type="hidden" name="from" value="<%= trip.getBrFrom() %>">
-        <input type="hidden" name="to" value="<%= trip.getBrTo() %>">
-        <input type="hidden" name="departureTime" value="<%= trip.getBt1DepartureTime() %>">
-        <input type="hidden" name="arrivalTime" value="<%= trip.getBt1ArrivalTime() %>">
-        <input type="hidden" name="price" value="<%= trip.getTPrice() %>">
-        <input type="hidden" name="description" value="<%= trip.getBrDescription() %>">
-        <input type="hidden" name="distance" value="<%= trip.getBrDistance() %>">
-        <input type="hidden" name="travelDate" value="<%= travelDate %>">
-        <button type="submit">Chọn chuyến</button>
-    </form>
-</td>
-</tr>
-<% } %>
-</tbody>
+       <h2>Kết quả tìm kiếm</h2>
+<table>
+    <thead>
+        <tr>
+            <th>ID Tuyến</th>
+            <th>Điểm đi</th>
+            <th>Điểm đến</th>
+            <th>Giờ khởi hành</th>
+            <th>Giờ đến</th>
+            <th>Giá vé</th>
+            <th>Mô tả</th>
+            <th>Khoảng cách (km)</th>
+            <th>Xe</th>
+            <th>Hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% for (BusTrip trip : trips) { %>
+            <tr>
+                <td><%= trip.getBrId() %></td>
+                <td><%= trip.getBrFrom() %></td>
+                <td><%= trip.getBrTo() %></td>
+                <td><%= trip.getBt1DepartureTime() %></td>
+                <td><%= trip.getBt1ArrivalTime() %></td>
+                <td><%= trip.gettPrice() %></td>
+                <td><%= trip.getBrDescription() %></td>
+                <td><%= trip.getBrDistance() %></td>
+                <td><%= trip.getV_id() %></td>
+                
+                <td>
+                    <form action="booking.jsp" method="GET">
+                        <input type="hidden" name="brId" value="<%= trip.getBrId() %>">
+                        <input type="hidden" name="from" value="<%= trip.getBrFrom() %>">
+                        <input type="hidden" name="to" value="<%= trip.getBrTo() %>">
+                        <input type="hidden" name="departureTime" value="<%= trip.getBt1DepartureTime() %>">
+                        <input type="hidden" name="arrivalTime" value="<%= trip.getBt1ArrivalTime() %>">
+                        <input type="hidden" name="price" value="<%= trip.gettPrice() %>">
+                        <input type="hidden" name="description" value="<%= trip.getBrDescription() %>">
+                        <input type="hidden" name="distance" value="<%= trip.getBrDistance() %>">
+                        <input type="hidden" name="vId" value="<%= trip.getV_id() %>">
+                        <input type="hidden" name="bt1Id" value="<%= trip.getBt1_id() %>">
+                        <button type="submit">Chọn chuyến</button>
+                    </form>
+                </td>
+            </tr>
+        <% } %>
+    </tbody>
 </table>
-    <% } %>
+ <% } %>
 </body>
 </html>

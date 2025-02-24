@@ -29,8 +29,8 @@
         <servlet-class>controller.accesscontrol.ChangePasswordController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>booking</servlet-name>
-        <servlet-class>controller.accesscontrol.booking</servlet-class>
+        <servlet-name>BookTicketController</servlet-name>
+        <servlet-class>controller.bookTicket.BookTicketServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Register</servlet-name>
@@ -60,6 +60,50 @@
         <servlet-name>ChangePasswordController</servlet-name>
         <url-pattern>/changepassword</url-pattern>
     </servlet-mapping>
+     <servlet>
+        <servlet-name>EmployeeLoginController</servlet-name>
+        <servlet-class>controller.accesscontrol.EmployeeLoginController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EmployeeLoginnController</servlet-name>
+        <servlet-class>controller.accesscontrol.EmployeeLoginnController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateEmployeeController</servlet-name>
+        <servlet-class>controller.accesscontrol.UpdateEmployeeController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ResetPasswordController</servlet-name>
+        <servlet-class>controller.accesscontrol.ResetPasswordController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>VerifyUsernameController</servlet-name>
+        <servlet-class>controller.accesscontrol.VerifyUsernameController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EmployeeLoginnController</servlet-name>
+        <url-pattern>/employee_login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateEmployeeController</servlet-name>
+        <url-pattern>/employee_update</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ResetPasswordController</servlet-name>
+        <url-pattern>/reset_password</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>VerifyUsernameController</servlet-name>
+        <url-pattern>/verify_username</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BookTicketController</servlet-name>
+        <url-pattern>/BookTicketURL</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>booking</servlet-name>
+        <servlet-class>controller.bookTicket.booking</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>booking</servlet-name>
         <url-pattern>/booking</url-pattern>

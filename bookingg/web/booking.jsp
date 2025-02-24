@@ -14,6 +14,8 @@
     String price = request.getParameter("price");
     String description = request.getParameter("description");
     String distance = request.getParameter("distance");
+    String vId = request.getParameter("vId");
+    String bt1Id = request.getParameter("bt1Id");
 %>
 
 <!DOCTYPE html>
@@ -30,7 +32,7 @@
 <body>
     <h1>Thông tin chuyến xe</h1>
     <table>
-        <tr><th>ID</th><td><%= brId %></td></tr>
+        <tr><th>ID Tuyến</th><td><%= brId %></td></tr>
         <tr><th>Điểm đi</th><td><%= from %></td></tr>
         <tr><th>Điểm đến</th><td><%= to %></td></tr>
         <tr><th>Giờ khởi hành</th><td><%= departureTime %></td></tr>
@@ -38,10 +40,12 @@
         <tr><th>Giá vé</th><td><%= price %></td></tr>
         <tr><th>Mô tả</th><td><%= description %></td></tr>
         <tr><th>Khoảng cách (km)</th><td><%= distance %></td></tr>
+        <tr><th>ID Xe</th><td><%= vId %></td></tr>
+        <tr><th>ID Chuyến</th><td><%= bt1Id %></td></tr>
     </table>
 
     <h2>Chọn ngày đi</h2>
-    <form action="confirmBooking.jsp" method="POST">
+    <form action="selectSeat.jsp" method="POST">
         <input type="hidden" name="brId" value="<%= brId %>">
         <input type="hidden" name="from" value="<%= from %>">
         <input type="hidden" name="to" value="<%= to %>">
@@ -50,8 +54,8 @@
         <input type="hidden" name="price" value="<%= price %>">
         <input type="hidden" name="description" value="<%= description %>">
         <input type="hidden" name="distance" value="<%= distance %>">
-
-        
+        <input type="hidden" name="vId" value="<%= vId %>">
+        <input type="hidden" name="bt1Id" value="<%= bt1Id %>">
         <button type="submit">Đặt vé</button>
     </form>
 </body>
