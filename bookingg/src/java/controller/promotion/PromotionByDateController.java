@@ -71,7 +71,7 @@ public class PromotionByDateController extends HttpServlet {
             Date startDate = sdf.parse(startDateStr);
             Date endDate = sdf.parse(endDateStr);
 
-            Promotions_By_Date promotion = new Promotions_By_Date(id, startDate, endDate, discount, quantity);
+            Promotions_By_Date promotion = new Promotions_By_Date(id, name, startDate, endDate, discount, quantity);
 
             if (id > 0) {
                 promotionDAO.update(promotion);

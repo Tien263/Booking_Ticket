@@ -18,13 +18,14 @@ public class PromotionByDateDAO extends DBContext<Promotions_By_Date>{
     // Thêm chương trình khuyến mãi
     @Override
     public void insert(Promotions_By_Date entity) {
-        String sql = "INSERT INTO Promotions_By_Date (pbd_startDate, pbd_endDate, pbd_discount, pbd_quantity) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO Promotions_By_Date (pbd_name, pbd_startDate, pbd_endDate, pbd_discount, pbd_quantity) VALUES (?, ?, ?, ?, ?)";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setDate(1, new java.sql.Date(entity.getStartDate().getTime()));
-            ps.setDate(2, new java.sql.Date(entity.getEndDate().getTime()));
-            ps.setDouble(3, entity.getDiscount());
-            ps.setInt(4, entity.getQuantity());
+            ps.setNString(1, entity.getName());
+            ps.setDate(2, new java.sql.Date(entity.getStartDate().getTime()));
+            ps.setDate(3, new java.sql.Date(entity.getEndDate().getTime()));
+            ps.setDouble(4, entity.getDiscount());
+            ps.setInt(5, entity.getQuantity());
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -34,14 +35,15 @@ public class PromotionByDateDAO extends DBContext<Promotions_By_Date>{
     // Cập nhật chương trình khuyến mãi
     @Override
     public void update(Promotions_By_Date entity) {
-        String sql = "UPDATE Promotions_By_Date SET pbd_startDate = ?, pbd_endDate = ?, pbd_discount = ?, pbd_quantity = ? WHERE pbd_id = ?";
+        String sql = "UPDATE Promotions_By_Date SET pbd_name = ?, pbd_startDate = ?, pbd_endDate = ?, pbd_discount = ?, pbd_quantity = ? WHERE pbd_id = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setDate(1, new java.sql.Date(entity.getStartDate().getTime()));
-            ps.setDate(2, new java.sql.Date(entity.getEndDate().getTime()));
-            ps.setDouble(3, entity.getDiscount());
-            ps.setInt(4, entity.getQuantity());
-            ps.setInt(5, entity.getId());
+            ps.setNString(1, entity.getName());
+            ps.setDate(2, new java.sql.Date(entity.getStartDate().getTime()));
+            ps.setDate(3, new java.sql.Date(entity.getEndDate().getTime()));
+            ps.setDouble(4, entity.getDiscount());
+            ps.setInt(5, entity.getQuantity());
+            ps.setInt(6, entity.getId());
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -72,6 +74,7 @@ public class PromotionByDateDAO extends DBContext<Promotions_By_Date>{
             while (rs.next()) {
                 Promotions_By_Date promo = new Promotions_By_Date(
                     rs.getInt("pbd_id"),
+                    rs.getNString("pbd_name"),
                     rs.getDate("pbd_startDate"),
                     rs.getDate("pbd_endDate"),
                     rs.getDouble("pbd_discount"),
@@ -96,6 +99,7 @@ public class PromotionByDateDAO extends DBContext<Promotions_By_Date>{
             if (rs.next()) {
                 return new Promotions_By_Date(
                     rs.getInt("pbd_id"),
+                    rs.getNString("pbc_name"),
                     rs.getDate("pbd_startDate"),
                     rs.getDate("pbd_endDate"),
                     rs.getDouble("pbd_discount"),

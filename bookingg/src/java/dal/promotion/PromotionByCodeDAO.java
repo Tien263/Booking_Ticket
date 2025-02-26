@@ -16,13 +16,14 @@ public class PromotionByCodeDAO extends DBContext<Promotions_By_Code> {
      */
     @Override
     public void insert(Promotions_By_Code entity) {
-        String sql = "INSERT INTO Promotions_By_Code (pbc_code, pbc_discount, pbc_endDate, pbc_quantity) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO Promotions_By_Code (pbc_code, pbc_name, pbc_discount, pbc_endDate, pbc_quantity) VALUES (?, ?, ?, ?, ?)";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, entity.getCode());
-            ps.setDouble(2, entity.getDiscount());
-            ps.setDate(3, new java.sql.Date(entity.getEndDate().getTime()));
-            ps.setInt(4, entity.getQuantity());
+            ps.setString(2, entity.getName());
+            ps.setDouble(3, entity.getDiscount());
+            ps.setDate(4, new java.sql.Date(entity.getEndDate().getTime()));
+            ps.setInt(5, entity.getQuantity());
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -34,14 +35,15 @@ public class PromotionByCodeDAO extends DBContext<Promotions_By_Code> {
      */
     @Override
     public void update(Promotions_By_Code entity) {
-        String sql = "UPDATE Promotions_By_Code SET pbc_code = ?, pbc_discount = ?, pbc_endDate = ?, pbc_quantity = ? WHERE pbc_id = ?";
+        String sql = "UPDATE Promotions_By_Code SET pbc_name = ?, pbc_code = ?, pbc_discount = ?, pbc_endDate = ?, pbc_quantity = ? WHERE pbc_id = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1, entity.getCode());
-            ps.setDouble(2, entity.getDiscount());
-            ps.setDate(3, new java.sql.Date(entity.getEndDate().getTime()));
-            ps.setInt(4, entity.getQuantity());
-            ps.setInt(5, entity.getId());
+            ps.setString(1, entity.getName());
+            ps.setString(2, entity.getCode());
+            ps.setDouble(3, entity.getDiscount());
+            ps.setDate(4, new java.sql.Date(entity.getEndDate().getTime()));
+            ps.setInt(5, entity.getQuantity());
+            ps.setInt(6, entity.getId());
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -76,6 +78,7 @@ public class PromotionByCodeDAO extends DBContext<Promotions_By_Code> {
             while (rs.next()) {
                 Promotions_By_Code promo = new Promotions_By_Code(
                         rs.getInt("pbc_id"),
+                        rs.getNString("pbc_name"),
                         rs.getString("pbc_code"),
                         rs.getDouble("pbc_discount"),
                         rs.getDate("pbc_endDate"),
@@ -102,6 +105,7 @@ public class PromotionByCodeDAO extends DBContext<Promotions_By_Code> {
             if (rs.next()) {
                 return new Promotions_By_Code(
                         rs.getInt("pbc_id"),
+                        rs.getNString("pbc_name"),
                         rs.getString("pbc_code"),
                         rs.getDouble("pbc_discount"),
                         rs.getDate("pbc_endDate"),

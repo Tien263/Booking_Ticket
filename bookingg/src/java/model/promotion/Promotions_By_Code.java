@@ -12,6 +12,7 @@ import java.util.Date;
  */
 public class Promotions_By_Code {
     private int id;
+    private String name;
     private String code;
     private double discount;
     private Date endDate;
@@ -20,12 +21,21 @@ public class Promotions_By_Code {
     public Promotions_By_Code() {
     }
 
-    public Promotions_By_Code(int id, String code, double discount, Date endDate, int quantity) {
+    public Promotions_By_Code(int id, String name, String code, double discount, Date endDate, int quantity) {
         this.id = id;
+        this.name = name;
         this.code = code;
         this.discount = discount;
         this.endDate = endDate;
         this.quantity = quantity;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getQuantity() {

@@ -56,6 +56,7 @@ public class PromotionByCodeController extends HttpServlet {
             int id = request.getParameter("id") != null && !request.getParameter("id").isEmpty() 
                     ? Integer.parseInt(request.getParameter("id")) 
                     : 0;
+            String name = request.getParameter("name");
             String code = request.getParameter("code");
             double discount = Double.parseDouble(request.getParameter("discount"));
             int quantity = Integer.parseInt(request.getParameter("quantity"));
@@ -64,7 +65,7 @@ public class PromotionByCodeController extends HttpServlet {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             Date endDate = sdf.parse(endDateStr);
 
-            Promotions_By_Code promotion = new Promotions_By_Code(id, code, discount, endDate, quantity);
+            Promotions_By_Code promotion = new Promotions_By_Code(id, name, code, discount, endDate, quantity);
 
             if (id > 0) {
                 promotionDAO.update(promotion);

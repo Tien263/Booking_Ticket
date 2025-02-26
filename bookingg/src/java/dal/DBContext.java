@@ -16,11 +16,7 @@ public abstract class DBContext<T> {
             String user = "sa1";
             String pass = "123";
             String url = "jdbc:sqlserver://localhost\\NGUYENTIEN:1433;databaseName=PROJECTV01;trustServerCertificate=true;";
-<<<<<<< Updated upstream
-            
-=======
 
->>>>>>> Stashed changes
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             connection = DriverManager.getConnection(url, user, pass);
         } catch (ClassNotFoundException ex) {
@@ -28,15 +24,6 @@ public abstract class DBContext<T> {
         } catch (SQLException ex) {
             Logger.getLogger(DBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
-<<<<<<< Updated upstream
-        
-    }
-    
-    public abstract void insert(T entity);
-    public abstract void update(T entity);
-    public abstract void delete(T entity);
-    public abstract ArrayList<T> list();
-=======
 
     }
 
@@ -48,6 +35,5 @@ public abstract class DBContext<T> {
 
     public abstract ArrayList<T> list();
 
->>>>>>> Stashed changes
     public abstract T get(int id);
 }
