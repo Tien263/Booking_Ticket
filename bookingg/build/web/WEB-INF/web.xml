@@ -56,7 +56,7 @@
         <servlet-name>ChangePasswordController</servlet-name>
         <url-pattern>/changepassword</url-pattern>
     </servlet-mapping>
-     <servlet>
+    <servlet>
         <servlet-name>EmployeeLoginController</servlet-name>
         <servlet-class>controller.accesscontrol.EmployeeLoginController</servlet-class>
     </servlet>
