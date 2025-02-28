@@ -425,7 +425,7 @@
                                             <input type="password" name="password" placeholder="Password" required>
                                         </div>
                                         <button type="submit" class="custom_btn bg_default_red text-uppercase">Login <img src="assets/images/icons/icon_01.png" alt="icon_not_found"></button>
-                                        <input type="button" class="reset_pass mb_15" name="forgot" value="Reset Your Password by e-mail?" onclick="location.href = 'verifyotp';">
+                                        <input type="button" class="reset_pass mb_15" name="forgot" value="Reset Your Password by e-mail?" onclick="location.href = 'forgotpassword';">
                                         <div class="checkbox_input mb-0">
                                             <label for="input_save"><input id="input_save" type="checkbox"> Save my name, email, and website in this browser for the next time I comment</label>
                                         </div>

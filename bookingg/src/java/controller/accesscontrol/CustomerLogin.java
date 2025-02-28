@@ -17,6 +17,7 @@ import jakarta.servlet.http.HttpSession;
 import java.time.LocalDateTime;
 import java.util.Scanner;
 import model.Customer;
+import model.Employee;
 
 /**
  *
@@ -60,14 +61,13 @@ public class CustomerLogin extends HttpServlet {
         Customer customer = cd.getByEmail(email);
         HttpSession session = request.getSession();
         UtilityMail mailUtility = new UtilityMail();
+        Employee loggedUser = (Employee) session.getAttribute("user");
 
+        session.setAttribute("user", loggedUser);
         if (forgot != null) {
             handleForgotPassword(request, response, session, email, customer, cd, mailUtility);
             return;
         }
-
-    
-        
 
         if (email == null || password == null || email.isEmpty() || password.isEmpty()) {
             request.setAttribute("loginerror", "Email and Password are required!");

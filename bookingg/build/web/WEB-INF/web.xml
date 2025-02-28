@@ -40,6 +40,18 @@
         <servlet-name>OTPVerificationController</servlet-name>
         <servlet-class>controller.accesscontrol.OTPVerificationController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BlogServlet</servlet-name>
+        <servlet-class>controller.accesscontrol.BlogServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BlogListController</servlet-name>
+        <servlet-class>controller.accesscontrol.BlogListController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BlogUpdateController</servlet-name>
+        <servlet-class>controller.accesscontrol.BlogUpdateController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Register</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -116,4 +128,17 @@
         <servlet-name>OTPVerificationController</servlet-name>
         <url-pattern>/verification</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BlogServlet</servlet-name>
+        <url-pattern>/createblog</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BlogListController</servlet-name>
+        <url-pattern>/listblog</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BlogUpdateController</servlet-name>
+        <url-pattern>/updateblog</url-pattern>
+    </servlet-mapping>
+    
 </web-app>
