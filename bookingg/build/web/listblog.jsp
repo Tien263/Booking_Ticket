@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
-<html>
+<html lang = "en">
     <head>
         <meta charset="UTF-8">
         <title>Danh sách Blog</title>
@@ -36,6 +36,7 @@
                     <th>Ngày tạo</th>
                     <th>Ngày cập nhật</th>
                     <th>Ảnh</th>
+                    <th>Hành động</th>
                 </tr>
             </thead>
             <tbody>
@@ -48,14 +49,13 @@
                                 <td>${b.getBrief()}</td>
                                 <td>${b.getContent()}</td>
                                 <td>${b.getCreatedby().getName()}</td>
-                                <td>${b.getCreatedby().getName()}</td>
+                                <td>${b.getUpdatedby().getName()}</td>
                                 <td>${b.getCreatedtime()}</td>
                                 <td>${b.getUpdatedtime()}</td>
-<!--                                <td>${b.getImage()}</td>-->
                                 <td>
                                     <c:choose>
                                         <c:when test="${not empty b.getImage()}">
-                                            <img src="${pageContext.request.contextPath}/assets/images/blog/${b.getImage()}" width="100" height="100" alt="Blog Image"/>
+                                            <img src="${b.getImage()}" width="100" height="100" alt="Blog Image"/>
                                         </c:when>
                                         <c:otherwise>
                                             Không có ảnh
@@ -70,7 +70,7 @@
                     </c:when>
                     <c:otherwise>
                         <tr>
-                            <td colspan="8">Không có blog nào.</td>
+                            <td colspan="10">Không có blog nào.</td>
                         </tr>
                     </c:otherwise>
                 </c:choose>

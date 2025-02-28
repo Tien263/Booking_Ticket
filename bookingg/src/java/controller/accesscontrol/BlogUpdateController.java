@@ -28,6 +28,8 @@ import model.Employee;
 
 public class BlogUpdateController extends HttpServlet {
 
+    private static final String UPLOAD_DIR = "upload";
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -55,18 +57,18 @@ public class BlogUpdateController extends HttpServlet {
 
     }
 
+    
+    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         HttpSession session = request.getSession();
         Employee loggedUser = (Employee) session.getAttribute("user");
-
         if (loggedUser == null) {
             response.sendRedirect("login.jsp");
             return;
         }
-
+        
         try {
             int id = Integer.parseInt(request.getParameter("id"));
             String title = request.getParameter("title");
@@ -74,31 +76,6 @@ public class BlogUpdateController extends HttpServlet {
             String content = request.getParameter("content");
             String status = request.getParameter("status");
             
-            Object userIdObj = request.getSession().getAttribute("user_id");
-            if (userIdObj == null) {
-                throw new ServletException("User ID is null. Make sure the user is logged in.");
-            }
-            
-            int updatedById = (Integer) userIdObj;
-            String updatedByName = (String) request.getSession().getAttribute("user_name");
-            
-            // Xử lý ảnh
-            Part imagePart = request.getPart("image");
-            String imagePath = request.getParameter("currentImage"); // Ảnh hiện tại
-            
-            if (imagePart != null && imagePart.getSize() > 0) {
-                String fileName = Paths.get(imagePart.getSubmittedFileName()).getFileName().toString();
-                String uploadDir = getServletContext().getRealPath("\\bookingg\\web\\assets\\images\\blog\\");
-                
-                File uploadDirFile = new File(uploadDir);
-                if (!uploadDirFile.exists()) {
-                    uploadDirFile.mkdirs();
-                }
-                
-                imagePath = "\\bookingg\\web\\assets\\images\\blog\\" + fileName;
-                imagePart.write(uploadDir + File.separator + fileName);
-            }
-
             BlogDao bd = new BlogDao();
             Blog blog = bd.get(id);
             if (blog == null) {
@@ -106,25 +83,37 @@ public class BlogUpdateController extends HttpServlet {
                 request.getRequestDispatcher("updateblog.jsp").forward(request, response);
                 return;
             }
-
+            
+            Part filePart = request.getPart("image");
+            String fileName = null;
+            String fileUrl = blog.getImage();
+            if (filePart != null && filePart.getSize() > 0) {
+                fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+                String uploadPath = getServletContext().getRealPath("") + File.separator + UPLOAD_DIR;
+                File uploadDir = new File(uploadPath);
+                if (!uploadDir.exists()) uploadDir.mkdir();
+                
+                String filePath = uploadPath + File.separator + fileName;
+                filePart.write(filePath);
+                fileUrl = request.getContextPath() + "/" + UPLOAD_DIR + "/" + fileName;
+            }
+            
             blog.setTitle(title);
             blog.setBrief(brief);
             blog.setContent(content);
             blog.setStatus("Active".equals(status));
-            blog.setImage(imagePath);
+            blog.setImage(fileUrl);
             blog.setUpdatedtime(new Date(System.currentTimeMillis()));
-            blog.setUpdatedby(new Employee(updatedById, updatedByName));
-
+            blog.setUpdatedby(loggedUser);
+            
             bd.update(blog);
             response.sendRedirect("listblog");
-        } catch (NumberFormatException e) {
-            request.setAttribute("errorMessage", "ID không hợp lệ.");
-            request.getRequestDispatcher("updateblog.jsp").forward(request, response);
         } catch (Exception e) {
             request.setAttribute("errorMessage", "Lỗi khi cập nhật blog: " + e.getMessage());
             request.getRequestDispatcher("updateblog.jsp").forward(request, response);
         }
     }
+
 
     @Override
     public String getServletInfo() {
