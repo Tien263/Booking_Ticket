@@ -4,7 +4,6 @@
         <servlet-name>Register</servlet-name>
         <servlet-class>controller.accesscontrol.RegisterController</servlet-class>
     </servlet>
-    
     <servlet>
         <servlet-name>CustomerLogin</servlet-name>
         <servlet-class>controller.accesscontrol.CustomerLogin</servlet-class>
@@ -141,8 +140,5 @@
         <servlet-name>BlogUpdateController</servlet-name>
         <url-pattern>/updateblog</url-pattern>
     </servlet-mapping>
-<!--    <servlet-mapping>
-    <servlet-name>default</servlet-name>
-    <url-pattern>/upload/*</url-pattern>
-</servlet-mapping>-->
+    
 </web-app>
