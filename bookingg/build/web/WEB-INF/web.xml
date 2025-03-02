@@ -36,6 +36,14 @@
         <servlet-name>BookTicketController</servlet-name>
         <servlet-class>controller.bookTicket.BookTicketController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SeatController</servlet-name>
+        <servlet-class>controller.bookTicket.SeatController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>TicketHistoryController</servlet-name>
+        <servlet-class>controller.bookTicket.TicketHistoryController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Register</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -115,5 +123,13 @@
     <servlet-mapping>
         <servlet-name>booking</servlet-name>
         <url-pattern>/booking</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SeatController</servlet-name>
+        <url-pattern>/SeatURL</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TicketHistoryController</servlet-name>
+        <url-pattern>/TicketHistory</url-pattern>
     </servlet-mapping>
 </web-app>

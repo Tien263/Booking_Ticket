@@ -131,7 +131,7 @@
                     <td><%= trip.getV_id() %></td>
 
                     <td>
-                        <form action="selectSeat.jsp" method="GET">
+                        <form action="SeatURL" method="GET">
                             <input type="hidden" name="customerId" value="1">
                             <input type="hidden" name="brId" value="<%= trip.getBrId() %>">
                             <input type="hidden" name="from" value="<%= trip.getBrFrom() %>">
