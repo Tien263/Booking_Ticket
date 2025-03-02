@@ -29,8 +29,16 @@
         <servlet-class>controller.accesscontrol.ChangePasswordController</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>SelectSeatController</servlet-name>
+        <servlet-class>controller.bookTicket.SelectSeatController</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>BookTicketController</servlet-name>
-        <servlet-class>controller.bookTicket.BookTicketServlet</servlet-class>
+        <servlet-class>controller.bookTicket.BookTicketController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CheckCId</servlet-name>
+        <servlet-class>controller.bookTicket.CheckCId</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Register</servlet-name>
@@ -60,7 +68,7 @@
         <servlet-name>ChangePasswordController</servlet-name>
         <url-pattern>/changepassword</url-pattern>
     </servlet-mapping>
-     <servlet>
+    <servlet>
         <servlet-name>EmployeeLoginController</servlet-name>
         <servlet-class>controller.accesscontrol.EmployeeLoginController</servlet-class>
     </servlet>
@@ -97,6 +105,10 @@
         <url-pattern>/verify_username</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>SelectSeatController</servlet-name>
+        <url-pattern>/SelectSeatURL</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>BookTicketController</servlet-name>
         <url-pattern>/BookTicketURL</url-pattern>
     </servlet-mapping>
@@ -107,5 +119,9 @@
     <servlet-mapping>
         <servlet-name>booking</servlet-name>
         <url-pattern>/booking</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckCId</servlet-name>
+        <url-pattern>/CheckCId</url-pattern>
     </servlet-mapping>
 </web-app>

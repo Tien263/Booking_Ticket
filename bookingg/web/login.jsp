@@ -417,7 +417,7 @@
                                         Savings of up to 15% with our car rental solutions, global coverage and a dedicated customer team
                                     </p>
                                     <span class="new_account mb_15">Log In or <a href="#!">Create an Account?</a></span>
-                                    <form action="cuslogin" method="post">
+                                    <form action="booking" method="post">
                                         <div class="form_item">
                                             <input type="text" name="email" placeholder="Your email" required>
                                         </div>

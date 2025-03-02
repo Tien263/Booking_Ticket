@@ -13,6 +13,6 @@
     </head>
     <body>
         <p>Lỗi: <%= request.getAttribute("message") %></p>
-        <a href="selectSeat.jsp">Quay lại</a>
+        <a href="booking">Quay lại</a>
     </body>
 </html>

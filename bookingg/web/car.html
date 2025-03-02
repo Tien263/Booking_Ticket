@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!<!DOCTYPE html>
 <html lang="en">
 
 	<head>
@@ -49,6 +49,7 @@
 				<i class="far fa-arrow-up"></i>
 			</a>
 		</div>
+              
 		<!-- backtotop - end -->
 
 		<!-- preloader - start -->
@@ -57,6 +58,8 @@
 				<div class="spinner"></div>
 				<p class="text-center">Loading</p>
 			</div>
+                    
+                    
 			<div class="loader">
 				<div class="row vh-100">
 					<div class="col-3 loader_section section-left">
@@ -73,6 +76,7 @@
 					</div>
 				</div>
 			</div>
+                    
 		</div>
 		<!-- preloader - end -->
 
@@ -108,9 +112,9 @@
 
 						<div class="col-lg-3 col-md-6 col-sm-6 col-6">
 							<div class="brand_logo">
-								<a href="index.html">
-									<img src="assets/images/logo/logo_01_1x.png" srcset="assets/images/logo/logo_01_2x.png 2x" alt="logo_not_found">
-									<img src="assets/images/logo/logo_02_1x.png" srcset="assets/images/logo/logo_02_2x.png 2x" alt="logo_not_found">
+								<a href="index_1.html">
+									<img src="assets/images/logo/logo_01_1.png" srcset="assets/images/logo/logo_01_2x.png 2x" alt="logo_not_found" style="width: 40%;">
+									<img src="assets/images/logo/logo_01_1.png" srcset="assets/images/logo/logo_02_2x.png 2x" alt="logo_not_found" style="width: 40%;">
 								</a>
 							</div>
 						</div>
@@ -184,7 +188,7 @@
 											</div>
 										</div>
 										<ul class="ul_li_block clearfix">
-											<li><a href="account"><i class="fal fa-user-circle"></i> Profile</a></li>
+											<li><a href="#!"><i class="fal fa-user-circle"></i> Profile</a></li>
 											<li><a href="#!"><i class="fal fa-user-cog"></i> Settings</a></li>
 											<li><a href="#!"><i class="fal fa-sign-out"></i> Logout</a></li>
 										</ul>
@@ -280,7 +284,7 @@
 
 					<div class="about_content mb_60">
 						<div class="brand_logo mb_15">
-							<a href="index.html">
+							<a href="index_1.html">
 								<img src="assets/images/logo/logo_01_1x.png" srcset="assets/images/logo/logo_01_2x.png 2x" alt="logo_not_found">
 							</a>
 						</div>
@@ -369,17 +373,17 @@
 			<!-- breadcrumb_section - start
 			================================================== -->
 			<section class="breadcrumb_section text-center clearfix">
-				<div class="page_title_area has_overlay d-flex align-items-center clearfix" data-bg-image="assets/images/breadcrumb/bg_01.jpg">
+				<div class="page_title_area has_overlay d-flex align-items-center clearfix" data-bg-image="assets/images/breadcrumb/bg_01_1.jpeg">
 					<div class="overlay"></div>
 					<div class="container" data-aos="fade-up" data-aos-delay="100">
-						<h1 class="page_title text-white mb-0">Our cars</h1>
+					       <h1 class="page_title text-white mb-0">Tìm Chuyến</h1>
 					</div>
 				</div>
 				<div class="breadcrumb_nav clearfix" data-bg-color="#F2F2F2">
 					<div class="container">
 						<ul class="ul_li clearfix">
-							<li><a href="index.html">Home</a></li>
-							<li>Our Cars</li>
+							<li><a href="index_1.html">Trang chủ</a></li>
+							<li>Tìm chuyến</li>
 						</ul>
 					</div>
 				</div>
@@ -387,6 +391,80 @@
 			<!-- breadcrumb_section - end
 			================================================== -->
 
+			<div class="register_card mb_60" data-bg-color="##F2F2F2" data-aos="fade-up" data-aos-delay="100" style="max-width: 900px; margin: auto; margin-top: 30px;">
+				
+				<form action="#">
+					<div class="row">
+						<!-- Lựa chọn Một chiều / Khứ hồi -->
+						<div class="col-lg-12 text-left mb-3">
+							<label>
+								<input type="radio" name="trip_type" value="oneway" checked> One-way
+							</label>
+							<label class="ml-4">
+								<input type="radio" name="trip_type" value="roundtrip"> Round-trip
+							</label>
+							<a href="#" class="float-right text-danger">Ticket booking guide</a>
+						</div>
+			
+						<!-- Điểm đi -->
+						<div class="col-lg-6 col-md-6 col-sm-12" data-aos="fade-up" data-aos-delay="500">
+							<div class="form_item">
+								<h4 class="input_title">Origin</h4>
+								<input type="text" name="departure" placeholder="Enter departure location" required>
+							</div>
+						</div>
+			
+						<!-- Điểm đến -->
+						<div class="col-lg-6 col-md-6 col-sm-12" data-aos="fade-up" data-aos-delay="500">
+							<div class="form_item">
+								<h4 class="input_title">Destination</h4>
+								<input type="text" name="destination" placeholder="Enter destination" required>
+							</div>
+						</div>
+			
+						<!-- Ngày đi -->
+						<div class="col-lg-6 col-md-6 col-sm-12" data-aos="fade-up" data-aos-delay="500">
+							<div class="form_item">
+								<h4 class="input_title">Departure Date</h4>
+								<input type="date" name="departure_date" required>
+							</div>
+						</div>
+			
+						<!-- Số vé -->
+						<div class="col-lg-6 col-md-6 col-sm-12" data-aos="fade-up" data-aos-delay="500">
+							<div class="form_item">
+								<h4 class="input_title">Tickets</h4>
+								<select name="ticket_quantity">
+									<option value="1">1 Ticket</option>
+									<option value="2">2 Tickets</option>
+									<option value="3">3 Tickets</option>
+									<option value="4">4 Tickets</option>
+									<option value="5">5 Tickets</option>
+								</select>
+							</div>
+						</div>
+					</div>
+			
+					<!-- Danh sách tìm kiếm gần đây -->
+					<div class="recent_searches mt-3">
+						<h5 class="input_title">Recent search</h5>
+						<button type="button" class="btn btn-light btn-sm">An Giang - Bạc Liêu <small>13/02/2025</small></button>
+						<button type="button" class="btn btn-light btn-sm">TP. Hồ Chí Minh - An Nhơn <small>11/01/2025</small></button>
+						<button type="button" class="btn btn-light btn-sm">Đà Lạt - Hà Nội <small>12/01/2025</small></button>
+						<button type="button" class="btn btn-light btn-sm">Hà Nội - Đà Lạt <small>12/01/2025</small></button>
+					</div>
+			
+					<!-- Nút tìm chuyến xe -->
+					<div class="text-center mt-4">
+						<button type="submit" class="custom_btn bg_default_red btn_width text-uppercase" data-aos="fade-up" data-aos-delay="700">
+							Search Trip
+						</button>
+					</div>
+				</form>
+			</div>
+			
+			
+			
 
 			<!-- car_section - start
 			================================================== -->
@@ -402,10 +480,27 @@
 								<div class="sb_widget">
 									<form action="#">
 										<div class="sb_widget price-range-area clearfix" data-aos="fade-up" data-aos-delay="100">
-											<h4 class="input_title">Price</h4>
-											<div id="slider-range" class="slider-range clearfix"></div>
-											<input class="price-text" type="text" id="amount" readonly>
+											<h4 class="input_title">Giờ đi</h4>
+											<div class="time-checkbox-list">
+												<label class="time-checkbox">
+													<input type="checkbox" class="mr-2">
+													<span>Sáng sớm 00:00 - 06:00 (0)</span>
+												</label>
+												<label class="time-checkbox">
+													<input type="checkbox" class="mr-2">
+													<span>Buổi sáng 06:00 - 12:00 (0)</span>
+												</label>
+												<label class="time-checkbox">
+													<input type="checkbox" class="mr-2">
+													<span>Buổi chiều 12:00 - 18:00 (0)</span>
+												</label>
+												<label class="time-checkbox">
+													<input type="checkbox" class="mr-2">
+													<span>Buổi tối 18:00 - 24:00 (0)</span>
+												</label>
+											</div>
 										</div>
+										
 
 										<div class="sb_widget car_picking" data-aos="fade-up" data-aos-delay="100">
 											<div class="form_item">
