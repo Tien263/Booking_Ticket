@@ -40,6 +40,26 @@
         <servlet-name>CheckCId</servlet-name>
         <servlet-class>controller.bookTicket.CheckCId</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DAOUsers</servlet-name>
+        <servlet-class>dal.bookTicket.DAOUsers</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewUserOrderHistory</servlet-name>
+        <servlet-class>controller.accesscontrol.ViewUserOrderHistory</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewUserDetail</servlet-name>
+        <servlet-class>controller.accesscontrol.ViewUserDetail</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewUserpPaymentHistory</servlet-name>
+        <servlet-class>controller.accesscontrol.ViewUserpPaymentHistory</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ReportFinacial</servlet-name>
+        <servlet-class>controller.accesscontrol.ReportFinacial</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Register</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -123,5 +143,23 @@
     <servlet-mapping>
         <servlet-name>CheckCId</servlet-name>
         <url-pattern>/CheckCId</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>/assets/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DAOUsers</servlet-name>
+        <url-pattern>/DAOUsers</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>ViewUserOrderHistory</servlet-name>
+        <url-pattern>/ViewUserOrderHistory</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>ReportFinacial</servlet-name>
+        <url-pattern>/ReportFinacial</url-pattern>
     </servlet-mapping>
 </web-app>
