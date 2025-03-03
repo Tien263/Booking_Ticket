@@ -4,18 +4,24 @@
  */
 package controller.bookTicket;
 
+import dal.CustomerDao;
+import dal.bookTicket.SeatsDAO;
 import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
+import jakarta.servlet.http.HttpSession;
+import java.util.List;
+import model.Customer;
+import model.bookTicket.Seats;
 
 /**
  *
- * @author Nguyen Minh Duc
+ * @author Admin
  */
-public class CheckCId extends HttpServlet {
+public class SeatController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -29,41 +35,38 @@ public class CheckCId extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String c_id = request.getParameter("c_id");
+        HttpSession session = request.getSession();
+        session.setAttribute("vehicleId", request.getParameter("vId"));
+        session.setAttribute("tripId", request.getParameter("bt1Id"));
+        session.setAttribute("routeId", request.getParameter("brId"));
+        session.setAttribute("customerId", request.getParameter("c_id"));
+        session.setAttribute("price", request.getParameter("price"));
+        session.setAttribute("from", request.getParameter("from"));
+        session.setAttribute("to", request.getParameter("to"));
+        session.setAttribute("departureTime", request.getParameter("departureTime"));
+        session.setAttribute("arrivalTime", request.getParameter("arrivalTime"));
+        try (PrintWriter out = response.getWriter()) {
+            int c_id = Integer.parseInt(request.getParameter("c_id"));
+            CustomerDao dao = new CustomerDao();
+            Customer cus = new Customer();
+            cus = dao.getByID(c_id);
+            // Lấy tripId và vehicleId từ request
+            String tripIdStr = request.getParameter("bt1Id");
+            String vehicleIdStr = request.getParameter("vId");
 
-        // Nếu chưa đăng nhập, chuyển hướng về trang login.jsp
-        if (c_id.equals("null")) {
-            response.sendRedirect("login.jsp");
-            return;
-        } else {
+            // Kiểm tra xem có giá trị hay không, nếu có thì chuyển đổi sang int
+            int tripId = (tripIdStr != null && !tripIdStr.isEmpty()) ? Integer.parseInt(tripIdStr) : 0;
+            int vehicleId = (vehicleIdStr != null && !vehicleIdStr.isEmpty()) ? Integer.parseInt(vehicleIdStr) : 0;
 
-            String brId = request.getParameter("brId");
-            String from = request.getParameter("from");
-            String to = request.getParameter("to");
-            String departureTime = request.getParameter("departureTime");
-            String arrivalTime = request.getParameter("arrivalTime");
-            String price = request.getParameter("price");
-            String description = request.getParameter("description");
-            String distance = request.getParameter("distance");
-            String vId = request.getParameter("vId");
-            String bt1Id = request.getParameter("bt1Id");
+            SeatsDAO seatDao = new SeatsDAO();
+            List<Seats> seats = seatDao.getSeats(tripId, vehicleId);
 
-            request.setAttribute("c_id", c_id);
-            request.setAttribute("brId", brId);
-            request.setAttribute("from", from);
-            request.setAttribute("to", to);
-            request.setAttribute("departureTime", departureTime);
-            request.setAttribute("arrivalTime", arrivalTime);
-            request.setAttribute("price", price);
-            request.setAttribute("description", description);
-            request.setAttribute("distance", distance);
-            request.setAttribute("vId", vId);
-            request.setAttribute("bt1Id", bt1Id);
-            request.getRequestDispatcher("SeatURL").forward(request, response);
+            // Đưa danh sách ghế vào request attribute
+            request.setAttribute("customer", cus);
+            request.setAttribute("seats", seats);
+            request.getRequestDispatcher("selectSeat.jsp").forward(request, response);
 
-            return;
         }
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

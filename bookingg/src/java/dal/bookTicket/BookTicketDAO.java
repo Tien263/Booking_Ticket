@@ -17,12 +17,13 @@ import java.util.List;
  *
  * @author Admin
  */
-public class DAOTickets extends DBContext {
+public class BookTicketDAO extends DBContext {
 
     public int createAndBookTickets(int userId, List<Integer> seatIds, int tripId) {
         int n = -1;
         try {
             connection.setAutoCommit(false); // Bắt đầu transaction
+
             // Tạo một bản ghi trong BookTickets trước
             int btId = insertBookTicket(userId, seatIds.size());
             if (btId == -1) {
@@ -84,8 +85,6 @@ public class DAOTickets extends DBContext {
                 psTicket.setInt(1, btId);  // Liên kết vé với BookTickets
                 psTicket.setInt(2, tripId);
                 psTicket.setInt(3, seatId);
-                System.out.println("dal.bookTicket.DAOTickets.createTickets()");
-                System.out.println(seatId);
                 int n = psTicket.executeUpdate();
                 if (n > 0) { // Kiểm tra nếu lệnh INSERT thành công
                     try (ResultSet rs = psTicket.getGeneratedKeys()) {
@@ -102,7 +101,7 @@ public class DAOTickets extends DBContext {
     // Phương thức lấy danh sách thông tin vé dựa vào danh sách bookingId
     public List<BookTicket> getTicketByBookingId(int bookingId) {
         List<BookTicket> tickets = new ArrayList<>(); // Danh sách lưu kết quả
-        String query = "SELECT t.t_id, c.c_fullname, c.c_phone, bt.bt_bookingDate, "
+        String query = "SELECT t.t_id, c.c_fullname, c.c_phone,bt1.bt1_date, bt.bt_bookingDate, "
                 + "br.br_from, br.br_to, bt1.bt1_departureTime, bt1.bt1_arrivalTime, "
                 + "s.s_name, Br.br_price "
                 + "FROM Tickets t "
@@ -112,39 +111,31 @@ public class DAOTickets extends DBContext {
                 + "JOIN BusTrips bt1 ON s.bt1_id = bt1.bt1_id "
                 + "JOIN BusRoutes br ON bt1.br_id = br.br_id "
                 + "WHERE bt.bt_id = ?";
-        System.out.println("DEBUG: bookingId = " + bookingId);
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setInt(1, bookingId);
-            try (ResultSet rs = ps.executeQuery()) {
-                while (rs.next()) {
-                    BookTicket bookTicket = new BookTicket(
+            try (ResultSet rs = ps.executeQuery()){ 
+                while(rs.next()) {
+                     BookTicket bookTicket = new BookTicket(
                             rs.getInt("t_id"),
                             rs.getString("c_fullname"),
                             rs.getString("c_phone"),
+                            rs.getDate("bt1_date"),
                             rs.getDate("bt_bookingDate"),
                             rs.getString("br_from") + "-" + rs.getString("br_to"),
                             rs.getString("bt1_departureTime") + "-" + rs.getString("bt1_arrivalTime"),
                             rs.getString("s_name"),
                             rs.getFloat("br_price")
                     );
-                    tickets.add(bookTicket);
+                      tickets.add(bookTicket);
                 }
             }
+        
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
 
-        }catch (SQLException e) {
-            e.printStackTrace();
+            return tickets;
         }
-
-        return tickets;
-    }
-
-    public static void main(String[] args) {
-        DAOTickets dao = new DAOTickets();
-        List<BookTicket> bookTicket = dao.getTicketByBookingId(275);
-        for (BookTicket bookTicket1 : bookTicket) {
-            System.out.println(bookTicket1.getT_id());
-        }
-    }
 
     @Override
     public void insert(Object entity) {

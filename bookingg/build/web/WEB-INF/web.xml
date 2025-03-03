@@ -162,4 +162,12 @@
         <servlet-name>ReportFinacial</servlet-name>
         <url-pattern>/ReportFinacial</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>SeatController</servlet-name>
+        <servlet-class>controller.bookTicket.SeatController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SeatController</servlet-name>
+        <url-pattern>/SeatURL</url-pattern>
+    </servlet-mapping>
 </web-app>
