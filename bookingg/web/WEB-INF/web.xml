@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="6.0" xmlns="https://jakarta.ee/xml/ns/jakartaee"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd">
+<web-app version="6.0" xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd">
     <servlet>
         <servlet-name>Register</servlet-name>
         <servlet-class>controller.accesscontrol.RegisterController</servlet-class>
@@ -39,12 +37,28 @@
         <servlet-class>controller.bookTicket.BookTicketController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>SeatController</servlet-name>
-        <servlet-class>controller.bookTicket.SeatController</servlet-class>
+        <servlet-name>CheckCId</servlet-name>
+        <servlet-class>controller.bookTicket.CheckCId</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>TicketHistoryController</servlet-name>
-        <servlet-class>controller.bookTicket.TicketHistoryController</servlet-class>
+        <servlet-name>DAOUsers</servlet-name>
+        <servlet-class>dal.bookTicket.DAOUsers</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewUserOrderHistory</servlet-name>
+        <servlet-class>controller.accesscontrol.ViewUserOrderHistory</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewUserDetail</servlet-name>
+        <servlet-class>controller.accesscontrol.ViewUserDetail</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewUserpPaymentHistory</servlet-name>
+        <servlet-class>controller.accesscontrol.ViewUserpPaymentHistory</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ReportFinacial</servlet-name>
+        <servlet-class>controller.accesscontrol.ReportFinacial</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Register</servlet-name>
@@ -127,11 +141,25 @@
         <url-pattern>/booking</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>SeatController</servlet-name>
-        <url-pattern>/SeatURL</url-pattern>
+        <servlet-name>CheckCId</servlet-name>
+        <url-pattern>/CheckCId</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>TicketHistoryController</servlet-name>
-        <url-pattern>/TicketHistory</url-pattern>
+        <servlet-name>default</servlet-name>
+        <url-pattern>/assets/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DAOUsers</servlet-name>
+        <url-pattern>/DAOUsers</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>ViewUserOrderHistory</servlet-name>
+        <url-pattern>/ViewUserOrderHistory</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>ReportFinacial</servlet-name>
+        <url-pattern>/ReportFinacial</url-pattern>
     </servlet-mapping>
 </web-app>

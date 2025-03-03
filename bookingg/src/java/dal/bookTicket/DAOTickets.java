@@ -23,7 +23,6 @@ public class DAOTickets extends DBContext {
         int n = -1;
         try {
             connection.setAutoCommit(false); // Bắt đầu transaction
-
             // Tạo một bản ghi trong BookTickets trước
             int btId = insertBookTicket(userId, seatIds.size());
             if (btId == -1) {
@@ -85,6 +84,8 @@ public class DAOTickets extends DBContext {
                 psTicket.setInt(1, btId);  // Liên kết vé với BookTickets
                 psTicket.setInt(2, tripId);
                 psTicket.setInt(3, seatId);
+                System.out.println("dal.bookTicket.DAOTickets.createTickets()");
+                System.out.println(seatId);
                 int n = psTicket.executeUpdate();
                 if (n > 0) { // Kiểm tra nếu lệnh INSERT thành công
                     try (ResultSet rs = psTicket.getGeneratedKeys()) {
@@ -114,9 +115,9 @@ public class DAOTickets extends DBContext {
         System.out.println("DEBUG: bookingId = " + bookingId);
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setInt(1, bookingId);
-            try (ResultSet rs = ps.executeQuery()){ 
-                while(rs.next()) {
-                     BookTicket bookTicket = new BookTicket(
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    BookTicket bookTicket = new BookTicket(
                             rs.getInt("t_id"),
                             rs.getString("c_fullname"),
                             rs.getString("c_phone"),
@@ -126,18 +127,16 @@ public class DAOTickets extends DBContext {
                             rs.getString("s_name"),
                             rs.getFloat("br_price")
                     );
-                      tickets.add(bookTicket);
+                    tickets.add(bookTicket);
                 }
             }
-        
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
 
-            return tickets;
+        }catch (SQLException e) {
+            e.printStackTrace();
         }
 
-    
+        return tickets;
+    }
 
     public static void main(String[] args) {
         DAOTickets dao = new DAOTickets();
