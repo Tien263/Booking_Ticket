@@ -18,43 +18,15 @@
     </servlet>
     <servlet>
         <servlet-name>CusListBlogController</servlet-name>
-        <servlet-class>controller.blog.customer.CusListBlogController</servlet-class>
+        <servlet-class>controller.accesscontrol.CusListBlogController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CusBlogDetailController</servlet-name>
-        <servlet-class>controller.blog.customer.CusBlogDetailController</servlet-class>
+        <servlet-class>controller.accesscontrol.CusBlogDetailController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ChangePasswordController</servlet-name>
         <servlet-class>controller.accesscontrol.ChangePasswordController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ForgotpasswordController</servlet-name>
-        <servlet-class>controller.forgotpass.otp.ForgotPasswordController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ResetPasswordCustomerController</servlet-name>
-        <servlet-class>controller.forgotpass.otp.ResetPasswordCustomerController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>OTPVerificationController</servlet-name>
-        <servlet-class>controller.forgotpass.otp.OTPVerificationController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>BlogServlet</servlet-name>
-        <servlet-class>controller.blog.BlogCreateServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>BlogListController</servlet-name>
-        <servlet-class>controller.blog.BlogListController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>BlogUpdateController</servlet-name>
-        <servlet-class>controller.blog.BlogUpdateController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>BlogDeleteController</servlet-name>
-        <servlet-class>controller.blog.BlogDeleteController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Register</servlet-name>
@@ -120,32 +92,30 @@
         <servlet-name>VerifyUsernameController</servlet-name>
         <url-pattern>/verify_username</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ForgotpasswordController</servlet-name>
-        <url-pattern>/forgotpassword</url-pattern>
+    
+    <servlet>
+        <servlet-name>SelectSeatController</servlet-name>
+        <servlet-class>controller.bookTicket.SelectSeatController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BookTicketController</servlet-name>
+        <servlet-class>controller.bookTicket.BookTicketController</servlet-class>
+    </servlet>
+
+<servlet-mapping>
+        <servlet-name>SelectSeatController</servlet-name>
+        <url-pattern>/SelectSeatURL</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ResetPasswordCustomerController</servlet-name>
-        <url-pattern>/resetpasswordcustomer</url-pattern>
+        <servlet-name>BookTicketController</servlet-name>
+        <url-pattern>/BookTicketURL</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>booking</servlet-name>
+        <servlet-class>controller.bookTicket.booking</servlet-class>
+    </servlet>
     <servlet-mapping>
-        <servlet-name>OTPVerificationController</servlet-name>
-        <url-pattern>/verification</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>BlogServlet</servlet-name>
-        <url-pattern>/createblog</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>BlogListController</servlet-name>
-        <url-pattern>/listblog</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>BlogUpdateController</servlet-name>
-        <url-pattern>/updateblog</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>BlogDeleteController</servlet-name>
-        <url-pattern>/deleteblog</url-pattern>
+        <servlet-name>booking</servlet-name>
+        <url-pattern>/booking</url-pattern>
     </servlet-mapping>
 </web-app>
