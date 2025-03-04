@@ -1,4 +1,4 @@
-package controller.accesscontrol;
+package controller.blog;
 
 import dal.BlogDao;
 import java.io.File;
@@ -22,7 +22,7 @@ import model.Employee;
     maxFileSize = 1024 * 1024 * 10, // 10MB
     maxRequestSize = 1024 * 1024 * 50 // 50MB
 )
-public class BlogServlet extends HttpServlet {
+public class BlogCreateServlet extends HttpServlet {
     private static final String UPLOAD_DIR = "upload";
 
     @Override

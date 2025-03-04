@@ -3,6 +3,16 @@
 
 <!DOCTYPE html>
 <html lang = "en">
+
+    <script>
+        function removeBlog(id) {
+            var result = confirm("Are you sure you want to delete blog?");
+            if (result) {
+                document.getElementById("removeBlog" + id).submit();
+            }
+        }
+    </script>
+
     <head>
         <meta charset="UTF-8">
         <title>Danh sách Blog</title>
@@ -36,6 +46,7 @@
                     <th>Ngày tạo</th>
                     <th>Ngày cập nhật</th>
                     <th>Ảnh</th>
+                    
                     <th>Hành động</th>
                 </tr>
             </thead>
@@ -62,19 +73,27 @@
                                         </c:otherwise>
                                     </c:choose>
                                 </td>
+                                
                                 <td>
                                     <a href="updateblog?id=${b.getId()}">Chỉnh sửa</a>
+                                    <button type="button" class="btn btn-danger btn-sm" onclick="removeBlog(${b.id})">
+                                        <i class="fas fa-trash-alt"></i> <!-- Biểu tượng Remove -->
+                                    </button>
                                 </td>
-                            </tr>
-                        </c:forEach>
-                    </c:when>
-                    <c:otherwise>
-                        <tr>
-                            <td colspan="10">Không có blog nào.</td>
-                        </tr>
-                    </c:otherwise>
-                </c:choose>
-            </tbody>
-        </table>
-    </body>
+                        <form id="removeBlog${b.id}" action="deleteblog" method="POST" style="display:none;">
+                            <input type="hidden" name="id" value="${b.id}"/>
+                        </form>
+                    </td>
+                </tr>
+            </c:forEach>
+        </c:when>
+        <c:otherwise>
+            <tr>
+                <td colspan="10">Không có blog nào.</td>
+            </tr>
+        </c:otherwise>
+    </c:choose>
+</tbody>
+</table>
+</body>
 </html>

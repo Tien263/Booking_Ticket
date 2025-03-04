@@ -1,4 +1,4 @@
-package controller.accesscontrol;
+package controller.forgotpass.otp;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license

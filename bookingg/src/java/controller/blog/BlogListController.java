@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package controller.accesscontrol;
+package controller.blog;
 
 import dal.BlogDao;
 import java.io.IOException;

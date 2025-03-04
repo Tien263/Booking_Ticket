@@ -50,13 +50,13 @@
                 <input type="hidden" name="updatedby" value="${sessionScope.user.name}">
             </div>
 
-            <div>
+<!--            <div>
                 <label for="status">Trạng thái:</label>
                 <select id="status" name="status">
                     <option value="Active" ${requestScope.b.status == 'Active' ? 'selected' : ''}>Active</option>
                     <option value="Inactive" ${requestScope.b.status == 'Inactive' ? 'selected' : ''}>Inactive</option>
                 </select>
-            </div>
+            </div>-->
 
             <button type="submit">Lưu</button>
         </form>

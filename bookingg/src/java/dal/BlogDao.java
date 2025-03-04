@@ -68,7 +68,7 @@ public class BlogDao extends DBContext<Blog> {
                 + "      ,[b_updatedby] = ?\n"
                 + "      ,[b_createdtime] = ?\n"
                 + "      ,[b_updatedtime] = ?\n"
-                + "      ,[b_status] = ?\n"
+              //  + "      ,[b_status] = ?\n"
                 + "      ,[b_image] = ?\n"
                 + " WHERE b_id = ?";
         PreparedStatement stm_update = null;
@@ -80,9 +80,9 @@ public class BlogDao extends DBContext<Blog> {
             stm_update.setInt(4, entity.getUpdatedby().getId());
             stm_update.setDate(5, new java.sql.Date(entity.getCreatedtime().getTime()));
             stm_update.setDate(6, new java.sql.Date(entity.getUpdatedtime().getTime()));
-            stm_update.setBoolean(7, entity.isStatus());
-            stm_update.setString(8, entity.getImage());
-            stm_update.setInt(9, entity.getId());
+            //stm_update.setBoolean(7, entity.isStatus());
+            stm_update.setString(7, entity.getImage());
+            stm_update.setInt(8, entity.getId());
             stm_update.executeUpdate();
 
         } catch (SQLException ex) {
@@ -92,7 +92,17 @@ public class BlogDao extends DBContext<Blog> {
 
     @Override
     public void delete(Blog entity) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String sql_delete = "DELETE FROM [dbo].[Blog]\n"
+                + "      WHERE b_id = ?";
+        PreparedStatement stm_delete = null;
+        try {
+            stm_delete = connection.prepareStatement(sql_delete);
+            stm_delete.setInt(1, entity.getId());
+            stm_delete.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(BlogDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     @Override
@@ -176,5 +186,3 @@ public class BlogDao extends DBContext<Blog> {
 
     }
 }
-
-

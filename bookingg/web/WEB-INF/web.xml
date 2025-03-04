@@ -18,11 +18,11 @@
     </servlet>
     <servlet>
         <servlet-name>CusListBlogController</servlet-name>
-        <servlet-class>controller.accesscontrol.CusListBlogController</servlet-class>
+        <servlet-class>controller.blog.customer.CusListBlogController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CusBlogDetailController</servlet-name>
-        <servlet-class>controller.accesscontrol.CusBlogDetailController</servlet-class>
+        <servlet-class>controller.blog.customer.CusBlogDetailController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ChangePasswordController</servlet-name>
@@ -30,27 +30,31 @@
     </servlet>
     <servlet>
         <servlet-name>ForgotpasswordController</servlet-name>
-        <servlet-class>controller.accesscontrol.ForgotPasswordController</servlet-class>
+        <servlet-class>controller.forgotpass.otp.ForgotPasswordController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ResetPasswordCustomerController</servlet-name>
-        <servlet-class>controller.accesscontrol.ResetPasswordCustomerController</servlet-class>
+        <servlet-class>controller.forgotpass.otp.ResetPasswordCustomerController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>OTPVerificationController</servlet-name>
-        <servlet-class>controller.accesscontrol.OTPVerificationController</servlet-class>
+        <servlet-class>controller.forgotpass.otp.OTPVerificationController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>BlogServlet</servlet-name>
-        <servlet-class>controller.accesscontrol.BlogServlet</servlet-class>
+        <servlet-class>controller.blog.BlogCreateServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>BlogListController</servlet-name>
-        <servlet-class>controller.accesscontrol.BlogListController</servlet-class>
+        <servlet-class>controller.blog.BlogListController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>BlogUpdateController</servlet-name>
-        <servlet-class>controller.accesscontrol.BlogUpdateController</servlet-class>
+        <servlet-class>controller.blog.BlogUpdateController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BlogDeleteController</servlet-name>
+        <servlet-class>controller.blog.BlogDeleteController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Register</servlet-name>
@@ -140,5 +144,8 @@
         <servlet-name>BlogUpdateController</servlet-name>
         <url-pattern>/updateblog</url-pattern>
     </servlet-mapping>
-    
+    <servlet-mapping>
+        <servlet-name>BlogDeleteController</servlet-name>
+        <url-pattern>/deleteblog</url-pattern>
+    </servlet-mapping>
 </web-app>
