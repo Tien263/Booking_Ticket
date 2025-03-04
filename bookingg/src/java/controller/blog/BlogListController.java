@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package controller.accesscontrol;
+package controller.blog;
 
 import dal.BlogDao;
 import java.io.IOException;
@@ -12,14 +12,11 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
 import model.Blog;
 
-/**
- *
- * @author ADMIN
- */
-public class CusListBlogController extends HttpServlet {
+public class BlogListController extends HttpServlet {
    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
@@ -29,28 +26,25 @@ public class CusListBlogController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CusListBlogController</title>");  
+            out.println("<title>Servlet BlogListController</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet CusListBlogController at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet BlogListController at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
     } 
+    private BlogDao blogDao = new BlogDao();
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<Blog> blogs = blogDao.getAllBlogs();
+        request.setAttribute("blog", blogs);
+        request.getRequestDispatcher("listblog.jsp").forward(request, response);
+    }
+    
 
     
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        BlogDao bdao = new BlogDao();
-        List<Blog> listB = bdao.list();
-        
-        request.setAttribute("listB", listB);
-        request.getRequestDispatcher("blog.jsp").forward(request, response);
-
-
-    } 
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
@@ -62,22 +56,4 @@ public class CusListBlogController extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-   
-    public static void main(String[] args) {
-        // Tạo instance của BlogDao
-        BlogDao bdao = new BlogDao();
-        
-        // Lấy danh sách blog
-        List<Blog> listB = bdao.list();
-        
-        // Kiểm tra danh sách có dữ liệu không
-        if (listB.isEmpty()) {
-            System.out.println("Không có blog nào trong danh sách.");
-        } else {
-            System.out.println("Danh sách blog:");
-            for (Blog b : listB) {
-                System.out.println("ID: " + b.getId() + ", Title: " + b.getTitle());
-            }
-        }
-    }
 }
