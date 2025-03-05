@@ -108,9 +108,9 @@
 
 						<div class="col-lg-3 col-md-6 col-sm-6 col-6">
 							<div class="brand_logo">
-								<a href="index.html">
-									<img src="assets/images/logo/logo_01_1x.png" srcset="assets/images/logo/logo_01_2x.png 2x" alt="logo_not_found">
-									<img src="assets/images/logo/logo_02_1x.png" srcset="assets/images/logo/logo_02_2x.png 2x" alt="logo_not_found">
+								<a href="index_1.html">
+									<img src="assets/images/logo/logo_01_1.png" srcset="assets/images/logo/logo_01_2x.png 2x" alt="logo_not_found" width="50%">
+									<img src="assets/images/logo/logo_01_1.png" srcset="assets/images/logo/logo_02_2x.png 2x" alt="logo_not_found" width="50%">
 								</a>
 							</div>
 						</div>
@@ -369,18 +369,18 @@
 
 			<!-- banner_section - start
 			================================================== -->
-			<section class="banner_section parallaxie has_overlay text-white d-flex align-items-center clearfix" data-bg-image="assets/images/backgrounds/bg_01.jpg">
+			<section class="banner_section parallaxie has_overlay text-white d-flex align-items-center clearfix" data-bg-image="assets/images/backgrounds/bg_01_1.jpg">
 				<div class="overlay"></div>
 				<div class="container">
 					<div class="row align-items-center justify-content-lg-between">
 						<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
 							<div class="banner_content">
-								<h1 class="text-white text-uppercase" data-aos="fade-up" data-aos-delay="100">Find that car</h1>
+								<h1 class="text-white text-uppercase" data-aos="fade-up" data-aos-delay="100">BusGo - Easy and Safe Bus Ticket Booking</h1>
 								<p data-aos="fade-up" data-aos-delay="300">
-									Pellentesque nec lectus nisl. Cras magna velit, tue maximus et dui a, convallis cursus turpis. Arcu cursus euismod quis viverra nibh cras. Arcu cursus euismod quis viverra nibh cras
+									BusGo is committed to providing a reliable bus ticket booking experience with transparent information and dedicated customer support. Book your ticket now for a convenient and safe journey!
 								</p>
 								<div data-aos="fade-up" data-aos-delay="500">
-									<a class="custom_btn bg_default_red btn_width text-uppercase" href="#!">Book A Car <img src="assets/images/icons/icon_01.png" alt="icon_not_found"></a>
+									<a class="custom_btn bg_default_red btn_width text-uppercase" href="car.html">Book Ticket <img src="assets/images/icons/icon_01.png" alt="icon_not_found"></a>
 								</div>
 							</div>
 						</div>
@@ -440,6 +440,82 @@
 					</div>
 
 					<div class="advance_search_form">
+						<div class="section_title text-center mb_30">
+							<h2 class="title_text mb-0 text-white" data-aos="fade-up" data-aos-delay="100">
+								<span>Search for a Bus Trip</span>
+							</h2>
+						</div>
+						<form action="#">
+							<div class="row">
+								<!-- Lựa chọn Một chiều / Khứ hồi -->
+								<div class="col-lg-12 text-left mb-3">
+									<label>
+										<input type="radio" name="trip_type" value="oneway" checked> One-way
+									</label>
+									<label class="ml-4">
+										<input type="radio" name="trip_type" value="roundtrip"> Round-trip
+									</label>
+									<a href="#" class="float-right text-danger">Ticket booking guide</a>
+								</div>
+					
+								<!-- Điểm đi -->
+								<div class="col-lg-4 col-md-6 col-sm-12">
+									<div class="form_item" data-aos="fade-up" data-aos-delay="100">
+										<h4 class="input_title text-white">Origin</h4>
+										<input type="text" name="departure" placeholder="Origin" required>
+									</div>
+								</div>
+					
+								<!-- Điểm đến -->
+								<div class="col-lg-4 col-md-6 col-sm-12">
+									<div class="form_item" data-aos="fade-up" data-aos-delay="100">
+										<h4 class="input_title text-white">Destinaion</h4>
+										<input type="text" name="destination" placeholder="Destinaion" required>
+									</div>
+								</div>
+					
+								<!-- Ngày đi -->
+								<div class="col-lg-2 col-md-6 col-sm-12">
+									<div class="form_item" data-aos="fade-up" data-aos-delay="100">
+										<h4 class="input_title text-white">Depature date</h4>
+										<input type="date" name="departure_date" required>
+									</div>
+								</div>
+					
+								<!-- Số vé -->
+								<div class="col-lg-2 col-md-6 col-sm-12">
+									<div class="form_item" data-aos="fade-up" data-aos-delay="100">
+										<h4 class="input_title text-white">Ticket</h4>
+										<select name="ticket_quantity">
+											<option value="1">1</option>
+											<option value="2">2</option>
+											<option value="3">3</option>
+											<option value="4">4</option>
+											<option value="5">5</option>
+										</select>
+									</div>
+								</div>
+							</div>
+					
+							<!-- Danh sách tìm kiếm gần đây -->
+							<div class="recent_searches mt-3">
+								<h5 class="input_title text-white">Recent search</h5>
+								<button type="button" class="btn btn-light btn-sm">An Giang - Bạc Liêu <small>13/02/2025</small></button>
+								<button type="button" class="btn btn-light btn-sm">TP. Hồ Chí Minh - An Nhơn <small>11/01/2025</small></button>
+								<button type="button" class="btn btn-light btn-sm">Đà Lạt - Hà Nội <small>12/01/2025</small></button>
+								<button type="button" class="btn btn-light btn-sm">Hà Nội - Đà Lạt <small>12/01/2025</small></button>
+							</div>
+					
+							<!-- Nút tìm chuyến xe -->
+							<div class="text-center mt-4">
+								<button type="submit" class="custom_btn bg_default_red btn_width text-uppercase">
+									Search Trip
+								</button>
+							</div>
+						</form>
+					</div>
+
+					<!-- <div class="advance_search_form">
 						<div class="section_title text-center mb_30">
 							<h2 class="title_text mb-0 text-white" data-aos="fade-up" data-aos-delay="100">
 								<span>Find the right car for every occasion</span>
@@ -530,7 +606,7 @@
 								</div>
 							</div>
 						</form>
-					</div>
+					</div> -->
 				</div>
 			</section>
 			<!-- banner_section - end
@@ -543,11 +619,25 @@
 				<div class="gallery_2col_carousel slideshow2_slider" data-slick='{"dots": false}' data-aos="fade-up" data-aos-delay="100">
 					<div class="item">
 						<div class="gallery_fullimage">
-							<img src="assets/images/gallery/img_01.jpg" alt="image_not_found">
+							<img src="assets/images/gallery/img_01_2.jpg" alt="image_not_found">
 							<div class="item_content text-white">
-								<h3 class="item_title text-white">Phasellus porta pulvinar metus</h3>
+								<h3 class="item_title text-white">Cầu Vàng - Biểu tượng Đà Nẵng</h3>
 								<p>
-									Phasellus porta pulvinar metus, sit amet bibendum lectus hendrerit vel. Duis ullamcorper, justo quis hendrerit venenatis, purus mi volutpat dui, vel commodo urna eros eget sapien
+									Nằm giữa thiên nhiên kỳ vĩ của Bà Nà Hills, Cầu Vàng là một tuyệt tác kiến trúc độc đáo với hai bàn tay đá khổng lồ nâng đỡ cây cầu. Đây là điểm đến lý tưởng để tận hưởng không khí trong lành và ngắm nhìn toàn cảnh núi rừng tuyệt đẹp.
+								</p>
+
+								<a class="text_btn text-uppercase" href="#!"><span>Find A Car</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
+							</div>
+						</div>
+					</div>
+
+					<div class="item">
+						<div class="gallery_fullimage">
+							<img src="assets/images/gallery/img_02_2.jpg" alt="image_not_found">
+							<div class="item_content text-white">
+								<h3 class="item_title text-white">Khám phá rừng dừa Bảy Mẫu - Hội An</h3>
+								<p>
+									Trải nghiệm chèo thuyền thúng độc đáo tại rừng dừa Bảy Mẫu, Hội An – nơi bạn có thể tận hưởng khung cảnh thiên nhiên xanh mát, khám phá đời sống sông nước và chiêm ngưỡng những màn biểu diễn thuyền thúng ngoạn mục. Hành trình lý tưởng để hòa mình vào văn hóa miền sông nước!
 								</p>
 								<a class="text_btn text-uppercase" href="#!"><span>Find A Car</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
 							</div>
@@ -556,12 +646,13 @@
 
 					<div class="item">
 						<div class="gallery_fullimage">
-							<img src="assets/images/gallery/img_02.jpg" alt="image_not_found">
+							<img src="assets/images/gallery/img_03_1.jpg" alt="image_not_found">
 							<div class="item_content text-white">
-								<h3 class="item_title text-white">Phasellus porta pulvinar metus</h3>
+								<h3 class="item_title text-white">Vịnh Hạ Long - Kỳ quan thiên nhiên thế giới</h3>
 								<p>
-									Phasellus porta pulvinar metus, sit amet bibendum lectus hendrerit vel. Duis ullamcorper, justo quis hendrerit venenatis, purus mi volutpat dui, vel commodo urna eros eget sapien
+									Trải nghiệm hành trình khám phá Vịnh Hạ Long, nơi hội tụ những hòn đảo đá vôi kỳ vĩ và làn nước xanh ngọc bích. Lênh đênh trên du thuyền truyền thống, tận hưởng khung cảnh huyền ảo và cảm nhận nét đẹp văn hóa Việt Nam giữa thiên nhiên tuyệt mỹ.
 								</p>
+
 								<a class="text_btn text-uppercase" href="#!"><span>Find A Car</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
 							</div>
 						</div>
@@ -569,24 +660,11 @@
 
 					<div class="item">
 						<div class="gallery_fullimage">
-							<img src="assets/images/gallery/img_01.jpg" alt="image_not_found">
+							<img src="assets/images/gallery/img_04_1.jpg" alt="image_not_found">
 							<div class="item_content text-white">
-								<h3 class="item_title text-white">Phasellus porta pulvinar metus</h3>
+								<h3 class="item_title text-white">Chùa Bích Động - Viên ngọc cổ kính của Ninh Bình</h3>
 								<p>
-									Phasellus porta pulvinar metus, sit amet bibendum lectus hendrerit vel. Duis ullamcorper, justo quis hendrerit venenatis, purus mi volutpat dui, vel commodo urna eros eget sapien
-								</p>
-								<a class="text_btn text-uppercase" href="#!"><span>Find A Car</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
-							</div>
-						</div>
-					</div>
-
-					<div class="item">
-						<div class="gallery_fullimage">
-							<img src="assets/images/gallery/img_02.jpg" alt="image_not_found">
-							<div class="item_content text-white">
-								<h3 class="item_title text-white">Phasellus porta pulvinar metus</h3>
-								<p>
-									Phasellus porta pulvinar metus, sit amet bibendum lectus hendrerit vel. Duis ullamcorper, justo quis hendrerit venenatis, purus mi volutpat dui, vel commodo urna eros eget sapien
+									Ẩn mình giữa núi non hùng vĩ và hồ sen thơ mộng, chùa Bích Động là một trong những danh thắng tâm linh nổi bật của Ninh Bình. Kiến trúc cổ kính kết hợp cùng thiên nhiên xanh mát tạo nên một không gian yên bình, lý tưởng để tìm về sự tĩnh lặng và chiêm ngưỡng vẻ đẹp văn hóa Việt Nam.
 								</p>
 								<a class="text_btn text-uppercase" href="#!"><span>Find A Car</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
 							</div>
@@ -614,11 +692,17 @@
 							<div class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
 								<div class="offer_content">
 									<h2 class="item_title" data-aos="fade-up" data-aos-delay="100">
-										Cras nec molestie felis. Sed non placerat enim
+										Why Choose Us? – The Best Bus Ticket Booking Experience 
 									</h2>
 									<p class="mb_30" data-aos="fade-up" data-aos-delay="300">
-										Ut id lobortis eros, sed finibus dui. Cras eget purus lacus. Suspendisse sodales massa quis turpis ultrices ultricies. Cras euismod eros at vehicula sagittis. Suspendisse condimentum tortor nec enim pellentesque feugiat. Fusce vulputate varius orci, eu imperdiet orci dictum in. Nulla tempor urna vitae sapien iaculis, auctor condimentum enim auctor
+										At BusGo, we are committed to providing a safe, fast, and convenient bus ticket booking experience. With our modern booking system, customers can easily select their preferred trips in just a few simple steps. To show our appreciation, we offer exclusive discounts for new users, daily promotions, and special privileges for loyal members.
 									</p>
+									<p class="mb_30" data-aos="fade-up" data-aos-delay="300">
+										Beyond great deals, service quality is our top priority. We collaborate with trusted bus operators to ensure every journey is safe, comfortable, and reliable. Moreover, our 24/7 customer support team is always available to assist you, ensuring a smooth and hassle-free travel experience.
+
+Your safety and satisfaction are our highest priorities.
+									</p>
+									
 									<div data-aos="fade-up" data-aos-delay="500">
 										<a class="text_btn text-uppercase" href="#!"><span>View All Offers</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
 									</div>
@@ -638,10 +722,10 @@
 				<div class="offers_car_carousel slideshow4_slider" data-slick='{"dots": false}' data-aos="fade-up" data-aos-delay="100">
 					<div class="item">
 						<div class="gallery_fullimage_2">
-							<img src="assets/images/gallery/img_03.jpg" alt="image_not_found">
+							<img src="assets/images/gallery/img_05_1.jpg" alt="image_not_found">
 							<div class="item_content text-white">
-								<span class="item_price bg_default_blue">$670/Day</span>
-								<h3 class="item_title text-white">Phasellus porta pulvinar metus</h3>
+								<span class="item_price bg_default_blue">200,000 VND/per trip</span>
+								<h3 class="item_title text-white">Dien Linh Coach Services</h3>
 								<a class="text_btn text-uppercase" href="#!"><span>Kook A Car</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
 							</div>
 						</div>
@@ -649,10 +733,10 @@
 
 					<div class="item">
 						<div class="gallery_fullimage_2">
-							<img src="assets/images/gallery/img_04.jpg" alt="image_not_found">
+							<img src="assets/images/gallery/img_05_2.jpg" alt="image_not_found">
 							<div class="item_content text-white">
-								<span class="item_price bg_default_blue">$670/Day</span>
-								<h3 class="item_title text-white">Phasellus porta pulvinar metus</h3>
+								<span class="item_price bg_default_blue">500,000 VND/per trip</span>
+								<h3 class="item_title text-white">Tan Quang Dung Coach Services</h3>
 								<a class="text_btn text-uppercase" href="#!"><span>Kook A Car</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
 							</div>
 						</div>
@@ -660,10 +744,10 @@
 
 					<div class="item">
 						<div class="gallery_fullimage_2">
-							<img src="assets/images/gallery/img_05.jpg" alt="image_not_found">
+							<img src="assets/images/gallery/img_05_3.jpg" alt="image_not_found">
 							<div class="item_content text-white">
-								<span class="item_price bg_default_blue">$670/Day</span>
-								<h3 class="item_title text-white">Phasellus porta pulvinar metus</h3>
+								<span class="item_price bg_default_blue">350,000 VND/per trip</span>
+								<h3 class="item_title text-white">Cuoc Hue Coach Services</h3>
 								<a class="text_btn text-uppercase" href="#!"><span>Kook A Car</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
 							</div>
 						</div>
@@ -671,10 +755,10 @@
 
 					<div class="item">
 						<div class="gallery_fullimage_2">
-							<img src="assets/images/gallery/img_06.jpg" alt="image_not_found">
+							<img src="assets/images/gallery/img_05_4.jpg" alt="image_not_found">
 							<div class="item_content text-white">
 								<span class="item_price bg_default_blue">$670/Day</span>
-								<h3 class="item_title text-white">Phasellus porta pulvinar metus</h3>
+								<h3 class="item_title text-white">Xuan Hai Coach Services</h3>
 								<a class="text_btn text-uppercase" href="#!"><span>Kook A Car</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
 							</div>
 						</div>
@@ -682,10 +766,10 @@
 
 					<div class="item">
 						<div class="gallery_fullimage_2">
-							<img src="assets/images/gallery/img_03.jpg" alt="image_not_found">
+							<img src="assets/images/gallery/img_05_5.jpg" alt="image_not_found">
 							<div class="item_content text-white">
 								<span class="item_price bg_default_blue">$670/Day</span>
-								<h3 class="item_title text-white">Phasellus porta pulvinar metus</h3>
+								<h3 class="item_title text-white">Long Van Coach Services</h3>
 								<a class="text_btn text-uppercase" href="#!"><span>Kook A Car</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
 							</div>
 						</div>
@@ -693,10 +777,10 @@
 
 					<div class="item">
 						<div class="gallery_fullimage_2">
-							<img src="assets/images/gallery/img_04.jpg" alt="image_not_found">
+							<img src="assets/images/gallery/img_05_6.jpg" alt="image_not_found">
 							<div class="item_content text-white">
 								<span class="item_price bg_default_blue">$670/Day</span>
-								<h3 class="item_title text-white">Phasellus porta pulvinar metus</h3>
+								<h3 class="item_title text-white">Son Tung Coach Services</h3>
 								<a class="text_btn text-uppercase" href="#!"><span>Kook A Car</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
 							</div>
 						</div>
@@ -704,10 +788,10 @@
 
 					<div class="item">
 						<div class="gallery_fullimage_2">
-							<img src="assets/images/gallery/img_05.jpg" alt="image_not_found">
+							<img src="assets/images/gallery/img_05_7.jpg" alt="image_not_found">
 							<div class="item_content text-white">
 								<span class="item_price bg_default_blue">$670/Day</span>
-								<h3 class="item_title text-white">Phasellus porta pulvinar metus</h3>
+								<h3 class="item_title text-white">Quoc Tuan Coach Services</h3>
 								<a class="text_btn text-uppercase" href="#!"><span>Kook A Car</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
 							</div>
 						</div>
@@ -715,10 +799,10 @@
 
 					<div class="item">
 						<div class="gallery_fullimage_2">
-							<img src="assets/images/gallery/img_06.jpg" alt="image_not_found">
+							<img src="assets/images/gallery/img_05_8.jpg" alt="image_not_found">
 							<div class="item_content text-white">
 								<span class="item_price bg_default_blue">$670/Day</span>
-								<h3 class="item_title text-white">Phasellus porta pulvinar metus</h3>
+								<h3 class="item_title text-white">Duc Lan Coach Services</h3>
 								<a class="text_btn text-uppercase" href="#!"><span>Kook A Car</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
 							</div>
 						</div>
@@ -738,7 +822,7 @@
 							<div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
 								<div class="serial_number text-right" data-aos="fade-up" data-aos-delay="100">
 									<span>02</span>
-									<h4 class="mb-0">Choose your car</h4>
+									<h4 class="mb-0">Choose a travel destination</h4>
 								</div>
 							</div>
 
@@ -747,7 +831,7 @@
 									<div class="thumbnail_carousel">
 										<div class="item">
 											<div class="item_head">
-												<h4 class="item_title mb-0">Infiniti Q50 2018</h4>
+												<h4 class="item_title mb-0">Top tourist destination</h4>
 												<ul class="review_text ul_li_right clearfix">
 													<li class="text-right">
 														<strong>Super</strong>
@@ -756,20 +840,20 @@
 													<li><span class="bg_default_blue">4.8/5</span></li>
 												</ul>
 											</div>
-											<img src="assets/images/gallery/img_07.jpg" alt="image_not_found">
+											<img src="assets/images/gallery/img_06_1.jpg" alt="image_not_found">
 											<ul class="btns_group ul_li_center clearfix">
 												<li>
 													<span class="custom_btn btn_width bg_default_blue"><del>$800/Day</del> $400/Day</span>
 												</li>
 												<li>
-													<a href="#!" class="custom_btn btn_width bg_default_red text-uppercase">Book A Car <img src="assets/images/icons/icon_01.png" alt="icon_not_found"></a>
+													<a href="#!" class="custom_btn btn_width bg_default_red text-uppercase">Book Ticket <img src="assets/images/icons/icon_01.png" alt="icon_not_found"></a>
 												</li>
 											</ul>
 										</div>
 
 										<div class="item">
 											<div class="item_head">
-												<h4 class="item_title mb-0">Infiniti Q50 2018</h4>
+												<h4 class="item_title mb-0">Top tourist destination</h4>
 												<ul class="review_text ul_li_right clearfix">
 													<li class="text-right">
 														<strong>Super</strong>
@@ -778,20 +862,20 @@
 													<li><span class="bg_default_blue">4.8/5</span></li>
 												</ul>
 											</div>
-											<img src="assets/images/gallery/img_07.jpg" alt="image_not_found">
+											<img src="assets/images/gallery/img_06_2.jpg" alt="image_not_found">
 											<ul class="btns_group ul_li_center clearfix">
 												<li>
 													<span class="custom_btn btn_width bg_default_blue"><del>$800/Day</del> $400/Day</span>
 												</li>
 												<li>
-													<a href="#!" class="custom_btn btn_width bg_default_red text-uppercase">Book A Car <img src="assets/images/icons/icon_01.png" alt="icon_not_found"></a>
+													<a href="#!" class="custom_btn btn_width bg_default_red text-uppercase">Book Ticket <img src="assets/images/icons/icon_01.png" alt="icon_not_found"></a>
 												</li>
 											</ul>
 										</div>
 
 										<div class="item">
 											<div class="item_head">
-												<h4 class="item_title mb-0">Infiniti Q50 2018</h4>
+												<h4 class="item_title mb-0">Top tourist destination</h4>
 												<ul class="review_text ul_li_right clearfix">
 													<li class="text-right">
 														<strong>Super</strong>
@@ -800,20 +884,20 @@
 													<li><span class="bg_default_blue">4.8/5</span></li>
 												</ul>
 											</div>
-											<img src="assets/images/gallery/img_07.jpg" alt="image_not_found">
+											<img src="assets/images/gallery/img_06_3.jpg" alt="image_not_found">
 											<ul class="btns_group ul_li_center clearfix">
 												<li>
 													<span class="custom_btn btn_width bg_default_blue"><del>$800/Day</del> $400/Day</span>
 												</li>
 												<li>
-													<a href="#!" class="custom_btn btn_width bg_default_red text-uppercase">Book A Car <img src="assets/images/icons/icon_01.png" alt="icon_not_found"></a>
+													<a href="#!" class="custom_btn btn_width bg_default_red text-uppercase">Book Ticket <img src="assets/images/icons/icon_01.png" alt="icon_not_found"></a>
 												</li>
 											</ul>
 										</div>
 
 										<div class="item">
 											<div class="item_head">
-												<h4 class="item_title mb-0">Infiniti Q50 2018</h4>
+												<h4 class="item_title mb-0">Top tourist destination</h4>
 												<ul class="review_text ul_li_right clearfix">
 													<li class="text-right">
 														<strong>Super</strong>
@@ -822,20 +906,20 @@
 													<li><span class="bg_default_blue">4.8/5</span></li>
 												</ul>
 											</div>
-											<img src="assets/images/gallery/img_07.jpg" alt="image_not_found">
+											<img src="assets/images/gallery/img_06_4.jpg" alt="image_not_found">
 											<ul class="btns_group ul_li_center clearfix">
 												<li>
 													<span class="custom_btn btn_width bg_default_blue"><del>$800/Day</del> $400/Day</span>
 												</li>
 												<li>
-													<a href="#!" class="custom_btn btn_width bg_default_red text-uppercase">Book A Car <img src="assets/images/icons/icon_01.png" alt="icon_not_found"></a>
+													<a href="#!" class="custom_btn btn_width bg_default_red text-uppercase">Book Ticket <img src="assets/images/icons/icon_01.png" alt="icon_not_found"></a>
 												</li>
 											</ul>
 										</div>
 
 										<div class="item">
 											<div class="item_head">
-												<h4 class="item_title mb-0">Infiniti Q50 2018</h4>
+												<h4 class="item_title mb-0">Top tourist destination</h4>
 												<ul class="review_text ul_li_right clearfix">
 													<li class="text-right">
 														<strong>Super</strong>
@@ -844,20 +928,20 @@
 													<li><span class="bg_default_blue">4.8/5</span></li>
 												</ul>
 											</div>
-											<img src="assets/images/gallery/img_07.jpg" alt="image_not_found">
+											<img src="assets/images/gallery/img_06_5.jpg" alt="image_not_found">
 											<ul class="btns_group ul_li_center clearfix">
 												<li>
 													<span class="custom_btn btn_width bg_default_blue"><del>$800/Day</del> $400/Day</span>
 												</li>
 												<li>
-													<a href="#!" class="custom_btn btn_width bg_default_red text-uppercase">Book A Car <img src="assets/images/icons/icon_01.png" alt="icon_not_found"></a>
+													<a href="#!" class="custom_btn btn_width bg_default_red text-uppercase">Book Ticket <img src="assets/images/icons/icon_01.png" alt="icon_not_found"></a>
 												</li>
 											</ul>
 										</div>
 
 										<div class="item">
 											<div class="item_head">
-												<h4 class="item_title mb-0">Infiniti Q50 2018</h4>
+												<h4 class="item_title mb-0">Top tourist destination</h4>
 												<ul class="review_text ul_li_right clearfix">
 													<li class="text-right">
 														<strong>Super</strong>
@@ -866,47 +950,46 @@
 													<li><span class="bg_default_blue">4.8/5</span></li>
 												</ul>
 											</div>
-											<img src="assets/images/gallery/img_07.jpg" alt="image_not_found">
+											<img src="assets/images/gallery/img_06_6.jpg" alt="image_not_found">
 											<ul class="btns_group ul_li_center clearfix">
 												<li>
 													<span class="custom_btn btn_width bg_default_blue"><del>$800/Day</del> $400/Day</span>
 												</li>
 												<li>
-													<a href="#!" class="custom_btn btn_width bg_default_red text-uppercase">Book A Car <img src="assets/images/icons/icon_01.png" alt="icon_not_found"></a>
+													<a href="#!" class="custom_btn btn_width bg_default_red text-uppercase">Book Ticket <img src="assets/images/icons/icon_01.png" alt="icon_not_found"></a>
 												</li>
 											</ul>
 										</div>
 									</div>
 									<div class="thumbnail_carousel_nav">
 										<div class="item">
-											<img src="assets/images/gallery/child_01.jpg" alt="image_not_found">
+											<img src="assets/images/gallery/img_06_1.jpg" alt="image_not_found">
 										</div>
 										<div class="item">
-											<img src="assets/images/gallery/child_02.jpg" alt="image_not_found">
+											<img src="assets/images/gallery/img_06_2.jpg" alt="image_not_found">
 										</div>
 										<div class="item">
-											<img src="assets/images/gallery/child_03.jpg" alt="image_not_found">
+											<img src="assets/images/gallery/img_06_3.jpg" alt="image_not_found">
 										</div>
 										<div class="item">
-											<img src="assets/images/gallery/child_04.jpg" alt="image_not_found">
+											<img src="assets/images/gallery/img_06_4.jpg" alt="image_not_found">
 										</div>
 										<div class="item">
-											<img src="assets/images/gallery/child_01.jpg" alt="image_not_found">
+											<img src="assets/images/gallery/img_06_5.jpg" alt="image_not_found">
 										</div>
 										<div class="item">
-											<img src="assets/images/gallery/child_02.jpg" alt="image_not_found">
+											<img src="assets/images/gallery/img_06_6.jpg" alt="image_not_found">
 										</div>
 									</div>
 								</div>
 
 								<div class="car_choose_content" data-aos="fade-up" data-aos-delay="500">
 									<ul class="info_list ul_li_block mb_15 clearfix">
-										<li><strong>Passengers:</strong> 4</li>
+										<li><strong>Passengers:</strong> 1</li>
 										<li><strong>Suitcase:</strong> 1 Large, 2 Small</li>
-										<li><strong>Doors:</strong> 2</li>
-										<li><strong>Engine:</strong> 3.9L V8 32V GDI DOHC Twin Turbo</li>
-										<li><strong>Fuel Type:</strong> Gasoline, Premium unleaded</li>
-										<li><strong>Options:</strong> Cruise Control, MP3 player, Automatic air conditioning, Wifi, GPS Navigation</li>
+										<li><strong>Departure:</strong> Ha Noi</li>
+										<li><strong>Ticket Type:</strong> Standard</li>
+										<li><strong>Amenities:</strong> Free drinking water, WiFi, Air conditioning, Charging ports, Blanket</li>
 									</ul>
 									<a class="terms_condition" href="#!"><i class="fas fa-info-circle mr-1"></i> Terms and conditions</a>
 								</div>
@@ -921,7 +1004,7 @@
 
 			<!-- feature_section - start
 			================================================== -->
-			<section class="feature_section sec_ptb_150 clearfix" data-bg-color="#F2F2F2">
+			<!-- <section class="feature_section sec_ptb_150 clearfix" data-bg-color="#F2F2F2">
 				<div class="container">
 
 					<div class="row justify-content-center">
@@ -1083,9 +1166,9 @@
 					</div>
 
 				</div>
-			</section>
+			</section>-->
 			<!-- feature_section - end
-			================================================== -->
+			================================================== --> 
 
 
 			<!-- offer_section - start
@@ -1104,10 +1187,10 @@
 							<div class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
 								<div class="offer_content">
 									<h2 class="item_title" data-aos="fade-up" data-aos-delay="100">
-										Best car rental offers and services features:
+										The Best Bus Ticket Booking Experience
 									</h2>
 									<p class="mb-0" data-aos="fade-up" data-aos-delay="300">
-										Ut id lobortis eros, sed finibus dui. Cras eget purus lacus. Suspendisse sodales massa quis turpis ultrices ultricies. Cras euismod eros at vehicula sagittis. Suspendisse condimentum tortor nec enim pellentesque feugiat. Fusce vulputate varius orci, eu imperdiet orci dictum in. Nulla tempor urna vitae sapien iaculis, auctor condimentum enim auctor
+										We are committed to providing a safe, convenient, and transparent bus ticket booking experience. With our modern system, you can easily select your preferred route, enjoy high-quality services, and access exclusive deals.
 									</p>
 									<div class="row">
 										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -1120,7 +1203,7 @@
 														Secured Payment Guarantee
 													</h4>
 													<p class="mb-0">
-														Vestibulum at ultrices elit. Maecenas faucibus vulputate vestibulum
+														Safe and secure payment options with maximum customer data protection.
 													</p>
 												</div>
 											</div>
@@ -1133,10 +1216,10 @@
 												</div>
 												<div class="item_content">
 													<h4 class="item_title">
-														Booking of any class vehicle
+														Easy Bus Ticket Booking
 													</h4>
 													<p class="mb-0">
-														Vestibulum at ultrices elit. Maecenas faucibus vulputate vestibulum
+														Quickly choose your bus route with multiple ticket options and trusted operators.
 													</p>
 												</div>
 											</div>
@@ -1152,7 +1235,7 @@
 														Multi-language Support 24/7
 													</h4>
 													<p class="mb-0">
-														Vestibulum at ultrices elit. Maecenas faucibus vulputate vestibulum
+														Multi-language assistance available anytime to support your needs.
 													</p>
 												</div>
 											</div>
@@ -1168,7 +1251,7 @@
 														Emergency technical assistance
 													</h4>
 													<p class="mb-0">
-														Vestibulum at ultrices elit. Maecenas faucibus vulputate vestibulum
+														Immediate support to ensure your journey is smooth and hassle-free.
 													</p>
 												</div>
 											</div>
@@ -1193,10 +1276,10 @@
 						<div class="col-lg-7 col-md-9 col-sm-12 col-xs-12">
 							<div class="section_title mb_60 text-center text-white" data-aos="fade-up" data-aos-delay="100">
 								<h2 class="title_text text-white mb_15">
-									<span>Worldwide Car Retal Locations</span>
+									<span>BusGo Headquarters</span>
 								</h2>
 								<p class="mb-0">
-									We have a number of convenient locations.  More than 500 Stations in 90+ Countries Worldwide
+									We operate from our central headquarters, ensuring smooth operations and premium customer service. Our main office is strategically located to support our network of routes and enhance the travel experience for all passengers.
 								</p>
 							</div>
 						</div>
@@ -1268,10 +1351,10 @@
 									<div class="testimonial_item clearfix">
 										<div class="admin_info_wrap clearfix" data-aos="fade-up" data-aos-delay="200">
 											<div class="admin_image">
-												<img src="assets/images/meta/img_01.png" alt="image_not_found">
+												<img src="assets/images/meta/img_01.jpg" alt="image_not_found"   style="width: 50px; height: auto; vertical-align: middle; margin-right: 10px;">
 											</div>
 											<div class="admin_content">
-												<h4 class="admin_name">Marianna Frazoni</h4>
+												<h4 class="admin_name">Phạm Thu Hương</h4>
 												<ul class="rating_star ul_li clearfix">
 													<li class="active"><i class="fas fa-star"></i></li>
 													<li class="active"><i class="fas fa-star"></i></li>
@@ -1282,22 +1365,17 @@
 											</div>
 										</div>
 										<p class="mb-0" data-aos="fade-up" data-aos-delay="300">
-											“Ut id lobortis eros, sed finibus dui. Cras eget purus lacus. Suspendisse sodales massa quis turpis ultrices ultricies. Cras euismod eros at vehicula sagittis. Suspendisse condimentum tortor nec enim pellentesque feugiat. Nulla tempor urna vitae sapien iaculis, auctor condimentum enim auctor”
+											“Lần đầu tiên đặt vé qua BusGo và rất hài lòng. Nhân viên hỗ trợ tận tình, xe sạch sẽ và đi rất êm. Chắc chắn sẽ giới thiệu cho bạn bè!”
 										</p>
 										<div class="row">
-											<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-												<div class="review_image has_overlay" data-aos="fade-up" data-aos-delay="400">
-													<img src="assets/images/testimonial/img_01.jpg" alt="image_not_found">
-													<a class="play_btn" href="http://www.youtube.com/watch?v=0O2aH4XLbto"><i class="fas fa-play"></i></a>
-													<div class="overlay" data-bg-gradient="linear-gradient(0deg, rgba(1, 0, 10, .73), transparent)"></div>
+											<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+												<div class="review_image" data-aos="fade-up" data-aos-delay="300">
+													<img src="assets/images/testimonial/img_07_1.jpg" alt="image_not_found">
 												</div>
 											</div>
 											<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-												<div class="review_image" data-aos="fade-up" data-aos-delay="500">
-													<img src="assets/images/testimonial/img_02.jpg" alt="image_not_found">
-												</div>
-												<div class="review_image" data-aos="fade-up" data-aos-delay="600">
-													<img src="assets/images/testimonial/img_03.jpg" alt="image_not_found">
+												<div class="review_image" data-aos="fade-up" data-aos-delay="400">
+													<img src="assets/images/testimonial/img_07_2.jpg" alt="image_not_found">
 												</div>
 											</div>
 										</div>
@@ -1306,10 +1384,39 @@
 									<div class="testimonial_item clearfix">
 										<div class="admin_info_wrap clearfix" data-aos="fade-up" data-aos-delay="100">
 											<div class="admin_image">
-												<img src="assets/images/meta/img_01.png" alt="image_not_found">
+												<img src="assets/images/meta/img_01.jpg" alt="image_not_found" style="width: 50px; height: auto; vertical-align: middle; margin-right: 10px;">
 											</div>
 											<div class="admin_content">
-												<h4 class="admin_name">Donovan Nordtrom</h4>
+												<h4 class="admin_name">Trần Hoàng Nam</h4>
+												<ul class="rating_star ul_li clearfix">
+													<li class="active"><i class="fas fa-star"></i></li>
+													<li class="active"><i class="fas fa-star"></i></li>
+													<li class="active"><i class="fas fa-star"></i></li>
+													<li class="active"><i class="fas fa-star"></i></li>
+													<li class="active"><i class="fas fa-star"></i></li>
+												</ul>
+											</div>
+										</div>
+										<p class="mb-0" data-aos="fade-up" data-aos-delay="200">
+											“Mọi thứ đều tốt, từ quá trình đặt vé đến trải nghiệm trên xe. WiFi mạnh, có ổ cắm sạc và điều hòa mát lạnh. Mong rằng sẽ có thêm nhiều tuyến đường hơn nữa!”
+										</p>
+										<div class="row">
+											<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+												<div class="review_image" data-aos="fade-up" data-aos-delay="300">
+													<img src="assets/images/testimonial/img_07_3.jpg" alt="image_not_found">
+												</div>
+											</div>
+											
+										</div>
+									</div>
+
+									<div class="testimonial_item clearfix">
+										<div class="admin_info_wrap clearfix" data-aos="fade-up" data-aos-delay="100">
+											<div class="admin_image">
+												<img src="assets/images/meta/img_01.jpg" alt="image_not_found" style="width: 50px; height: auto; vertical-align: middle; margin-right: 10px;">
+											</div>
+											<div class="admin_content">
+												<h4 class="admin_name">Nguyễn Minh Anh </h4>
 												<ul class="rating_star ul_li clearfix">
 													<li class="active"><i class="fas fa-star"></i></li>
 													<li class="active"><i class="fas fa-star"></i></li>
@@ -1320,60 +1427,12 @@
 											</div>
 										</div>
 										<p class="mb-0" data-aos="fade-up" data-aos-delay="200">
-											“Ut id lobortis eros, sed finibus dui. Cras eget purus lacus. Suspendisse sodales massa quis turpis ultrices ultricies. Cras euismod eros at vehicula sagittis. Suspendisse condimentum tortor nec enim pellentesque feugiat. Nulla tempor urna vitae sapien iaculis, auctor condimentum enim auctor”
+											“Chuyến đi khá ổn, xe chạy đúng lịch trình, tài xế thân thiện. Tuy nhiên, nếu có thêm hướng dẫn chi tiết hơn về điểm đón thì sẽ hoàn hảo hơn!”
 										</p>
 										<div class="row">
 											<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
 												<div class="review_image" data-aos="fade-up" data-aos-delay="300">
-													<img src="assets/images/testimonial/img_04.jpg" alt="image_not_found">
-												</div>
-											</div>
-											<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-												<div class="review_image" data-aos="fade-up" data-aos-delay="400">
-													<img src="assets/images/testimonial/img_05.jpg" alt="image_not_found">
-												</div>
-											</div>
-											<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-												<div class="review_image" data-aos="fade-up" data-aos-delay="500">
-													<img src="assets/images/testimonial/img_06.jpg" alt="image_not_found">
-												</div>
-											</div>
-										</div>
-									</div>
-
-									<div class="testimonial_item clearfix">
-										<div class="admin_info_wrap clearfix" data-aos="fade-up" data-aos-delay="100">
-											<div class="admin_image">
-												<img src="assets/images/meta/img_01.png" alt="image_not_found">
-											</div>
-											<div class="admin_content">
-												<h4 class="admin_name">Elisabeth Summers</h4>
-												<ul class="rating_star ul_li clearfix">
-													<li class="active"><i class="fas fa-star"></i></li>
-													<li class="active"><i class="fas fa-star"></i></li>
-													<li class="active"><i class="fas fa-star"></i></li>
-													<li class="active"><i class="fas fa-star"></i></li>
-													<li><i class="fas fa-star"></i></li>
-												</ul>
-											</div>
-										</div>
-										<p class="mb-0" data-aos="fade-up" data-aos-delay="200">
-											“Ut id lobortis eros, sed finibus dui. Cras eget purus lacus. Suspendisse sodales massa quis turpis ultrices ultricies. Cras euismod eros at vehicula sagittis. Suspendisse condimentum tortor nec enim pellentesque feugiat. Nulla tempor urna vitae sapien iaculis, auctor condimentum enim auctor”
-										</p>
-										<div class="row">
-											<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-												<div class="review_image" data-aos="fade-up" data-aos-delay="300">
-													<img src="assets/images/testimonial/img_07.jpg" alt="image_not_found">
-												</div>
-											</div>
-											<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-												<div class="review_image" data-aos="fade-up" data-aos-delay="400">
-													<img src="assets/images/testimonial/img_08.jpg" alt="image_not_found">
-												</div>
-											</div>
-											<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-												<div class="review_image" data-aos="fade-up" data-aos-delay="500">
-													<img src="assets/images/testimonial/img_09.jpg" alt="image_not_found">
+													<img src="assets/images/testimonial/img_07_4.jpg" alt="image_not_found">
 												</div>
 											</div>
 										</div>

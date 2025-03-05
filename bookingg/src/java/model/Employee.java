@@ -20,10 +20,6 @@ public class Employee {
     private boolean gender;
     private ArrayList<Roles> roles = new ArrayList<>();
     
-    public Employee(int id, String name){
-        this.id = id;
-        this.name = name;
-    }
     
     public Employee() {
     }
