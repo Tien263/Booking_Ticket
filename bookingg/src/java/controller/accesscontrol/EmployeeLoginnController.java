@@ -14,7 +14,6 @@ import jakarta.servlet.http.HttpSession;
 import java.io.PrintWriter;
 import java.util.List;
 import java.util.Scanner;
-import model.Employee;
 import model.User;
 
 public class EmployeeLoginnController extends HttpServlet {
@@ -48,14 +47,8 @@ public class EmployeeLoginnController extends HttpServlet {
         User user = ed.getUserByUsernameAndPassword(username, password);
 
         if (user != null) {
-            Employee employee = ed.getEmployeeById(user.geteId()); // Lấy Employee từ User ID
-            if (employee == null) {
-                request.setAttribute("loginerror", "Không tìm thấy thông tin nhân viên!");
-                request.getRequestDispatcher("employee_login.jsp").forward(request, response);
-                return;
-            }
-            session.setAttribute("user", employee); // Lưu Employee thay vì User
-            session.setAttribute("user_id", user.geteId()); // Đảm bảo được đặt đúng
+            session.setAttribute("user", user);
+            System.out.println("Login success: " + user.getUsername());
 
             // Lấy danh sách roles của user
             UserDBContext userDB = new UserDBContext();
@@ -70,7 +63,7 @@ public class EmployeeLoginnController extends HttpServlet {
 
             // Kiểm tra quyền và điều hướng
             if (roles.contains("Marketing")) {
-                response.sendRedirect("createblog.jsp");
+                response.sendRedirect("car.html");
             } else if (roles.contains("History")) {
                 response.sendRedirect("history_dashboard.jsp");
             } else if (roles.contains("Sale")) {
