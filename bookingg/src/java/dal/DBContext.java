@@ -13,7 +13,7 @@ public abstract class DBContext<T> {
 
     public DBContext() {
         try {
-            String user = "sa";
+            String user = "sa1";
             String pass = "123";
             String url = "jdbc:sqlserver://localhost:1433;databaseName=PROJECTV01;trustServerCertificate=true;";
 
