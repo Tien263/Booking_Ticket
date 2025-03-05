@@ -64,6 +64,7 @@
                 background-color: #f2f2f2;
             }
         </style>
+        <script>window.location="home.jsp"</script>
     </head>
     <body>
         <h1>Tìm kiếm chuyến xe</h1>
