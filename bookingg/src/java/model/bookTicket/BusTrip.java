@@ -20,31 +20,7 @@ public class BusTrip {
     private double brDistance;
     private int v_id;
     private int bt1_id;
-    private String date;
 
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-    
-     
-    public BusTrip(int brId, String bt1DepartureTime, String bt1ArrivalTime, float tPrice, String brFrom, String brTo, String brDescription, double brDistance, int v_id, int bt1_id, String date) {
-        this.brId = brId;
-        this.bt1DepartureTime = bt1DepartureTime;
-        this.bt1ArrivalTime = bt1ArrivalTime;
-        this.tPrice = tPrice;
-        this.brFrom = brFrom;
-        this.brTo = brTo;
-        this.brDescription = brDescription;
-        this.brDistance = brDistance;
-        this.v_id = v_id;
-        this.bt1_id = bt1_id;
-        this.date = date;
-    }
-   
     public BusTrip(int brId, String bt1DepartureTime, String bt1ArrivalTime, float tPrice, String brFrom, String brTo, String brDescription, double brDistance, int v_id, int bt1_id) {
         this.brId = brId;
         this.bt1DepartureTime = bt1DepartureTime;
@@ -126,7 +102,6 @@ public class BusTrip {
         return v_id;
     }
 
-    
     public void setV_id(int v_id) {
         this.v_id = v_id;
     }
@@ -138,7 +113,6 @@ public class BusTrip {
     public void setBt1_id(int bt1_id) {
         this.bt1_id = bt1_id;
     }
-    
-    
+
     
 }

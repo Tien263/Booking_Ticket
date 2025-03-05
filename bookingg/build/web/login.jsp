@@ -417,7 +417,7 @@
                                         Savings of up to 15% with our car rental solutions, global coverage and a dedicated customer team
                                     </p>
                                     <span class="new_account mb_15">Log In or <a href="#!">Create an Account?</a></span>
-                                    <form action="booking" method="post">
+                                    <form action="cuslogin" method="post">
                                         <div class="form_item">
                                             <input type="text" name="email" placeholder="Your email" required>
                                         </div>
@@ -425,7 +425,7 @@
                                             <input type="password" name="password" placeholder="Password" required>
                                         </div>
                                         <button type="submit" class="custom_btn bg_default_red text-uppercase">Login <img src="assets/images/icons/icon_01.png" alt="icon_not_found"></button>
-                                        <span class="reset_pass mb_15"><a href="#!">Reset Your Password by e-mail?</a></span>
+                                        <input type="button" class="reset_pass mb_15" name="forgot" value="Reset Your Password by e-mail?" onclick="location.href = 'forgotpassword';">
                                         <div class="checkbox_input mb-0">
                                             <label for="input_save"><input id="input_save" type="checkbox"> Save my name, email, and website in this browser for the next time I comment</label>
                                         </div>

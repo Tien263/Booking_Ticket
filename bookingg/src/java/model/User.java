@@ -75,9 +75,4 @@ public class User {
         this.eId = eId;
     }
 
-    
-    
-    
-    
-    
 }

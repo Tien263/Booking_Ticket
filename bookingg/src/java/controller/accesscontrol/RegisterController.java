@@ -57,6 +57,21 @@ public class RegisterController extends HttpServlet {
         System.out.println(String.valueOf(gender));
         CustomerDao cd = new CustomerDao();
         Customer c = new Customer(email, fullname, phone, address, gender, username, password);
+
+        // Regex kiểm tra mật khẩu
+        String passwordPattern = "^(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,16}$";
+        if (!password.matches(passwordPattern)) {
+            request.setAttribute("error", "Mật khẩu phải có ít nhất 8 ký tự, tối đa 16 ký tự, có ít nhất 1 chữ hoa, 1 chữ số và 1 ký tự đặc biệt.");
+            request.setAttribute("fullname", fullname);
+            request.setAttribute("email", email);
+            request.setAttribute("username", username);
+            request.setAttribute("phone", phone);
+            request.setAttribute("address", address);
+            request.setAttribute("gender", gender);
+            request.getRequestDispatcher("login.jsp").forward(request, response);
+            return;
+        }
+
         if (cd.checkEmailExist(email)) {
             request.setAttribute("error", "Email exists. Choose another email!");
             request.setAttribute("fullname", fullname);

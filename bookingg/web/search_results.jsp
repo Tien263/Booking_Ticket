@@ -26,7 +26,7 @@
     List<BusTrip> trips = (List<BusTrip>) request.getAttribute("trips");
     String error = (String) request.getAttribute("error");
     String message = (String) request.getAttribute("message");
-    String c_id = (String) request.getAttribute("c_id");
+    
  // Xử lý ngày mặc định
     if (time == null) {
         java.util.Date today = new java.util.Date();
@@ -48,183 +48,91 @@
 <html>
     <head>
         <title>Kết quả tìm kiếm chuyến xe</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
-
-        <title>Our Cars - Rotors - Car Rental HTML5 Template</title>
-        <link rel="shortcut icon" href="assets/images/logo/favourite_icon.png">
-
-        <!-- fraimwork - css include -->
-        <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
-
-        <!-- icon - css include -->
-        <link rel="stylesheet" type="text/css" href="assets/css/fontawesome.css">
-
-        <!-- animation - css include -->
-        <link rel="stylesheet" type="text/css" href="assets/css/aos.css">
-        <link rel="stylesheet" type="text/css" href="assets/css/animate.css">
-
-        <!-- carousel - css include -->
-        <link rel="stylesheet" type="text/css" href="assets/css/slick.css">
-        <link rel="stylesheet" type="text/css" href="assets/css/slick-theme.css">
-
-        <!-- popup - css include -->
-        <link rel="stylesheet" type="text/css" href="assets/css/magnific-popup.css">
-
-        <!-- select options - css include -->
-        <link rel="stylesheet" type="text/css" href="assets/css/nice-select.css">
-
-        <!-- pricing range - css include -->
-        <link rel="stylesheet" type="text/css" href="assets/css/jquery-ui.css">
-        <!-- custom - css include -->
-        <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-
+        <style>
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+            table, th, td {
+                border: 1px solid black;
+            }
+            th, td {
+                padding: 10px;
+                text-align: center;
+            }
+            th {
+                background-color: #f2f2f2;
+            }
+        </style>
     </head>
     <body>
-        <section class="breadcrumb_section text-center clearfix">
-            <div class="page_title_area has_overlay d-flex align-items-center clearfix" data-bg-image="assets/images/breadcrumb/bg_01_1.jpeg">
-                <div class="overlay"></div>
-                <div class="container" data-aos="fade-up" data-aos-delay="100">
-                    <h1 class="page_title text-white mb-0">Tìm Chuyến</h1>
-                </div>
-            </div>
+        <h1>Tìm kiếm chuyến xe</h1>
 
-            <div class="breadcrumb_nav clearfix" data-bg-color="#F2F2F2">
-                <div class="container">
-                    <ul class="ul_li clearfix">
-                        <li><a href="index_1.html">Trang chủ</a></li>
-                        <li>Tìm Chuyến</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
+        <% if (error != null) { %>
+        <p style="color: red;"><%= error %></p>
+        <% } %>
 
+        <% if (message != null) { %>
+        <p><%= message %></p>
+        <% } %>
 
-        <!-- Phân cách -->
+        <form method="GET" action="booking">
+            Điểm đi: 
+            <select name="from" required>
+                <% for (String province : provinces) { %>
+                <option value="<%= province %>" <%= province.equals(from) ? "selected" : "" %>><%= province %></option>
+                <% } %>
+            </select>
 
-        <div class="register_card mb_60" data-bg-color="##F2F2F2" data-aos="fade-up" data-aos-delay="100" style="max-width: 900px; margin: auto; margin-top: 30px;">
-            <form method="GET" action="booking">
-                <div class="row">
-                    <!-- Lựa chọn Một chiều / Khứ hồi -->
-                    <div class="col-lg-12 text-left mb-3">
-                        <label>
-                            <input type="radio" name="trip_type" value="oneway" checked> Một chiều
-                        </label><!-- Chức năng chính -->
+            Điểm đến: 
+            <select name="to" required>
+                <% for (String province : provinces) { %>
+                <option value="<%= province %>" <%= province.equals(to) ? "selected" : "" %>><%= province %></option>
+                <% } %>
+            </select>
 
-                        <label class="ml-4">
-                            <input type="radio" name="trip_type" value="roundtrip"> Khứ hồi
-                        </label><!-- Chức năng chính -->
+            <br><br>
+            Ngày đi: <input type="date" name="travelDate" value="<%= travelDate %>" min="<%= java.time.LocalDate.now() %>" required><br><br>
+            Giờ: <input type="number" name="hour" min="0" max="23" value="<%= hour %>" required>
+            Phút: <input type="number" name="minute" min="0" max="59" value="<%= minute %>" required>
 
-                        <a href="#" >Ticket booking guide</a>
-                    </div>
+            <br><br>
+            <button type="submit">Tìm kiếm</button>
+        </form>
 
-
-
-
-                    <!--Chức năng chính 1: Điểm đi -->
-                    <div class="col-lg-6 col-md-6 col-sm-12"  data-aos-delay="500">
-                        <div class="form_item">
-                            <h4 class="input_title">Điểm đi</h4>
-                            <select name="from" class="form-control" required>
-                                <% for (String province : provinces) { 
-                                    boolean isSelected = (from != null && province.equals(from));
-                                %>
-                                <option value="<%= province %>" <%= isSelected ? "selected" : "" %>>
-                                    <%= province %>
-                                </option>
-                                <% } %>
-                            </select>
-                        </div>
-                    </div>
-
-
-
-
-                    <!--Chức năng chính 1: Điểm đến -->
-                    <div class="col-lg-6 col-md-6 col-sm-12"  data-aos-delay="500">
-                        <div class="form_item">
-                            <h4 class="input_title">Điểm đến</h4>
-                            <select name="to" class="form-control" required>
-                                <% for (String province : provinces) { 
-                                    boolean isSelected = (to != null && province.equals(to));
-                                %>
-                                <option value="<%= province %>" <%= isSelected ? "selected" : "" %>>
-                                    <%= province %>
-                                </option>
-                                <% } %>
-                            </select>
-                        </div>
-                    </div>
-
-
-                    <!-- Chức năng chính 1: Thời gian -->
-                    <div class="col-lg-6 col-md-6 col-sm-12" data-aos="fade-up" data-aos-delay="500">
-                        <div class="form_item">
-                            <h4 class="input_title">Thời gian</h4>
-                            <div class="d-flex align-items-center gap-2">
-                                <label for="hour">Giờ:</label>
-                                <input type="number" id="hour" name="hour" class="form-control w-25" min="0" max="23" value="<%= (hour != null) ? hour : 0 %>" required>
-                                <label for="minute">Phút:</label>
-                                <input type="number" id="minute" name="minute" class="form-control w-25" min="0" max="59" value="<%= (minute != null) ? minute : 0 %>" required>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Chức năng chính 2: Ngày đi -->
-                    <div class="col-lg-6 col-md-6 col-sm-12" data-aos="fade-up" data-aos-delay="500">
-                        <div class="form_item">
-                            <h4 class="input_title">Ngày đi</h4>
-                            <input type="date" name="travelDate" class="form-control" value="<%= (travelDate != null) ? travelDate : "" %>" required>
-                        </div>
-                    </div>
-
-
-
-
-                    <!-- Nút tìm chuyến xe -->
-                    <div class="text-center mt-4">
-                        <button type="submit" class="custom_btn bg_default_red btn_width text-uppercase" data-aos="fade-up" data-aos-delay="700">
-                            Tìm chuyến
-                        </button>
-                    </div>
-            </form>
-            <!-- Hiển thị thông báo lỗi và tin nhắn -->
-            <div class="col-lg-12" data-aos="fade-up" data-aos-delay="500">
-                <div class="form_item">
-                    <% if (error != null) { %>
-                    <p class="float-left text-danger"style="font-size: 18px; font-weight: bold;"><%= error %></p>
-                    <% } %>
-
-                    <% if (message != null) { %>
-                    <p class="float-left text-danger"style="font-size: 18px; font-weight: bold;"><%= message %></p>
-                    <% } %>
-                </div>
-            </div>
-        </div>
-
-        <div>
-            <% if (trips != null && !trips.isEmpty()) { %>
-            <h2>Kết quả tìm kiếm</h2>
-            <div class="row">
+        <% if (trips != null && !trips.isEmpty()) { %>
+        <h2>Kết quả tìm kiếm</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID Tuyến</th>
+                    <th>Điểm đi</th>
+                    <th>Điểm đến</th>
+                    <th>Giờ khởi hành</th>
+                    <th>Giờ đến</th>
+                    <th>Giá vé</th>
+                    <th>Mô tả</th>
+                    <th>Khoảng cách (km)</th>
+                    <th>Xe</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody>
                 <% for (BusTrip trip : trips) { %>
-                <div class="col-lg-6 col-md-6">
-                    <div class="feature_vehicle_item" data-aos="fade-up" data-aos-delay="100">
-                        <h3 class="item_title mb-0">
-                            <a href="#!">
-                                Tuyến <%= trip.getBrFrom() %> - <%= trip.getBrTo() %>
-                            </a>
-                        </h3>
-                        <ul class="info_list ul_li_center clearfix">
-                            <li>Thời Gian: <%= trip.getBt1DepartureTime() %> - <%= trip.getBt1ArrivalTime() %></li>
-                            <li>Năm-Tháng-Ngày: <%= trip.getDate() %></li>
-                            <li>Giá vé: <%= trip.gettPrice() %> VNĐ</li>
-                            <li>Mô tả: <%= trip.getBrDescription() %></li>
-                            <li>Khoảng cách: <%= trip.getBrDistance() %> km</li>
-                            <li>Biển hiệu: <%= trip.getV_id() %></li>
-                        </ul>
-                        <form action="CheckCId" method="GET">
-                            <input type="hidden" name="c_id" value="<%= c_id %>">
+                <tr>
+                    <td><%= trip.getBrId() %></td>
+                    <td><%= trip.getBrFrom() %></td>
+                    <td><%= trip.getBrTo() %></td>
+                    <td><%= trip.getBt1DepartureTime() %></td>
+                    <td><%= trip.getBt1ArrivalTime() %></td>
+                    <td><%= trip.gettPrice() %></td>
+                    <td><%= trip.getBrDescription() %></td>
+                    <td><%= trip.getBrDistance() %></td>
+                    <td><%= trip.getV_id() %></td>
+
+                    <td>
+                        <form action="selectSeat.jsp" method="GET">
+                            <input type="hidden" name="customerId" value="1">
                             <input type="hidden" name="brId" value="<%= trip.getBrId() %>">
                             <input type="hidden" name="from" value="<%= trip.getBrFrom() %>">
                             <input type="hidden" name="to" value="<%= trip.getBrTo() %>">
@@ -235,71 +143,13 @@
                             <input type="hidden" name="distance" value="<%= trip.getBrDistance() %>">
                             <input type="hidden" name="vId" value="<%= trip.getV_id() %>">
                             <input type="hidden" name="bt1Id" value="<%= trip.getBt1_id() %>">
-                            <input type="hidden" name="bt1_date" value="<%= trip.getDate() %>">
-                            <button type="submit" class="btn btn-primary">Chọn chuyến</button>
+                            <button type="submit">Chọn chuyến</button>
                         </form>
-                    </div>
-                </div>
+                    </td>
+                </tr>
                 <% } %>
-            </div>
-            <% } %>
-
-        </div> 
-
-
-
-
-
-
-
-
-
-
-
-
-        <!-- fraimwork - jquery include -->
-        <script src="assets/js/jquery-3.5.1.min.js"></script>
-        <script src="assets/js/popper.min.js"></script>
-        <script src="assets/js/bootstrap.min.js"></script>
-
-        <!-- animation - jquery include -->
-        <script src="assets/js/aos.js"></script>
-        <script src="assets/js/parallaxie.js"></script>
-
-        <!-- carousel - jquery include -->
-        <script src="assets/js/slick.min.js"></script>
-
-        <!-- popup - jquery include -->
-        <script src="assets/js/magnific-popup.min.js"></script>
-
-        <!-- select ontions - jquery include -->
-        <script src="assets/js/nice-select.min.js"></script>
-
-        <!-- isotope - jquery include -->
-        <script src="assets/js/isotope.pkgd.js"></script>
-        <script src="assets/js/imagesloaded.pkgd.min.js"></script>
-        <script src="assets/js/masonry.pkgd.min.js"></script>
-
-        <!-- google map - jquery include -->
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDk2HrmqE4sWSei0XdKGbOMOHN3Mm2Bf-M&ver=2.1.6"></script>
-        <script src="assets/js/gmaps.min.js"></script>
-
-        <!-- pricing range - jquery include -->
-        <script src="assets/js/jquery-ui.js"></script>
-
-        <!-- counter - jquery include -->
-        <script src="assets/js/waypoint.js"></script>
-        <script src="assets/js/counterup.min.js"></script>
-
-        <!-- contact form - jquery include -->
-        <script src="assets/js/validate.js"></script>
-
-        <!-- mobile menu - jquery include -->
-        <script src="assets/js/mCustomScrollbar.js"></script>
-
-        <!-- custom - jquery include -->
-        <script src="assets/js/custom.js"></script>
-
-
+            </tbody>
+        </table>
+        <% } %>
     </body>
 </html>

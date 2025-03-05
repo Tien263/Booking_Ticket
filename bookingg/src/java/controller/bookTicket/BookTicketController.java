@@ -4,16 +4,15 @@
  */
 package controller.bookTicket;
 
-import dal.bookTicket.ConfirmTicketDAO;
-import dal.bookTicket.SeatsDAO;
-import dal.bookTicket.BookTicketDAO;
+import dal.bookTicket.ConfirmationDAO;
+import dal.bookTicket.DAOSeats;
+import dal.bookTicket.DAOTickets;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -40,36 +39,35 @@ public class BookTicketController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         try {
-            BookTicketDAO ticketsDAO = new BookTicketDAO();
-            SeatsDAO seatsDAO = new SeatsDAO();
-            HttpSession session = request.getSession();
+            DAOTickets ticketsDAO = new DAOTickets();
+            DAOSeats seatsDAO = new DAOSeats();
+            int tripId = Integer.parseInt(request.getParameter("tripId"));
+            int userId = Integer.parseInt(request.getParameter("customerId"));
 
-            // Lấy giá trị từ session và kiểm tra trước khi chuyển đổi
-            String tripIdStr = (String) session.getAttribute("tripId");
-            String userIdStr = (String) session.getAttribute("customerId");
-
-            Integer tripId = (tripIdStr != null && !tripIdStr.isEmpty()) ? Integer.parseInt(tripIdStr) : null;
-            Integer userId = (userIdStr != null && !userIdStr.isEmpty()) ? Integer.parseInt(userIdStr) : null;
-
-            // Lấy danh sách ghế đã chọn từ session
-            List<Integer> seatIds = (List<Integer>) session.getAttribute("seatIds");
-
-            // Kiểm tra nếu dữ liệu bị thiếu
-            if (tripId == null || userId == null || seatIds == null || seatIds.isEmpty()) {
-                handleError(request, response, "No seat selected or missing data!");
+            // Lấy danh sách ghế đã chọn
+            String[] seatIdsArray = request.getParameterValues("seatId");
+            if (seatIdsArray == null || seatIdsArray.length == 0) {
+                request.setAttribute("message", "No seat selected!");
+                request.getRequestDispatcher("error.jsp").forward(request, response);
                 return;
             }
 
+            List<Integer> seatIds = Arrays.stream(seatIdsArray)
+                    .map(Integer::parseInt)
+                    .toList();
+
             int bookingId = ticketsDAO.createAndBookTickets(userId, seatIds, tripId);
             if (bookingId == -1) {
-                handleError(request, response, "Đặt vé thất bại!");
+                request.setAttribute("message", "Đặt vé thất bại!");
+                request.getRequestDispatcher("error.jsp").forward(request, response);
                 return;
             }
             // Cập nhật trạng thái ghế đã đặt
             for (Integer seatId : seatIds) {
                 boolean success = seatsDAO.isSeatBooked(seatId, "booked");
                 if (!success) {
-                    handleError(request, response, "Lỗi khi cập nhật trạng thái ghế! Hãy liên hệ hỗ trợ.");
+                    request.setAttribute("message", "Lỗi khi cập nhật trạng thái ghế! Hãy liên hệ hỗ trợ.");
+                    request.getRequestDispatcher("error.jsp").forward(request, response);
                     return;
                 }
             }
@@ -77,35 +75,25 @@ public class BookTicketController extends HttpServlet {
             // Lấy danh sách vé đã đặt
             List<BookTicket> bookedTickets = ticketsDAO.getTicketByBookingId(bookingId);
             if (bookedTickets == null || bookedTickets.isEmpty()) {
-                handleError(request, response, "Lỗi khi lấy thông tin vé! Vui lòng thử lại.");
+                request.setAttribute("message", "Lỗi khi lấy thông tin vé! Vui lòng thử lại.");
+                request.getRequestDispatcher("error.jsp").forward(request, response);
                 return;
             }
-            session.removeAttribute("vehicleId");
-            session.removeAttribute("tripId");
-            session.removeAttribute("routeId");
-            session.removeAttribute("price");
-            session.removeAttribute("from");
-            session.removeAttribute("to");
-            session.removeAttribute("departureTime");
-            session.removeAttribute("arrivalTime");
+            
             request.setAttribute("bookedTickets", bookedTickets);
             request.getRequestDispatcher("BookTicket.jsp").forward(request, response);
 
         } catch (NumberFormatException e) {
-            handleError(request, response, "Lỗi định dạng số: " + e.getMessage());
+            request.setAttribute("message", e.getMessage());
+            request.getRequestDispatcher("error.jsp").forward(request, response);
         } catch (Exception e) {
             e.printStackTrace();
-            handleError(request, response, "Đã xảy ra lỗi trong quá trình xử lý: " + e.getMessage());
+            request.setAttribute("message", "Đã xảy ra lỗi trong quá trình xử lý: " + e.getMessage());
+            request.getRequestDispatcher("error.jsp").forward(request, response);
         }
     }
 
-    private void handleError(HttpServletRequest request, HttpServletResponse response, String errorMessage)
-            throws ServletException, IOException {
-        request.setAttribute("message", errorMessage);
-        request.getRequestDispatcher("error.jsp").forward(request, response);
-    }
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-
     /**
      * Handles the HTTP <code>GET</code> method.
      *

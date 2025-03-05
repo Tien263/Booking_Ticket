@@ -4,13 +4,14 @@
  */
 package controller.bookTicket;
 
-import dal.bookTicket.SeatsDAO;
+import dal.bookTicket.DAOSeats;
+import dal.bookTicket.DAOTickets;
+import dal.bookTicket.DAOTrips;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.List;
@@ -44,15 +45,19 @@ public class SelectSeatController extends HttpServlet {
             }
 
             if ("selectSeat".equals(service)) {
-                SeatsDAO seatsDAO = new SeatsDAO();
+                DAOSeats seatsDAO = new DAOSeats();
+                DAOTrips tripsDAO = new DAOTrips();
                 try {
-                    HttpSession session = request.getSession(false); // Không tạo mới session nếu chưa có
-                    if (session == null || session.getAttribute("price") == null) {
-                        response.sendRedirect("errorPage.jsp"); // Chuyển hướng nếu session không tồn tại
-                        return;
-                    }
-                    String priceStr = (String) session.getAttribute("price");
-                    Double price = Double.parseDouble(priceStr);
+                    int routeId = Integer.parseInt(request.getParameter("routeId"));
+                    int tripId = Integer.parseInt(request.getParameter("tripId"));
+                    int vehicleId = Integer.parseInt(request.getParameter("vehicleId"));
+                    double price = Double.parseDouble(request.getParameter("price"));
+                    String routeFrom = request.getParameter("from");
+                    String routeTo = request.getParameter("to");
+                    String departureTime = request.getParameter("departureTime");
+                    String arrivalTime = request.getParameter("arrivalTime");
+                    int userId = Integer.parseInt(request.getParameter("customerId"));
+
                     String[] seatIdsArray = request.getParameterValues("seatIds");
                     if (seatIdsArray == null || seatIdsArray.length == 0) {
                         request.setAttribute("message", "No seat selected!");
@@ -67,10 +72,18 @@ public class SelectSeatController extends HttpServlet {
                             .map(seatsDAO::getSeatName)
                             .filter(Objects::nonNull)
                             .toList();
-                    // Lưu vào session
-                    session.setAttribute("seatIds", seatIds);
+
                     double totalPrice = price * seatIds.size();
+                    request.setAttribute("customerId", userId);
+                    request.setAttribute("routeId", routeId);
+                    request.setAttribute("tripId", tripId);
+                    request.setAttribute("vehicleId", vehicleId);
+                    request.setAttribute("routeFrom", routeFrom);
+                    request.setAttribute("routeTo", routeTo);
+                    request.setAttribute("departureTime", departureTime);
+                    request.setAttribute("arrivalTime", arrivalTime);
                     request.setAttribute("seatNames", seatNames);
+                    request.setAttribute("seatIds", seatIds);
                     request.setAttribute("totalPrice", totalPrice);
                     request.getRequestDispatcher("payment.jsp").forward(request, response);
                 } catch (NumberFormatException e) {
