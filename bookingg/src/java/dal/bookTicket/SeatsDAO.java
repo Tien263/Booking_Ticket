@@ -19,7 +19,7 @@ import java.util.logging.Logger;
  *
  * @author Admin
  */
-public class DAOSeats extends DBContext {
+public class SeatsDAO extends DBContext {
 
     //Lấy danh sách ghế
     public List<Seats> getSeats(int tripId, int vehicleId) {
@@ -39,7 +39,7 @@ public class DAOSeats extends DBContext {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(DAOSeats.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SeatsDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return seats;
     }
@@ -53,7 +53,7 @@ public class DAOSeats extends DBContext {
             state.executeUpdate(sql);
 
         } catch (SQLException ex) {
-            Logger.getLogger(DAOSeats.class
+            Logger.getLogger(SeatsDAO.class
                     .getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -69,7 +69,7 @@ public class DAOSeats extends DBContext {
 
             }
         } catch (SQLException ex) {
-            Logger.getLogger(DAOSeats.class
+            Logger.getLogger(SeatsDAO.class
                     .getName()).log(Level.SEVERE, null, ex);
         }
         return false;
@@ -84,7 +84,7 @@ public class DAOSeats extends DBContext {
                 return rs.getString("s_name");
             }
         } catch (SQLException ex) {
-            Logger.getLogger(DAOSeats.class
+            Logger.getLogger(SeatsDAO.class
                     .getName()).log(Level.SEVERE, null, ex);
         }
         return "Không xác định";

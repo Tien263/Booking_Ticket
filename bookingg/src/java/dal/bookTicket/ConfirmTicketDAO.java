@@ -15,7 +15,7 @@ import java.util.List;
  *
  * @author Admin
  */
-public class ConfirmationDAO extends DBContext {
+public class ConfirmTicketDAO extends DBContext {
     // Xác nhận thanh toán
 
     public boolean confirmPayment(int bookingId) {

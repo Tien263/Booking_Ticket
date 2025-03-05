@@ -23,7 +23,7 @@ public class bookingDAO extends DBContext<Object> {
 
     public List<BusTrip> getBusTrips(String from, String to, String time,String date) {
         List<BusTrip> list = new ArrayList<>();
-       String sql = "SELECT br.br_id, bt.bt1_departureTime, bt.bt1_arrivalTime, br.br_price, " + 
+       String sql = "SELECT distinct br.br_id, bt.bt1_departureTime, bt.bt1_arrivalTime, br.br_price, " + 
              "br.br_from, br.br_to, br.br_description, br.br_distance, " + 
              "v.v_id, bt.bt1_id, bt.bt1_date " + 
              "FROM [BusRoutes] br " + 
@@ -69,7 +69,6 @@ public class bookingDAO extends DBContext<Object> {
     public String getEid(String email) {
     String c_id = null; // Giá trị mặc định nếu không tìm thấy
     String sql = "SELECT c_id FROM Customer WHERE c_email = ?";
-
     try {
         PreparedStatement st = connection.prepareStatement(sql);
         st.setString(1, email);
@@ -81,9 +80,8 @@ public class bookingDAO extends DBContext<Object> {
     } catch (SQLException e) {
         e.printStackTrace();
     }
-
     return c_id;
-}
+ }
 
     
 
