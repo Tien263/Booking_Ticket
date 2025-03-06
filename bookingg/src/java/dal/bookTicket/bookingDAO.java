@@ -29,8 +29,9 @@ public class bookingDAO extends DBContext<Object> {
              "FROM [BusRoutes] br " + 
              "JOIN [BusTrips] bt ON bt.br_id = br.br_id " + 
              "JOIN [Seats] s ON bt.bt1_id = s.bt1_id " + 
-             "JOIN [Vehicles] v ON v.v_id = s.v_id " + 
-             "WHERE br.br_from = ? AND br.br_to = ? " + 
+             "JOIN [Vehicles] v ON v.v_id = s.v_id " +
+             "WHERE br.br_from = ? AND br.br_to = ? " +
+             "AND s.s_status = 'available' " + 
              "AND bt.bt1_departureTime >= ? " + 
              "AND bt.bt1_date = ?;";
            try {
@@ -62,7 +63,7 @@ public class bookingDAO extends DBContext<Object> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
+    
         return list;
     }
     

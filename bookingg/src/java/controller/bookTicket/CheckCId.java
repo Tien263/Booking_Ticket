@@ -60,7 +60,6 @@ public class CheckCId extends HttpServlet {
             request.setAttribute("vId", vId);
             request.setAttribute("bt1Id", bt1Id);
             request.getRequestDispatcher("SeatURL").forward(request, response);
-
             return;
         }
 

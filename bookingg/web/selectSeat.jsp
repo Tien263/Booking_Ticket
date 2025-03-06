@@ -93,7 +93,7 @@
                                             <input type="checkbox" name="seatIds" value="<%= seat.getS_id() %>" hidden>
                                             <%= seat.getS_name() %>
                                         </button>
-                                        <% } } %>
+                                        <%}}%>
                                     </div>
                                 </div>
 

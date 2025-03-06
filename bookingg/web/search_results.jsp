@@ -203,6 +203,7 @@
             </div>
         </div>
 
+                
         <div>
             <% if (trips != null && !trips.isEmpty()) { %>
             <h2>Kết quả tìm kiếm</h2>

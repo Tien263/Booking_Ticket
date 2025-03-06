@@ -247,6 +247,39 @@ public class CustomerDao extends DBContext<Customer> {
 
         return null;
     }
+    public void resetPassword(String email, String newPassword) {
+        String sql_update = "UPDATE [dbo].[Customer]\n"
+                + "   SET [c_password] = ?\n"
+                + " WHERE c_email = ?";
+
+        PreparedStatement stm_update = null;
+
+        try {
+
+            stm_update = connection.prepareStatement(sql_update);
+            stm_update.setString(1, newPassword);
+            stm_update.setString(2, email);
+            stm_update.executeUpdate();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerDao.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+    }
+    public boolean isEmailExists(String email) {
+        String sql = "SELECT COUNT(*) AS count FROM Customer WHERE c_email = ?";
+        try (PreparedStatement stm = connection.prepareStatement(sql)) {
+            stm.setString(1, email);
+            try (ResultSet rs = stm.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("count") > 0;
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
 
     public String getPasswordByEmail(String email) {
         String query = "SELECT c_password FROM Customer WHERE c_email = ?";
@@ -261,8 +294,7 @@ public class CustomerDao extends DBContext<Customer> {
         }
         return null; // Nếu không tìm thấy email trong cơ sở dữ liệu
     }
-    
-    public Customer getByID(int c_id) {
+public Customer getByID(int c_id) {
         String query = "SELECT * FROM Customer WHERE c_id = ?";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setInt(1, c_id);
@@ -283,5 +315,4 @@ public class CustomerDao extends DBContext<Customer> {
         }
         return null;
     }
-
 }

@@ -1,13 +1,7 @@
-<%-- 
-    Document   : login
-    Created on : Jan 24, 2025, 11:25:56 PM
-    Author     : ADMIN
---%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-
 <html lang="en">
 
     <head>
@@ -94,8 +88,8 @@
                     <div class="row align-items-center">
                         <div class="col-lg-7">
                             <ul class="header_contact_info ul_li clearfix">
-                                <li><i class="fal fa-envelope"></i> xuantien50d@@email.com</li>
-                                <li><i class="fal fa-phone"></i> 0398996177</li>
+                                <li><i class="fal fa-envelope"></i> rotorsmail@email.com</li>
+                                <li><i class="fal fa-phone"></i> +1-202-555-0156</li>
                             </ul>
                         </div>
 
@@ -118,8 +112,9 @@
                         <div class="col-lg-3 col-md-6 col-sm-6 col-6">
                             <div class="brand_logo">
                                 <a href="index.html">
-                                    <img src="assets/images/logo/logo_01_1x.png" srcset="assets/images/logo/logo_01_2x.png 2x" alt="logo_not_found">
-                                    <img src="assets/images/logo/logo_02_1x.png" srcset="assets/images/logo/logo_02_2x.png 2x" alt="logo_not_found">
+                                    <img src="assets/images/logo/logo_01_1.png" srcset="assets/images/logo/logo_01_1.png 2x" alt="logo_not_found" width="35%">
+
+                                    <img src="assets/images/logo/logo_01_1.png" srcset="assets/images/logo/logo_01_1.png 2x" alt="logo_not_found" width="35%">
                                 </a>
                             </div>
                         </div>
@@ -228,7 +223,7 @@
                                             <li class="has_child">
                                                 <a href="#!">Blogs</a>
                                                 <ul class="submenu">
-                                                    <li><a href="cuslistblog">Blog</a></li>
+                                                    <li><a href="blog.html">Blog</a></li>
                                                     <li><a href="blog_details.html">Blog Details</a></li>
                                                 </ul>
                                             </li>
@@ -290,7 +285,7 @@
                     <div class="about_content mb_60">
                         <div class="brand_logo mb_15">
                             <a href="index.html">
-                                <img src="assets/images/logo/logo_01_1x.png" srcset="assets/images/logo/logo_01_2x.png 2x" alt="logo_not_found">
+                                <img src="assets/images/logo/logo_01_1.png" srcset="assets/images/logo/logo_01_1.png 2x" alt="logo_not_found">
                             </a>
                         </div>
                         <p class="mb-0">
@@ -378,8 +373,8 @@
             <!-- breadcrumb_section - start
             ================================================== -->
             <section class="breadcrumb_section text-center clearfix">
-                <div class="page_title_area has_overlay d-flex align-items-center clearfix" data-bg-image="assets/images/breadcrumb/bg_09.jpg">
-                    <div class="overlay"></div>
+                <div class="page_title_area has_overlay d-flex align-items-center clearfix" data-bg-image="assets/images/breadcrumb/bg_08_1.png">
+                    <!-- <div class="overlay"></div> -->
                     <div class="container" data-aos="fade-up" data-aos-delay="100">
                         <h1 class="page_title text-white mb-0">Login</h1>
                     </div>
@@ -406,7 +401,7 @@
                         <div class="row align-items-center">
                             <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
                                 <div class="reg_image" data-aos="fade-up" data-aos-delay="300">
-                                    <img src="assets/images/about/img_03.jpg" alt="image_not_found">
+                                    <img src="assets/images/about/img_03_1.jpg" alt="image_not_found">
                                 </div>
                             </div>
 
@@ -425,7 +420,7 @@
                                             <input type="password" name="password" placeholder="Password" required>
                                         </div>
                                         <button type="submit" class="custom_btn bg_default_red text-uppercase">Login <img src="assets/images/icons/icon_01.png" alt="icon_not_found"></button>
-                                        <span class="reset_pass mb_15"><a href="#!">Reset Your Password by e-mail?</a></span>
+                                        <input type="button" class="reset_pass mb_15" name="forgot" value="Reset Your Password by e-mail?" onclick="location.href = 'forgotpassword';">
                                         <div class="checkbox_input mb-0">
                                             <label for="input_save"><input id="input_save" type="checkbox"> Save my name, email, and website in this browser for the next time I comment</label>
                                         </div>
@@ -516,11 +511,11 @@
                             <div class="footer_about" data-aos="fade-up" data-aos-delay="100">
                                 <div class="brand_logo mb_30">
                                     <a href="index.html">
-                                        <img src="assets/images/logo/logo_02_1x.png" srcset="assets/images/logo/logo_02_2x.png 2x" alt="logo_not_found">
+                                        <img src="assets/images/logo/logo_01_1.png" srcset="assets/images/logo/logo_01_1.png 2x" alt="logo_not_found">
                                     </a>
                                 </div>
                                 <p class="mb_15">
-                                    Cras sit amet mi non orci pretium consectetur. Donec iaculis ante ac sollicitudin luctus. Phasellus ut lacus lacus. Phasellus sagittis ex id tortor tincidunt luctus. Donec consectetur consequat bibendum
+                                    BusGo is committed to providing a reliable and high-quality bus ticket booking service with transparent information, clear pricing, and dedicated customer support, ensuring your journey is always convenient and safe
                                 </p>
                                 <div class="footer_useful_links mb_30">
                                     <ul class="ul_li_block clearfix">

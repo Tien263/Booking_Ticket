@@ -1,5 +1,4 @@
 package dal;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -13,21 +12,26 @@ public abstract class DBContext<T> {
 
     public DBContext() {
         try {
-            String user = "sa";
-            String pass = "yeuminhduc";
-            String url = "jdbc:sqlserver://localhost:1433;databaseName=ducute;trustServerCertificate=true;";
+            String user = "sa" ;
+            String pass = "yeuminhduc" ;
+            String url = "jdbc:sqlserver://localhost:1433;databaseName = ducute;trustServerCertificate=true;";
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             connection = DriverManager.getConnection(url, user, pass);
-        } catch (ClassNotFoundException ex) {
+        }catch (ClassNotFoundException ex){
             Logger.getLogger(DBContext.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
+        }catch (SQLException ex){
             Logger.getLogger(DBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
     public abstract void insert(T entity);
+
     public abstract void update(T entity);
+
     public abstract void delete(T entity);
+
     public abstract ArrayList<T> list();
+
     public abstract T get(int id);
+    
+   
 }

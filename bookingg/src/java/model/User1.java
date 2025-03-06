@@ -9,9 +9,9 @@ package model;
  * @author Nguyen Minh Duc
  */
 public class User1 {
-  
     private String c_fullname;
     private String c_email;
+    private String c_CCCD;
     private String oh_date;
     private String p1_date;
     private String pm_name;
@@ -21,12 +21,10 @@ public class User1 {
     private String t_status;
     private double oh_totalAmount;
 
-    
-    // Constructor
-
-    public User1(String c_fullname, String c_email, String oh_date, String p1_date, String pm_name, int t_id, String bt1_departureTime, String bt1_arrivalTime, String t_status, double oh_totalAmount) {
+    public User1(String c_fullname, String c_email, String c_CCCD, String oh_date, String p1_date, String pm_name, int t_id, String bt1_departureTime, String bt1_arrivalTime, String t_status, double oh_totalAmount) {
         this.c_fullname = c_fullname;
         this.c_email = c_email;
+        this.c_CCCD = c_CCCD;
         this.oh_date = oh_date;
         this.p1_date = p1_date;
         this.pm_name = pm_name;
@@ -53,6 +51,14 @@ public class User1 {
         this.c_email = c_email;
     }
 
+    public String getC_CCCD() {
+        return c_CCCD;
+    }
+
+    public void setC_CCCD(String c_CCCD) {
+        this.c_CCCD = c_CCCD;
+    }
+
     public String getOh_date() {
         return oh_date;
     }
@@ -77,27 +83,24 @@ public class User1 {
         this.pm_name = pm_name;
     }
 
-    
     public int getT_id() {
         return t_id;
     }
 
-    
     public void setT_id(int t_id) {
         this.t_id = t_id;
     }
-
+    
     
     public String getBt1_departureTime() {
         return bt1_departureTime;
     }
-
+    
     
     public void setBt1_departureTime(String bt1_departureTime) {
         this.bt1_departureTime = bt1_departureTime;
     }
 
-    
     public String getBt1_arrivalTime() {
         return bt1_arrivalTime;
     }
@@ -106,12 +109,10 @@ public class User1 {
         this.bt1_arrivalTime = bt1_arrivalTime;
     }
 
-    
     public String getT_status() {
         return t_status;
     }
 
-    
     public void setT_status(String t_status) {
         this.t_status = t_status;
     }
@@ -120,9 +121,12 @@ public class User1 {
         return oh_totalAmount;
     }
 
-    
     public void setOh_totalAmount(double oh_totalAmount) {
         this.oh_totalAmount = oh_totalAmount;
     }
+
+    
+    
+
     
 }

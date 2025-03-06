@@ -29,12 +29,37 @@ public class ViewUserOrderHistory extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+
      protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        // Lấy danh sách User1 từ database thông qua UserDAO
+        
+        // Lấy dữ liệu từ form
+        String hourStr = request.getParameter("hour");
+        String minuteStr = request.getParameter("minute");
+        String travelDate = request.getParameter("travelDate");
+        String departure = request.getParameter("departure");
+        String arrival = request.getParameter("arrival");
+
+        // Gọi UserDBContext để lấy danh sách đơn hàng dựa trên các điều kiện
         UserDBContext userDAO = new UserDBContext();
+        
+        if(hourStr == "null"){
+        String time = null;
+        int hour = Integer.parseInt(hourStr);
+          int minute = Integer.parseInt(minuteStr);
+            if (hour < 0 || hour > 23 || minute < 0 || minute > 59) {
+                request.setAttribute("error", "Giờ phải từ 0-23 và phút phải từ 0-59!");
+            } else {
+                time = String.format("%02d:%02d", hour, minute);
+            }
+            
+           
+           List<User1> userList = userDAO.getUserTransactionsFiltered(time, travelDate, departure, arrival);
+           }
+        // Lấy danh sách User1 từ database thông qua UserDAO
+       
         List<User1> userList = userDAO.getUserTransactions();
 
         // Gửi danh sách này qua request để hiển thị trên JSP

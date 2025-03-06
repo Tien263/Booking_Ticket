@@ -14,6 +14,7 @@
             <tr>
                 <th>Họ Tên</th>
                 <th>Email</th>
+                <th>CCCD</th>
                 <th>Ngày Đặt</th>
                 <th>Ngày Thanh Toán</th>
                 <th>Phương Thức Thanh Toán</th>
@@ -28,6 +29,7 @@
 
                     <td>${user.c_fullname}</td>
                     <td>${user.c_email}</td>
+                    <td>${user.c_CCCD}</td>
                     <td>${user.oh_date}</td>
                     <td>${user.p1_date}</td>
                     <td>${user.pm_name}</td>
