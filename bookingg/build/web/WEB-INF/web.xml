@@ -40,6 +40,10 @@
         <servlet-name>TermsController</servlet-name>
         <servlet-class>controller.accesscontrol.TermsController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>VehicleController</servlet-name>
+        <servlet-class>controller.accesscontrol.VehicleController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Register</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -115,5 +119,9 @@
     <servlet-mapping>
         <servlet-name>TermsController</servlet-name>
         <url-pattern>/terms</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>VehicleController</servlet-name>
+        <url-pattern>/vehicle</url-pattern>
     </servlet-mapping>
 </web-app>
