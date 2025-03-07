@@ -387,7 +387,7 @@
 									BusGo is committed to providing a reliable bus ticket booking experience with transparent information and dedicated customer support. Book your ticket now for a convenient and safe journey!
 								</p>
 								<div data-aos="fade-up" data-aos-delay="500">
-									<a class="custom_btn bg_default_red btn_width text-uppercase" href="car.html">Book Ticket <img src="assets/images/icons/icon_01.png" alt="icon_not_found"></a>
+									<a class="custom_btn bg_default_red btn_width text-uppercase" href="booking">Book Ticket <img src="assets/images/icons/icon_01.png" alt="icon_not_found"></a>
 								</div>
 							</div>
 						</div>

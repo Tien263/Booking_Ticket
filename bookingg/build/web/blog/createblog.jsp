@@ -6,7 +6,7 @@
 <%
     Employee user = (Employee) session.getAttribute("user");
     if (user == null) {
-        response.sendRedirect("login.jsp");
+        response.sendRedirect("employee_login.jsp");
         return;
     }
 %>
@@ -54,6 +54,6 @@
     </script>
 
     <br>
-    <a href="listblog">Xem danh sách bài viết</a>
+    <a href="/blog/listblog">Xem danh sách bài viết</a>
 </body>
 </html>
