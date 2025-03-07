@@ -1,13 +1,10 @@
 <%-- 
     Document   : home
-    Created on : Mar 5, 2025, 10:18:45 AM
-    Author     : ADMIN
+    Created on : Mar 4, 2025, 12:33:18 PM
+    Author     : Nguyen Minh Duc
 --%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
 
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 	<head>
 
 		<meta charset="utf-8">
@@ -42,7 +39,7 @@
 
 		<!-- custom - css include -->
 		<link rel="stylesheet" type="text/css" href="assets/css/style.css">
-                
+
 	</head>
 
 
@@ -116,8 +113,8 @@
 						<div class="col-lg-3 col-md-6 col-sm-6 col-6">
 							<div class="brand_logo">
 								<a href="index_1.html">
-									<img src="assets/images/logo/logo_01_1.png" srcset="assets/images/logo/logo_01_1.png 2x" alt="logo_not_found" width="50%">
-									<img src="assets/images/logo/logo_01_1.png" srcset="assets/images/logo/logo_01_1.png 2x" alt="logo_not_found" width="50%">
+									<img src="assets/images/logo/logo_01_1.png" srcset="assets/images/logo/logo_01_2x.png 2x" alt="logo_not_found" width="50%">
+									<img src="assets/images/logo/logo_01_1.png" srcset="assets/images/logo/logo_02_2x.png 2x" alt="logo_not_found" width="50%">
 								</a>
 							</div>
 						</div>
@@ -239,7 +236,7 @@
 											</li>
 											<li><a href="cart.html">Shopping Cart</a></li>
 											<li><a href="faq.html">F.A.Q.</a></li>
-											<li><a href="login.jsp">Login</a></li>
+											<li><a href="login.html">Login</a></li>
                                                                                         <li><a href="login.html">LoginEmployees</a></li>
 										</ul>
 									</li>
@@ -271,9 +268,7 @@
 				</div>
 			</div>
 		</header>
-		<!-- header_section - end
-		================================================== -->
-
+		
 
 		<!-- main body - start
 		================================================== -->
@@ -289,7 +284,7 @@
 					<div class="about_content mb_60">
 						<div class="brand_logo mb_15">
 							<a href="index.html">
-								<img src="assets/images/logo/logo_01_1.png" srcset="assets/images/logo/logo_01_2x.png 2x" alt="logo_not_found">
+								<img src="assets/images/logo/logo_01_1x.png" srcset="assets/images/logo/logo_01_2x.png 2x" alt="logo_not_found">
 							</a>
 						</div>
 						<p class="mb-0">
@@ -445,175 +440,10 @@
 							</div>
 						</div>
 					</div>
-
-					<div class="advance_search_form">
-						<div class="section_title text-center mb_30">
-							<h2 class="title_text mb-0 text-white" data-aos="fade-up" data-aos-delay="100">
-								<span>Search for a Bus Trip</span>
-							</h2>
-						</div>
-						<form action="#">
-							<div class="row">
-								<!-- Lựa chọn Một chiều / Khứ hồi -->
-								<div class="col-lg-12 text-left mb-3">
-									<label>
-										<input type="radio" name="trip_type" value="oneway" checked> One-way
-									</label>
-									<label class="ml-4">
-										<input type="radio" name="trip_type" value="roundtrip"> Round-trip
-									</label>
-									<a href="#" class="float-right text-danger">Ticket booking guide</a>
-								</div>
+                    
 					
-								<!-- Điểm đi -->
-								<div class="col-lg-4 col-md-6 col-sm-12">
-									<div class="form_item" data-aos="fade-up" data-aos-delay="100">
-										<h4 class="input_title text-white">Origin</h4>
-										<input type="text" name="departure" placeholder="Origin" required>
-									</div>
-								</div>
+
 					
-								<!-- Điểm đến -->
-								<div class="col-lg-4 col-md-6 col-sm-12">
-									<div class="form_item" data-aos="fade-up" data-aos-delay="100">
-										<h4 class="input_title text-white">Destinaion</h4>
-										<input type="text" name="destination" placeholder="Destinaion" required>
-									</div>
-								</div>
-					
-								<!-- Ngày đi -->
-								<div class="col-lg-2 col-md-6 col-sm-12">
-									<div class="form_item" data-aos="fade-up" data-aos-delay="100">
-										<h4 class="input_title text-white">Depature date</h4>
-										<input type="date" name="departure_date" required>
-									</div>
-								</div>
-					
-								<!-- Số vé -->
-								<div class="col-lg-2 col-md-6 col-sm-12">
-									<div class="form_item" data-aos="fade-up" data-aos-delay="100">
-										<h4 class="input_title text-white">Ticket</h4>
-										<select name="ticket_quantity">
-											<option value="1">1</option>
-											<option value="2">2</option>
-											<option value="3">3</option>
-											<option value="4">4</option>
-											<option value="5">5</option>
-										</select>
-									</div>
-								</div>
-							</div>
-					
-							<!-- Danh sách tìm kiếm gần đây -->
-							<div class="recent_searches mt-3">
-								<h5 class="input_title text-white">Recent search</h5>
-								<button type="button" class="btn btn-light btn-sm">An Giang - Bạc Liêu <small>13/02/2025</small></button>
-								<button type="button" class="btn btn-light btn-sm">TP. Hồ Chí Minh - An Nhơn <small>11/01/2025</small></button>
-								<button type="button" class="btn btn-light btn-sm">Đà Lạt - Hà Nội <small>12/01/2025</small></button>
-								<button type="button" class="btn btn-light btn-sm">Hà Nội - Đà Lạt <small>12/01/2025</small></button>
-							</div>
-					
-							<!-- Nút tìm chuyến xe -->
-							<div class="text-center mt-4">
-								<button type="submit" class="custom_btn bg_default_red btn_width text-uppercase">
-									Search Trip
-								</button>
-							</div>
-						</form>
-					</div>
-
-					<!-- <div class="advance_search_form">
-						<div class="section_title text-center mb_30">
-							<h2 class="title_text mb-0 text-white" data-aos="fade-up" data-aos-delay="100">
-								<span>Find the right car for every occasion</span>
-							</h2>
-						</div>
-						<form action="#">
-							<div class="row">
-								<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
-									<div class="form_item" data-aos="fade-up" data-aos-delay="100">
-										<h4 class="input_title text-white">Pick Up Location</h4>
-										<div class="position-relative">
-											<input id="location_two" type="text" name="location" placeholder="City, State or Airport Code">
-											<label for="location_two" class="input_icon"><i class="fas fa-map-marker-alt"></i></label>
-										</div>
-									</div>
-								</div>
-
-								<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
-									<div class="form_item" data-aos="fade-up" data-aos-delay="300">
-										<h4 class="input_title text-white">Pick A Date</h4>
-										<input type="date" name="date">
-									</div>
-								</div>
-
-								<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
-									<div class="form_item" data-aos="fade-up" data-aos-delay="500">
-										<h4 class="input_title text-white">Time</h4>
-										<input type="time" name="time">
-									</div>
-								</div>
-
-								<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
-									<div class="form_item" data-aos="fade-up" data-aos-delay="100">
-										<h4 class="input_title text-white">Return car to a different location</h4>
-										<div class="position-relative">
-											<input id="location_three" type="text" name="location" placeholder="City, State or Airport Code">
-											<label for="location_three" class="input_icon"><i class="fas fa-map-marker-alt"></i></label>
-										</div>
-									</div>
-								</div>
-
-								<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
-									<div class="form_item" data-aos="fade-up" data-aos-delay="300">
-										<h4 class="input_title text-white">Return Date</h4>
-										<input type="date" name="date">
-									</div>
-								</div>
-
-								<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
-									<div class="form_item" data-aos="fade-up" data-aos-delay="500">
-										<h4 class="input_title text-white">Time</h4>
-										<input type="time" name="time">
-									</div>
-								</div>
-
-								<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
-									<div class="checkbox_input" data-aos="fade-up" data-aos-delay="100">
-										<label for="help_checkbox"><input type="checkbox" id="help_checkbox"> Help me find rental location. View Map</label>
-									</div>
-								</div>
-
-								<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
-									<div class="checkbox_input" data-aos="fade-up" data-aos-delay="300">
-										<label for="service_checkbox"><input type="checkbox" id="service_checkbox"> Chauffeur-driven service</label>
-									</div>
-								</div>
-							</div>
-							<hr class="mt-0">
-
-							<div class="row">
-								<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
-									<div class="form_item mb-0" data-aos="fade-up" data-aos-delay="100">
-										<h4 class="input_icon">Select Car Type</h4>
-										<select>
-											<option data-display="All Cars Type">Nothing</option>
-											<option value="1">Some option</option>
-											<option value="2">Another option</option>
-											<option value="3" disabled>A disabled option</option>
-											<option value="4">Potato</option>
-										</select>
-									</div>
-								</div>
-
-								<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-									<div data-aos="fade-up" data-aos-delay="300">
-										<button type="submit" class="custom_btn bg_default_red btn_width text-uppercase">Book A Car <img src="assets/images/icons/icon_01.png" alt="icon_not_found"></button>
-									</div>
-								</div>
-							</div>
-						</form>
-					</div> -->
 				</div>
 			</section>
 			<!-- banner_section - end
@@ -1009,173 +839,7 @@ Your safety and satisfaction are our highest priorities.
 			================================================== -->
 
 
-			<!-- feature_section - start
-			================================================== -->
-			<!-- <section class="feature_section sec_ptb_150 clearfix" data-bg-color="#F2F2F2">
-				<div class="container">
-
-					<div class="row justify-content-center">
-						<div class="col-lg-6 col-md-8 col-sm-12 col-xs-12">
-							<div class="section_title mb_60 text-center" data-aos="fade-up" data-aos-delay="100">
-								<h2 class="title_text mb_15">
-									<span>Featured Vehicles</span>
-								</h2>
-								<p class="mb-0">
-									Mauris cursus quis lorem sed cursus. Aenean aliquam pellentesque magna, ut dictum ex pellentesque
-								</p>
-							</div>
-						</div>
-					</div>
-
-					<ul class="button-group filters-button-group ul_li_center mb_30 clearfix" data-aos="fade-up" data-aos-delay="300">
-						<li><button class="button active" data-filter="*">All</button></li>
-						<li><button class="button" data-filter=".sedan">Sedan</button></li>
-						<li><button class="button" data-filter=".sports">Sports</button></li>
-						<li><button class="button" data-filter=".luxury">Luxury</button></li>
-					</ul>
-
-					<div class="feature_vehicle_filter element-grid clearfix">
-						<div class="element-item sedan " data-category="sedan">
-							<div class="feature_vehicle_item" data-aos="fade-up" data-aos-delay="100">
-								<h3 class="item_title mb-0">
-									<a href="#!">
-										2015 Chevrolet Corvette Stingray Z51
-									</a>
-								</h3>
-								<div class="item_image position-relative">
-									<a class="image_wrap" href="#!">
-										<img src="assets/images/feature/img_01.jpg" alt="image_not_found">
-									</a>
-									<span class="item_price bg_default_blue">$230/Day</span>
-								</div>
-								<ul class="info_list ul_li_center clearfix">
-									<li>Sports</li>
-									<li>Auto</li>
-									<li>2 Passengers</li>
-									<li>Gasoline</li>
-								</ul>
-							</div>
-						</div>
-
-						<div class="element-item sports " data-category="sports">
-							<div class="feature_vehicle_item" data-aos="fade-up" data-aos-delay="300">
-								<h3 class="item_title mb-0">
-									<a href="#!">
-										2019 Chevrolet Corvette Stingray Red
-									</a>
-								</h3>
-								<div class="item_image position-relative">
-									<a class="image_wrap" href="#!">
-										<img src="assets/images/feature/img_02.jpg" alt="image_not_found">
-									</a>
-									<span class="item_price bg_default_blue">$230/Day</span>
-								</div>
-								<ul class="info_list ul_li_center clearfix">
-									<li>Sports</li>
-									<li>Auto</li>
-									<li>2 Passengers</li>
-									<li>Hybrid</li>
-								</ul>
-							</div>
-						</div>
-
-						<div class="element-item luxury " data-category="luxury">
-							<div class="feature_vehicle_item" data-aos="fade-up" data-aos-delay="500">
-								<h3 class="item_title mb-0">
-									<a href="#!">
-										2015 Chevrolet Corvette Stingray Z51
-									</a>
-								</h3>
-								<div class="item_image position-relative">
-									<a class="image_wrap" href="#!">
-										<img src="assets/images/feature/img_03.jpg" alt="image_not_found">
-									</a>
-									<span class="item_price bg_default_blue">$120/Day</span>
-								</div>
-								<ul class="info_list ul_li_center clearfix">
-									<li>Sports</li>
-									<li>Auto</li>
-									<li>2 Passengers</li>
-									<li>Gasoline</li>
-								</ul>
-							</div>
-						</div>
-
-						<div class="element-item sedan " data-category="sedan">
-							<div class="feature_vehicle_item" data-aos="fade-up" data-aos-delay="100">
-								<h3 class="item_title mb-0">
-									<a href="#!">
-										2020 Audi New Generation P00234
-									</a>
-								</h3>
-								<div class="item_image position-relative">
-									<a class="image_wrap" href="#!">
-										<img src="assets/images/feature/img_04.jpg" alt="image_not_found">
-									</a>
-									<span class="item_price bg_default_blue">$230/Day</span>
-								</div>
-								<ul class="info_list ul_li_center clearfix">
-									<li>Sports</li>
-									<li>Auto</li>
-									<li>2 Passengers</li>
-									<li>Electro</li>
-								</ul>
-							</div>
-						</div>
-
-						<div class="element-item sports " data-category="sports">
-							<div class="feature_vehicle_item" data-aos="fade-up" data-aos-delay="300">
-								<h3 class="item_title mb-0">
-									<a href="#!">
-										2015 Chevrolet Corvette Stingray Z51
-									</a>
-								</h3>
-								<div class="item_image position-relative">
-									<a class="image_wrap" href="#!">
-										<img src="assets/images/feature/img_05.jpg" alt="image_not_found">
-									</a>
-									<span class="item_price bg_default_blue">$160/Day</span>
-								</div>
-								<ul class="info_list ul_li_center clearfix">
-									<li>Sports</li>
-									<li>Auto</li>
-									<li>2 Passengers</li>
-									<li>Gasoline</li>
-								</ul>
-							</div>
-						</div>
-
-						<div class="element-item luxury " data-category="luxury">
-							<div class="feature_vehicle_item" data-aos="fade-up" data-aos-delay="500">
-								<h3 class="item_title mb-0">
-									<a href="#!">
-										2015 Chevrolet Corvette Stingray Z51
-									</a>
-								</h3>
-								<div class="item_image position-relative">
-									<a class="image_wrap" href="#!">
-										<img src="assets/images/feature/img_06.jpg" alt="image_not_found">
-									</a>
-									<span class="item_price bg_default_blue">$230/Day</span>
-								</div>
-								<ul class="info_list ul_li_center clearfix">
-									<li>Sports</li>
-									<li>Auto</li>
-									<li>2 Passengers</li>
-									<li>Hybrid</li>
-								</ul>
-							</div>
-						</div>	
-					</div>
-
-					<div class="abtn_wrap text-center clearfix" data-aos="fade-up" data-aos-delay="100">
-						<a class="custom_btn bg_default_red btn_width text-uppercase" href="#!">Book A Car <img src="assets/images/icons/icon_01.png" alt="icon_not_found"></a>
-					</div>
-
-				</div>
-			</section>-->
-			<!-- feature_section - end
-			================================================== --> 
+		
 
 
 			<!-- offer_section - start
@@ -1549,7 +1213,7 @@ Your safety and satisfaction are our highest priorities.
 							<div class="footer_about" data-aos="fade-up" data-aos-delay="100">
 								<div class="brand_logo mb_30">
 									<a href="index.html">
-										<img src="assets/images/logo/logo_01_1.png" srcset="assets/images/logo/logo_02_2x.png 2x" alt="logo_not_found">
+										<img src="assets/images/logo/logo_02_1x.png" srcset="assets/images/logo/logo_02_2x.png 2x" alt="logo_not_found">
 									</a>
 								</div>
 								<p class="mb_15">

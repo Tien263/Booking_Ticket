@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.User;
+import model.User1;
 
 /**
  *
@@ -95,6 +96,86 @@ public class UserDBContext extends DBContext<User> {
             e.printStackTrace();
         }
         return false;
+    }
+    
+public List<User1> getUserTransactions() {
+        List<User1> userList = new ArrayList<>();
+        String sql = "SELECT c.c_fullname, c.c_email,c.c_CCCD,o.oh_date, p.p1_date, pm.pm_name, "
+                + "t.t_id, bt.bt1_departureTime, bt.bt1_arrivalTime, t.t_status, o.oh_totalAmount "
+                + "FROM dbo.Customer c "
+                + "JOIN dbo.Bill b ON c.c_id = b.c_id "
+                + "JOIN dbo.Payment p ON b.p1_id = p.p1_id "
+                + "JOIN dbo.PaymentMethods pm ON p.pm_id = pm.pm_id "
+                + "JOIN dbo.OrderHistory o ON p.p1_id = o.p1_id "
+                + "JOIN dbo.Tickets t ON o.oh_status = t.t_status "
+                + "JOIN dbo.BusTrips bt ON t.bt1_id = bt.bt1_id ";
+               
+        try (
+                PreparedStatement ps = connection.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                User1 user = new User1(
+                        rs.getString("c_fullname"),
+                        rs.getString("c_email"),
+                        rs.getString("c_CCCD"),
+                        rs.getString("oh_date"),
+                        rs.getString("p1_date"),
+                        rs.getString("pm_name"),
+                        rs.getInt("t_id"),
+                        rs.getString("bt1_departureTime"),
+                        rs.getString("bt1_arrivalTime"),
+                        rs.getString("t_status"),
+                        rs.getDouble("oh_totalAmount")
+                );
+                userList.add(user);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return userList;
+    }
+
+public List<User1> getUserTransactionsFiltered( String time, String travelDate, String departure, String arrival){
+        List<User1> userList = new ArrayList<>();
+        String sql = "SELECT c.c_fullname, c.c_email,c.c_CCCD,o.oh_date, p.p1_date, pm.pm_name, "
+                + "t.t_id, bt.bt1_departureTime, bt.bt1_arrivalTime, t.t_status, o.oh_totalAmount "
+                + "FROM dbo.Customer c "
+                + "JOIN dbo.Bill b ON c.c_id = b.c_id "
+                + "JOIN dbo.Payment p ON b.p1_id = p.p1_id "
+                + "JOIN dbo.PaymentMethods pm ON p.pm_id = pm.pm_id "
+                + "JOIN dbo.OrderHistory o ON p.p1_id = o.p1_id "
+                + "JOIN dbo.Tickets t ON o.oh_status = t.t_status "
+                + "JOIN dbo.BusTrips bt ON t.bt1_id = bt.bt1_id "
+                + "WHERE bt.bt1_departureTime >= ? " 
+                + "AND bt.bt1_date = ? " 
+                + "AND br.br_from = ? AND br.br_to = ?;";
+        try {
+                PreparedStatement ps = connection.prepareStatement(sql);
+                ps.setString(1, time);
+                ps.setString(2,travelDate );
+                ps.setString(3,  departure);
+                 ps.setString(4, arrival);
+                
+               ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                User1 user = new User1(
+                        rs.getString("c_fullname"),
+                        rs.getString("c_email"),
+                        rs.getString("c_CCCD"),
+                        rs.getString("oh_date"),
+                        rs.getString("p1_date"),
+                        rs.getString("pm_name"),
+                        rs.getInt("t_id"),
+                        rs.getString("bt1_departureTime"),
+                        rs.getString("bt1_arrivalTime"),
+                        rs.getString("t_status"),
+                        rs.getDouble("oh_totalAmount")
+                );
+                userList.add(user);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return userList;
     }
 
     @Override

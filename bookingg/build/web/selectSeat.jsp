@@ -66,7 +66,7 @@
                 <a href="booking" style="text-decoration: underline; display: block; text-align: left;"> &laquo; Quay lại</a>
 
             </div>                        
-            <form id="seatSelectionForm" action="SelectSeatURL" method="get" onsubmit="return validateSeats()">
+            <form action="SelectSeatURL" method="get">
                 <input type="hidden" name="service" value="selectSeat">
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-4">
                     <div class="lg:col-span-2 space-y-4">
@@ -251,16 +251,7 @@
                 } else {
                     console.error("Không tìm thấy phần tử seatCount hoặc totalPrice");
                 }
-
             }
-            
-            function validateSeats() {
-                    if (seatCount === 0) {
-                        alert("Vui lòng chọn ít nhất một ghế trước khi đặt vé.");
-                        return false; // Ngăn gửi form
-                    }
-                    return true; // Cho phép gửi form nếu có ghế được chọn
-                }
         </script>
         <script src="assets/js/jquery-3.6.0.min.js"></script>
         <script src="assets/js/bootstrap.bundle.min.js"></script>

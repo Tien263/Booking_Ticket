@@ -67,20 +67,23 @@ public class bookingDAO extends DBContext<Object> {
         return list;
     }
     
-    public String getEid(String email) {
+    public String getEid(String email,String pass,int flag) {
     String c_id = null; // Giá trị mặc định nếu không tìm thấy
-    String sql = "SELECT c_id FROM Customer WHERE c_email = ?";
+    String sql = "SELECT c_id FROM Customer WHERE c_email = ? " + " AND c_password = ?";
     try {
         PreparedStatement st = connection.prepareStatement(sql);
         st.setString(1, email);
+        st.setString(2, pass);
         ResultSet rs = st.executeQuery();
 
         if (rs.next()) {
             c_id = String.valueOf(rs.getInt("c_id"));
+            flag = 1;
         }
     } catch (SQLException e) {
         e.printStackTrace();
     }
+    
     return c_id;
  }
 
@@ -110,5 +113,4 @@ public class bookingDAO extends DBContext<Object> {
     public Object get(int id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
 }

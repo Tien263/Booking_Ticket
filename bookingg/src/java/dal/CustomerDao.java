@@ -17,28 +17,6 @@ import java.util.logging.Logger;
  */
 public class CustomerDao extends DBContext<Customer> {
 
-    public Customer getByID(int c_id) {
-        String query = "SELECT * FROM Customer WHERE c_id = ?";
-        try (PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.setInt(1, c_id);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                return new Customer(
-                        rs.getString("c_email"),
-                        rs.getString("c_fullname"),
-                        rs.getString("c_phone"),
-                        rs.getString("c_address"),
-                        rs.getBoolean("c_gender"),
-                        rs.getString("c_username"),
-                        rs.getString("c_password")
-                );
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-    
     public boolean isUsernameExists(String username, String email) {
         String query = "SELECT COUNT(*) FROM Customer WHERE c_username = ? AND c_email != ?";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
@@ -316,5 +294,25 @@ public class CustomerDao extends DBContext<Customer> {
         }
         return null; // Nếu không tìm thấy email trong cơ sở dữ liệu
     }
-
+public Customer getByID(int c_id) {
+        String query = "SELECT * FROM Customer WHERE c_id = ?";
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setInt(1, c_id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return new Customer(
+                        rs.getString("c_email"),
+                        rs.getString("c_fullname"),
+                        rs.getString("c_phone"),
+                        rs.getString("c_address"),
+                        rs.getBoolean("c_gender"),
+                        rs.getString("c_username"),
+                        rs.getString("c_password")
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
