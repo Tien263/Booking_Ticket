@@ -64,13 +64,14 @@
                         <p>2 sản phẩm</p>
                     </div>
                 </div>
+                
             </section>
 
             <section class="orders">
                 <h3>Đơn hàng hôm nay</h3>
-                <table>
-                    <thead>
-                        <tr>
+                  <table>
+                     <thead>
+                         <tr>
                             <th>ID đơn hàng</th>
                             <th>Khách hàng</th>
                             <th>Số điện thoại</th>
@@ -79,13 +80,13 @@
                             <th>Tổng tiền</th>
                             <th>Thanh toán</th>
                             <th>Chức năng</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+                         </tr>
+                     </thead>
+                   <tbody>
                         <tr>
                             <td colspan="8" style="text-align: center;">Không có đơn hàng nào</td>
                         </tr>
-                    </tbody>
+                   </tbody>
                 </table>
             </section>
         </main>
