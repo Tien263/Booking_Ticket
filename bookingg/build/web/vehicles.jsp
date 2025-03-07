@@ -82,7 +82,7 @@
             <td><%= v.getLicensePlate() %></td>
             <td><%= v.getStatus() %></td>
             <td>
-                <a href="editVehicle.jsp?id=<%= v.getId() %>">Edit</a> |
+                <a href="editVehicle.jsp?id=<%= v.getId() %>">Edit</a> 
 <!--                <a href="vehicle?action=delete&id=?" onclick="return confirm('Are you sure?');">Delete</a>-->
             </td>
         </tr>

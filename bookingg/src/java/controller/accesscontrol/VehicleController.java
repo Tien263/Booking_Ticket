@@ -12,6 +12,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import model.Vehicle;
 
@@ -56,6 +57,13 @@ public class VehicleController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        List<String> roles = (List<String>) session.getAttribute("roles");
+
+        if (roles == null) {
+            response.sendRedirect("employee_login.jsp");
+            return;
+        }
         List<Vehicle> vehicles = vehicleDAO.getAllVehicles();
         request.setAttribute("vehicles", vehicles);
         request.getRequestDispatcher("vehicles.jsp").forward(request, response);
