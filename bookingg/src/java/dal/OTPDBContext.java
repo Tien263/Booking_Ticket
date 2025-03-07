@@ -65,6 +65,7 @@ public class OTPDBContext extends DBContext<OTP> {
     }
 
 
+    // lay ma OTP moi nhat
     public String getOTP(String email) {
         String sql = "SELECT TOP 1 otp FROM [dbo].[OTP] "
                 + "WHERE c_email = ? "
@@ -84,7 +85,7 @@ public class OTPDBContext extends DBContext<OTP> {
         } 
         return null;
     }
-
+// kiem tra otp nhap vao co khop khong
     public boolean verifyOTP(String email, String otp) {
         String sql = "SELECT TOP 1 * FROM OTP WHERE otp = ? "
                 + "AND c_email = ? AND used = 0 AND expires_at > GETDATE() ORDER BY  expires_at DESC ";
@@ -103,6 +104,7 @@ public class OTPDBContext extends DBContext<OTP> {
         return false;
     }
 
+    // danh dau la otp da su dụng
     @Override
     public void update(OTP entity) {
         String sql_update = "UPDATE OTP SET used = 1 WHERE c_email = ? AND otp = ?";

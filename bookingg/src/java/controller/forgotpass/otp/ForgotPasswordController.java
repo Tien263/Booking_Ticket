@@ -51,12 +51,15 @@ public class ForgotPasswordController extends HttpServlet {
         session.setAttribute("allowOTP", true);  // Thêm biến này để kiểm soát /verification
         session.setAttribute("action", "forgotpassword");
 
-        // Gửi OTP
+        // Tạo một mã OTP và lưu vào database.
+        // Lấy OTP vừa tạo từ database để gửi đi.
         OTPDBContext otpDB = new OTPDBContext();
         OTP otpSend = new OTP();
         otpSend.setEmail(email);
         otpDB.insert(otpSend);
         String OTPCode = otpDB.getOTP(email);
+        //gửi mã OTP qua email người dùng.
+
         Email userEmail = new Email();
         if (OTPCode != null && !OTPCode.isEmpty()) {
             boolean result = userEmail.sendEmail(email, "Vui lòng xác thực địa chỉ email của bạn cho Busgo", "Đây là mã OTP của bạn: " + OTPCode);
@@ -66,7 +69,7 @@ public class ForgotPasswordController extends HttpServlet {
                 return;
             }
         }
-
+        //trang nhập OTP 
         response.sendRedirect("verification");
     }
 

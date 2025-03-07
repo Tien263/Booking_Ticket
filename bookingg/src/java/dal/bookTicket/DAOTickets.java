@@ -116,10 +116,11 @@ public class DAOTickets extends DBContext {
             ps.setInt(1, bookingId);
             try (ResultSet rs = ps.executeQuery()){ 
                 while(rs.next()) {
-                     BookTicket bookTicket = new BookTicket(
+                  BookTicket bookTicket = new BookTicket(
                             rs.getInt("t_id"),
                             rs.getString("c_fullname"),
                             rs.getString("c_phone"),
+                            rs.getDate("bt1_date"),
                             rs.getDate("bt_bookingDate"),
                             rs.getString("br_from") + "-" + rs.getString("br_to"),
                             rs.getString("bt1_departureTime") + "-" + rs.getString("bt1_arrivalTime"),

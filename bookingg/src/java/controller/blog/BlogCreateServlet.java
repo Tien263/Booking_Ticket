@@ -31,7 +31,7 @@ public class BlogCreateServlet extends HttpServlet {
         HttpSession session = request.getSession();
         Employee loggedUser = (Employee) session.getAttribute("user");
         if (loggedUser == null) {
-            response.sendRedirect("login.jsp");
+            response.sendRedirect("/bookingg/employee_login.jsp");
             return;
         }
         

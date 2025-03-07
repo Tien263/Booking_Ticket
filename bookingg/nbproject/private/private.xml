@@ -3,10 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/ADMIN/Downloads/Booking_Ticket-main%20(5)/Booking_Ticket-main/bookingg/web/WEB-INF/web.xml</file>
-            <file>file:/C:/Users/ADMIN/Downloads/Booking_Ticket-main%20(5)/Booking_Ticket-main/bookingg/web/createblog.jsp</file>
-            <file>file:/C:/Users/ADMIN/Downloads/Booking_Ticket-main%20(5)/Booking_Ticket-main/bookingg/src/java/dal/BlogDao.java</file>
-            <file>file:/C:/Users/ADMIN/Downloads/Booking_Ticket-main%20(5)/Booking_Ticket-main/bookingg/src/java/controller/blog/BlogCreateServlet.java</file>
+            <file>file:/D:/Booking_Ticket/bookingg/src/java/model/OTP.java</file>
+            <file>file:/D:/Booking_Ticket/bookingg/src/java/controller/forgotpass/otp/ResetPasswordCustomerController.java</file>
+            <file>file:/D:/Booking_Ticket/bookingg/src/java/controller/forgotpass/otp/ForgotPasswordController.java</file>
+            <file>file:/D:/Booking_Ticket/bookingg/src/java/controller/forgotpass/otp/OTPVerificationController.java</file>
+            <file>file:/D:/Booking_Ticket/bookingg/web/forgotpassword/new_password.jsp</file>
+            <file>file:/D:/Booking_Ticket/bookingg/src/java/dal/OTPDBContext.java</file>
+            <file>file:/D:/Booking_Ticket/bookingg/web/forgotpassword/otp_fo.jsp</file>
+            <file>file:/D:/Booking_Ticket/bookingg/web/forgotpassword/forgot_password.jsp</file>
         </group>
     </open-files>
 </project-private>

@@ -56,6 +56,14 @@
         <servlet-name>CusBlogDetailController</servlet-name>
         <servlet-class>controller.blog.customer.CusBlogDetailController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CheckCId</servlet-name>
+        <servlet-class>controller.bookTicket.CheckCId</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SeatController</servlet-name>
+        <servlet-class>controller.bookTicket.SeatController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Register</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -137,22 +145,6 @@
         <url-pattern>/booking</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>BlogDeleteController</servlet-name>
-        <url-pattern>/deleteblog</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>BlogUpdateController</servlet-name>
-        <url-pattern>/updateblog</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>BlogListController</servlet-name>
-        <url-pattern>/listblog</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>BlogCreateServlet</servlet-name>
-        <url-pattern>/createblog</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>OTPVerificationController</servlet-name>
         <url-pattern>/verification</url-pattern>
     </servlet-mapping>
@@ -171,5 +163,29 @@
     <servlet-mapping>
         <servlet-name>CusBlogDetailController</servlet-name>
         <url-pattern>/cusblogdetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BlogListController</servlet-name>
+        <url-pattern>/blog/listblog</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BlogCreateServlet</servlet-name>
+        <url-pattern>/blog/createblog</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BlogDeleteController</servlet-name>
+        <url-pattern>/blog/deleteblog</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BlogUpdateController</servlet-name>
+        <url-pattern>/blog/updateblog</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckCId</servlet-name>
+        <url-pattern>/CheckCId</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SeatController</servlet-name>
+        <url-pattern>/SeatURL</url-pattern>
     </servlet-mapping>
 </web-app>
