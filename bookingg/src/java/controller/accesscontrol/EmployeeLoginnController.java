@@ -71,8 +71,8 @@ public class EmployeeLoginnController extends HttpServlet {
             // Kiểm tra quyền và điều hướng
             if (roles.contains("Blog Manager")) {
                 response.sendRedirect("blog/createblog.jsp");
-            } else if (roles.contains("History")) {
-                response.sendRedirect("history_dashboard.jsp");
+            } else if (roles.contains("Promotion Manager")) {
+                response.sendRedirect("Promotion.jsp");
             } else if (roles.contains("Sale")) {
                 response.sendRedirect("sale_dashboard.jsp");
             } else {
