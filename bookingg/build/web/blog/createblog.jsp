@@ -54,6 +54,6 @@
     </script>
 
     <br>
-    <a href="listblog">Xem danh sách bài viết</a>
+    <a href="/blog/listblog">Xem danh sách bài viết</a>
 </body>
 </html>
