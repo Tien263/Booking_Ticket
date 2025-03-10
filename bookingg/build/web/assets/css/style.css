@@ -107,7 +107,7 @@ img {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  color: #000C21;
+  color: #002859;
   font-family: "Goldman", cursive;
 }
 
@@ -747,8 +747,10 @@ hr {
   position: absolute;
   display: inline-block;
   transform: translateY(-50%);
-  background-color: #EA001E;
+  background-color: #7da47f;
 }
+
+
 .section_title .title_text span:before {
   left: 0px;
 }
@@ -914,7 +916,7 @@ hr {
 }
 
 .bg_default_red {
-  background-color: #EA001E;
+  background-color: #7da47f;
 }
 
 .bg_default_blue {
@@ -974,7 +976,7 @@ button {
   display: flex;
   padding: 6px 0px;
   align-items: center;
-  background-color: rgba(22, 24, 41, 0.6);
+  background-color: #607e62;
   box-shadow: 0px 2px 8px 0px rgba(0, 6, 16, 0.9);
 }
 
@@ -990,7 +992,7 @@ button {
 }
 
 .secondary_header .header_bottom {
-  background-color: #000C21;
+  background-color: #99b697;
 }
 .secondary_header.stuck .header_bottom {
   background-color: #ffffff;
