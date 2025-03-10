@@ -38,8 +38,6 @@ public class ResetPasswordCustomerController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        //cập nhật mật khẩu mới người dùng gửi lên sau khi nhập thành công mã OTP
         HttpSession session = request.getSession();
         String email = (String) session.getAttribute("resetEmail");
 
