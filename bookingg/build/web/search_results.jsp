@@ -93,7 +93,7 @@
             <div class="breadcrumb_nav clearfix" data-bg-color="#F2F2F2">
                 <div class="container">
                     <ul class="ul_li clearfix">
-                        <li><a href="index_1.html">Trang chủ</a></li>
+                        <li><a href="home.jsp">Trang chủ</a></li>
                         <li>Tìm Chuyến</li>
                     </ul>
                 </div>
