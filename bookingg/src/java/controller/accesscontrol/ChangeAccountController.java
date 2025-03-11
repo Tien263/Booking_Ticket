@@ -46,11 +46,9 @@ public class ChangeAccountController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // sai me roi, no lay tu query param ma?, thay son day lam nhu nay ma hoic hem
         String fullname = request.getParameter("fullname");
         String email = request.getParameter("email");
         String username = request.getParameter("username");
-        String password = request.getParameter("password");
         String phone = request.getParameter("phone");
         String address = request.getParameter("address");
         Boolean gender = Boolean.parseBoolean(request.getParameter("gender"));
@@ -63,7 +61,7 @@ public class ChangeAccountController extends HttpServlet {
         }
 
         CustomerDao cd = new CustomerDao();
-        Customer c = new Customer(email, fullname, phone, address, gender, username, password);
+        Customer c = new Customer(email, fullname, phone, address, gender, username);
         Customer currentCustomer = cd.getByEmail(email);
         if (currentCustomer == null) {
             request.setAttribute("error", "Account does not exist!");

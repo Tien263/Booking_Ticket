@@ -22,6 +22,15 @@ public class Customer {
     public Customer() {
     }
 
+    public Customer(String email, String fullname, String phone, String address, boolean gender, String username) {
+        this.email = email;
+        this.fullname = fullname;
+        this.phone = phone;
+        this.address = address;
+        this.gender = gender;
+        this.username = username;
+    }
+    
     public Customer(String email, String fullname, String phone, String address, boolean gender, String username, String password) {
         this.email = email;
         this.fullname = fullname;
