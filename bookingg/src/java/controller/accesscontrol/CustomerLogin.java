@@ -52,7 +52,6 @@ public class CustomerLogin extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         String forgot = request.getParameter("forgot");
@@ -80,10 +79,10 @@ public class CustomerLogin extends HttpServlet {
             Customer c = cd.getCustomerByEmail(email, password);
 
             if (c != null) {
-                session.setAttribute("customer", c);
-                session.setAttribute("user", email);
-                response.sendRedirect("home.jsp");
 
+                session.setAttribute("customer", c);
+                session.setAttribute("c_id", c.getId());
+                response.sendRedirect("car.html");
             } else {
                 request.setAttribute("loginerror", "Wrong passoword!");
                 request.getRequestDispatcher("login.jsp").forward(request, response);
