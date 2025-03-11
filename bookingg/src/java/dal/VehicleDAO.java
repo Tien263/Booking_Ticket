@@ -62,7 +62,8 @@ public class VehicleDAO extends DBContext {
             pstmt.setInt(3, vehicle.getCapacity());
             pstmt.setString(4, vehicle.getLicensePlate());
             pstmt.setString(5, vehicle.getStatus());
-            pstmt.executeUpdate();
+            int affectedRows = pstmt.executeUpdate(); // Thực hiện INSERT
+            return affectedRows > 0;
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -91,7 +92,8 @@ public class VehicleDAO extends DBContext {
             pstmt.setString(3, vehicle.getLicensePlate());
             pstmt.setString(4, vehicle.getStatus());
             pstmt.setInt(5, vehicle.getId());
-            pstmt.executeUpdate();
+            int affectedRows = pstmt.executeUpdate(); // Thực hiện INSERT
+            return affectedRows > 0;
         } catch (SQLException e) {
             e.printStackTrace();
         }

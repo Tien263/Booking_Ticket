@@ -61,13 +61,7 @@ public class VehicleController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        List<String> roles = (List<String>) session.getAttribute("roles");
-
-        if (roles == null) {
-            response.sendRedirect("employee_login.jsp");
-            return;
-        }
+        
         List<Vehicle> vehicles = vehicleDAO.getAllVehicles();
         request.setAttribute("vehicles", vehicles);
         request.getRequestDispatcher("vehicles.jsp").forward(request, response);
@@ -97,10 +91,12 @@ public class VehicleController extends HttpServlet {
             boolean isInserted = vehicleDAO.insertVehicle(vehicle);
 
             if (!isInserted) {
-                request.setAttribute("errorMessage", "Biển số xe đã tồn tại!");
-                request.getRequestDispatcher("vehicles.jsp").forward(request, response);
-                return; // Dừng lại, không redirect
+                request.setAttribute("errorMessage", "Biển số xe hoặc ID của xe đã tồn tại!");
+            } else {
+                request.setAttribute("successMessage", "Thêm phương tiện thành công!");
             }
+            request.getRequestDispatcher("vehicles.jsp").forward(request, response);
+            return;
         } else if ("update".equals(action)) {
             int id = Integer.parseInt(request.getParameter("id"));
             String type = request.getParameter("type");
@@ -112,10 +108,12 @@ public class VehicleController extends HttpServlet {
             boolean isUpdated = vehicleDAO.updateVehicle(vehicle);
 
             if (!isUpdated) {
-                request.setAttribute("errorMessage", "Biển số xe đã tồn tại! Vui lòng chọn biển số khác.");
-                request.getRequestDispatcher("vehicles.jsp").forward(request, response);
-                return;
+                request.setAttribute("errorMessage", "Biển số xe hoặc ID của xe đã tồn tại! Vui lòng cập nhật lại.");
+            } else {
+                request.setAttribute("successMessage", "Cập nhật phương tiện thành công!");
             }
+            request.getRequestDispatcher("vehicles.jsp").forward(request, response);
+            return;
         } else if ("delete".equals(action)) {
             int id = Integer.parseInt(request.getParameter("id"));
             vehicleDAO.deleteVehicle(id);

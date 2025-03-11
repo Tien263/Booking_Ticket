@@ -59,7 +59,7 @@
         </style>
     </head>
     <body>
-        
+
 
         <h2>List of Vehicles</h2>
         <table>
@@ -91,9 +91,19 @@
             <% } %>
         </table>
         <button onclick="window.location.href = 'addVehicle.jsp'">Add</button>
-        <% if (request.getAttribute("errorMessage") != null) { %>
-    <p style="color: red;"><%= request.getAttribute("errorMessage") %></p>
-<% } %>
+        <% 
+    String errorMessage = (String) request.getAttribute("errorMessage");
+    String successMessage = (String) request.getAttribute("successMessage");
+    if (errorMessage != null) { 
+        %>
+        <p style="color: red;"><%= errorMessage %></p>
+        <% 
+            } else if (successMessage != null) { 
+        %>
+        <p style="color: green;"><%= successMessage %></p>
+        <% 
+            } 
+        %>
 
     </body>
 </html>
