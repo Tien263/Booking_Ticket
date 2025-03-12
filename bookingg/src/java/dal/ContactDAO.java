@@ -16,13 +16,14 @@ import java.util.List;
  */
 public class ContactDAO extends DBContext{
     public void insertContact(Contact contact) {
-        String sql = "INSERT INTO Contact (name, email, message) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO Contact (name, email, message, created_at) VALUES (?, ?, ?, ?)";
         try {
             
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, contact.getName());
             ps.setString(2, contact.getEmail());
             ps.setString(3, contact.getMessage());
+            ps.setTimestamp(4, contact.getCreatedAt());
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -40,7 +41,7 @@ public class ContactDAO extends DBContext{
             contact.setName(rs.getString("name"));
             contact.setEmail(rs.getString("email"));
             contact.setMessage(rs.getString("message"));
-            contact.setCreatedAt(rs.getString("created_at"));
+            contact.setCreatedAt(rs.getTimestamp("created_at"));
             contactList.add(contact);
         }
     } catch (SQLException e) {

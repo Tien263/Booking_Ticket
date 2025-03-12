@@ -1,827 +1,398 @@
 <%-- 
-    Document   : blog
-    Created on : Jan 29, 2025, 11:43:01 PM
-    Author     : ADMIN
+    Document   : cuslistblog
+    Created on : [Date]
+    Author     : [Author]
 --%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<%@ page import="java.util.List" %>
+<%@ page import="model.Blog" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <!DOCTYPE html>
 <html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Blog - Rotors</title>
+    <link rel="shortcut icon" href="assets/images/logo/favourite_icon.png">
 
-    <head>
+    <!-- Framework - CSS include -->
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
 
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <!-- Icon - CSS include -->
+    <link rel="stylesheet" type="text/css" href="assets/css/fontawesome.css">
 
-        <title>Blog - Rotors - Car Rental HTML5 Template</title>
-        <link rel="shortcut icon" href="assets/images/logo/favourite_icon.png">
+    <!-- Animation - CSS include -->
+    <link rel="stylesheet" type="text/css" href="assets/css/aos.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/animate.css">
 
-        <!-- fraimwork - css include -->
-        <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+    <!-- Carousel - CSS include -->
+    <link rel="stylesheet" type="text/css" href="assets/css/slick.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/slick-theme.css">
 
-        <!-- icon - css include -->
-        <link rel="stylesheet" type="text/css" href="assets/css/fontawesome.css">
+    <!-- Popup - CSS include -->
+    <link rel="stylesheet" type="text/css" href="assets/css/magnific-popup.css">
 
-        <!-- animation - css include -->
-        <link rel="stylesheet" type="text/css" href="assets/css/aos.css">
-        <link rel="stylesheet" type="text/css" href="assets/css/animate.css">
+    <!-- Select options - CSS include -->
+    <link rel="stylesheet" type="text/css" href="assets/css/nice-select.css">
 
-        <!-- carousel - css include -->
-        <link rel="stylesheet" type="text/css" href="assets/css/slick.css">
-        <link rel="stylesheet" type="text/css" href="assets/css/slick-theme.css">
+    <!-- Pricing range - CSS include -->
+    <link rel="stylesheet" type="text/css" href="assets/css/jquery-ui.css">
 
-        <!-- popup - css include -->
-        <link rel="stylesheet" type="text/css" href="assets/css/magnific-popup.css">
+    <!-- Custom - CSS include -->
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
-        <!-- select options - css include -->
-        <link rel="stylesheet" type="text/css" href="assets/css/nice-select.css">
+    <!-- Custom styles from cuslistblog.jsp -->
+    <style>
+        body {
+            background-color: #7da47f; /* Light green background */
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        .blog-container {
+            width: 60%;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        .blog-item {
+            background: white;
+            color: black;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Added shadow for depth */
+        }
+        .blog-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+        .blog-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            color: gray;
+            margin-top: 10px;
+        }
+        .blog-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .blog-brief {
+            font-size: 16px;
+            line-height: 1.5;
+        }
+        .read-more {
+            display: inline-block;
+            margin-top: 10px;
+            color: #a8dadc; /* Light teal for link */
+            font-weight: bold;
+            text-decoration: none;
+        }
+        .read-more::after {
+            content: " →";
+        }
+        .read-more:hover {
+            color: #81c784; /* Lighter green on hover */
+        }
+        /* Updated footer styles */
+        .footer_section {
+            background-color: #ffffff; /* White background */
+            color: #333; /* Dark text for contrast */
+        }
+        .footer_widget_area {
+            background-color: #ffffff; /* White background for widget area */
+            padding: 50px 0; /* Reduced padding for cleaner look */
+        }
+        .footer_bottom {
+            background-color: #f5f5f5; /* Light gray for contrast */
+            color: #666; /* Slightly lighter text */
+            padding: 15px 0;
+        }
+        .footer_widget_title {
+            color: #7da47f; /* Green for headings to match theme */
+        }
+        .footer_contact_info ul li,
+        .footer_useful_links ul li a {
+            color: #333; /* Dark text for readability */
+        }
+        .footer_useful_links ul li a:hover {
+            color: #7da47f; /* Green on hover to match theme */
+        }
+        .footer_bottom a {
+            color: #7da47f; /* Green for links */
+        }
+        .footer_bottom a:hover {
+            color: #5d8c5f; /* Darker green on hover */
+        }
+        .primary_social_links li a {
+            color: #333; /* Dark icons */
+        }
+        .primary_social_links li a:hover {
+            color: #7da47f; /* Green on hover */
+        }
+    </style>
+</head>
 
-        <!-- pricing range - css include -->
-        <link rel="stylesheet" type="text/css" href="assets/css/jquery-ui.css">
+<body>
+    <!-- backtotop - start -->
+    <div id="thetop"></div>
+    <div class="backtotop">
+        <a href="#" class="scroll">
+            <i class="far fa-arrow-up"></i>
+        </a>
+    </div>
+    <!-- backtotop - end -->
 
-        <!-- custom - css include -->
-        <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-
-    </head>
-
-
-    <body>
-
-
-        <!-- backtotop - start -->
-        <div id="thetop"></div>
-        <div class="backtotop">
-            <a href="#" class="scroll">
-                <i class="far fa-arrow-up"></i>
-            </a>
+    <!-- preloader - start -->
+    <div class="preloader">
+        <div class="animation_preloader">
+            <div class="spinner"></div>
+            <p class="text-center">Loading</p>
         </div>
-        <!-- backtotop - end -->
-
-        <!-- preloader - start -->
-        <div class="preloader">
-            <div class="animation_preloader">
-                <div class="spinner"></div>
-                <p class="text-center">Loading</p>
+        <div class="loader">
+            <div class="row vh-100">
+                <div class="col-3 loader_section section-left"><div class="bg"></div></div>
+                <div class="col-3 loader_section section-left"><div class="bg"></div></div>
+                <div class="col-3 loader_section section-right"><div class="bg"></div></div>
+                <div class="col-3 loader_section section-right"><div class="bg"></div></div>
             </div>
-            <div class="loader">
-                <div class="row vh-100">
-                    <div class="col-3 loader_section section-left">
-                        <div class="bg"></div>
+        </div>
+    </div>
+    <!-- preloader - end -->
+
+    <!-- header_section - start -->
+    <header class="header_section secondary_header sticky text-white clearfix">
+        <div class="header_top clearfix">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-7">
+                        <ul class="header_contact_info ul_li clearfix">
+                            <li><i class="fal fa-envelope"></i> rotorsmail@email.com</li>
+                            <li><i class="fal fa-phone"></i> +1-202-555-0156</li>
+                        </ul>
                     </div>
-                    <div class="col-3 loader_section section-left">
-                        <div class="bg"></div>
-                    </div>
-                    <div class="col-3 loader_section section-right">
-                        <div class="bg"></div>
-                    </div>
-                    <div class="col-3 loader_section section-right">
-                        <div class="bg"></div>
+                    <div class="col-lg-5">
+                        <ul class="primary_social_links ul_li_right clearfix">
+                            <li><a href="#!"><i class="fab fa-facebook-f"></i></a></li>
+                            <li><a href="#!"><i class="fab fa-instagram"></i></a></li>
+                            <li><a href="#!"><i class="fab fa-twitter"></i></a></li>
+                            <li><a href="#!"><i class="fab fa-youtube"></i></a></li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- preloader - end -->
 
-
-        <!-- header_section - start
-        ================================================== -->
-        <header class="header_section secondary_header sticky text-white clearfix">
-            <div class="header_top clearfix">
-                <div class="container">
-                    <div class="row align-items-center">
-                        <div class="col-lg-7">
-                            <ul class="header_contact_info ul_li clearfix">
-                                <li><i class="fal fa-envelope"></i> rotorsmail@email.com</li>
-                                <li><i class="fal fa-phone"></i> +1-202-555-0156</li>
-                            </ul>
-                        </div>
-
-                        <div class="col-lg-5">
-                            <ul class="primary_social_links ul_li_right clearfix">
-                                <li><a href="#!"><i class="fab fa-facebook-f"></i></a></li>
-                                <li><a href="#!"><i class="fab fa-instagram"></i></a></li>
-                                <li><a href="#!"><i class="fab fa-twitter"></i></a></li>
-                                <li><a href="#!"><i class="fab fa-youtube"></i></a></li>
-                            </ul>
+        <div class="header_bottom clearfix">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-6">
+                        <div class="brand_logo">
+                            <a href="index.html">
+                                <img src="assets/images/logo/logo_01_1.png" srcset="assets/images/logo/logo_01_1.png 2x" alt="logo_not_found" width="35%">
+                            </a>
                         </div>
                     </div>
-                </div>
-            </div>
 
-            <div class="header_bottom clearfix">
-                <div class="container">
-                    <div class="row align-items-center">
-
-                        <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-                            <div class="brand_logo">
-                                <a href="index.html">
-                                    <img src="assets/images/logo/logo_01_1x.png" srcset="assets/images/logo/logo_01_2x.png 2x" alt="logo_not_found">
-                                    <img src="assets/images/logo/logo_02_1x.png" srcset="assets/images/logo/logo_02_2x.png 2x" alt="logo_not_found">
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-3 col-md-6 col-sm-6 col-6 order-last">
-                            <ul class="header_action_btns ul_li_right clearfix">
-                                <li>
-                                    <button type="button" class="search_btn" data-toggle="collapse" data-target="#collapse_search_body" aria-expanded="false" aria-controls="collapse_search_body">
-                                        <i class="fal fa-search"></i>
-                                    </button>
-                                </li>
-                                <li class="dropdown">
-                                    <button type="button" class="cart_btn" id="cart_dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fal fa-shopping-cart"></i>
-                                        <span class="cart_counter bg_default_red">3</span>
-                                    </button>
-                                    <div class="cart_dropdown rotors_dropdown dropdown-menu" aria-labelledby="cart_dropdown">
-                                        <h4 class="wrap_title">Cart Items: (3)</h4>
-                                        <ul class="cart_items_list ul_li_block clearfix">
-                                            <li>
-                                                <div class="item_image">
-                                                    <img src="assets/images/cart/img_2.png" alt="image_not_found">
-                                                </div>
-                                                <div class="item_content">
-                                                    <h4 class="item_title">Digital Infrared Thermometer</h4>
-                                                    <span class="item_price">$39.50</span>
-                                                </div>
-                                                <button type="button" class="remove_btn"><i class="fal fa-times"></i></button>
-                                            </li>
-
-                                            <li>
-                                                <div class="item_image">
-                                                    <img src="assets/images/cart/img_2.png" alt="image_not_found">
-                                                </div>
-                                                <div class="item_content">
-                                                    <h4 class="item_title">Digital Infrared Thermometer</h4>
-                                                    <span class="item_price">$39.50</span>
-                                                </div>
-                                                <button type="button" class="remove_btn"><i class="fal fa-times"></i></button>
-                                            </li>
-
-                                            <li>
-                                                <div class="item_image">
-                                                    <img src="assets/images/cart/img_2.png" alt="image_not_found">
-                                                </div>
-                                                <div class="item_content">
-                                                    <h4 class="item_title">Digital Infrared Thermometer</h4>
-                                                    <span class="item_price">$39.50</span>
-                                                </div>
-                                                <button type="button" class="remove_btn"><i class="fal fa-times"></i></button>
-                                            </li>
-                                        </ul>
-                                        <ul class="btns_group ul_li_block clearfix">
-                                            <li><a href="cart.html" class="custom_btn bg_default_red text-uppercase">View Cart <img src="assets/images/icons/icon_01.png" alt="icon_not_found"></a></li>
-                                            <li><a href="#!" class="custom_btn bg_default_black text-uppercase">Checkout <img src="assets/images/icons/icon_01.png" alt="icon_not_found"></a></li>
-                                        </ul>
-                                    </div>
-                                </li>
-                                <li class="dropdown">
-                                    <button type="button" class="user_btn" id="user_dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fal fa-user"></i>
-                                    </button>
-                                    <div class="user_dropdown rotors_dropdown dropdown-menu clearfix" aria-labelledby="user_dropdown">
-                                        <div class="profile_info clearfix">
-                                            <a href="#!" class="user_thumbnail">
-                                                <img src="assets/images/meta/img_01.png" alt="thumbnail_not_found">
-                                            </a>
-                                            <div class="user_content">
-                                                <h4 class="user_name"><a href="#!">Rakibul Hassan</a></h4>
-                                                <span class="user_title">Seller</span>
-                                            </div>
-                                        </div>
-                                        <ul class="ul_li_block clearfix">
-                                            <li><a href="#!"><i class="fal fa-user-circle"></i> Profile</a></li>
-                                            <li><a href="#!"><i class="fal fa-user-cog"></i> Settings</a></li>
-                                            <li><a href="#!"><i class="fal fa-sign-out"></i> Logout</a></li>
-                                        </ul>
-                                    </div>
-                                </li>
-                                <li>
-                                    <button type="button" class="mobile_sidebar_btn"><i class="fal fa-align-right"></i></button>
-                                </li>
+                    <div class="col-lg-6 col-md-12">
+                        <nav class="main_menu clearfix">
+                            <ul class="ul_li_center clearfix">
+                                <li><a href="home.jsp">Home</a></li>
+                                <li><a href="booking">Booking Ticket</a></li>
+                                <li class="active"><a href="cuslistblog">Blog</a></li>
+                                <li><a href="contact.jsp">Contact Us</a></li>
+                                <li><a href="employee_login.jsp">Employee Login</a></li>
                             </ul>
-                        </div>
-
-                        <div class="col-lg-6 col-md-12">
-                            <nav class="main_menu clearfix">
-                                <ul class="ul_li_center clearfix">
-                                    <li class="active has_child">
-                                        <a href="#!">Home</a>
-                                        <ul class="submenu">
-                                            <li><a href="index_1.html">Home Page V.1</a></li>
-                                            <li><a href="index_2.html">Home Page V.2</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="gallery.html">Our Cars</a></li>
-                                    <li><a href="review.html">Reviews</a></li>
-                                    <li><a href="about.html">About</a></li>
-                                    <li class="has_child">
-                                        <a href="#!">Pages</a>
-                                        <ul class="submenu">
-                                            <li><a href="service.html">Our Service</a></li>
-                                            <li><a href="gallery.html">Car Gallery</a></li>
-                                            <li><a href="account.html">My Account</a></li>
-                                            <li><a href="reservation.html">Reservation</a></li>
-                                            <li class="has_child">
-                                                <a href="#!">Blogs</a>
-                                                <ul class="submenu">
-                                                    <li><a href="blog.html">Blog</a></li>
-                                                    <li><a href="blog_details.html">Blog Details</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="has_child">
-                                                <a href="#!">Our Cars</a>
-                                                <ul class="submenu">
-                                                    <li><a href="car.html">Cars</a></li>
-                                                    <li><a href="car_details.html">Car Details</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="cart.html">Shopping Cart</a></li>
-                                            <li><a href="faq.html">F.A.Q.</a></li>
-                                            <li><a href="login.html">Login</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="has_child">
-                                        <a href="#!">Contact Us</a>
-                                        <ul class="submenu">
-                                            <li><a href="contact.html">Contact Default</a></li>
-                                            <li><a href="contact_wordwide.html">Contact Wordwide</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>
-
+                        </nav>
                     </div>
-                </div>
-            </div>
 
-            <div id="collapse_search_body" class="collapse_search_body collapse">
-                <div class="search_body">
-                    <div class="container">
-                        <form action="#">
-                            <div class="form_item">
-                                <input type="search" name="search" placeholder="Type here...">
-                                <button type="submit"><i class="fal fa-search"></i></button>
-                            </div>
-                        </form>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-6 order-last">
+                        <ul class="header_action_btns ul_li_right clearfix">
+                            <li><button type="button" class="search_btn" data-toggle="collapse" data-target="#collapse_search_body"><i class="fal fa-search"></i></button></li>
+                            <li><button type="button" class="mobile_sidebar_btn"><i class="fal fa-align-right"></i></button></li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </header>
-        <!-- header_section - end
-        ================================================== -->
+    <!-- header_section - end -->
 
-
-        <!-- main body - start
-        ================================================== -->
-        <main>
-
-
-            <!-- mobile menu - start
-            ================================================== -->
-            <div class="sidebar-menu-wrapper">
-                <div class="mobile_sidebar_menu">
-                    <button type="button" class="close_btn"><i class="fal fa-times"></i></button>
-
-                    <div class="about_content mb_60">
-                        <div class="brand_logo mb_15">
-                            <a href="index.html">
-                                <img src="assets/images/logo/logo_01_1x.png" srcset="assets/images/logo/logo_01_2x.png 2x" alt="logo_not_found">
-                            </a>
-                        </div>
-                        <p class="mb-0">
-                            Nullam id dolor auctor, dignissim magna eu, mattis ante. Pellentesque tincidunt, elit a facilisis efficitur, nunc nisi scelerisque enim, rhoncus malesuada est velit a nulla. Cras porta mi vitae dolor tristique euismod. Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                        </p>
-                    </div>
-
-                    <div class="menu_list mb_60 clearfix">
-                        <h3 class="title_text text-white">Menu List</h3>
-                        <ul class="ul_li_block clearfix">
-                            <li class="active dropdown">
-                                <a href="#!" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Home</a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="index_1.html">Home Page V.1</a></li>
-                                    <li><a href="index_2.html">Home Page V.2</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="gallery.html">Our Cars</a></li>
-                            <li><a href="review.html">Reviews</a></li>
-                            <li><a href="about.html">About</a></li>
-                            <li class="dropdown">
-                                <a href="#!" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages</a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="service.html">Our Service</a></li>
-                                    <li><a href="gallery.html">Car Gallery</a></li>
-                                    <li><a href="account.html">My Account</a></li>
-                                    <li><a href="reservation.html">Reservation</a></li>
-                                    <li class="dropdown">
-                                        <a href="#!" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Blogs</a>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="blog.html">Blog</a></li>
-                                            <li><a href="blog_details.html">Blog Details</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="dropdown">
-                                        <a href="#!" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Our Cars</a>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="car.html">Cars</a></li>
-                                            <li><a href="car_details.html">Car Details</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="cart.html">Shopping Cart</a></li>
-                                    <li><a href="faq.html">F.A.Q.</a></li>
-                                    <li><a href="login.html">Login</a></li>
-                                </ul>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#!" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Contact Us</a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="contact.html">Contact Default</a></li>
-                                    <li><a href="contact_wordwide.html">Contact Wordwide</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="booking_car_form">
-                        <h3 class="title_text text-white mb-2">Book A Car</h3>
-                        <p class="mb_15">
-                            Nullam id dolor auctor, dignissim magna eu, mattis ante. Pellentesque tincidunt, elit a facilisis efficitur.
-                        </p>
-                        <form action="#">
-                            <div class="form_item">
-                                <h4 class="input_title text-white">Pick Up Location</h4>
-                                <div class="position-relative">
-                                    <input id="location_one" type="text" name="location" placeholder="City, State or Airport Code">
-                                    <label for="location_one" class="input_icon"><i class="fas fa-map-marker-alt"></i></label>
-                                </div>
-                            </div>
-                            <div class="form_item">
-                                <h4 class="input_title text-white">Pick A Date</h4>
-                                <input type="date" name="date">
-                            </div>
-                            <button type="submit" class="custom_btn bg_default_red btn_width text-uppercase">Book A Car <img src="assets/images/icons/icon_01.png" alt="icon_not_found"></button>
-                        </form>
-                    </div>
-
-                </div>
+    <!-- main body - start -->
+    <main>
+        <!-- Breadcrumb Section -->
+        <section class="breadcrumb_section text-center clearfix">
+            <div class="page_title_area has_overlay d-flex align-items-center clearfix" data-bg-image="assets/images/breadcrumb/bg_01_1.jpeg">
                 <div class="overlay"></div>
+                <div class="container" data-aos="fade-up" data-aos-delay="100">
+                    <h1 class="page_title text-white mb-0">Blog</h1>
+                </div>
             </div>
-            <!-- mobile menu - end
-            ================================================== -->
 
-
-            <!-- breadcrumb_section - start
-            ================================================== -->
-            <section class="breadcrumb_section text-center clearfix">
-                <div class="page_title_area has_overlay d-flex align-items-center clearfix" data-bg-image="assets/images/breadcrumb/bg_07.jpg">
-                    <div class="overlay"></div>
-                    <div class="container" data-aos="fade-up" data-aos-delay="100">
-                        <h1 class="page_title text-white mb-0">Blog</h1>
-                    </div>
-                </div>
-                <div class="breadcrumb_nav clearfix" data-bg-color="#F2F2F2">
-                    <div class="container">
-                        <ul class="ul_li clearfix">
-                            <li><a href="index.html">Home</a></li>
-                            <li>Pages</li>
-                            <li>Blog</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-            <!-- breadcrumb_section - end
-            ================================================== -->
-
-
-            <!-- blog_section - start
-            ================================================== -->
-            <section class="blog_section sec_ptb_100 clearfix">
+            <div class="breadcrumb_nav clearfix" data-bg-color="#F2F2F2">
                 <div class="container">
-                    <div class="row justify-content-lg-between justify-content-md-center justify-content-sm-center">
-                        <div class="col-lg-8 col-md-8 order-last">
-                            <div class="blog_standard" data-aos="fade-up" data-aos-delay="100">
-                                <c:forEach var="item" items="${listB}" varStatus="status">
-                                    <c:if test="${item.status}">
-
-                                            <div >
-                                                <a class="item_image" href="blogdetail.jsp" target="_blank">
-                                                    <img src="" alt="image_not_found">
-                                                </a>
-                                                <div class="item_content">
-                                                    <ul class="post_meta ul_li clearfix">
-                                                        <li>${item.updatedtime}</li>
-                                                        <li>by <a href="#!">${item.createdby}</a></li>
-                                                        <li><a href="#!">No Comments</a></li>
-                                                    </ul>
-                                                    <h3 class="item_title">
-                                                        ${item.title}
-                                                    </h3>
-                                                    <p class="mb_15">
-                                                        ${item.brief}                                                    </p>
-                                                    <a class="text_btn text-uppercase" href="cusblogdetail?id=${item.id}" target="_blank"><span>Read More</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
-                                                </div>
-
-                                            </div>
-                                       
-                                    </c:if>
-                                </c:forEach>
-                            </div>
-
-                            <div class="blog_standard" data-aos="fade-up" data-aos-delay="300">
-                                <a class="item_image" href="blog_details.html" target="_blank">
-                                    <img src="assets/images/blog/img_01.jpg" alt="image_not_found">
-                                </a>
-                                <div class="item_content">
-                                    <ul class="post_meta ul_li clearfix">
-                                        <li>Aug. 10, 2020</li>
-                                        <li>by <a href="#!">Merkulove</a></li>
-                                        <li><a href="#!">No Comments</a></li>
-                                    </ul>
-                                    <h3 class="item_title">
-                                        <a href="blog_details.html" target="_blank">
-                                            Vestibulum lobortis aliquam nisl eget congue suscipit
-                                        </a>
-                                    </h3>
-                                    <p class="mb_15">
-                                        Quisque ut tellus ut odio suscipit sollicitudin. Suspendisse venenatis nulla eget efficitur convallis. Praesent eu faucibus leo, id euismod sapien
-                                    </p>
-                                    <a class="text_btn text-uppercase" href="blog_details.html" target="_blank"><span>Read More</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
-                                </div>
-                            </div>
-
-                            <div class="blog_standard" data-aos="fade-up" data-aos-delay="500">
-                                <a class="item_image" href="blog_details.html" target="_blank">
-                                    <img src="assets/images/blog/img_11.jpg" alt="image_not_found">
-                                </a>
-                                <div class="item_content">
-                                    <ul class="post_meta ul_li clearfix">
-                                        <li>Aug. 10, 2020</li>
-                                        <li>by <a href="#!">Merkulove</a></li>
-                                        <li><a href="#!">No Comments</a></li>
-                                    </ul>
-                                    <h3 class="item_title">
-                                        <a href="blog_details.html" target="_blank">
-                                            Sed volutpat odio dui, ac malesuada mi faucibus sed
-                                        </a>
-                                    </h3>
-                                    <p class="mb_15">
-                                        Quisque ut tellus ut odio suscipit sollicitudin. Suspendisse venenatis nulla eget efficitur convallis. Praesent eu faucibus leo, id euismod sapien
-                                    </p>
-                                    <a class="text_btn text-uppercase" href="blog_details.html" target="_blank"><span>Read More</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
-                                </div>
-                            </div>
-
-                            <div class="blog_standard" data-aos="fade-up" data-aos-delay="700">
-                                <a class="item_image" href="blog_details.html" target="_blank">
-                                    <img src="assets/images/blog/img_03.jpg" alt="image_not_found">
-                                </a>
-                                <div class="item_content">
-                                    <ul class="post_meta ul_li clearfix">
-                                        <li>Aug. 10, 2020</li>
-                                        <li>by <a href="#!">Merkulove</a></li>
-                                        <li><a href="#!">No Comments</a></li>
-                                    </ul>
-                                    <h3 class="item_title">
-                                        <a href="blog_details.html" target="_blank">
-                                            Fusce ac dapibus ex. Fusce tempus, elit nec vestibulum
-                                        </a>
-                                    </h3>
-                                    <p class="mb_15">
-                                        Quisque ut tellus ut odio suscipit sollicitudin. Suspendisse venenatis nulla eget efficitur convallis. Praesent eu faucibus leo, id euismod sapien
-                                    </p>
-                                    <a class="text_btn text-uppercase" href="blog_details.html" target="_blank"><span>Read More</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
-                                </div>
-                            </div>
-
-                            <div class="pagination_wrap clearfix" data-aos="fade-up" data-aos-delay="100">
-                                <div class="row align-items-center justify-content-lg-between">
-                                    <div class="col-lg-6 col-md-5 col-sm-12 col-xs-12">
-                                        <span class="page_number">Page 1 of 3</span>
-                                    </div>
-
-                                    <div class="col-lg-6 col-md-7 col-sm-12 col-xs-12">
-                                        <ul class="pagination_nav ul_li_right clearfix">
-                                            <li><a href="#!"><i class="fal fa-angle-double-left"></i></a></li>
-                                            <li class="active"><a href="#!">1</a></li>
-                                            <li><a href="#!">2</a></li>
-                                            <li><a href="#!">3</a></li>
-                                            <li><a href="#!"><i class="fal fa-angle-double-right"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-4 col-md-6">
-                            <aside class="sidebar_section clearfix" data-bg-color="#F2F2F2">
-                                <div class="sb_widget sb_subscrib_form" data-aos="fade-up" data-aos-delay="100">
-                                    <h3 class="sb_widget_title">Subscribe:</h3>
-                                    <form action="#">
-                                        <div class="form_item">
-                                            <input type="email" name="email" value="${customer.getEmail()}" placeholder="E-mail">
-                                        </div>
-                                        <button type="submit" class="custom_btn bg_default_red text-uppercase">Subscribe <img src="assets/images/icons/icon_01.png" alt="icon_not_found"></button>
-                                    </form>
-                                </div>
-
-                                <div class="sb_widget sb_latest_newses" data-aos="fade-up" data-aos-delay="300">
-                                    <h3 class="sb_widget_title">Latest News:</h3>
-
-                                    <div class="blog_small_grid">
-                                        <a class="item_image" href="#!">
-                                            <img src="assets/images/blog/img_05.jpg" alt="image_not_found">
-                                        </a>
-                                        <div class="item_content">
-                                            <h3 class="item_title">
-                                                <a href="#!">
-                                                    Porta nec nibh ut sodales. Phasellus nunc nunc, auctor…
-                                                </a>
-                                            </h3>
-                                            <span class="post_date">Aug. 10, 2020 / by Merkulove/ No Comments</span>
-                                        </div>
-                                    </div>
-
-                                    <div class="blog_small_grid">
-                                        <a class="item_image" href="#!">
-                                            <img src="assets/images/blog/img_06.jpg" alt="image_not_found">
-                                        </a>
-                                        <div class="item_content">
-                                            <h3 class="item_title">
-                                                <a href="#!">
-                                                    Phasellus mollis tus ligula to a quam dolor...
-                                                </a>
-                                            </h3>
-                                            <span class="post_date">Aug. 10, 2020 / by Merkulove/ No Comments</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="sb_widget sb_category_list" data-aos="fade-up" data-aos-delay="500">
-                                    <h3 class="sb_widget_title">Categories:</h3>
-                                    <ul class="ul_li_block clearfix">
-                                        <li><a href="#!"><i class="fas fa-caret-right"></i> Vehicle guide</a></li>
-                                        <li><a href="#!"><i class="fas fa-caret-right"></i> Best offers</a></li>
-                                        <li><a href="#!"><i class="fas fa-caret-right"></i> Travel Guides</a></li>
-                                        <li><a href="#!"><i class="fas fa-caret-right"></i> On The Road</a></li>
-                                    </ul>
-                                </div>
-                            </aside>
-                        </div>
-                    </div>
+                    <ul class="ul_li clearfix">
+                        <li><a href="home.jsp">Trang chủ</a></li>
+                        <li>Blog</li>
+                    </ul>
                 </div>
-            </section>
-            <!-- blog_section - end
-            ================================================== -->
+            </div>
+        </section>
 
+        <!-- Blog Section -->
+        <div class="blog-container">
+            <%
+                List<Blog> blogList = (List<Blog>) request.getAttribute("blogList");
+                if (blogList != null && !blogList.isEmpty()) {
+                    for (Blog blog : blogList) {
+            %>
+            <div class="blog-item" data-aos="fade-up" data-aos-delay="100">
+                <img src="<%= blog.getImage() %>" alt="Blog Image">
+                <div class="blog-meta">
+                    <span><%= blog.getUpdatedtime() %></span>
+                </div>
+                <h2 class="blog-title"><%= blog.getTitle() %></h2>
+                <p class="blog-brief"><%= blog.getBrief() %></p>
+                <a href="blogdetail.jsp?id=<%= blog.getId() %>" class="read-more">READ MORE</a>
+            </div>
+            <%
+                    }
+                } else {
+            %>
+            <p>Không có blog nào được tìm thấy.</p>
+            <%
+                }
+            %>
+        </div>
+    </main>
+    <!-- main body - end -->
 
-            <!-- search_section - start
-            ================================================== -->
-            <section class="search_section sec_ptb_100 clearfix" data-bg-color="#161829">
-                <div class="container">
-                    <div class="section_title text-center mb_60" data-aos="fade-up" data-aos-delay="100">
-                        <h2 class="title_text text-white mb-0"><span>Find the right car for every occasion</span></h2>
-                    </div>
-
-                    <div class="advance_search_form2 p-0 mt-0 mb_60 shadow-none">
-                        <div class="row align-items-end">
-                            <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12" data-aos="fade-up" data-aos-delay="100">
-                                <div class="form_item">
-                                    <h4 class="input_title text-white">Pick Up Location</h4>
-                                    <div class="position-relative">
-                                        <input id="location_two" type="text" name="location" placeholder="City, State or Airport Code">
-                                        <label for="location_two" class="input_icon"><i class="fas fa-map-marker-alt"></i></label>
-                                    </div>
-                                </div>
+    <!-- footer_section - start -->
+    <footer class="footer_section clearfix">
+        <div class="footer_widget_area clearfix">
+            <div class="container">
+                <div class="row justify-content-lg-between">
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-sm-12">
+                        <div class="footer_about" data-aos="fade-up" data-aos-delay="100">
+                            <div class="brand_logo mb_30">
+                                <a href="index.html">
+                                    <img src="assets/images/logo/logo_01_1.png" srcset="assets/images/logo/logo_01_1.png 2x" alt="logo_not_found">
+                                </a>
                             </div>
-
-                            <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12" data-aos="fade-up" data-aos-delay="300">
-                                <div class="form_item">
-                                    <h4 class="input_title text-white">Pick A Date</h4>
-                                    <input type="date" name="date">
-                                </div>
+                            <p class="mb_15">
+                                BusGo is committed to providing a reliable and high-quality bus ticket booking service with transparent information, clear pricing, and dedicated customer support, ensuring your journey is always convenient and safe
+                            </p>
+                            <div class="footer_useful_links mb_30">
+                                <ul class="ul_li_block clearfix"></ul>
                             </div>
-
-                            <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12" data-aos="fade-up" data-aos-delay="500">
+                            <div class="form_item mb-0">
                                 <form action="#">
-                                    <div class="price-range-area clearfix">
-                                        <h4 class="input_title text-white">Price</h4>
-                                        <div id="slider-range" class="slider-range clearfix"></div>
-                                        <input class="price-text" type="text" id="amount" readonly>
-                                    </div>
+                                    <input id="footer_search" type="search" name="search" placeholder="Search">
+                                    <label for="footer_search" class="input_icon"><i class="fal fa-search"></i></label>
                                 </form>
                             </div>
-
-                            <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12" data-aos="fade-up" data-aos-delay="700">
-                                <button type="submit" class="custom_btn bg_default_red text-uppercase">Find A Car <img src="assets/images/icons/icon_01.png" alt="icon_not_found"></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="offers_car_carousel slideshow4_slider" data-aos="fade-up" data-aos-delay="900">
-                    <div class="item">
-                        <div class="gallery_fullimage_2">
-                            <img src="assets/images/gallery/img_03.jpg" alt="image_not_found">
-                            <div class="item_content text-white">
-                                <span class="item_price bg_default_blue">$670/Day</span>
-                                <h3 class="item_title text-white">Phasellus porta pulvinar metus</h3>
-                                <a class="text_btn text-uppercase" href="#!"><span>Kook A Car</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
-                            </div>
                         </div>
                     </div>
 
-                    <div class="item">
-                        <div class="gallery_fullimage_2">
-                            <img src="assets/images/gallery/img_04.jpg" alt="image_not_found">
-                            <div class="item_content text-white">
-                                <span class="item_price bg_default_blue">$670/Day</span>
-                                <h3 class="item_title text-white">Phasellus porta pulvinar metus</h3>
-                                <a class="text_btn text-uppercase" href="#!"><span>Kook A Car</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
-                            </div>
+                    <div class="col-lg-3 col-md-4 col-sm-12 col-sm-12">
+                        <div class="footer_contact_info" data-aos="fade-up" data-aos-delay="200">
+                            <h3 class="footer_widget_title">Liên hệ:</h3>
+                            <ul class="ul_li_block clearfix">
+                                <li>
+                                    <strong><i class="fas fa-map-marker-alt"></i> Địa chỉ:</strong>
+                                    <p class="mb-0">
+                                        Khu công nghệ cao Hòa Lạc - Thạch Thất - Hà Nội
+                                    </p>
+                                </li>
+                                <li><i class="fas fa-clock"></i> 7:00 - 22:00</li>
+                                <li><i class="fas fa-envelope"></i> <strong>BusGo@gmail.com</strong></li>
+                                <li><i class="fas fa-phone"></i> <strong>0398 996 177</strong></li>
+                            </ul>
                         </div>
                     </div>
 
-                    <div class="item">
-                        <div class="gallery_fullimage_2">
-                            <img src="assets/images/gallery/img_05.jpg" alt="image_not_found">
-                            <div class="item_content text-white">
-                                <span class="item_price bg_default_blue">$670/Day</span>
-                                <h3 class="item_title text-white">Phasellus porta pulvinar metus</h3>
-                                <a class="text_btn text-uppercase" href="#!"><span>Kook A Car</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="item">
-                        <div class="gallery_fullimage_2">
-                            <img src="assets/images/gallery/img_06.jpg" alt="image_not_found">
-                            <div class="item_content text-white">
-                                <span class="item_price bg_default_blue">$670/Day</span>
-                                <h3 class="item_title text-white">Phasellus porta pulvinar metus</h3>
-                                <a class="text_btn text-uppercase" href="#!"><span>Kook A Car</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="item">
-                        <div class="gallery_fullimage_2">
-                            <img src="assets/images/gallery/img_03.jpg" alt="image_not_found">
-                            <div class="item_content text-white">
-                                <span class="item_price bg_default_blue">$670/Day</span>
-                                <h3 class="item_title text-white">Phasellus porta pulvinar metus</h3>
-                                <a class="text_btn text-uppercase" href="#!"><span>Kook A Car</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <!-- search_section - end
-            ================================================== -->
-
-
-        </main>
-        <!-- main body - end
-        ================================================== -->
-
-
-        <!-- footer_section - start
-        ================================================== -->
-        <footer class="footer_section clearfix">
-            <div class="footer_widget_area sec_ptb_100 clearfix" data-bg-color="#F2F2F2">
-                <div class="container">
-                    <div class="row justify-content-lg-between">
-                        <div class="col-lg-4 col-md-4 col-sm-12 col-sm-12">
-                            <div class="footer_about" data-aos="fade-up" data-aos-delay="100">
-                                <div class="brand_logo mb_30">
-                                    <a href="index.html">
-                                        <img src="assets/images/logo/logo_02_1x.png" srcset="assets/images/logo/logo_02_2x.png 2x" alt="logo_not_found">
-                                    </a>
-                                </div>
-                                <p class="mb_15">
-                                    Cras sit amet mi non orci pretium consectetur. Donec iaculis ante ac sollicitudin luctus. Phasellus ut lacus lacus. Phasellus sagittis ex id tortor tincidunt luctus. Donec consectetur consequat bibendum
-                                </p>
-                                <div class="footer_useful_links mb_30">
-                                    <ul class="ul_li_block clearfix">
-                                        <li><a href="#!"><i class="fal fa-angle-right"></i> Rental Information</a></li>
-                                        <li><a href="#!"><i class="fal fa-angle-right"></i> F.A.Q.</a></li>
-                                    </ul>
-                                </div>
-                                <div class="form_item mb-0">
-                                    <form action="#">
-                                        <input id="footer_search" type="search" name="search" placeholder="Search">
-                                        <label for="footer_search" class="input_icon"><i class="fal fa-search"></i></label>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-3 col-md-4 col-sm-12 col-sm-12">
-                            <div class="footer_contact_info" data-aos="fade-up" data-aos-delay="200">
-                                <h3 class="footer_widget_title">Contact Us:</h3>
-                                <ul class="ul_li_block clearfix">
-                                    <li>
-                                        <strong><i class="fas fa-map-marker-alt"></i> Main Office Address:</strong>
-                                        <p class="mb-0">
-                                            Unit 9, Manor Industrial Estate, Lower Wash Lane, Warrington, WA4
-                                        </p>
-                                    </li>
-                                    <li><i class="fas fa-clock"></i> 8:00am-9:30pm</li>
-                                    <li><i class="far fa-angle-right"></i> Other Office Locations</li>
-                                    <li><i class="fas fa-envelope"></i> <strong>rotorseml@eml.fr</strong></li>
-                                    <li><i class="fas fa-phone"></i> <strong>+880 1680 6361 89</strong></li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-4 col-md-4 col-sm-12 col-sm-12">
-                            <div class="footer_useful_links" data-aos="fade-up" data-aos-delay="300">
-                                <h3 class="footer_widget_title">Information:</h3>
-                                <ul class="ul_li_block clearfix">
-                                    <li><a href="#!"><i class="fal fa-angle-right"></i> Find a Car for Rent in the Nearest Location</a></li>
-                                    <li><a href="#!"><i class="fal fa-angle-right"></i> Cars Catalog</a></li>
-                                    <li><a href="#!"><i class="fal fa-angle-right"></i> F.A.Q.</a></li>
-                                    <li><a href="#!"><i class="fal fa-angle-right"></i> About Us</a></li>
-                                    <li><a href="#!"><i class="fal fa-angle-right"></i> Contact Us</a></li>
-                                    <li><a href="#!"><i class="fal fa-angle-right"></i> Help Center</a></li>
-                                    <li><a href="#!"><i class="fal fa-angle-right"></i> Privacy Police</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="footer_bottom text-white clearfix" data-bg-color="#000C21">
-                <div class="container">
-                    <div class="row align-items-center justify-content-lg-between">
-                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                            <p class="copyright_text mb-0">Copyright © 2020. Rotors by <a class="author_links text-white" href="#!">Merkulove</a></p>
-                        </div>
-
-                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                            <ul class="primary_social_links ul_li_right clearfix">
-                                <li><a href="#!"><i class="fab fa-facebook-f"></i></a></li>
-                                <li><a href="#!"><i class="fab fa-instagram"></i></a></li>
-                                <li><a href="#!"><i class="fab fa-twitter"></i></a></li>
-                                <li><a href="#!"><i class="fab fa-youtube"></i></a></li>
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-sm-12">
+                        <div class="footer_useful_links" data-aos="fade-up" data-aos-delay="300">
+                            <h3 class="footer_widget_title">Information:</h3>
+                            <ul class="ul_li_block clearfix">
+                                <li><a href="#!"><i class="fal fa-angle-right"></i> Find a Car for Rent in the Nearest Location</a></li>
+                                <li><a href="#!"><i class="fal fa-angle-right"></i> Cars Catalog</a></li>
+                                <li><a href="#!"><i class="fal fa-angle-right"></i> F.A.Q.</a></li>
+                                <li><a href="#!"><i class="fal fa-angle-right"></i> About Us</a></li>
+                                <li><a href="#!"><i class="fal fa-angle-right"></i> Contact Us</a></li>
+                                <li><a href="#!"><i class="fal fa-angle-right"></i> Help Center</a></li>
+                                <li><a href="#!"><i class="fal fa-angle-right"></i> Privacy Policy</a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
-        </footer>
-        <!-- footer_section - end
-        ================================================== -->
+        </div>
 
+        <div class="footer_bottom clearfix">
+            <div class="container">
+                <div class="row align-items-center justify-content-lg-between">
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <p class="copyright_text mb-0">Copyright © 2020. Rotors by <a class="author_links" href="#!">Merkulove</a></p>
+                    </div>
 
-        <!-- fraimwork - jquery include -->
-        <script src="assets/js/jquery-3.5.1.min.js"></script>
-        <script src="assets/js/popper.min.js"></script>
-        <script src="assets/js/bootstrap.min.js"></script>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <ul class="primary_social_links ul_li_right clearfix">
+                            <li><a href="#!"><i class="fab fa-facebook-f"></i></a></li>
+                            <li><a href="#!"><i class="fab fa-instagram"></i></a></li>
+                            <li><a href="#!"><i class="fab fa-twitter"></i></a></li>
+                            <li><a href="#!"><i class="fab fa-youtube"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- footer_section - end -->
 
-        <!-- animation - jquery include -->
-        <script src="assets/js/aos.js"></script>
-        <script src="assets/js/parallaxie.js"></script>
+    <!-- Framework - jQuery include -->
+    <script src="assets/js/jquery-3.5.1.min.js"></script>
+    <script src="assets/js/popper.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
 
-        <!-- carousel - jquery include -->
-        <script src="assets/js/slick.min.js"></script>
+    <!-- Animation - jQuery include -->
+    <script src="assets/js/aos.js"></script>
+    <script src="assets/js/parallaxie.js"></script>
 
-        <!-- popup - jquery include -->
-        <script src="assets/js/magnific-popup.min.js"></script>
+    <!-- Carousel - jQuery include -->
+    <script src="assets/js/slick.min.js"></script>
 
-        <!-- select ontions - jquery include -->
-        <script src="assets/js/nice-select.min.js"></script>
+    <!-- Popup - jQuery include -->
+    <script src="assets/js/magnific-popup.min.js"></script>
 
-        <!-- isotope - jquery include -->
-        <script src="assets/js/isotope.pkgd.js"></script>
-        <script src="assets/js/imagesloaded.pkgd.min.js"></script>
-        <script src="assets/js/masonry.pkgd.min.js"></script>
+    <!-- Select options - jQuery include -->
+    <script src="assets/js/nice-select.min.js"></script>
 
-        <!-- google map - jquery include -->
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDk2HrmqE4sWSei0XdKGbOMOHN3Mm2Bf-M&ver=2.1.6"></script>
-        <script src="assets/js/gmaps.min.js"></script>
+    <!-- Isotope - jQuery include -->
+    <script src="assets/js/isotope.pkgd.js"></script>
+    <script src="assets/js/imagesloaded.pkgd.min.js"></script>
+    <script src="assets/js/masonry.pkgd.min.js"></script>
 
-        <!-- pricing range - jquery include -->
-        <script src="assets/js/jquery-ui.js"></script>
+    <!-- Google Map - jQuery include -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDk2HrmqE4sWSei0XdKGbOMOHN3Mm2Bf-M&ver=2.1.6"></script>
+    <script src="assets/js/gmaps.min.js"></script>
 
-        <!-- counter - jquery include -->
-        <script src="assets/js/waypoint.js"></script>
-        <script src="assets/js/counterup.min.js"></script>
+    <!-- Pricing range - jQuery include -->
+    <script src="assets/js/jquery-ui.js"></script>
 
-        <!-- contact form - jquery include -->
-        <script src="assets/js/validate.js"></script>
+    <!-- Counter - jQuery include -->
+    <script src="assets/js/waypoint.js"></script>
+    <script src="assets/js/counterup.min.js"></script>
 
-        <!-- mobile menu - jquery include -->
-        <script src="assets/js/mCustomScrollbar.js"></script>
+    <!-- Contact form - jQuery include -->
+    <script src="assets/js/validate.js"></script>
 
-        <!-- custom - jquery include -->
-        <script src="assets/js/custom.js"></script>
+    <!-- Mobile menu - jQuery include -->
+    <script src="assets/js/mCustomScrollbar.js"></script>
 
-
-    </body>
+    <!-- Custom - jQuery include -->
+    <script src="assets/js/custom.js"></script>
+</body>
 </html>

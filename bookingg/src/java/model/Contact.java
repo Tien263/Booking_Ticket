@@ -4,6 +4,8 @@
  */
 package model;
 
+import java.sql.*;
+
 /**
  *
  * @author Quang Anh
@@ -13,16 +15,21 @@ public class Contact {
     private String name;
     private String email;
     private String message;
-    private String createdAt;
+    private Timestamp createdAt;
 
     // Constructors
     public Contact() {}
-    
-    public Contact(String name, String email, String message) {
+
+    public Contact(String name, String email, String message, Timestamp createdAt) {
         this.name = name;
         this.email = email;
         this.message = message;
+        this.createdAt = createdAt;
     }
+
+    
+    
+    
 
     // Getters và Setters
     public int getContactId() {
@@ -57,11 +64,15 @@ public class Contact {
         this.message = message;
     }
 
-    public String getCreatedAt() {
+    public Timestamp getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(String createdAt) {
+    public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
     }
+
+    
+
+    
 }

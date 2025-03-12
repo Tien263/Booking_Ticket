@@ -1,13 +1,7 @@
-<%-- 
-    Document   : login
-    Created on : Jan 24, 2025, 11:25:56 PM
-    Author     : ADMIN
---%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-
 <html lang="en">
 
     <head>
@@ -50,7 +44,16 @@
 
     <body>
 
-
+        <c:if test="${not empty success}">
+            <div id="success-alert" class="alert alert-success alert-dismissible fade show position-fixed"
+                 role="alert" 
+                 style="z-index: 1050; top: 20px; right: 20px; width: auto; max-width: 300px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
+                <strong>✔</strong> ${success}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </c:if>
         <!-- backtotop - start -->
         <div id="thetop"></div>
         <div class="backtotop">
@@ -94,8 +97,8 @@
                     <div class="row align-items-center">
                         <div class="col-lg-7">
                             <ul class="header_contact_info ul_li clearfix">
-                                <li><i class="fal fa-envelope"></i> xuantien50d@@email.com</li>
-                                <li><i class="fal fa-phone"></i> 0398996177</li>
+                                <li><i class="fal fa-envelope"></i> Busgo@email.com</li>
+                                <li><i class="fal fa-phone"></i> 0398 996 177</li>
                             </ul>
                         </div>
 
@@ -118,24 +121,18 @@
                         <div class="col-lg-3 col-md-6 col-sm-6 col-6">
                             <div class="brand_logo">
                                 <a href="index.html">
-                                    <img src="assets/images/logo/logo_01_1x.png" srcset="assets/images/logo/logo_01_2x.png 2x" alt="logo_not_found">
-                                    <img src="assets/images/logo/logo_02_1x.png" srcset="assets/images/logo/logo_02_2x.png 2x" alt="logo_not_found">
+                                    <img src="assets/images/logo/logo_01_1.png" srcset="assets/images/logo/logo_01_1.png 2x" alt="logo_not_found" width="35%">
+
+                                    <img src="assets/images/logo/logo_01_1.png" srcset="assets/images/logo/logo_01_1.png 2x" alt="logo_not_found" width="35%">
                                 </a>
                             </div>
                         </div>
 
                         <div class="col-lg-3 col-md-6 col-sm-6 col-6 order-last">
                             <ul class="header_action_btns ul_li_right clearfix">
-                                <li>
-                                    <button type="button" class="search_btn" data-toggle="collapse" data-target="#collapse_search_body" aria-expanded="false" aria-controls="collapse_search_body">
-                                        <i class="fal fa-search"></i>
-                                    </button>
-                                </li>
+
                                 <li class="dropdown">
-                                    <button type="button" class="cart_btn" id="cart_dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fal fa-shopping-cart"></i>
-                                        <span class="cart_counter bg_default_red">3</span>
-                                    </button>
+
                                     <div class="cart_dropdown rotors_dropdown dropdown-menu" aria-labelledby="cart_dropdown">
                                         <h4 class="wrap_title">Cart Items: (3)</h4>
                                         <ul class="cart_items_list ul_li_block clearfix">
@@ -195,7 +192,7 @@
                                         <ul class="ul_li_block clearfix">
                                             <li><a href="#!"><i class="fal fa-user-circle"></i> Profile</a></li>
                                             <li><a href="#!"><i class="fal fa-user-cog"></i> Settings</a></li>
-                                            <li><a href="#!"><i class="fal fa-sign-out"></i> Logout</a></li>
+                                            <li><a href="logout"><i class="fal fa-sign-out"></i> Logout</a></li>
                                         </ul>
                                     </div>
                                 </li>
@@ -228,7 +225,7 @@
                                             <li class="has_child">
                                                 <a href="#!">Blogs</a>
                                                 <ul class="submenu">
-                                                    <li><a href="cuslistblog">Blog</a></li>
+                                                    <li><a href="blog.html">Blog</a></li>
                                                     <li><a href="blog_details.html">Blog Details</a></li>
                                                 </ul>
                                             </li>
@@ -290,7 +287,7 @@
                     <div class="about_content mb_60">
                         <div class="brand_logo mb_15">
                             <a href="index.html">
-                                <img src="assets/images/logo/logo_01_1x.png" srcset="assets/images/logo/logo_01_2x.png 2x" alt="logo_not_found">
+                                <img src="assets/images/logo/logo_01_1.png" srcset="assets/images/logo/logo_01_1.png 2x" alt="logo_not_found">
                             </a>
                         </div>
                         <p class="mb-0">
@@ -378,8 +375,8 @@
             <!-- breadcrumb_section - start
             ================================================== -->
             <section class="breadcrumb_section text-center clearfix">
-                <div class="page_title_area has_overlay d-flex align-items-center clearfix" data-bg-image="assets/images/breadcrumb/bg_09.jpg">
-                    <div class="overlay"></div>
+                <div class="page_title_area has_overlay d-flex align-items-center clearfix" data-bg-image="assets/images/breadcrumb/bg_08_1.png">
+                    <!-- <div class="overlay"></div> -->
                     <div class="container" data-aos="fade-up" data-aos-delay="100">
                         <h1 class="page_title text-white mb-0">Login</h1>
                     </div>
@@ -406,7 +403,7 @@
                         <div class="row align-items-center">
                             <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
                                 <div class="reg_image" data-aos="fade-up" data-aos-delay="300">
-                                    <img src="assets/images/about/img_03.jpg" alt="image_not_found">
+                                    <img src="assets/images/about/img_03_1.jpg" alt="image_not_found">
                                 </div>
                             </div>
 
@@ -425,7 +422,7 @@
                                             <input type="password" name="password" placeholder="Password" required>
                                         </div>
                                         <button type="submit" class="custom_btn bg_default_red text-uppercase">Login <img src="assets/images/icons/icon_01.png" alt="icon_not_found"></button>
-                                        <span class="reset_pass mb_15"><a href="#!">Reset Your Password by e-mail?</a></span>
+                                        <input type="button" class="reset_pass mb_15" name="forgot" value="Reset Your Password by e-mail?" onclick="location.href = 'forgotpassword';">
                                         <div class="checkbox_input mb-0">
                                             <label for="input_save"><input id="input_save" type="checkbox"> Save my name, email, and website in this browser for the next time I comment</label>
                                         </div>
@@ -452,39 +449,58 @@
                                     </div>
                                     <div class="form_item">
                                         <label for="email">Email*</label>
-                                        <input type="email" id="email" name="email" placeholder="Your Email" value="${email}" required>
+                                        <input type="email" id="email" name="email" placeholder="Your Email" value="${email}" required pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}" title="Vui lòng nhập đúng định dạng email">
                                     </div>
-                                    <div class="form_item">
+                                    <div class="form_item position-relative">
                                         <label for="username">Username*</label>
-                                        <input type="text" id="username" name="username" placeholder="Username" value="${username}" required>
+                                        <input type="text" id="username" name="username" placeholder="Username" required>
+                                        <span id="username-error-icon" class="text-danger position-absolute" 
+                                              style="right: 10px; top: 75%; transform: translateY(-50%); display: none;">
+                                            <i class="fas fa-exclamation-circle" title="Username đã tồn tại"></i>
+                                        </span>
                                     </div>
                                     <div class="form_item">
                                         <label for="phone">Phone Number*</label>
                                         <input type="tel" id="phone" name="phone" placeholder="Phone Number" value="${phone}" required pattern="[0-9]{10}">
                                     </div>
+                                    <div class="form_item"><label for="gender">Gender*</label><select id="gender" name="gender" required><option value="1" <c:if test="${gender}">selected</c:if>>Male</option><option value="0" <c:if test="${gender}">selected</c:if>>Female</option></select></div>
+                                    <div class="form_item"><label for="address">Address</label><input type="text" id="address" name="address" placeholder="Address" value="${address}"></div>
                                 </div>
 
                                 <!-- Cột bên phải -->
                                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" data-aos="fade-up" data-aos-delay="700">
                                     <div class="form_item">
                                         <label for="password">Password*</label>
-                                        <input type="password" id="password" name="password" placeholder="Password" required>
+                                        <div class="position-relative">
+                                            <input type="password" id="password" name="password" placeholder="Password" required>
+                                            <i id="togglePassword" class="fas fa-eye input_icon" style="cursor: pointer;"></i>
+                                        </div>
                                     </div>
                                     <div class="form_item">
                                         <label for="confirmpass">Confirm Password*</label>
                                         <input type="password" id="confirmpass" name="confirmpass" placeholder="Confirm Password" required>
                                     </div>
-                                    <div class="form_item">
-                                        <label for="gender">Gender*</label>
-                                        <select id="gender" name="gender" required>
-                                            <option value="1" <c:if test="${gender}">selected</c:if>>Male</option>
-                                            <option value="0" <c:if test="${gender}">selected</c:if>>Female</option>
-                                            </select>
-                                        </div>
-                                        <div class="form_item">
-                                            <label for="address">Address</label>
-                                            <input type="text" id="address" name="address" placeholder="Address" value="${address}">
+                                    <!-- Password Requirements -->
+                                    <div id="result" class="alert d-none" role="alert">
+                                        <span id="resultText"></span>
                                     </div>
+                                    <div class="border p-3 rounded mb-3">
+                                        <p class="font-weight-bold mb-2">Your password must contain:</p>
+                                        <ul class="list-unstyled">
+                                            <li class="d-flex align-items-center"><i id="lengthIcon" class="fas fa-times text-danger mr-2"></i> At least 8 characters</li>
+                                            <li class="d-flex align-items-center"><i id="varietyIcon" class="fas fa-times text-danger mr-2"></i> At least 3 of the following:
+                                                <ul class="list-unstyled ml-4">
+                                                    <li id="lowercase" class="d-flex align-items-center"><i class="fas fa-times text-danger mr-2"></i> Lower case letters (a-z)</li>
+                                                    <li id="uppercase" class="d-flex align-items-center"><i class="fas fa-times text-danger mr-2"></i> Upper case letters (A-Z)</li>
+                                                    <li id="numbers" class="d-flex align-items-center"><i class="fas fa-times text-danger mr-2"></i> Numbers (0-9)</li>
+                                                    <li id="special" class="d-flex align-items-center"><i class="fas fa-times text-danger mr-2"></i> Special characters (e.g. !@#$%^&*)</li>
+                                                </ul>
+                                            </li>
+                                            <li class="d-flex align-items-center"><i id="repeatIcon" class="fas fa-times text-danger mr-2"></i> No more than 2 identical characters in a row</li>
+                                            <li class="d-flex align-items-center"><i id="matchIcon" class="fas fa-times text-danger mr-2"></i> Passwords must match</li>
+                                        </ul>
+                                    </div>
+
                                 </div>
                             </div>
 
@@ -516,16 +532,15 @@
                             <div class="footer_about" data-aos="fade-up" data-aos-delay="100">
                                 <div class="brand_logo mb_30">
                                     <a href="index.html">
-                                        <img src="assets/images/logo/logo_02_1x.png" srcset="assets/images/logo/logo_02_2x.png 2x" alt="logo_not_found">
+                                        <img src="assets/images/logo/logo_01_1.png" srcset="assets/images/logo/logo_01_1.png 2x" alt="logo_not_found">
                                     </a>
                                 </div>
                                 <p class="mb_15">
-                                    Cras sit amet mi non orci pretium consectetur. Donec iaculis ante ac sollicitudin luctus. Phasellus ut lacus lacus. Phasellus sagittis ex id tortor tincidunt luctus. Donec consectetur consequat bibendum
+                                    BusGo is committed to providing a reliable and high-quality bus ticket booking service with transparent information, clear pricing, and dedicated customer support, ensuring your journey is always convenient and safe
                                 </p>
                                 <div class="footer_useful_links mb_30">
                                     <ul class="ul_li_block clearfix">
-                                        <li><a href="#!"><i class="fal fa-angle-right"></i> Rental Information</a></li>
-                                        <li><a href="#!"><i class="fal fa-angle-right"></i> F.A.Q.</a></li>
+
                                     </ul>
                                 </div>
                                 <div class="form_item mb-0">
@@ -539,18 +554,17 @@
 
                         <div class="col-lg-3 col-md-4 col-sm-12 col-sm-12">
                             <div class="footer_contact_info" data-aos="fade-up" data-aos-delay="200">
-                                <h3 class="footer_widget_title">Contact Us:</h3>
+                                <h3 class="footer_widget_title">Liên hệ:</h3>
                                 <ul class="ul_li_block clearfix">
                                     <li>
-                                        <strong><i class="fas fa-map-marker-alt"></i> Main Office Address:</strong>
+                                        <strong><i class="fas fa-map-marker-alt"></i> Địa chỉ:</strong>
                                         <p class="mb-0">
-                                            Unit 9, Manor Industrial Estate, Lower Wash Lane, Warrington, WA4
+                                            Khu công nghệ cao Hòa Lạc - Thạch Thất - Hà Nội
                                         </p>
                                     </li>
-                                    <li><i class="fas fa-clock"></i> 8:00am-9:30pm</li>
-                                    <li><i class="far fa-angle-right"></i> Other Office Locations</li>
-                                    <li><i class="fas fa-envelope"></i> <strong>rotorseml@eml.fr</strong></li>
-                                    <li><i class="fas fa-phone"></i> <strong>+880 1680 6361 89</strong></li>
+                                    <li><i class="fas fa-clock"></i> 7:00 - 22:00</li>
+                                    <li><i class="fas fa-envelope"></i> <strong>BusGo@gmail.com</strong></li>
+                                    <li><i class="fas fa-phone"></i> <strong>0398 996 177</strong></li>
                                 </ul>
                             </div>
                         </div>
@@ -640,5 +654,143 @@
         <script src="assets/js/custom.js"></script>
 
 
+        <!-- Password Validation Script -->
+        <script>
+                                            $(document).ready(function () {
+                                                const $password = $('#password');
+                                                const $confirmpass = $('#confirmpass');
+                                                const $togglePassword = $('#togglePassword');
+                                                const $result = $('#result');
+                                                const $resultIcon = $('#resultIcon');
+                                                const $resultText = $('#resultText');
+                                                const $lengthIcon = $('#lengthIcon');
+                                                const $varietyIcon = $('#varietyIcon');
+                                                const $repeatIcon = $('#repeatIcon');
+                                                const $matchIcon = $('#matchIcon');
+                                                const $lowercaseIcon = $('#lowercase i');
+                                                const $uppercaseIcon = $('#uppercase i');
+                                                const $numbersIcon = $('#numbers i');
+                                                const $specialIcon = $('#special i');
+
+                                                // Toggle password visibility
+                                                $togglePassword.on('click', function () {
+                                                    const type = $password.attr('type') === 'password' ? 'text' : 'password';
+                                                    $password.attr('type', type);
+                                                    $confirmpass.attr('type', type);
+                                                    $(this).toggleClass('fa-eye fa-eye-slash');
+                                                });
+
+                                                // Password validation function
+                                                function validatePassword() {
+                                                    const password = $password.val();
+                                                    const confirm = $confirmpass.val();
+
+                                                    // Check length
+                                                    const isLengthValid = password.length >= 8;
+                                                    updateIcon($lengthIcon, isLengthValid);
+
+                                                    // Check character variety
+                                                    const hasLowercase = /[a-z]/.test(password);
+                                                    const hasUppercase = /[A-Z]/.test(password);
+                                                    const hasNumbers = /[0-9]/.test(password);
+                                                    const hasSpecial = /[!@#$%^&*]/.test(password);
+                                                    updateIcon($lowercaseIcon, hasLowercase);
+                                                    updateIcon($uppercaseIcon, hasUppercase);
+                                                    updateIcon($numbersIcon, hasNumbers);
+                                                    updateIcon($specialIcon, hasSpecial);
+                                                    const varietyCount = [hasLowercase, hasUppercase, hasNumbers, hasSpecial].filter(Boolean).length;
+                                                    const isVarietyValid = varietyCount >= 3;
+                                                    updateIcon($varietyIcon, isVarietyValid);
+
+                                                    // Check repeated characters
+                                                    const isRepeatValid = !/(.)\1{2,}/.test(password);
+                                                    updateIcon($repeatIcon, isRepeatValid);
+
+                                                    // Check if passwords match
+                                                    const isMatchValid = password === confirm && password !== '';
+                                                    updateIcon($matchIcon, isMatchValid);
+
+                                                    // Overall validation
+                                                    const isValid = isLengthValid && isVarietyValid && isRepeatValid && isMatchValid;
+                                                    updateResult(isValid);
+                                                }
+
+                                                // Update icon function
+                                                function updateIcon($icon, isValid) {
+                                                    $icon.removeClass('fa-times fa-check text-danger text-success');
+                                                    $icon.addClass(isValid ? 'fa-check text-success' : 'fa-times text-danger');
+                                                }
+
+                                                // Update result function
+                                                function updateResult(isValid) {
+                                                    $result.removeClass('d-none alert-success alert-danger');
+                                                    $result.addClass(isValid ? 'alert-success' : 'alert-danger');
+                                                    $resultIcon.removeClass('fa-check-circle fa-times-circle');
+                                                    $resultIcon.addClass(isValid ? 'fa-check-circle' : 'fa-times-circle');
+                                                    $resultText.text(isValid ? 'Success!' : 'Failed!');
+                                                }
+
+                                                // Bind input events
+                                                $password.on('input', validatePassword);
+                                                $confirmpass.on('input', validatePassword);
+
+                                                // Prevent form submission if validation fails
+                                                $('#registerForm').on('submit', function (e) {
+                                                    const password = $password.val();
+                                                    const confirm = $confirmpass.val();
+                                                    const isLengthValid = password.length >= 8;
+                                                    const hasLowercase = /[a-z]/.test(password);
+                                                    const hasUppercase = /[A-Z]/.test(password);
+                                                    const hasNumbers = /[0-9]/.test(password);
+                                                    const hasSpecial = /[!@#$%^&*]/.test(password);
+                                                    const varietyCount = [hasLowercase, hasUppercase, hasNumbers, hasSpecial].filter(Boolean).length;
+                                                    const isVarietyValid = varietyCount >= 3;
+                                                    const isRepeatValid = !/(.)\1{2,}/.test(password);
+                                                    const isMatchValid = password === confirm && password !== '';
+
+                                                    if (!(isLengthValid && isVarietyValid && isRepeatValid && isMatchValid)) {
+                                                        e.preventDefault();
+                                                        $(this).find('p[style="color: red; text-align: center;"]').text('Please meet all password requirements.');
+                                                    }
+                                                });
+                                            });
+        </script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+                                            $(document).ready(function () {
+                                                $("#username").on("input", function () {
+                                                    let username = $(this).val();
+                                                    let $usernameField = $(this);
+                                                    let $errorIcon = $("#username-error-icon");
+
+                                                    if (username.length < 3) {
+                                                        $errorIcon.hide();
+                                                        return;
+                                                    }
+
+                                                    $.ajax({
+                                                        url: "register", // Trùng với URL mapping của servlet
+                                                        type: "GET",
+                                                        data: {username: username},
+                                                        success: function (response) {
+                                                            if (response.exists) {
+                                                                $usernameField.addClass("is-invalid");
+                                                                $errorIcon.show();
+                                                            } else {
+                                                                $usernameField.removeClass("is-invalid");
+                                                                $errorIcon.hide();
+                                                            }
+                                                        }
+                                                    });
+                                                });
+                                            });
+        </script>
+        <script>
+            $(document).ready(function () {
+                setTimeout(function () {
+                    $("#success-alert").fadeOut("slow");
+                }, 3000);
+            });
+        </script>
     </body>
 </html>
