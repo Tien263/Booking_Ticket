@@ -1,9 +1,6 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- ViewUserDetail
-ViewUserOrderHistory
-
-* Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 package controller.accesscontrol;
 
@@ -51,11 +48,11 @@ public class AccountController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        HttpSession session = request.getSession(false);
-//        if (session != null) {
-//            Customer c = (Customer) session.getAttribute("customer");
-//            request.setAttribute("customer", c);
-//        }
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            Customer c = (Customer) session.getAttribute("customer");
+            request.setAttribute("customer", c);
+        }
 
     request.getRequestDispatcher("account.jsp").forward(request, response);
     }

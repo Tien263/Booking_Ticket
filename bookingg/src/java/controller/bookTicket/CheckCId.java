@@ -33,7 +33,7 @@ public class CheckCId extends HttpServlet {
 
         // Nếu chưa đăng nhập, chuyển hướng về trang login.jsp
         if (c_id.equals("null")) {
-            response.sendRedirect("login.jsp");
+            response.sendRedirect("login1.jsp");
             return;
         } else {
 
@@ -60,7 +60,6 @@ public class CheckCId extends HttpServlet {
             request.setAttribute("vId", vId);
             request.setAttribute("bt1Id", bt1Id);
             request.getRequestDispatcher("SeatURL").forward(request, response);
-
             return;
         }
 

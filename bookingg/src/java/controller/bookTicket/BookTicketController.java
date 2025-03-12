@@ -4,9 +4,11 @@
  */
 package controller.bookTicket;
 
-import dal.bookTicket.ConfirmTicketDAO;
-import dal.bookTicket.SeatsDAO;
 import dal.bookTicket.BookTicketDAO;
+import dal.bookTicket.ConfirmationDAO;
+import dal.bookTicket.DAOSeats;
+import dal.bookTicket.DAOTickets;
+import dal.bookTicket.SeatsDAO;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
