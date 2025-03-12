@@ -63,11 +63,6 @@ public class BlogUpdateController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        Employee loggedUser = (Employee) session.getAttribute("user");
-        if (loggedUser == null) {
-            response.sendRedirect("login.jsp");
-            return;
-        }
         
         try {
             int id = Integer.parseInt(request.getParameter("id"));
@@ -104,7 +99,6 @@ public class BlogUpdateController extends HttpServlet {
             blog.setStatus("Active".equals(status));
             blog.setImage(fileUrl);
             blog.setUpdatedtime(new Date(System.currentTimeMillis()));
-            blog.setUpdatedby(loggedUser);
             
             bd.update(blog);
             response.sendRedirect("listblog");

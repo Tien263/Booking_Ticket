@@ -161,9 +161,38 @@ public class EmployeeDao extends DBContext<Employee> {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    @Override
+     @Override
     public Employee get(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String sql = "SELECT * FROM Employee WHERE e_id = ?";
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            stmt = connection.prepareStatement(sql);
+            stmt.setInt(1, id);
+            rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return new Employee(
+                        rs.getInt("e_id"),
+                        rs.getString("e_name"),
+                        rs.getString("e_phone"),
+                        rs.getString("e_address"),
+                        rs.getBoolean("e_gender"),
+                        rs.getInt("r_id")
+                );
+            }
+        } catch (Exception e) {
+            Logger.getLogger(EmployeeDao.class.getName()).log(Level.SEVERE, null, e);
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (stmt != null) stmt.close();
+            } catch (Exception e) {
+                Logger.getLogger(EmployeeDao.class.getName()).log(Level.SEVERE, null, e);
+            }
+        }
+        return null;
     }
     public Employee getEmployeeById(int eId) {
     Employee employee = null;

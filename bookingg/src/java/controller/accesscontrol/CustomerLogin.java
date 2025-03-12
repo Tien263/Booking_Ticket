@@ -55,8 +55,6 @@ public class CustomerLogin extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         String forgot = request.getParameter("forgot");
-        BCrypt bCrypt = new BCrypt();
-//        String password1 =  bCrypt.hashpw(password, bCrypt.gensalt());
         CustomerDao cd = new CustomerDao();
         Customer customer = cd.getByEmail(email);
         HttpSession session = request.getSession();
@@ -79,10 +77,10 @@ public class CustomerLogin extends HttpServlet {
             Customer c = cd.getCustomerByEmail(email, password);
 
             if (c != null) {
-
                 session.setAttribute("customer", c);
-                session.setAttribute("c_id", c.getId());
-                response.sendRedirect("car.html");
+                session.setAttribute("user", email);
+                response.sendRedirect("home.jsp");
+
             } else {
                 request.setAttribute("loginerror", "Wrong passoword!");
                 request.getRequestDispatcher("login.jsp").forward(request, response);

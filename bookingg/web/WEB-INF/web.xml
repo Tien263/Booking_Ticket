@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="6.0" xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd">
+    <filter>
+        <filter-name>authenticationBlog</filter-name>
+        <filter-class>filter.authenticationBlog</filter-class>
+    </filter>
+    <filter>
+        <filter-name>authenticationPromotion</filter-name>
+        <filter-class>filter.authenticationPromotion</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>authenticationPromotion</filter-name>
+        <url-pattern>/promotion/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>authenticationBlog</filter-name>
+        <url-pattern>/blog/*</url-pattern>
+    </filter-mapping>
     <servlet>
         <servlet-name>Register</servlet-name>
         <servlet-class>controller.accesscontrol.RegisterController</servlet-class>
@@ -63,6 +79,14 @@
     <servlet>
         <servlet-name>SeatController</servlet-name>
         <servlet-class>controller.bookTicket.SeatController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ContactController</servlet-name>
+        <servlet-class>controller.accesscontrol.ContactController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ContactListController</servlet-name>
+        <servlet-class>controller.accesscontrol.ContactListController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Register</servlet-name>
@@ -187,5 +211,13 @@
     <servlet-mapping>
         <servlet-name>SeatController</servlet-name>
         <url-pattern>/SeatURL</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ContactController</servlet-name>
+        <url-pattern>/contact</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ContactListController</servlet-name>
+        <url-pattern>/contactlist</url-pattern>
     </servlet-mapping>
 </web-app>
