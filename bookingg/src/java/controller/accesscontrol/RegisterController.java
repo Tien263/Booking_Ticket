@@ -20,27 +20,21 @@ import model.Customer;
  */
 public class RegisterController extends HttpServlet {
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Register</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Register at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+    public boolean isValidEmail(String email) {
+        String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
+        return email.matches(emailRegex);
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String username = request.getParameter("username");
+        CustomerDao cd = new CustomerDao();
+        boolean exists = cd.checkUsernameExist(username);
+
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write("{\"exists\": " + exists + "}");
     }
 
     @Override
@@ -59,7 +53,7 @@ public class RegisterController extends HttpServlet {
         CustomerDao cd = new CustomerDao();
         // **Mã hóa mật khẩu trước khi lưu vào cơ sở dữ liệu**
         String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
-        
+
         Customer c = new Customer(email, fullname, phone, address, gender, username, hashedPassword);
 
         // Kiểm tra từng điều kiện riêng lẻ
@@ -92,6 +86,20 @@ public class RegisterController extends HttpServlet {
             request.setAttribute("phone", phone);
             request.setAttribute("address", address);
             request.setAttribute("gender", gender);
+            request.getRequestDispatcher("login.jsp").forward(request, response);
+            return;
+        }
+
+        if (!isValidEmail(email)) {
+            request.setAttribute("error", "Email không hợp lệ! Vui lòng nhập đúng định dạng.");
+            request.setAttribute("fullname", fullname);
+            request.setAttribute("username", username);
+            request.setAttribute("password", password);
+            request.setAttribute("confirmpass", confirmpass);
+            request.setAttribute("phone", phone);
+            request.setAttribute("address", address);
+            request.setAttribute("gender", gender);
+
             request.getRequestDispatcher("login.jsp").forward(request, response);
             return;
         }
@@ -164,7 +172,8 @@ public class RegisterController extends HttpServlet {
         }
 
         cd.insert(c);
-        response.sendRedirect("login.jsp");
+        request.setAttribute("success", "Đăng ký thành công!");
+        request.getRequestDispatcher("login.jsp").forward(request, response);
     }
 
     @Override

@@ -44,7 +44,16 @@
 
     <body>
 
-
+        <c:if test="${not empty success}">
+            <div id="success-alert" class="alert alert-success alert-dismissible fade show position-fixed"
+                 role="alert" 
+                 style="z-index: 1050; top: 20px; right: 20px; width: auto; max-width: 300px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
+                <strong>✔</strong> ${success}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </c:if>
         <!-- backtotop - start -->
         <div id="thetop"></div>
         <div class="backtotop">
@@ -121,9 +130,9 @@
 
                         <div class="col-lg-3 col-md-6 col-sm-6 col-6 order-last">
                             <ul class="header_action_btns ul_li_right clearfix">
-                                
+
                                 <li class="dropdown">
-                                    
+
                                     <div class="cart_dropdown rotors_dropdown dropdown-menu" aria-labelledby="cart_dropdown">
                                         <h4 class="wrap_title">Cart Items: (3)</h4>
                                         <ul class="cart_items_list ul_li_block clearfix">
@@ -440,17 +449,21 @@
                                     </div>
                                     <div class="form_item">
                                         <label for="email">Email*</label>
-                                        <input type="email" id="email" name="email" placeholder="Your Email" value="${email}" required>
+                                        <input type="email" id="email" name="email" placeholder="Your Email" value="${email}" required pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}" title="Vui lòng nhập đúng định dạng email">
                                     </div>
-                                    <div class="form_item">
+                                    <div class="form_item position-relative">
                                         <label for="username">Username*</label>
-                                        <input type="text" id="username" name="username" placeholder="Username" value="${username}" required>
+                                        <input type="text" id="username" name="username" placeholder="Username" required>
+                                        <span id="username-error-icon" class="text-danger position-absolute" 
+                                              style="right: 10px; top: 75%; transform: translateY(-50%); display: none;">
+                                            <i class="fas fa-exclamation-circle" title="Username đã tồn tại"></i>
+                                        </span>
                                     </div>
                                     <div class="form_item">
                                         <label for="phone">Phone Number*</label>
                                         <input type="tel" id="phone" name="phone" placeholder="Phone Number" value="${phone}" required pattern="[0-9]{10}">
                                     </div>
-                                     <div class="form_item"><label for="gender">Gender*</label><select id="gender" name="gender" required><option value="1" <c:if test="${gender}">selected</c:if>>Male</option><option value="0" <c:if test="${gender}">selected</c:if>>Female</option></select></div>
+                                    <div class="form_item"><label for="gender">Gender*</label><select id="gender" name="gender" required><option value="1" <c:if test="${gender}">selected</c:if>>Male</option><option value="0" <c:if test="${gender}">selected</c:if>>Female</option></select></div>
                                     <div class="form_item"><label for="address">Address</label><input type="text" id="address" name="address" placeholder="Address" value="${address}"></div>
                                 </div>
 
@@ -487,7 +500,7 @@
                                             <li class="d-flex align-items-center"><i id="matchIcon" class="fas fa-times text-danger mr-2"></i> Passwords must match</li>
                                         </ul>
                                     </div>
-                                  
+
                                 </div>
                             </div>
 
@@ -527,7 +540,7 @@
                                 </p>
                                 <div class="footer_useful_links mb_30">
                                     <ul class="ul_li_block clearfix">
-                                        
+
                                     </ul>
                                 </div>
                                 <div class="form_item mb-0">
@@ -742,6 +755,42 @@
                                                 });
                                             });
         </script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+                                            $(document).ready(function () {
+                                                $("#username").on("input", function () {
+                                                    let username = $(this).val();
+                                                    let $usernameField = $(this);
+                                                    let $errorIcon = $("#username-error-icon");
 
+                                                    if (username.length < 3) {
+                                                        $errorIcon.hide();
+                                                        return;
+                                                    }
+
+                                                    $.ajax({
+                                                        url: "register", // Trùng với URL mapping của servlet
+                                                        type: "GET",
+                                                        data: {username: username},
+                                                        success: function (response) {
+                                                            if (response.exists) {
+                                                                $usernameField.addClass("is-invalid");
+                                                                $errorIcon.show();
+                                                            } else {
+                                                                $usernameField.removeClass("is-invalid");
+                                                                $errorIcon.hide();
+                                                            }
+                                                        }
+                                                    });
+                                                });
+                                            });
+        </script>
+        <script>
+            $(document).ready(function () {
+                setTimeout(function () {
+                    $("#success-alert").fadeOut("slow");
+                }, 3000);
+            });
+        </script>
     </body>
 </html>
