@@ -127,7 +127,7 @@
 
                         <div class="col-lg-3 col-md-6 col-sm-6 col-6">
                             <div class="brand_logo">
-                                <a href="index_1.html">
+                                <a href="home.jsp">
                                     <img src="assets/images/logo/logo_01_1.png" srcset="assets/images/logo/logo_01_1.png 2x" alt="logo_not_found" width="50%">
                                     <img src="assets/images/logo/logo_01_1.png" srcset="assets/images/logo/logo_01_1.png 2x" alt="logo_not_found" width="50%">
                                 </a>
@@ -228,49 +228,14 @@
                             <nav class="main_menu clearfix">
                                 <ul class="ul_li_center clearfix">
                                     <li class="active has_child">
-                                        <a href="#!">Home</a>
-                                        <ul class="submenu">
-                                            <li><a href="index_1.html">Home Page V.1</a></li>
-                                            <li><a href="index_2.html">Home Page V.2</a></li>
-                                        </ul>
+                                        <a href="home.jsp">Home</a>
                                     </li>
-                                    <li><a href="gallery.html">Our Service</a></li>
-                                    <li><a href="review.html">Reviews</a></li>
-                                    <li><a href="about.html">About</a></li>
-                                    <li class="has_child">
-                                        <a href="#!">Pages</a>
-                                        <ul class="submenu">
-                                            <li><a href="service.html">Our Service</a></li>
-                                            <li><a href="gallery.html">Car Gallery</a></li>
-                                            <li><a href="account.html">My Account</a></li>
-                                            <li><a href="reservation.html">Reservation</a></li>
-                                            <li class="has_child">
-                                                <a href="#!">Blogs</a>
-                                                <ul class="submenu">
-                                                    <li><a href="blog.html">Blog</a></li>
-                                                    <li><a href="blog_details.html">Blog Details</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="has_child">
-                                                <a href="#!">Our Cars</a>
-                                                <ul class="submenu">
-                                                    <li><a href="car.html">Cars</a></li>
-                                                    <li><a href="car_details.html">Car Details</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="cart.html">Shopping Cart</a></li>
-                                            <li><a href="faq.html">F.A.Q.</a></li>
-                                            <li><a href="login.jsp">Login</a></li>
-                                            <li><a href="employee_login.jsp">LoginEmployees</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="has_child">
+                                    <li><a href="booking">Booking Ticket</a></li>
+                                    <li><a href="cuslistblog">Blog</a></li>
+                                    <li>
                                         <a href="contact.jsp">Contact Us</a>
-                                        <ul class="submenu">
-                                            <li><a href="contact.html">Contact Default</a></li>
-                                            <li><a href="contact_wordwide.html">Contact Wordwide</a></li>
-                                        </ul>
                                     </li>
+                                    <li><a href="employee_login.jsp">Employee Login</a></li>
                                 </ul>
                             </nav>
                         </div>
@@ -1509,7 +1474,7 @@
 
             <!-- blog_section - start
             ================================================== -->
-            <section class="blog_section clearfix">
+<!--            <section class="blog_section clearfix">
                 <div class="updown_style_wrap">
 
                     <div class="updown_style">
@@ -1562,7 +1527,7 @@
 
                 </div>
             </section>
-            <!-- blog_section - end
+             blog_section - end
             ================================================== -->
 
 
@@ -1580,8 +1545,8 @@
                         <div class="col-lg-4 col-md-4 col-sm-12 col-sm-12">
                             <div class="footer_about" data-aos="fade-up" data-aos-delay="100">
                                 <div class="brand_logo mb_30">
-                                    <a href="index.html">
-                                        <img src="assets/images/logo/logo_01_1.png" srcset="assets/images/logo/logo_02_2x.png 2x" alt="logo_not_found">
+                                    <a href="home.jsp">
+                                        <img src="assets/images/logo/logo_01_1.png" srcset="assets/images/logo/logo_01_1.png 2x" alt="logo_not_found">
                                     </a>
                                 </div>
                                 <p class="mb_15">

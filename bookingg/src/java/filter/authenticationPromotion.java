@@ -135,7 +135,7 @@ public class authenticationPromotion implements Filter {
                     chain.doFilter(request, response);
                     return;
                 } else {
-                    httpResponse.sendRedirect(httpRequest.getContextPath() + "/home.jsp?RoleErr=true");
+                    httpResponse.sendRedirect(httpRequest.getContextPath() + "/employee_login.jsp?RoleErr=true");
                     return;
                 }
             } else {
