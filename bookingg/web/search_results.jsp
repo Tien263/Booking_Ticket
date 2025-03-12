@@ -150,30 +150,20 @@
                     </div>
 
                     <div class="col-lg-6 col-md-12">
-                        <nav class="main_menu clearfix">
-                            <ul class="ul_li_center clearfix">
-                                <li class="active has_child"><a href="#!">Home</a>
-                                    <ul class="submenu">
-                                        <li><a href="index_1.html">Home Page V.1</a></li>
-                                        <li><a href="index_2.html">Home Page V.2</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="gallery.html">Our Cars</a></li>
-                                <li><a href="review.html">Reviews</a></li>
-                                <li><a href="about.html">About</a></li>
-                                <li class="has_child"><a href="#!">Pages</a>
-                                    <ul class="submenu">
-                                        <li><a href="service.html">Our Service</a></li>
-                                        <li><a href="gallery.html">Car Gallery</a></li>
-                                        <li><a href="account.html">My Account</a></li>
-                                        <li><a href="reservation.html">Reservation</a></li>
-                                        <li><a href="login.html">Login</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="contact.html">Contact Us</a></li>
-                            </ul>
-                        </nav>
-                    </div>
+                            <nav class="main_menu clearfix">
+                                <ul class="ul_li_center clearfix">
+                                    <li class="active has_child">
+                                        <a href="home.jsp">Home</a>
+                                    </li>
+                                    <li><a href="booking">Booking Ticket</a></li>
+                                    <li><a href="cuslistblog">Blog</a></li>
+                                    <li>
+                                        <a href="contact.jsp">Contact Us</a>
+                                    </li>
+                                    <li><a href="employee_login.jsp">Employee Login</a></li>
+                                </ul>
+                            </nav>
+                        </div>
 
                     <div class="col-lg-3 col-md-6 col-sm-6 col-6 order-last">
                         <ul class="header_action_btns ul_li_right clearfix">
@@ -332,91 +322,92 @@
     </main>
     <!-- main body - end -->
 
-    <!-- footer_section - start -->
-    <footer class="footer_section clearfix" data-bg-color="#F2F2F2">
-        <div class="footer_widget_area sec_ptb_100 clearfix">
-            <div class="container">
-                <div class="row justify-content-lg-between">
-                    <div class="col-lg-4 col-md-4 col-sm-12 col-sm-12">
-                        <div class="footer_about" data-aos="fade-up" data-aos-delay="100">
-                            <div class="brand_logo mb_30">
-                                <a href="index.html">
-                                    <img src="assets/images/logo/logo_01_1.png" srcset="assets/images/logo/logo_01_1.png 2x" alt="logo_not_found">
-                                </a>
+    <!-- footer_section - start
+        ================================================== -->
+        <footer class="footer_section clearfix">
+            <div class="footer_widget_area sec_ptb_100 clearfix">
+                <div class="container">
+                    <div class="row justify-content-lg-between">
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-sm-12">
+                            <div class="footer_about" data-aos="fade-up" data-aos-delay="100">
+                                <div class="brand_logo mb_30">
+                                    <a href="index.html">
+                                        <img src="assets/images/logo/logo_01_1.png" srcset="assets/images/logo/logo_01_1.png 2x" alt="logo_not_found">
+                                    </a>
+                                </div>
+                                <p class="mb_15">
+                                    BusGo is committed to providing a reliable and high-quality bus ticket booking service with transparent information, clear pricing, and dedicated customer support, ensuring your journey is always convenient and safe
+                                </p>
+                                <div class="footer_useful_links mb_30">
+                                    <ul class="ul_li_block clearfix">
+
+                                    </ul>
+                                </div>
+                                <div class="form_item mb-0">
+                                    <form action="#">
+                                        <input id="footer_search" type="search" name="search" placeholder="Search">
+                                        <label for="footer_search" class="input_icon"><i class="fal fa-search"></i></label>
+                                    </form>
+                                </div>
                             </div>
-                            <p class="mb_15">
-                                BusGo is committed to providing a reliable and high-quality bus ticket booking service with transparent information, clear pricing, and dedicated customer support, ensuring your journey is always convenient and safe
-                            </p>
-                            <div class="footer_useful_links mb_30">
+                        </div>
+
+                        <div class="col-lg-3 col-md-4 col-sm-12 col-sm-12">
+                            <div class="footer_contact_info" data-aos="fade-up" data-aos-delay="200">
+                                <h3 class="footer_widget_title">Liên hệ:</h3>
                                 <ul class="ul_li_block clearfix">
-                                    <li><a href="#!"><i class="fal fa-angle-right"></i> Rental Information</a></li>
-                                    <li><a href="#!"><i class="fal fa-angle-right"></i> F.A.Q.</a></li>
+                                    <li>
+                                        <strong><i class="fas fa-map-marker-alt"></i> Địa chỉ:</strong>
+                                        <p class="mb-0">
+                                            Khu công nghệ cao Hòa Lạc - Thạch Thất - Hà Nội
+                                        </p>
+                                    </li>
+                                    <li><i class="fas fa-clock"></i> 7:00 - 22:00</li>
+                                    <li><i class="fas fa-envelope"></i> <strong>BusGo@gmail.com</strong></li>
+                                    <li><i class="fas fa-phone"></i> <strong>0398 996 177</strong></li>
                                 </ul>
                             </div>
-                            <div class="form_item mb-0">
-                                <form action="#">
-                                    <input id="footer_search" type="search" name="search" placeholder="Search">
-                                    <label for="footer_search" class="input_icon"><i class="fal fa-search"></i></label>
-                                </form>
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-sm-12">
+                            <div class="footer_useful_links" data-aos="fade-up" data-aos-delay="300">
+                                <h3 class="footer_widget_title">Information:</h3>
+                                <ul class="ul_li_block clearfix">
+                                    <li><a href="#!"><i class="fal fa-angle-right"></i> Find a Car for Rent in the Nearest Location</a></li>
+                                    <li><a href="#!"><i class="fal fa-angle-right"></i> Cars Catalog</a></li>
+                                    <li><a href="#!"><i class="fal fa-angle-right"></i> F.A.Q.</a></li>
+                                    <li><a href="#!"><i class="fal fa-angle-right"></i> About Us</a></li>
+                                    <li><a href="#!"><i class="fal fa-angle-right"></i> Contact Us</a></li>
+                                    <li><a href="#!"><i class="fal fa-angle-right"></i> Help Center</a></li>
+                                    <li><a href="#!"><i class="fal fa-angle-right"></i> Privacy Police</a></li>
+                                </ul>
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
 
-                    <div class="col-lg-3 col-md-4 col-sm-12 col-sm-12">
-                        <div class="footer_contact_info" data-aos="fade-up" data-aos-delay="200">
-                            <h3 class="footer_widget_title">Contact Us:</h3>
-                            <ul class="ul_li_block clearfix">
-                                <li>
-                                    <strong><i class="fas fa-map-marker-alt"></i> Main Office Address:</strong>
-                                    <p class="mb-0">
-                                        Unit 9, Manor Industrial Estate, Lower Wash Lane, Warrington, WA4
-                                    </p>
-                                </li>
-                                <li><i class="fas fa-clock"></i> 8:00am-9:30pm</li>
-                                <li><i class="far fa-angle-right"></i> Other Office Locations</li>
-                                <li><i class="fas fa-envelope"></i> <strong>rotorseml@eml.fr</strong></li>
-                                <li><i class="fas fa-phone"></i> <strong>+880 1680 6361 89</strong></li>
-                            </ul>
+            <div class="footer_bottom text-white clearfix" data-bg-color="#000C21">
+                <div class="container">
+                    <div class="row align-items-center justify-content-lg-between">
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <p class="copyright_text mb-0">Copyright © 2020. Rotors by <a class="author_links text-white" href="#!">Merkulove</a></p>
                         </div>
-                    </div>
 
-                    <div class="col-lg-4 col-md-4 col-sm-12 col-sm-12">
-                        <div class="footer_useful_links" data-aos="fade-up" data-aos-delay="300">
-                            <h3 class="footer_widget_title">Information:</h3>
-                            <ul class="ul_li_block clearfix">
-                                <li><a href="#!"><i class="fal fa-angle-right"></i> Find a Car for Rent in the Nearest Location</a></li>
-                                <li><a href="#!"><i class="fal fa-angle-right"></i> Cars Catalog</a></li>
-                                <li><a href="#!"><i class="fal fa-angle-right"></i> F.A.Q.</a></li>
-                                <li><a href="#!"><i class="fal fa-angle-right"></i> About Us</a></li>
-                                <li><a href="#!"><i class="fal fa-angle-right"></i> Contact Us</a></li>
-                                <li><a href="#!"><i class="fal fa-angle-right"></i> Help Center</a></li>
-                                <li><a href="#!"><i class="fal fa-angle-right"></i> Privacy Police</a></li>
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <ul class="primary_social_links ul_li_right clearfix">
+                                <li><a href="#!"><i class="fab fa-facebook-f"></i></a></li>
+                                <li><a href="#!"><i class="fab fa-instagram"></i></a></li>
+                                <li><a href="#!"><i class="fab fa-twitter"></i></a></li>
+                                <li><a href="#!"><i class="fab fa-youtube"></i></a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-
-        <div class="footer_bottom text-white clearfix" data-bg-color="#000C21">
-            <div class="container">
-                <div class="row align-items-center justify-content-lg-between">
-                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                        <p class="copyright_text mb-0">Copyright © 2020. Rotors by <a class="author_links text-white" href="#!">Merkulove</a></p>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                        <ul class="primary_social_links ul_li_right clearfix">
-                            <li><a href="#!"><i class="fab fa-facebook-f"></i></a></li>
-                            <li><a href="#!"><i class="fab fa-instagram"></i></a></li>
-                            <li><a href="#!"><i class="fab fa-twitter"></i></a></li>
-                            <li><a href="#!"><i class="fab fa-youtube"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!-- footer_section - end -->
+        </footer>
+        <!-- footer_section - end
+        ================================================== -->
 
     <!-- fraimwork - jquery include -->
     <script src="assets/js/jquery-3.5.1.min.js"></script>
