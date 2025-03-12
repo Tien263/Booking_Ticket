@@ -1,17 +1,24 @@
-<%-- 
-    Document   : selectSeats
-    Created on : Feb 5, 2025, 11:16:59 AM
-    Author     : Admin
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %>
 <%@ page import="dal.bookTicket.SeatsDAO" %>
 <%@ page import="model.bookTicket.Seats" %>
 <%@ page import="model.Customer" %>
 <%@ page import="java.text.SimpleDateFormat, java.util.Date" %>
+<%@ page import="java.text.SimpleDateFormat, java.sql.Time" %>
 <% 
     Customer cus = (Customer) request.getAttribute("customer"); 
+    Object rawTime = session.getAttribute("departureTime");
+    String formattedTime = "";
+
+    if (rawTime != null) {
+        try {
+            Time time = Time.valueOf(rawTime.toString()); // Chuyển về kiểu Time
+            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm"); // Định dạng HH:mm
+            formattedTime = sdf.format(time);
+        } catch (Exception e) {
+            formattedTime = rawTime.toString(); // Tránh lỗi, giữ nguyên nếu có lỗi
+        }
+    }
 %>
 <!DOCTYPE html>
 <html>
@@ -63,10 +70,9 @@
                 <img alt="FUTA Bus Lines logo" class="mx-auto mb-2" height="50"
                      src="https://storage.googleapis.com/a1aa/image/ngQyCrFJhxt_MJUEIuluASVCn5PNgYLQwGUjmABjfyU.jpg"
                      width="100" />
-                <a href="booking" style="text-decoration: underline; display: block; text-align: left;"> &laquo; Quay lại</a>
-
+                <a href="booking" style="text-decoration: underline; display: block; text-align: left;"> « Quay lại</a>
             </div>                        
-            <form id="seatSelectionForm" action="SelectSeatURL" method="get" onsubmit="return validateSeats()">
+            <form action="SelectSeatURL" method="get" onsubmit="return validateSeatSelection()">
                 <input type="hidden" name="service" value="selectSeat">
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-4">
                     <div class="lg:col-span-2 space-y-4">
@@ -93,7 +99,7 @@
                                             <input type="checkbox" name="seatIds" value="<%= seat.getS_id() %>" hidden>
                                             <%= seat.getS_name() %>
                                         </button>
-                                        <%}}%>
+                                        <% } } %>
                                     </div>
                                 </div>
 
@@ -163,7 +169,7 @@
                                 </div>
                                 <div class="text-red-500">
                                     <h3 class="font-bold">
-                                        ĐIỀU KHOẢN &amp; LƯU Ý
+                                        ĐIỀU KHOẢN & LƯU Ý
                                     </h3>
                                     <p class="text-black">
                                         <span class="text-red-500">(*)</span> Quý khách vui lòng có mặt tại bến xuất phát của xe
@@ -189,13 +195,10 @@
                                 Tuyến xe: <%= session.getAttribute("from") %> - <%= session.getAttribute("to") %>
                             </p>
                             <p>
-                                Thời gian xuất bến: <%= session.getAttribute("departureTime") %>
+                                Thời gian xuất bến: <%= formattedTime %>
                             </p>
                             <p>
-                                Số lượng ghế: <span id="seatCount">0</span> Ghế
-                            </p>
-                            <p>
-                                Tổng tiền lượt đi: <span id="totalPrice">0</span> VND
+                                Giá vé: <%= session.getAttribute("price")%>
                             </p>
                         </div>
                         <div class="bg-white p-4 rounded shadow">
@@ -203,13 +206,10 @@
                                 Chi tiết giá
                             </h2>
                             <p>
-                                Giá vé lượt đi: 0đ
+                                Tổng số vé: <span id="seatCount">0</span> Vé
                             </p>
                             <p>
-                                Phí thanh toán: 0đ
-                            </p>
-                            <p>
-                                Tổng tiền: 0đ
+                                Tổng tiền: <span id="totalPrice">0</span> VND
                             </p>
                         </div>
                     </div>
@@ -251,16 +251,16 @@
                 } else {
                     console.error("Không tìm thấy phần tử seatCount hoặc totalPrice");
                 }
-
             }
-            
-            function validateSeats() {
-                    if (seatCount === 0) {
-                        alert("Vui lòng chọn ít nhất một ghế trước khi đặt vé.");
-                        return false; // Ngăn gửi form
-                    }
-                    return true; // Cho phép gửi form nếu có ghế được chọn
+
+            // Hàm kiểm tra chọn ghế
+            function validateSeatSelection() {
+                if (seatCount === 0) {
+                    alert("Bạn phải chọn ít nhất một ghế trước khi xác nhận đặt vé!");
+                    return false; // Ngăn form submit
                 }
+                return true; // Cho phép form submit nếu đã chọn ghế
+            }
         </script>
         <script src="assets/js/jquery-3.6.0.min.js"></script>
         <script src="assets/js/bootstrap.bundle.min.js"></script>
@@ -270,8 +270,5 @@
         <script src="assets/js/jquery.nice-select.min.js"></script>
         <script src="assets/js/jquery-ui.js"></script>
         <script src="assets/js/main.js"></script>
-
     </body>
 </html>
-
-

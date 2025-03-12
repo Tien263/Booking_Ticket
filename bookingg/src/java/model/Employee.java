@@ -1,20 +1,26 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package model;
 
 import java.util.ArrayList;
 
+
+
+/**
+ *
+ * @author ADMIN
+ */
 public class Employee {
     private int id;
     private String name;
     private String phone;
     private String address;
     private boolean gender;
-    private int RoleID;
-
-    public Employee(int id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
+    private ArrayList<Roles> roles = new ArrayList<>();
+    
+    
     public Employee() {
     }
 
@@ -24,15 +30,6 @@ public class Employee {
         this.phone = phone;
         this.address = address;
         this.gender = gender;
-    }
-
-    public Employee(int id, String name, String phone, String address, boolean gender, int RoleID) {
-        this.id = id;
-        this.name = name;
-        this.phone = phone;
-        this.address = address;
-        this.gender = gender;
-        this.RoleID = RoleID;
     }
 
     public int getId() {
@@ -75,11 +72,13 @@ public class Employee {
         this.gender = gender;
     }
 
-    public int getRoleID() {
-        return RoleID;
+    public ArrayList<Roles> getRoles() {
+        return roles;
     }
 
-    public void setRoleID(int roleID) {
-        RoleID = roleID;
+    public void setRoles(ArrayList<Roles> roles) {
+        this.roles = roles;
     }
+    
+    
 }

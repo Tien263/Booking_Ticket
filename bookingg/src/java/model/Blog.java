@@ -16,6 +16,8 @@ public class Blog {
     private String title;
     private String content;
     private String brief;
+    private String createdby;
+    private String updatedby;
     private Date createdtime;
     private Date updatedtime;
     private boolean status;
@@ -24,11 +26,13 @@ public class Blog {
     public Blog() {
     }
 
-    public Blog(int id, String title, String content, String brief, Date createdtime, Date updatedtime, boolean status, String image) {
+    public Blog(int id, String title, String content, String brief, String createdby, String updatedby, Date createdtime, Date updatedtime, boolean status, String image) {
         this.id = id;
         this.title = title;
         this.content = content;
         this.brief = brief;
+        this.createdby = createdby;
+        this.updatedby = updatedby;
         this.createdtime = createdtime;
         this.updatedtime = updatedtime;
         this.status = status;
@@ -67,6 +71,22 @@ public class Blog {
         this.brief = brief;
     }
 
+    public String getCreatedby() {
+        return createdby;
+    }
+
+    public void setCreatedby(String createdby) {
+        this.createdby = createdby;
+    }
+
+    public String getUpdatedby() {
+        return updatedby;
+    }
+
+    public void setUpdatedby(String updatedby) {
+        this.updatedby = updatedby;
+    }
+
     public Date getCreatedtime() {
         return createdtime;
     }
@@ -99,5 +119,6 @@ public class Blog {
         this.image = image;
     }
 
-   
+    
+
 }

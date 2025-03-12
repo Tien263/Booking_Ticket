@@ -41,15 +41,17 @@ public class BookTicketDAO extends DBContext {
 
             connection.commit(); // Xác nhận transaction
             n = btId;
-        } catch (SQLException e) {
+        } catch (SQLException e) {            
+            e.printStackTrace();
+        } finally {
             try {
                 if (connection != null) {
                     connection.rollback(); // Rollback nếu có lỗi
+                    connection.setAutoCommit(true); // Bật lại AutoCommit để tránh ảnh hưởng các thao tác khác
                 }
-            } catch (SQLException rollbackEx) {
-                rollbackEx.printStackTrace();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
             }
-            e.printStackTrace();
         }
         return n; // Trả về ID của BookTickets
     }
@@ -78,23 +80,17 @@ public class BookTicketDAO extends DBContext {
             return false; // Không có ghế nào để tạo vé
         }
         String ticketSQL = "INSERT INTO Tickets (bt_id, bt1_id, s_id, t_status, t_purchaseDate) VALUES (?, ?, ?, 'pending', GETDATE())";
-        int createdTickets = 0; // Đếm số vé được tạo thành công
 
         try (PreparedStatement psTicket = connection.prepareStatement(ticketSQL, Statement.RETURN_GENERATED_KEYS)) {
             for (int seatId : seatIds) {
                 psTicket.setInt(1, btId);  // Liên kết vé với BookTickets
                 psTicket.setInt(2, tripId);
                 psTicket.setInt(3, seatId);
-                int n = psTicket.executeUpdate();
-                if (n > 0) { // Kiểm tra nếu lệnh INSERT thành công
-                    try (ResultSet rs = psTicket.getGeneratedKeys()) {
-                        if (rs.next()) {
-                            createdTickets++; // Đếm số vé tạo thành công
-                        }
-                    }
-                }
+                psTicket.addBatch(); // Thêm vào batch
             }
-            return createdTickets == seatIds.size();
+
+            int[] result = psTicket.executeBatch(); // Thực thi tất cả các lệnh cùng lúc
+            return result.length == seatIds.size(); // Kiểm tra nếu tất cả đều thành công
         }
     }
 
@@ -113,9 +109,9 @@ public class BookTicketDAO extends DBContext {
                 + "WHERE bt.bt_id = ?";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setInt(1, bookingId);
-            try (ResultSet rs = ps.executeQuery()){ 
-                while(rs.next()) {
-                     BookTicket bookTicket = new BookTicket(
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    BookTicket bookTicket = new BookTicket(
                             rs.getInt("t_id"),
                             rs.getString("c_fullname"),
                             rs.getString("c_phone"),
@@ -126,16 +122,16 @@ public class BookTicketDAO extends DBContext {
                             rs.getString("s_name"),
                             rs.getFloat("br_price")
                     );
-                      tickets.add(bookTicket);
+                    tickets.add(bookTicket);
                 }
             }
-        
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
 
-            return tickets;
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+
+        return tickets;
+    }
 
     @Override
     public void insert(Object entity) {

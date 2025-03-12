@@ -29,9 +29,8 @@ public class bookingDAO extends DBContext<Object> {
              "FROM [BusRoutes] br " + 
              "JOIN [BusTrips] bt ON bt.br_id = br.br_id " + 
              "JOIN [Seats] s ON bt.bt1_id = s.bt1_id " + 
-             "JOIN [Vehicles] v ON v.v_id = s.v_id " +
-             "WHERE br.br_from = ? AND br.br_to = ? " +
-             "AND s.s_status = 'available' " + 
+             "JOIN [Vehicles] v ON v.v_id = s.v_id " + 
+             "WHERE br.br_from = ? AND br.br_to = ? " + 
              "AND bt.bt1_departureTime >= ? " + 
              "AND bt.bt1_date = ?;";
            try {
@@ -63,13 +62,14 @@ public class bookingDAO extends DBContext<Object> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    
+
         return list;
     }
     
     public String getEid(String email) {
     String c_id = null; // Giá trị mặc định nếu không tìm thấy
     String sql = "SELECT c_id FROM Customer WHERE c_email = ?";
+
     try {
         PreparedStatement st = connection.prepareStatement(sql);
         st.setString(1, email);
@@ -81,10 +81,9 @@ public class bookingDAO extends DBContext<Object> {
     } catch (SQLException e) {
         e.printStackTrace();
     }
-    return c_id;
- }
 
-    
+    return c_id;
+}
 
     @Override
     public void insert(Object entity) {

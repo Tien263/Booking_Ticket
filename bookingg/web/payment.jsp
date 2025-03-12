@@ -31,3 +31,5 @@
             <input type="submit" value="Thanh toán">
         </form>
     </body>
+</html>
+

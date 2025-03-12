@@ -3,9 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/ADMIN/Downloads/Booking_Ticket-main%20(7)/Booking_Ticket-main/bookingg/src/java/model/Blog.java</file>
-            <file>file:/C:/Users/ADMIN/Downloads/Booking_Ticket-main%20(7)/Booking_Ticket-main/bookingg/src/java/dal/BlogDao.java</file>
-            <file>file:/C:/Users/ADMIN/Downloads/Booking_Ticket-main%20(7)/Booking_Ticket-main/bookingg/src/java/controller/blog/BlogCreateServlet.java</file>
+            <file>file:/D:/ProjectSWp/3-3/bookingg/web/managerTrip/insertBusRoute.jsp</file>
+            <file>file:/D:/ProjectSWp/3-3/bookingg/src/java/controller/managerTrip/BusRouteController.java</file>
+            <file>file:/D:/ProjectSWp/3-3/bookingg/web/managerTrip/updateBusRoute.jsp</file>
+            <file>file:/D:/ProjectSWp/3-3/bookingg/web/managerTrip/updateBusTrip.jsp</file>
+            <file>file:/D:/ProjectSWp/3-3/bookingg/src/java/controller/managerTrip/BusTripController.java</file>
+            <file>file:/D:/ProjectSWp/3-3/bookingg/src/java/model/managerTrip/BusRoute.java</file>
+            <file>file:/D:/ProjectSWp/3-3/bookingg/web/managerTrip/listBusRoute.jsp</file>
+            <file>file:/D:/ProjectSWp/3-3/bookingg/web/managerTrip/busRouteDetail.jsp</file>
         </group>
     </open-files>
 </project-private>

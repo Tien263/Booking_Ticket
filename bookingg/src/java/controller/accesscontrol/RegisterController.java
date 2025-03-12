@@ -4,7 +4,6 @@
  */
 package controller.accesscontrol;
 
-import MD5.BCrypt;
 import dal.CustomerDao;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -57,45 +56,7 @@ public class RegisterController extends HttpServlet {
 
         System.out.println(String.valueOf(gender));
         CustomerDao cd = new CustomerDao();
-        // **Mã hóa mật khẩu trước khi lưu vào cơ sở dữ liệu**
-        String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
-        
-        Customer c = new Customer(email, fullname, phone, address, gender, username, hashedPassword);
-
-        // Kiểm tra từng điều kiện riêng lẻ
-        boolean hasUppercase = password.matches(".*[A-Z].*");
-        boolean hasDigit = password.matches(".*\\d.*");
-        boolean hasSpecialChar = password.matches(".*[@$!%*?&].*");
-        boolean validLength = password.length() >= 8 && password.length() <= 16;
-
-// Đếm số điều kiện thỏa mãn
-        int validConditions = 0;
-        if (hasUppercase) {
-            validConditions++;
-        }
-        if (hasDigit) {
-            validConditions++;
-        }
-        if (hasSpecialChar) {
-            validConditions++;
-        }
-        if (validLength) {
-            validConditions++;
-        }
-
-// Kiểm tra xem có ít nhất 3 điều kiện được thỏa mãn hay không
-        if (validConditions < 3) {
-            request.setAttribute("error", "Mật khẩu phải thỏa mãn ít nhất 3 trong 4 yêu cầu: 8-16 ký tự, 1 chữ hoa, 1 số, 1 ký tự đặc biệt.");
-            request.setAttribute("fullname", fullname);
-            request.setAttribute("email", email);
-            request.setAttribute("username", username);
-            request.setAttribute("phone", phone);
-            request.setAttribute("address", address);
-            request.setAttribute("gender", gender);
-            request.getRequestDispatcher("login.jsp").forward(request, response);
-            return;
-        }
-
+        Customer c = new Customer(email, fullname, phone, address, gender, username, password);
         if (cd.checkEmailExist(email)) {
             request.setAttribute("error", "Email exists. Choose another email!");
             request.setAttribute("fullname", fullname);
