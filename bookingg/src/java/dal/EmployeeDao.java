@@ -161,61 +161,9 @@ public class EmployeeDao extends DBContext<Employee> {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-     @Override
+    @Override
     public Employee get(int id) {
-        String sql = "SELECT * FROM Employee WHERE e_id = ?";
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-
-        try {
-            stmt = connection.prepareStatement(sql);
-            stmt.setInt(1, id);
-            rs = stmt.executeQuery();
-
-            if (rs.next()) {
-                return new Employee(
-                        rs.getInt("e_id"),
-                        rs.getString("e_name"),
-                        rs.getString("e_phone"),
-                        rs.getString("e_address"),
-                        rs.getBoolean("e_gender"),
-                        rs.getInt("r_id")
-                );
-            }
-        } catch (Exception e) {
-            Logger.getLogger(EmployeeDao.class.getName()).log(Level.SEVERE, null, e);
-        } finally {
-            try {
-                if (rs != null) rs.close();
-                if (stmt != null) stmt.close();
-            } catch (Exception e) {
-                Logger.getLogger(EmployeeDao.class.getName()).log(Level.SEVERE, null, e);
-            }
-        }
-        return null;
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    public Employee getEmployeeById(int eId) {
-    Employee employee = null;
-    String sql = "SELECT e_id, e_name, e_phone, e_address, e_gender FROM Employee WHERE e_id = ?";
-
-    try {
-        PreparedStatement ps = connection.prepareStatement(sql);
-        ps.setInt(1, eId);
-        ResultSet rs = ps.executeQuery();
-
-        if (rs.next()) {
-            employee = new Employee();
-            employee.setId(rs.getInt("e_id"));
-            employee.setName(rs.getString("e_name"));
-            employee.setPhone(rs.getString("e_phone"));
-            employee.setAddress(rs.getString("e_address"));
-            employee.setGender(rs.getBoolean("e_gender"));
-        }
-    } catch (SQLException e) {
-        e.printStackTrace();
-    }
-    return employee;
-}
-
 
 }

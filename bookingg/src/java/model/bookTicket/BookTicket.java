@@ -10,7 +10,8 @@ import java.util.Date;
 /**
  *
  * @author Admin
- */public class BookTicket {
+ */
+public class BookTicket {
 
     private int t_id;
     private String c_fullname;

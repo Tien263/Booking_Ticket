@@ -72,8 +72,7 @@ public class SelectSeatController extends HttpServlet {
                     double totalPrice = price * seatIds.size();
                     request.setAttribute("seatNames", seatNames);
                     request.setAttribute("totalPrice", totalPrice);
-//                    request.getRequestDispatcher("payment.jsp").forward(request, response);
-                    response.sendRedirect("/vnpay_jsp/vnpay_pay.jsp");
+                    request.getRequestDispatcher("payment.jsp").forward(request, response);
                 } catch (NumberFormatException e) {
                     request.setAttribute("message", "Lỗi dữ liệu payment: " + e.getMessage());
                     request.getRequestDispatcher("error.jsp").forward(request, response);
