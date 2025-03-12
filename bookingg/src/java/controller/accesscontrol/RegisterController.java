@@ -4,6 +4,7 @@
  */
 package controller.accesscontrol;
 
+import MD5.BCrypt;
 import dal.CustomerDao;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -56,7 +57,10 @@ public class RegisterController extends HttpServlet {
 
         System.out.println(String.valueOf(gender));
         CustomerDao cd = new CustomerDao();
-        Customer c = new Customer(email, fullname, phone, address, gender, username, password);
+        // **Mã hóa mật khẩu trước khi lưu vào cơ sở dữ liệu**
+        String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
+        
+        Customer c = new Customer(email, fullname, phone, address, gender, username, hashedPassword);
 
         // Kiểm tra từng điều kiện riêng lẻ
         boolean hasUppercase = password.matches(".*[A-Z].*");
