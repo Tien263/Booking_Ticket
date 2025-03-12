@@ -20,7 +20,7 @@ import model.promotion.Promotions_By_Code;
 /**
  * Servlet điều khiển quản lý mã giảm giá
  */
-@WebServlet(name = "PromotionController", urlPatterns = {"/promotion_code", "/editPromotion", "/deletePromotion"})
+@WebServlet(name = "PromotionByCodeController", urlPatterns = {"/promotion/promotion_code", "/promotion/editPromotion", "/promotion/deletePromotion"})
 public class PromotionByCodeController extends HttpServlet {
 
     private PromotionByCodeDAO promotionDAO = new PromotionByCodeDAO();

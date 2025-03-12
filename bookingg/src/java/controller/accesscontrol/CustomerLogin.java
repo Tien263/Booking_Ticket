@@ -79,10 +79,10 @@ public class CustomerLogin extends HttpServlet {
             Customer c = cd.getCustomerByEmail(email, password);
 
             if (c != null) {
-
                 session.setAttribute("customer", c);
-                session.setAttribute("c_id", c.getId());
-                response.sendRedirect("car.html");
+                session.setAttribute("user", email);
+                response.sendRedirect("home.jsp");
+
             } else {
                 request.setAttribute("loginerror", "Wrong passoword!");
                 request.getRequestDispatcher("login.jsp").forward(request, response);

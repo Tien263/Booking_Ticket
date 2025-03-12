@@ -22,7 +22,7 @@ import jakarta.servlet.http.HttpServletResponse;
  * @author ADMIN
  */
 
-@WebServlet(name = "PromotionByDateController", urlPatterns = {"/promotion_date", "/editDatePromotion", "/deleteDatePromotion"})
+@WebServlet(name = "PromotionByDateController", urlPatterns = {"/promotion/promotion_date", "/promotion/editDatePromotion", "/promotion/deleteDatePromotion"})
 public class PromotionByDateController extends HttpServlet {
 
     private PromotionByDateDAO promotionDAO = new PromotionByDateDAO();
