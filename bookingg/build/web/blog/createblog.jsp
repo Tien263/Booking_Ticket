@@ -2,14 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="model.User, java.util.Date" %>
 
-<%
-    // Lấy User từ session thay vì Employee
-    User user = (User) session.getAttribute("user");
-    if (user == null) {
-        response.sendRedirect("employee_login.jsp");
-        return;
-    }
-%>
 
 <!DOCTYPE html>
 <html>
@@ -33,7 +25,6 @@
 
         <img id="previewImage" src="" alt="Ảnh xem trước" style="max-width: 300px; display: none;"><br><br>
 
-        <p><b>Người đăng:</b> <%= user.getUsername() %></p>
         <p><b>Thời gian hiện tại:</b> <%= new Date() %></p>
 
         <button type="submit">Đăng bài</button>

@@ -41,8 +41,6 @@
                     <th>Tiêu đề</th>
                     <th>Mô tả ngắn</th>
                     <th>Nội dung</th>
-                    <th>Người tạo</th>
-                    <th>Người cập nhật</th>
                     <th>Ngày tạo</th>
                     <th>Ngày cập nhật</th>
                     <th>Ảnh</th>
@@ -59,8 +57,6 @@
                                 <td>${b.getTitle()}</td>
                                 <td>${b.getBrief()}</td>
                                 <td>${b.getContent()}</td>
-                                <td>${b.getCreatedby().getName()}</td>
-                                <td>${b.getUpdatedby().getName()}</td>
                                 <td>${b.getCreatedtime()}</td>
                                 <td>${b.getUpdatedtime()}</td>
                                 <td>

@@ -55,8 +55,6 @@ public class CustomerLogin extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         String forgot = request.getParameter("forgot");
-        BCrypt bCrypt = new BCrypt();
-//        String password1 =  bCrypt.hashpw(password, bCrypt.gensalt());
         CustomerDao cd = new CustomerDao();
         Customer customer = cd.getByEmail(email);
         HttpSession session = request.getSession();

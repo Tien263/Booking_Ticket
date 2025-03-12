@@ -37,13 +37,7 @@ public class BlogCreateServlet extends HttpServlet {
         HttpSession session = request.getSession();
         Object userObj = session.getAttribute("user"); // Lấy đối tượng từ session
 
-        // Kiểm tra kiểu của đối tượng
-        if (!(userObj instanceof Employee)) {
-            response.sendRedirect("/bookingg/employee_login.jsp"); // Chuyển hướng nếu không phải Employee
-            return;
-        }
         
-        Employee loggedUser = (Employee) userObj; // Ép kiểu an toàn
 
         // Lấy thông tin từ form
         String title = request.getParameter("title");
@@ -71,8 +65,6 @@ public class BlogCreateServlet extends HttpServlet {
         blog.setTitle(title);
         blog.setContent(content);
         blog.setBrief(brief);
-        blog.setCreatedby(loggedUser);
-        blog.setUpdatedby(loggedUser);
         blog.setCreatedtime(Date.valueOf(LocalDateTime.now().toLocalDate()));
         blog.setUpdatedtime(Date.valueOf(LocalDateTime.now().toLocalDate()));
         blog.setStatus(true);

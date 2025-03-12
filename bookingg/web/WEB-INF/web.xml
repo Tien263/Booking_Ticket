@@ -88,10 +88,6 @@
         <servlet-name>ContactListController</servlet-name>
         <servlet-class>controller.accesscontrol.ContactListController</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>LogoutController</servlet-name>
-        <servlet-class>controller.accesscontrol.LogoutController</servlet-class>
-    </servlet>
     <servlet-mapping>
         <servlet-name>Register</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -223,9 +219,5 @@
     <servlet-mapping>
         <servlet-name>ContactListController</servlet-name>
         <url-pattern>/contactlist</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>LogoutController</servlet-name>
-        <url-pattern>/logout</url-pattern>
     </servlet-mapping>
 </web-app>
