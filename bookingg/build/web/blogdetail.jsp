@@ -87,7 +87,7 @@
         <div class="content"><%= blog.getContent() %></div>
 
         <div class="blog-meta">
-            <span>Updated by: <%= blog.getUpdatedby() != null ? blog.getUpdatedby().getName() : "N/A" %></span>
+
             <span>Date: <%= blog.getUpdatedtime() %></span>
         </div>
 

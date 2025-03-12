@@ -40,7 +40,13 @@ public class RegisterController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String username = request.getParameter("username");
+        CustomerDao cd = new CustomerDao();
+        boolean exists = cd.checkUsernameExist(username);
+
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write("{\"exists\": " + exists + "}");
     }
 
     @Override
@@ -59,7 +65,7 @@ public class RegisterController extends HttpServlet {
         CustomerDao cd = new CustomerDao();
         // **Mã hóa mật khẩu trước khi lưu vào cơ sở dữ liệu**
         String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
-        
+
         Customer c = new Customer(email, fullname, phone, address, gender, username, hashedPassword);
 
         // Kiểm tra từng điều kiện riêng lẻ
@@ -164,7 +170,8 @@ public class RegisterController extends HttpServlet {
         }
 
         cd.insert(c);
-        response.sendRedirect("login.jsp");
+        request.setAttribute("success", "Đăng ký thành công!");
+        request.getRequestDispatcher("login.jsp").forward(request, response);
     }
 
     @Override
