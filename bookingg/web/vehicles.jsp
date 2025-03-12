@@ -59,10 +59,24 @@
         </style>
     </head>
     <body>
+        <h2>Search Vehicles</h2>
 
+        <!-- Form tìm kiếm theo biển số -->
+        <form action="vehicle" method="GET">
+            <label for="licensePlate">Search by License Plate:</label>
+            <input type="text" name="licensePlate" id="licensePlate">
+            <button type="submit">Search</button>
+        </form>
+
+        <!-- Form tìm kiếm theo loại xe -->
+        <form action="vehicle" method="GET">
+            <label for="type">Search by Type:</label>
+            <input type="text" name="type" id="type">
+            <button type="submit">Search</button>
+        </form>
 
         <h2>List of Vehicles</h2>
-        <table>
+        <table border="1">
             <tr>
                 <th>ID</th>
                 <th>Type</th>
@@ -71,11 +85,10 @@
                 <th>Status</th>
                 <th>Action</th>
             </tr>
-            <%-- Dữ liệu phương tiện sẽ được hiển thị tại đây --%>
             <% 
-                VehicleDAO dao = new VehicleDAO();
-                List<Vehicle> vehicles = dao.getAllVehicles();
-                for (Vehicle v : vehicles) {
+                List<Vehicle> vehicles = (List<Vehicle>) request.getAttribute("vehicles");
+                if (vehicles != null) {
+                    for (Vehicle v : vehicles) { 
             %>
             <tr>
                 <td><%= v.getId() %></td>
@@ -85,23 +98,35 @@
                 <td><%= v.getStatus() %></td>
                 <td>
                     <a href="editVehicle.jsp?id=<%= v.getId() %>">Edit</a> 
-                    <!--                <a href="vehicle?action=delete&id=?" onclick="return confirm('Are you sure?');">Delete</a>-->
+
                 </td>
+            </tr>
+            <% 
+                    }
+                } else { 
+            %>
+            <tr>
+                <td colspan="6">No vehicles found.</td>
             </tr>
             <% } %>
         </table>
+
         <button onclick="window.location.href = 'addVehicle.jsp'">Add</button>
+
+        <%-- Hiển thị thông báo thành công hoặc lỗi --%>
         <% 
-    String errorMessage = (String) request.getAttribute("errorMessage");
-    String successMessage = (String) request.getAttribute("successMessage");
-    if (errorMessage != null) { 
+            String errorMessage = (String) session.getAttribute("errorMessage");
+            String successMessage = (String) session.getAttribute("successMessage");
+            if (errorMessage != null) { 
         %>
         <p style="color: red;"><%= errorMessage %></p>
         <% 
+                session.removeAttribute("errorMessage");
             } else if (successMessage != null) { 
         %>
         <p style="color: green;"><%= successMessage %></p>
         <% 
+                session.removeAttribute("successMessage");
             } 
         %>
 

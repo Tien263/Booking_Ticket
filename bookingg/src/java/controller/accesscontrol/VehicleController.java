@@ -61,8 +61,20 @@ public class VehicleController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        List<Vehicle> vehicles = vehicleDAO.getAllVehicles();
+
+        String licensePlate = request.getParameter("licensePlate");
+        String type = request.getParameter("type");
+
+        List<Vehicle> vehicles;
+
+        if (licensePlate != null && !licensePlate.trim().isEmpty()) {
+            vehicles = vehicleDAO.searchByLicensePlate(licensePlate);
+        } else if (type != null && !type.trim().isEmpty()) {
+            vehicles = vehicleDAO.searchByType(type);
+        } else {
+            vehicles = vehicleDAO.getAllVehicles();
+        }
+
         request.setAttribute("vehicles", vehicles);
         request.getRequestDispatcher("vehicles.jsp").forward(request, response);
     }
@@ -81,21 +93,20 @@ public class VehicleController extends HttpServlet {
         String action = request.getParameter("action");
 
         if ("add".equals(action)) {
-            int id = Integer.parseInt(request.getParameter("id"));
             String type = request.getParameter("type");
             int capacity = Integer.parseInt(request.getParameter("capacity"));
             String licensePlate = request.getParameter("licensePlate");
             String status = request.getParameter("status");
 
-            Vehicle vehicle = new Vehicle(id, type, capacity, licensePlate, status);
+            Vehicle vehicle = new Vehicle(type, capacity, licensePlate, status);
             boolean isInserted = vehicleDAO.insertVehicle(vehicle);
 
-            if (!isInserted) {
-                request.setAttribute("errorMessage", "Biển số xe hoặc ID của xe đã tồn tại!");
+             if (!isInserted) {
+                request.getSession().setAttribute("errorMessage", "Biển số xe đã tồn tại!");
             } else {
-                request.setAttribute("successMessage", "Thêm phương tiện thành công!");
+                request.getSession().setAttribute("successMessage", "Thêm phương tiện thành công!");
             }
-            request.getRequestDispatcher("vehicles.jsp").forward(request, response);
+            response.sendRedirect("vehicle");
             return;
         } else if ("update".equals(action)) {
             int id = Integer.parseInt(request.getParameter("id"));
@@ -107,12 +118,12 @@ public class VehicleController extends HttpServlet {
             Vehicle vehicle = new Vehicle(id, type, capacity, licensePlate, status);
             boolean isUpdated = vehicleDAO.updateVehicle(vehicle);
 
-            if (!isUpdated) {
-                request.setAttribute("errorMessage", "Biển số xe hoặc ID của xe đã tồn tại! Vui lòng cập nhật lại.");
+           if (!isUpdated) {
+                request.getSession().setAttribute("errorMessage", "Biển số xe đã tồn tại! Vui lòng cập nhật lại.");
             } else {
-                request.setAttribute("successMessage", "Cập nhật phương tiện thành công!");
+                request.getSession().setAttribute("successMessage", "Cập nhật phương tiện thành công!");
             }
-            request.getRequestDispatcher("vehicles.jsp").forward(request, response);
+            response.sendRedirect("vehicle");
             return;
         } else if ("delete".equals(action)) {
             int id = Integer.parseInt(request.getParameter("id"));

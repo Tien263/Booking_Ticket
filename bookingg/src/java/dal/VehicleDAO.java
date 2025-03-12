@@ -54,16 +54,22 @@ public class VehicleDAO extends DBContext {
         if (isLicensePlateExists(vehicle.getLicensePlate())) {
             return false; // Trả về false nếu biển số đã tồn tại
         }
-        String sql = "INSERT INTO Vehicles (v_id, v_type, v_capacity, v_licensePlate, v_status) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Vehicles (v_type, v_capacity, v_licensePlate, v_status) VALUES (?, ?, ?, ?)";
         try (
-                PreparedStatement pstmt = connection.prepareStatement(sql)) {
-            pstmt.setInt(1, vehicle.getId());
-            pstmt.setString(2, vehicle.getType());
-            pstmt.setInt(3, vehicle.getCapacity());
-            pstmt.setString(4, vehicle.getLicensePlate());
-            pstmt.setString(5, vehicle.getStatus());
-            int affectedRows = pstmt.executeUpdate(); // Thực hiện INSERT
-            return affectedRows > 0;
+                PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            stmt.setString(1, vehicle.getType());
+            stmt.setInt(2, vehicle.getCapacity());
+            stmt.setString(3, vehicle.getLicensePlate());
+            stmt.setString(4, vehicle.getStatus());
+            int affectedRows = stmt.executeUpdate();
+
+            if (affectedRows > 0) {
+                ResultSet generatedKeys = stmt.getGeneratedKeys();
+                if (generatedKeys.next()) {
+                    vehicle.setId(generatedKeys.getInt(1)); // Lấy ID tự động sinh
+                }
+                return true;
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -110,6 +116,48 @@ public class VehicleDAO extends DBContext {
             e.printStackTrace();
         }
 
+    }
+
+    public List<Vehicle> searchByLicensePlate(String licensePlate) {
+        List<Vehicle> vehicles = new ArrayList<>();
+        String sql = "SELECT * FROM Vehicles WHERE v_licensePlate LIKE ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, "%" + licensePlate + "%");
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                vehicles.add(new Vehicle(
+                        rs.getInt("v_id"),
+                        rs.getString("v_type"),
+                        rs.getInt("v_capacity"),
+                        rs.getString("v_licensePlate"),
+                        rs.getString("v_status")
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return vehicles;
+    }
+
+    public List<Vehicle> searchByType(String type) {
+        List<Vehicle> vehicles = new ArrayList<>();
+        String sql = "SELECT * FROM Vehicles WHERE v_type LIKE ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, "%" + type + "%");
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                vehicles.add(new Vehicle(
+                        rs.getInt("v_id"),
+                        rs.getString("v_type"),
+                        rs.getInt("v_capacity"),
+                        rs.getString("v_licensePlate"),
+                        rs.getString("v_status")
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return vehicles;
     }
 
     public Vehicle getVehicleById(int id) {

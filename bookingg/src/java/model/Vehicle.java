@@ -26,6 +26,13 @@ public class Vehicle {
         this.licensePlate = licensePlate;
         this.status = status;
     }
+    public Vehicle(String type, int capacity, String licensePlate, String status) {
+        this.type = type;
+        this.capacity = capacity;
+        this.licensePlate = licensePlate;
+        this.status = status;
+    }
+    
 
     // Getters và Setters
     public int getId() { return id; }
