@@ -59,6 +59,9 @@ public class EmployeeLoginnController extends HttpServlet {
             case 5:
                 response.sendRedirect(request.getContextPath() + "/promotion/Promotion.jsp");
                 break;
+            case 6:
+                response.sendRedirect(request.getContextPath() + "/vehicle/vehicle");
+                break;
             default:
                 response.sendRedirect(request.getContextPath() + "/home");
                 break;

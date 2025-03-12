@@ -12,6 +12,14 @@
         <filter-name>authenticationTripRoute</filter-name>
         <filter-class>filter.authenticationTripRoute</filter-class>
     </filter>
+    <filter>
+        <filter-name>authenticationVehicle</filter-name>
+        <filter-class>filter.authenticationVehicle</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>authenticationVehicle</filter-name>
+        <url-pattern>/vehicle/*</url-pattern>
+    </filter-mapping>
     <filter-mapping>
         <filter-name>authenticationTripRoute</filter-name>
         <url-pattern>/BusTripURL/*</url-pattern>
@@ -103,6 +111,10 @@
     <servlet>
         <servlet-name>LogoutController</servlet-name>
         <servlet-class>controller.accesscontrol.LogoutController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>VehicleController</servlet-name>
+        <servlet-class>controller.accesscontrol.VehicleController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Register</servlet-name>
@@ -255,5 +267,9 @@
     <servlet-mapping>
         <servlet-name>BusTripController</servlet-name>
         <url-pattern>/BusTripURL</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>VehicleController</servlet-name>
+        <url-pattern>/vehicle/vehicle</url-pattern>
     </servlet-mapping>
 </web-app>
