@@ -10,7 +10,7 @@ package model;
  * @author ADMIN
  */
 public class Customer {
-
+    private int id;
     private String email;
     private String fullname;
     private String phone;
@@ -22,15 +22,18 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(String email, String fullname, String phone, String address, boolean gender, String username) {
+    public Customer(int id, String email, String fullname, String phone, String address, boolean gender, String username, String password) {
+        this.id = id;
         this.email = email;
         this.fullname = fullname;
         this.phone = phone;
         this.address = address;
         this.gender = gender;
         this.username = username;
+        this.password = password;
     }
     
+
     public Customer(String email, String fullname, String phone, String address, boolean gender, String username, String password) {
         this.email = email;
         this.fullname = fullname;
@@ -39,6 +42,14 @@ public class Customer {
         this.gender = gender;
         this.username = username;
         this.password = password;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getEmail() {
