@@ -253,11 +253,11 @@
                                             <li><a href="cart.html">Shopping Cart</a></li>
                                             <li><a href="faq.html">F.A.Q.</a></li>
                                             <li><a href="login.jsp">Login</a></li>
-                                            <li><a href="login.html">LoginEmployees</a></li>
+                                            <li><a href="employee_login.jsp">LoginEmployees</a></li>
                                         </ul>
                                     </li>
                                     <li class="has_child">
-                                        <a href="#!">Contact Us</a>
+                                        <a href="contact.jsp">Contact Us</a>
                                         <ul class="submenu">
                                             <li><a href="contact.html">Contact Default</a></li>
                                             <li><a href="contact_wordwide.html">Contact Wordwide</a></li>

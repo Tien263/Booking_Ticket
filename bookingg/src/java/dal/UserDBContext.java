@@ -18,6 +18,37 @@ import model.User;
  */
 public class UserDBContext extends DBContext<User> {
 
+    public User checkAuthen(String username, String password) {
+        String sql = "SELECT * FROM Users WHERE u_username = ? AND u_password = ?";
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            stmt = connection.prepareStatement(sql);
+            stmt.setString(1, username);
+            stmt.setString(2, password);
+            rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                User user = new User();
+                user.setUsername(rs.getString("u_username"));
+                user.setPassword(rs.getString("u_password"));
+                user.setRoleID(rs.getInt("r_id"));
+                return user;
+            }
+        } catch (Exception e) {
+            Logger.getLogger(UserDBContext.class.getName()).log(Level.SEVERE, null, e);
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (stmt != null) stmt.close();
+            } catch (Exception e) {
+                Logger.getLogger(UserDBContext.class.getName()).log(Level.SEVERE, null, e);
+            }
+        }
+        return null;
+    }
+    
     public List<String> getRolesByUsername(String username) {
         List<String> roles = new ArrayList<>();
         String sql = "SELECT r.r_name FROM Roles r "

@@ -1,33 +1,33 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author ADMIN
- */
 public class User {
 
     private String username;
     private String password;
-    private int eId = -1; // Mặc định là -1 nếu chưa có Employee
+    private int eId = -1; // Default is -1 if no Employee
     private ArrayList<Employee> emp = new ArrayList<>();
+    private int RoleID;
 
-    // Lấy e_id của nhân viên đầu tiên nếu có (tránh lỗi khi Employee trống)
     public int getFirstEmployeeId() {
         if (!emp.isEmpty()) {
-            return emp.get(0).getId(); // Lấy e_id của nhân viên đầu tiên
+            return emp.get(0).getId(); // Return first Employee ID
         }
-        return -1; // Trả về -1 nếu không có Employee nào
+        return -1; // Return -1 if no Employee
     }
 
     public boolean hasEmployeeInfo() {
         System.out.println("🔍 Checking Employee Info: e_id = " + eId);
-        return eId > 0; //trả về true nếu danh sách không trống
+        return eId > 0; // Return true if list is not empty
+    }
+
+    public int getRoleID() {
+        return RoleID;
+    }
+
+    public void setRoleID(int roleID) {
+        this.RoleID = roleID;
     }
 
     public User() {
@@ -62,7 +62,6 @@ public class User {
         this.emp = emp;
     }
 
-    // Thêm Employee vào danh sách
     public void addEmployee(Employee employee) {
         this.emp.add(employee);
     }
@@ -74,5 +73,4 @@ public class User {
     public void seteId(int eId) {
         this.eId = eId;
     }
-
 }

@@ -1,15 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="model.User, java.util.Date" %>
 
-<%@ page import="model.Employee, java.util.Date" %>
-
-<%
-    Employee user = (Employee) session.getAttribute("user");
-    if (user == null) {
-        response.sendRedirect("employee_login.jsp");
-        return;
-    }
-%>
 
 <!DOCTYPE html>
 <html>
@@ -33,7 +25,6 @@
 
         <img id="previewImage" src="" alt="Ảnh xem trước" style="max-width: 300px; display: none;"><br><br>
 
-        <p><b>Người đăng:</b> <%= user.getName() %></p>
         <p><b>Thời gian hiện tại:</b> <%= new Date() %></p>
 
         <button type="submit">Đăng bài</button>
@@ -54,6 +45,6 @@
     </script>
 
     <br>
-    <a href="/blog/listblog">Xem danh sách bài viết</a>
+    <a href="listblog">Xem danh sách bài viết</a>
 </body>
 </html>

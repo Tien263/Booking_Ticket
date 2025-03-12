@@ -16,8 +16,6 @@ public class Blog {
     private String title;
     private String content;
     private String brief;
-    private Employee createdby;
-    private Employee updatedby;
     private Date createdtime;
     private Date updatedtime;
     private boolean status;
@@ -26,13 +24,11 @@ public class Blog {
     public Blog() {
     }
 
-    public Blog(int id, String title, String content, String brief, Employee createdby, Employee updatedby, Date createdtime, Date updatedtime, boolean status, String image) {
+    public Blog(int id, String title, String content, String brief, Date createdtime, Date updatedtime, boolean status, String image) {
         this.id = id;
         this.title = title;
         this.content = content;
         this.brief = brief;
-        this.createdby = createdby;
-        this.updatedby = updatedby;
         this.createdtime = createdtime;
         this.updatedtime = updatedtime;
         this.status = status;
@@ -69,22 +65,6 @@ public class Blog {
 
     public void setBrief(String brief) {
         this.brief = brief;
-    }
-
-    public Employee getCreatedby() {
-        return createdby;
-    }
-
-    public void setCreatedby(Employee createdby) {
-        this.createdby = createdby;
-    }
-
-    public Employee getUpdatedby() {
-        return updatedby;
-    }
-
-    public void setUpdatedby(Employee updatedby) {
-        this.updatedby = updatedby;
     }
 
     public Date getCreatedtime() {

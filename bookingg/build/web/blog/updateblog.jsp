@@ -44,11 +44,6 @@
                 </c:if>
             </div>
 
-            <div>
-                <label>Người cập nhật:</label>
-                <input type="text" value="${sessionScope.user.name}" readonly>
-                <input type="hidden" name="updatedby" value="${sessionScope.user.name}">
-            </div>
 
 <!--            <div>
                 <label for="status">Trạng thái:</label>
