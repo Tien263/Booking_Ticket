@@ -195,21 +195,25 @@
                                 <span>Viết bài Blog</span>
                             </h2>
                         </div>
+                        <!-- Hiển thị thông báo lỗi chung -->
+                    <c:if test="${not empty errorMessage}">
+                        <div class="alert alert-danger text-center">${errorMessage}</div>
+                    </c:if>
                         <form action="createblog" method="post" enctype="multipart/form-data" id="createBlogForm">
                             <div class="row">
                                 <!-- Single column -->
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" data-aos="fade-up" data-aos-delay="500">
                                     <div class="form_item">
                                         <label for="title">Tiêu đề</label>
-                                        <input type="text" name="title" id="title" required>
+                                        <input type="text" name="title" id="title">
                                     </div>
                                     <div class="form_item">
                                         <label for="brief">Tóm tắt</label>
-                                        <textarea name="brief" id="brief" required></textarea>
+                                        <textarea name="brief" id="brief"></textarea>
                                     </div>
                                     <div class="form_item">
                                         <label for="content">Nội dung</label>
-                                        <textarea name="content" id="content" required></textarea>
+                                        <textarea name="content" id="content"></textarea>
                                     </div>
                                     <div class="form_item">
                                         <label for="fileInput">Hình ảnh</label>

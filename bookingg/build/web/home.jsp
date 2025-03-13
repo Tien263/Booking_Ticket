@@ -136,7 +136,7 @@
 
                         <div class="col-lg-3 col-md-6 col-sm-6 col-6 order-last">
                             <ul class="header_action_btns ul_li_right clearfix">
-                                
+
                                 <li class="dropdown">
                                     <!--                                    <button type="button" class="cart_btn" id="cart_dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                                             <i class="fal fa-shopping-cart"></i>
@@ -244,18 +244,18 @@
                 </div>
             </div>
 
-<!--            <div id="collapse_search_body" class="collapse_search_body collapse">
-                <div class="search_body">
-                    <div class="container">
-                        <form action="#">
-                            <div class="form_item">
-                                <input type="search" name="search" placeholder="Type here...">
-                                <button type="submit"><i class="fal fa-search"></i></button>
+            <!--            <div id="collapse_search_body" class="collapse_search_body collapse">
+                            <div class="search_body">
+                                <div class="container">
+                                    <form action="#">
+                                        <div class="form_item">
+                                            <input type="search" name="search" placeholder="Type here...">
+                                            <button type="submit"><i class="fal fa-search"></i></button>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
-                        </form>
-                    </div>
-                </div>
-            </div>-->
+                        </div>-->
         </header>
         <!-- header_section - end
         ================================================== -->
@@ -279,56 +279,21 @@
                             </a>
                         </div>
                         <p class="mb-0">
-                            Nullam id dolor auctor, dignissim magna eu, mattis ante. Pellentesque tincidunt, elit a facilisis efficitur, nunc nisi scelerisque enim, rhoncus malesuada est velit a nulla. Cras porta mi vitae dolor tristique euismod. Lorem ipsum dolor sit amet, consectetur adipiscing elit
+                            BusGo cam kết cung cấp dịch vụ đặt vé xe buýt đáng tin cậy và chất lượng cao với thông tin minh bạch, giá cả rõ ràng và hỗ trợ khách hàng tận tình, đảm bảo hành trình của bạn luôn thuận tiện và an toàn.
                         </p>
                     </div>
 
                     <div class="menu_list mb_60 clearfix">
-                        <h3 class="title_text text-white">Menu List</h3>
+                        <h3 class="title_text text-white">Danh mục</h3>
                         <ul class="ul_li_block clearfix">
                             <li class="active dropdown">
-                                <a href="#!" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Home</a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="index_1.html">Home Page V.1</a></li>
-                                    <li><a href="index_2.html">Home Page V.2</a></li>
-                                </ul>
+                                <a href="home.jsp" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Home</a>
                             </li>
-                            <li><a href="gallery.html">Our Cars</a></li>
-                            <li><a href="review.html">Reviews</a></li>
-                            <li><a href="about.html">About</a></li>
-                            <li class="dropdown">
-                                <a href="#!" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages</a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="service.html">Our Service</a></li>
-                                    <li><a href="gallery.html">Car Gallery</a></li>
-                                    <li><a href="account.html">My Account</a></li>
-                                    <li><a href="reservation.html">Reservation</a></li>
-                                    <li class="dropdown">
-                                        <a href="#!" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Blogs</a>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="blog.html">Blog</a></li>
-                                            <li><a href="blog_details.html">Blog Details</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="dropdown">
-                                        <a href="#!" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Our Cars</a>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="car.html">Cars</a></li>
-                                            <li><a href="car_details.html">Car Details</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="cart.html">Shopping Cart</a></li>
-                                    <li><a href="faq.html">F.A.Q.</a></li>
-                                    <li><a href="login.html">Login</a></li>
-                                </ul>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#!" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Contact Us</a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="contact.html">Contact Default</a></li>
-                                    <li><a href="contact_wordwide.html">Contact Wordwide</a></li>
-                                </ul>
-                            </li>
+                            <li><a href="booking">Đặt vé</a></li>
+                            <li><a href="cuslistblog">Tin tức</a></li>
+                            <li><a href="contact.jsp">Liên hệ</a></li>
+                            <li><a href="employee_login.jsp">Đăng nhập của nhân viên</a></li>
+                            
                         </ul>
                     </div>
 
@@ -1474,61 +1439,61 @@
 
             <!-- blog_section - start
             ================================================== -->
-<!--            <section class="blog_section clearfix">
-                <div class="updown_style_wrap">
-
-                    <div class="updown_style">
-                        <div class="blog_fullimage" data-aos="fade-up" data-aos-delay="100">
-                            <img src="assets/images/blog/img_01.jpg" alt="image_not_found">
-                            <div class="item_content text-white">
-                                <h3 class="item_title text-white">Cras eu ante bibendum, lacinia velit sit amet, scelerisque enim</h3>
-                                <p>
-                                    Phasellus porta pulvinar metus, sit amet bibendum lectus hendrerit vel. Duis ullamcorper, justo quis hendrerit venenatis, purus mi volutpat dui, vel commodo urna eros eget sapien
-                                </p>
-                                <a class="text_btn text-uppercase" href="#!"><span>Read in our blog</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
+            <!--            <section class="blog_section clearfix">
+                            <div class="updown_style_wrap">
+            
+                                <div class="updown_style">
+                                    <div class="blog_fullimage" data-aos="fade-up" data-aos-delay="100">
+                                        <img src="assets/images/blog/img_01.jpg" alt="image_not_found">
+                                        <div class="item_content text-white">
+                                            <h3 class="item_title text-white">Cras eu ante bibendum, lacinia velit sit amet, scelerisque enim</h3>
+                                            <p>
+                                                Phasellus porta pulvinar metus, sit amet bibendum lectus hendrerit vel. Duis ullamcorper, justo quis hendrerit venenatis, purus mi volutpat dui, vel commodo urna eros eget sapien
+                                            </p>
+                                            <a class="text_btn text-uppercase" href="#!"><span>Read in our blog</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
+                                        </div>
+                                    </div>
+            
+                                    <div class="blog_fullimage" data-aos="fade-up" data-aos-delay="300">
+                                        <img src="assets/images/blog/img_02.jpg" alt="image_not_found">
+                                        <div class="item_content text-white">
+                                            <h3 class="item_title text-white">Phasellus porta pulvinar metus</h3>
+                                            <p>
+                                                Phasellus porta pulvinar metus, sit amet bibendum lectus hendrerit vel. Duis ullamcorper, justo quis hendrerit venenatis, purus mi volutpat dui, vel commodo urna eros eget sapien
+                                            </p>
+                                            <a class="text_btn text-uppercase" href="#!"><span>Read in our blog</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
+                                        </div>
+                                    </div>
+                                </div>
+            
+                                <div class="updown_style">
+                                    <div class="blog_fullimage" data-aos="fade-up" data-aos-delay="100">
+                                        <img src="assets/images/blog/img_03.jpg" alt="image_not_found">
+                                        <div class="item_content text-white">
+                                            <h3 class="item_title text-white">Fed finibus mi et purus finibus, ut condimentum mauris fringilla</h3>
+                                            <p>
+                                                Phasellus porta pulvinar metus, sit amet bibendum lectus hendrerit vel. Duis ullamcorper, justo quis hendrerit venenatis, purus mi volutpat dui, vel commodo urna eros eget sapien
+                                            </p>
+                                            <a class="text_btn text-uppercase" href="#!"><span>Read in our blog</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
+                                        </div>
+                                    </div>
+            
+                                    <div class="blog_fullimage" data-aos="fade-up" data-aos-delay="300">
+                                        <img src="assets/images/blog/img_04.jpg" alt="image_not_found">
+                                        <div class="item_content text-white">
+                                            <h3 class="item_title text-white">Maecenas sagittis turpis non pharetra pulvinar. Nullam mollis tortor eget</h3>
+                                            <p>
+                                                Phasellus porta pulvinar metus, sit amet bibendum lectus hendrerit vel. Duis ullamcorper, justo quis hendrerit venenatis, purus mi volutpat dui, vel commodo urna eros eget sapien
+                                            </p>
+                                            <a class="text_btn text-uppercase" href="#!"><span>Read in our blog</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
+                                        </div>
+                                    </div>
+                                </div>
+            
                             </div>
-                        </div>
-
-                        <div class="blog_fullimage" data-aos="fade-up" data-aos-delay="300">
-                            <img src="assets/images/blog/img_02.jpg" alt="image_not_found">
-                            <div class="item_content text-white">
-                                <h3 class="item_title text-white">Phasellus porta pulvinar metus</h3>
-                                <p>
-                                    Phasellus porta pulvinar metus, sit amet bibendum lectus hendrerit vel. Duis ullamcorper, justo quis hendrerit venenatis, purus mi volutpat dui, vel commodo urna eros eget sapien
-                                </p>
-                                <a class="text_btn text-uppercase" href="#!"><span>Read in our blog</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="updown_style">
-                        <div class="blog_fullimage" data-aos="fade-up" data-aos-delay="100">
-                            <img src="assets/images/blog/img_03.jpg" alt="image_not_found">
-                            <div class="item_content text-white">
-                                <h3 class="item_title text-white">Fed finibus mi et purus finibus, ut condimentum mauris fringilla</h3>
-                                <p>
-                                    Phasellus porta pulvinar metus, sit amet bibendum lectus hendrerit vel. Duis ullamcorper, justo quis hendrerit venenatis, purus mi volutpat dui, vel commodo urna eros eget sapien
-                                </p>
-                                <a class="text_btn text-uppercase" href="#!"><span>Read in our blog</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
-                            </div>
-                        </div>
-
-                        <div class="blog_fullimage" data-aos="fade-up" data-aos-delay="300">
-                            <img src="assets/images/blog/img_04.jpg" alt="image_not_found">
-                            <div class="item_content text-white">
-                                <h3 class="item_title text-white">Maecenas sagittis turpis non pharetra pulvinar. Nullam mollis tortor eget</h3>
-                                <p>
-                                    Phasellus porta pulvinar metus, sit amet bibendum lectus hendrerit vel. Duis ullamcorper, justo quis hendrerit venenatis, purus mi volutpat dui, vel commodo urna eros eget sapien
-                                </p>
-                                <a class="text_btn text-uppercase" href="#!"><span>Read in our blog</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </section>
-             blog_section - end
-            ================================================== -->
+                        </section>
+                         blog_section - end
+                        ================================================== -->
 
 
         </main>
@@ -1550,8 +1515,8 @@
                                     </a>
                                 </div>
                                 <p class="mb_15">
-                                    BusGo is committed to providing a reliable and high-quality bus ticket booking service with transparent information, clear pricing, and dedicated customer support, ensuring your journey is always convenient and safe
-                                </p>
+                                    BusGo cam kết cung cấp dịch vụ đặt vé xe buýt đáng tin cậy và chất lượng cao với thông tin minh bạch, giá cả rõ ràng và hỗ trợ khách hàng tận tình, đảm bảo hành trình của bạn luôn thuận tiện và an toàn.
+                                <p>
                                 <div class="footer_useful_links mb_30">
                                     <ul class="ul_li_block clearfix">
 

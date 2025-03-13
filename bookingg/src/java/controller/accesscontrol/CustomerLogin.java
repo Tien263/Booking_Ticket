@@ -50,7 +50,7 @@ public class CustomerLogin extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
@@ -133,26 +133,4 @@ public class CustomerLogin extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        CustomerDao customerDao = new CustomerDao();
-
-        System.out.print("Enter email: ");
-        String email = scanner.nextLine();
-
-        System.out.print("Enter password: ");
-        String password = scanner.nextLine();
-
-        // Gọi DAO để lấy Customer từ Database
-        Customer c = customerDao.getCustomerByEmail(email, password);
-
-        if (c != null) {
-            System.out.println("\nLogin successful! ✅");
-            System.out.println("Email: " + c.getEmail());
-            System.out.println("password: " + c.getPassword());
-
-            // Kiểm tra thông tin khách hàng đã đầy đủ chưa
-            scanner.close();
-        }
-    }
 }

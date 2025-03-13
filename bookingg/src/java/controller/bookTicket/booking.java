@@ -25,7 +25,7 @@ import java.util.List;
  */
 public class booking extends HttpServlet {
 
-   protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+   public void processRequest(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
     response.setContentType("text/html;charset=UTF-8");
 

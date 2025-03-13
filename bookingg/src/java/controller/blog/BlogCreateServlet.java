@@ -14,51 +14,49 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
 import model.Blog;
-import model.Employee;
 
 @MultipartConfig(
     fileSizeThreshold = 1024 * 1024 * 2, // 2MB
-    maxFileSize = 1024 * 1024 * 10, // 10MB
+    maxFileSize = 1024 * 1024 * 5, // 5MB
     maxRequestSize = 1024 * 1024 * 50 // 50MB
 )
 public class BlogCreateServlet extends HttpServlet {
     private static final String UPLOAD_DIR = "upload";
-    
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         response.sendRedirect("createblog.jsp");
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Lấy session
         HttpSession session = request.getSession();
-        Object userObj = session.getAttribute("user"); // Lấy đối tượng từ session
-
         
-
         // Lấy thông tin từ form
         String title = request.getParameter("title");
         String content = request.getParameter("content");
         String brief = request.getParameter("brief");
+        Part filePart = request.getPart("image");
+
+        // Validate dữ liệu
+        String errorMessage = validateBlogData(title, brief, content, filePart);
+        if (errorMessage != null) {
+            request.setAttribute("errorMessage", errorMessage);
+            request.getRequestDispatcher("createblog.jsp").forward(request, response);
+            return;
+        }
 
         // Xử lý file ảnh tải lên
-        Part filePart = request.getPart("image");
-        String fileName = null;
-        String fileUrl = null;
+        String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+        String uploadPath = getServletContext().getRealPath("") + File.separator + UPLOAD_DIR;
+        File uploadDir = new File(uploadPath);
+        if (!uploadDir.exists()) uploadDir.mkdir();
 
-        if (filePart != null && filePart.getSize() > 0) {
-            fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
-            String uploadPath = getServletContext().getRealPath("") + File.separator + UPLOAD_DIR;
-            File uploadDir = new File(uploadPath);
-            if (!uploadDir.exists()) uploadDir.mkdir();
-
-            String filePath = uploadPath + File.separator + fileName;
-            filePart.write(filePath);
-            fileUrl = request.getContextPath() + "/" + UPLOAD_DIR + "/" + fileName;
-        }
+        String filePath = uploadPath + File.separator + fileName;
+        filePart.write(filePath);
+        String fileUrl = request.getContextPath() + "/" + UPLOAD_DIR + "/" + fileName;
 
         // Tạo đối tượng Blog
         Blog blog = new Blog();
@@ -78,8 +76,45 @@ public class BlogCreateServlet extends HttpServlet {
         response.sendRedirect("listblog");
     }
 
+    private String validateBlogData(String title, String brief, String content, Part filePart) {
+        if (title == null || title.trim().isEmpty()) {
+            return "Tiêu đề không được để trống!";
+        }
+        if (title.length() > 255) {
+            return "Tiêu đề không được vượt quá 255 ký tự!";
+        }
+
+        if (brief == null || brief.trim().isEmpty()) {
+            return "Tóm tắt không được để trống!";
+        }
+        if (brief.length() > 500) {
+            return "Tóm tắt không được vượt quá 500 ký tự!";
+        }
+
+        if (content == null || content.trim().isEmpty()) {
+            return "Nội dung bài viết không được để trống!";
+        }
+        if (content.length() < 100) {
+            return "Nội dung bài viết phải có ít nhất 100 ký tự!";
+        }
+
+        if (filePart == null || filePart.getSize() == 0) {
+            return "Hình ảnh không được để trống!";
+        }
+        if (filePart.getSize() > 1024 * 1024 * 5) {
+            return "Kích thước ảnh tối đa là 5MB!";
+        }
+
+        String fileName = filePart.getSubmittedFileName();
+        if (!fileName.matches(".*\\.(jpg|jpeg|png)$")) {
+            return "Hình ảnh chỉ được phép có định dạng JPG, JPEG hoặc PNG!";
+        }
+
+        return null; // Hợp lệ
+    }
+
     @Override
     public String getServletInfo() {
-        return "Servlet tạo bài viết Blog";
+        return "Servlet tạo bài viết Blog với validate dữ liệu";
     }
 }

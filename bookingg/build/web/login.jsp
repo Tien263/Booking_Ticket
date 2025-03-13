@@ -10,8 +10,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-        <title>Login - Rotors - Car Rental HTML5 Template</title>
-        <link rel="shortcut icon" href="assets/images/logo/favourite_icon.png">
+        <title>Login - BusGo</title>
+        <link rel="shortcut icon" href="assets/images/logo/logo_01_1.png">
 
         <!-- fraimwork - css include -->
         <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
@@ -206,48 +206,14 @@
                             <nav class="main_menu clearfix">
                                 <ul class="ul_li_center clearfix">
                                     <li class="active has_child">
-                                        <a href="#!">Home</a>
-                                        <ul class="submenu">
-                                            <li><a href="index_1.html">Home Page V.1</a></li>
-                                            <li><a href="index_2.html">Home Page V.2</a></li>
-                                        </ul>
+                                        <a href="home.jsp">Home</a>
                                     </li>
-                                    <li><a href="gallery.html">Our Cars</a></li>
-                                    <li><a href="review.html">Reviews</a></li>
-                                    <li><a href="about.html">About</a></li>
-                                    <li class="has_child">
-                                        <a href="#!">Pages</a>
-                                        <ul class="submenu">
-                                            <li><a href="service.html">Our Service</a></li>
-                                            <li><a href="gallery.html">Car Gallery</a></li>
-                                            <li><a href="account.html">My Account</a></li>
-                                            <li><a href="reservation.html">Reservation</a></li>
-                                            <li class="has_child">
-                                                <a href="#!">Blogs</a>
-                                                <ul class="submenu">
-                                                    <li><a href="blog.html">Blog</a></li>
-                                                    <li><a href="blog_details.html">Blog Details</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="has_child">
-                                                <a href="#!">Our Cars</a>
-                                                <ul class="submenu">
-                                                    <li><a href="car.html">Cars</a></li>
-                                                    <li><a href="car_details.html">Car Details</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="cart.html">Shopping Cart</a></li>
-                                            <li><a href="faq.html">F.A.Q.</a></li>
-                                            <li><a href="login.html">Login</a></li>
-                                        </ul>
+                                    <li><a href="booking">Booking Ticket</a></li>
+                                    <li><a href="cuslistblog">Blog</a></li>
+                                    <li>
+                                        <a href="contact.jsp">Contact Us</a>
                                     </li>
-                                    <li class="has_child">
-                                        <a href="#!">Contact Us</a>
-                                        <ul class="submenu">
-                                            <li><a href="contact.html">Contact Default</a></li>
-                                            <li><a href="contact_wordwide.html">Contact Wordwide</a></li>
-                                        </ul>
-                                    </li>
+                                    <li><a href="employee_login.jsp">Employee Login</a></li>
                                 </ul>
                             </nav>
                         </div>
@@ -286,7 +252,7 @@
 
                     <div class="about_content mb_60">
                         <div class="brand_logo mb_15">
-                            <a href="index.html">
+                            <a href="home.jsp">
                                 <img src="assets/images/logo/logo_01_1.png" srcset="assets/images/logo/logo_01_1.png 2x" alt="logo_not_found">
                             </a>
                         </div>
@@ -384,7 +350,7 @@
                 <div class="breadcrumb_nav clearfix" data-bg-color="#F2F2F2">
                     <div class="container">
                         <ul class="ul_li clearfix">
-                            <li><a href="index.html">Home</a></li>
+                            <li><a href="home.jsp">Home</a></li>
                             <li>Login</li>
                         </ul>
                     </div>
