@@ -25,7 +25,7 @@ import java.util.List;
  */
 public class booking extends HttpServlet {
 
-   protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+   public void processRequest(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
     response.setContentType("text/html;charset=UTF-8");
 
@@ -33,56 +33,32 @@ public class booking extends HttpServlet {
     bookingDAO dao = new bookingDAO();
     HttpSession session = request.getSession();
     String email = request.getParameter("email");
-    String pass = request.getParameter("password");
     String from = request.getParameter("from");
     String to = request.getParameter("to");
     String hourStr = request.getParameter("hour");
     String minuteStr = request.getParameter("minute");
-    String travelDate = request.getParameter("travelDate");
-    
-    int flag = 0;
-    String c_id = null;
-    
-    System.out.println("controller.bookTicket.booking.processRequest()");
-
-    try {
-        c_id = dao.getEid(email, pass, flag);
-    } catch (Exception e) {
-        request.setAttribute("loginerror", "Lỗi khi truy vấn cơ sở dữ liệu!");
-        request.getRequestDispatcher("login.jsp").forward(request, response);
-        return;
-    }
-
-    if (flag == 0) {
-        request.setAttribute("loginerror", "Tài khoản hoặc mật khẩu không đúng!");
-        request.getRequestDispatcher("login.jsp").forward(request, response);
-        return;
-    }
-
-    if (c_id != null) {
-        session.setAttribute("email", c_id);
-        session.setAttribute("Y", "U");
-    }
-
-    // Kiểm tra session
-    String s = (String) session.getAttribute("Y");
-    if ("U".equals(s)) {
-        c_id = (String) session.getAttribute("email");
-    }
-
-    // Danh sách các tỉnh thành
+    String date = null;
+    String time = null;
+    String c_id = dao.getEid(email);
+       if (c_id !=null){
+       session.setAttribute( "email",c_id );
+       session.setAttribute( "Y", "U");
+       }
+       String s=(String)session.getAttribute("Y");
+       if(s == "U"){
+       c_id = (String)session.getAttribute("email");}
+//       System.out.println(c_id);
     String[] provinces = {"Hà Nội", "Hồ Chí Minh", "Đà Nẵng", "Hải Phòng", "Cần Thơ", "An Giang", 
         "Bà Rịa - Vũng Tàu", "Bắc Giang", "Bắc Kạn", "Bạc Liêu", "Bắc Ninh", "Bến Tre", "Bình Định", 
         "Bình Dương", "Bình Phước", "Bình Thuận", "Cà Mau", "Cao Bằng", "Đắk Lắk", "Đắk Nông", "Điện Biên",
-        "Đồng Nai", "Đồng Tháp", "Gia Lai", "Hà Giang", "Hà Nam", "Hà Tĩnh", "Hải Dương", "Hậu Giang",
-        "Hòa Bình", "Hưng Yên", "Khánh Hòa", "Kiên Giang", "Kon Tum", "Lai Châu", "Lâm Đồng", "Lạng Sơn", 
-        "Lào Cai", "Long An", "Nam Định", "Nghệ An", "Ninh Bình", "Ninh Thuận", "Phú Thọ", "Phú Yên",
-        "Quảng Bình", "Quảng Nam", "Quảng Ngãi", "Quảng Ninh", "Quảng Trị", "Sóc Trăng", "Sơn La", "Tây Ninh", 
-        "Thái Bình", "Thái Nguyên", "Thanh Hóa", "Thừa Thiên Huế", "Tiền Giang", "Trà Vinh", "Tuyên Quang",
-        "Vĩnh Long", "Vĩnh Phúc", "Yên Bái"};
+        "Đồng Nai", "Đồng Tháp", "Gia Lai" , "Hà Giang" , "Hà Nam" , "Hà Tĩnh" , "Hải Dương" , "Hậu Giang" ,
+        "Hòa Bình" , "Hưng Yên" , "Khánh Hòa" , "Kiên Giang" , "Kon Tum" , "Lai Châu" , "Lâm Đồng", "Lạng Sơn", 
+        "Lào Cai", "Long An" , "Nam Định" , "Nghệ An" , "Ninh Bình" , "Ninh Thuận" , "Phú Thọ" , "Phú Yên",
+        "Quảng Bình" , "Quảng Nam" , "Quảng Ngãi", "Quảng Ninh", "Quảng Trị", "Sóc Trăng", "Sơn La", "Tây Ninh", 
+        "Thái Bình" , "Thái Nguyên", "Thanh Hóa", "Thừa Thiên Huế", "Tiền Giang", "Trà Vinh", "Tuyên Quang",
+        "Vĩnh Long" , "Vĩnh Phúc" , "Yên Bái"};
 
     List<BusTrip> trips = new ArrayList<>();
-    String time = null;
 
     if (from != null && to != null && hourStr != null && minuteStr != null) {
         try {
@@ -93,17 +69,18 @@ public class booking extends HttpServlet {
                 request.setAttribute("error", "Giờ phải từ 0-23 và phút phải từ 0-59!");
             } else {
                 time = String.format("%02d:%02d", hour, minute);
-                trips = dao.getBusTrips(from, to, time, travelDate);
+                date = request.getParameter("travelDate");
+                trips = dao.getBusTrips(from, to, time,date);
                 
                 if (trips.isEmpty()) {
-                    request.setAttribute("message", "Không có chuyến xe phù hợp!");
+                    request.setAttribute("message", " Không có chuyến xe phù hợp! ");
                 }
             }
         } catch (NumberFormatException e) {
-            request.setAttribute("error", "Giờ và phút phải là số hợp lệ!");
+            request.setAttribute("error", " Giờ và phút phải là số hợp lệ! ");
         }
     }
-
+   
     // Đặt dữ liệu lên request để chuyển đến JSP
     request.setAttribute("from", from);
     request.setAttribute("to", to);
@@ -112,11 +89,12 @@ public class booking extends HttpServlet {
     request.setAttribute("time", time);
     request.setAttribute("provinces", provinces);
     request.setAttribute("trips", trips);
-    request.setAttribute("c_id", c_id);
-
+    request.setAttribute("c_id",c_id );
     // Chuyển hướng sang trang JSP
-    request.getRequestDispatcher("search_results.jsp").forward(request, response);
+    RequestDispatcher dispatcher = request.getRequestDispatcher("search_results.jsp");
+    dispatcher.forward(request, response);
 }
+
 
 
     @Override

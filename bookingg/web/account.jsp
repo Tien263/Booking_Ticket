@@ -93,8 +93,8 @@
                     <div class="row align-items-center">
                         <div class="col-lg-7">
                             <ul class="header_contact_info ul_li clearfix">
-                                <li><i class="fal fa-envelope"></i> rotorsmail@email.com</li>
-                                <li><i class="fal fa-phone"></i> +1-202-555-0156</li>
+                                <li><i class="fal fa-envelope"></i> Busgo@email.com</li>
+                                <li><i class="fal fa-phone"></i> 0398 996 177</li>
                             </ul>
                         </div>
 
@@ -117,24 +117,17 @@
                         <div class="col-lg-3 col-md-6 col-sm-6 col-6">
                             <div class="brand_logo">
                                 <a href="index.html">
-                                    <img src="assets/images/logo/logo_01_1x.png" srcset="assets/images/logo/logo_01_2x.png 2x" alt="logo_not_found">
-                                    <img src="assets/images/logo/logo_02_1x.png" srcset="assets/images/logo/logo_02_2x.png 2x" alt="logo_not_found">
+                                    <img src="assets/images/logo/logo_01_1.png" srcset="assets/images/logo/logo_01_1.png 2x" alt="logo_not_found"  width="35%">
+                                    <img src="assets/images/logo/logo_01_1.png" srcset="assets/images/logo/logo_01_1.png 2x" alt="logo_not_found" width="35%">
                                 </a>
                             </div>
                         </div>
 
                         <div class="col-lg-3 col-md-6 col-sm-6 col-6 order-last">
                             <ul class="header_action_btns ul_li_right clearfix">
-                                <li>
-                                    <button type="button" class="search_btn" data-toggle="collapse" data-target="#collapse_search_body" aria-expanded="false" aria-controls="collapse_search_body">
-                                        <i class="fal fa-search"></i>
-                                    </button>
-                                </li>
+                                
                                 <li class="dropdown">
-                                    <button type="button" class="cart_btn" id="cart_dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fal fa-shopping-cart"></i>
-                                        <span class="cart_counter bg_default_red">3</span>
-                                    </button>
+                                    
                                     <div class="cart_dropdown rotors_dropdown dropdown-menu" aria-labelledby="cart_dropdown">
                                         <h4 class="wrap_title">Cart Items: (3)</h4>
                                         <ul class="cart_items_list ul_li_block clearfix">
@@ -194,7 +187,7 @@
                                         <ul class="ul_li_block clearfix">
                                             <li><a href="#!"><i class="fal fa-user-circle"></i> Profile</a></li>
                                             <li><a href="#!"><i class="fal fa-user-cog"></i> Settings</a></li>
-                                            <li><a href="cuslogin"><i class="fal fa-sign-out"></i> Logout</a></li>
+                                            <li><a href="logout"><i class="fal fa-sign-out"></i> Logout</a></li>
                                         </ul>
                                     </div>
                                 </li>
@@ -410,7 +403,7 @@
                                         <a class="active" data-toggle="tab" href="#admin_tab"><i class="fas fa-user"></i> ${customer.username}</a>
                                     </li>
                                     <li>
-                                        <a href="cuslogin"><i class="fas fa-sign-out-alt"></i> Log Out <img class="arrow" src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
+                                        <a href="logout"><i class="fas fa-sign-out-alt"></i> Log Out <img class="arrow" src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
                                     </li>
                                     <li>
                                         <a data-toggle="tab" href="#profile_tab"><i class="fas fa-address-book"></i> Booking Profiles</a>
@@ -566,13 +559,10 @@
                                     </a>
                                 </div>
                                 <p class="mb_15">
-                                    Cras sit amet mi non orci pretium consectetur. Donec iaculis ante ac sollicitudin luctus. Phasellus ut lacus lacus. Phasellus sagittis ex id tortor tincidunt luctus. Donec consectetur consequat bibendum
+                                    BusGo is committed to providing a reliable and high-quality bus ticket booking service with transparent information, clear pricing, and dedicated customer support, ensuring your journey is always convenient and safe
                                 </p>
                                 <div class="footer_useful_links mb_30">
-                                    <ul class="ul_li_block clearfix">
-                                        <li><a href="#!"><i class="fal fa-angle-right"></i> Rental Information</a></li>
-                                        <li><a href="#!"><i class="fal fa-angle-right"></i> F.A.Q.</a></li>
-                                    </ul>
+                                    
                                 </div>
                                 <div class="form_item mb-0">
                                     <form action="#">
@@ -585,18 +575,17 @@
 
                         <div class="col-lg-3 col-md-4 col-sm-12 col-sm-12">
                             <div class="footer_contact_info" data-aos="fade-up" data-aos-delay="200">
-                                <h3 class="footer_widget_title">Contact Us:</h3>
+                                <h3 class="footer_widget_title">Liên hệ:</h3>
                                 <ul class="ul_li_block clearfix">
                                     <li>
-                                        <strong><i class="fas fa-map-marker-alt"></i> Main Office Address:</strong>
+                                        <strong><i class="fas fa-map-marker-alt"></i> Địa chỉ:</strong>
                                         <p class="mb-0">
-                                            Unit 9, Manor Industrial Estate, Lower Wash Lane, Warrington, WA4
+                                            Khu công nghệ cao Hòa Lạc - Thạch Thất - Hà Nội
                                         </p>
                                     </li>
-                                    <li><i class="fas fa-clock"></i> 8:00am-9:30pm</li>
-                                    <li><i class="far fa-angle-right"></i> Other Office Locations</li>
-                                    <li><i class="fas fa-envelope"></i> <strong>rotorseml@eml.fr</strong></li>
-                                    <li><i class="fas fa-phone"></i> <strong>+880 1680 6361 89</strong></li>
+                                    <li><i class="fas fa-clock"></i> 7:00 - 22:00</li>
+                                    <li><i class="fas fa-envelope"></i> <strong>BusGo@gmail.com</strong></li>
+                                    <li><i class="fas fa-phone"></i> <strong>0398 996 177</strong></li>
                                 </ul>
                             </div>
                         </div>

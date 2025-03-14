@@ -57,63 +57,106 @@ public class BlogUpdateController extends HttpServlet {
 
     }
 
-    
-    
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        Employee loggedUser = (Employee) session.getAttribute("user");
-        if (loggedUser == null) {
-            response.sendRedirect("login.jsp");
-            return;
-        }
-        
+        BlogDao bd = new BlogDao();
+
         try {
             int id = Integer.parseInt(request.getParameter("id"));
-            String title = request.getParameter("title");
-            String brief = request.getParameter("brief");
-            String content = request.getParameter("content");
-            String status = request.getParameter("status");
-            
-            BlogDao bd = new BlogDao();
             Blog blog = bd.get(id);
+
             if (blog == null) {
                 request.setAttribute("errorMessage", "Không tìm thấy blog.");
                 request.getRequestDispatcher("updateblog.jsp").forward(request, response);
                 return;
             }
-            
+
+            String title = request.getParameter("title");
+            String brief = request.getParameter("brief");
+            String content = request.getParameter("content");
+            String status = request.getParameter("status");
+
+            boolean hasError = false;
+
+            // Validate tiêu đề
+            if (title == null || title.trim().isEmpty()) {
+                request.setAttribute("titleError", "Tiêu đề không được để trống!");
+                hasError = true;
+            } else if (title.length() > 255) {
+                request.setAttribute("titleError", "Tiêu đề không được vượt quá 255 ký tự!");
+                hasError = true;
+            }
+
+            // Validate tóm tắt
+            if (brief == null || brief.trim().isEmpty()) {
+                request.setAttribute("briefError", "Tóm tắt không được để trống!");
+                hasError = true;
+            } else if (brief.length() > 500) {
+                request.setAttribute("briefError", "Tóm tắt không được vượt quá 500 ký tự!");
+                hasError = true;
+            }
+
+            // Validate nội dung
+            if (content == null || content.trim().isEmpty()) {
+                request.setAttribute("contentError", "Nội dung không được để trống!");
+                hasError = true;
+            } else if (content.length() < 100) {
+                request.setAttribute("contentError", "Nội dung phải có ít nhất 100 ký tự!");
+                hasError = true;
+            }
+
+            // Kiểm tra ảnh (nếu người dùng tải lên ảnh mới)
             Part filePart = request.getPart("image");
-            String fileName = null;
             String fileUrl = blog.getImage();
             if (filePart != null && filePart.getSize() > 0) {
-                fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
-                String uploadPath = getServletContext().getRealPath("") + File.separator + UPLOAD_DIR;
-                File uploadDir = new File(uploadPath);
-                if (!uploadDir.exists()) uploadDir.mkdir();
-                
-                String filePath = uploadPath + File.separator + fileName;
-                filePart.write(filePath);
-                fileUrl = request.getContextPath() + "/" + UPLOAD_DIR + "/" + fileName;
+                if (filePart.getSize() > 1024 * 1024 * 5) {
+                    request.setAttribute("imageError", "Ảnh tối đa 5MB!");
+                    hasError = true;
+                } else if (!filePart.getSubmittedFileName().matches(".*\\.(jpg|jpeg|png)$")) {
+                    request.setAttribute("imageError", "Ảnh chỉ hỗ trợ JPG, JPEG, PNG!");
+                    hasError = true;
+                } else {
+                    String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+                    String uploadPath = getServletContext().getRealPath("") + File.separator + UPLOAD_DIR;
+                    File uploadDir = new File(uploadPath);
+                    if (!uploadDir.exists()) {
+                        uploadDir.mkdir();
+                    }
+
+                    String filePath = uploadPath + File.separator + fileName;
+                    filePart.write(filePath);
+                    fileUrl = request.getContextPath() + "/" + UPLOAD_DIR + "/" + fileName;
+                }
             }
-            
+
+            // Nếu có lỗi, quay lại trang cập nhật
+            if (hasError) {
+                request.setAttribute("b", blog);
+                request.getRequestDispatcher("updateblog.jsp").forward(request, response);
+                return;
+            }
+
+            // Cập nhật thông tin blog
             blog.setTitle(title);
             blog.setBrief(brief);
             blog.setContent(content);
             blog.setStatus("Active".equals(status));
             blog.setImage(fileUrl);
             blog.setUpdatedtime(new Date(System.currentTimeMillis()));
-            blog.setUpdatedby(loggedUser);
-            
+
             bd.update(blog);
             response.sendRedirect("listblog");
+
+        } catch (NumberFormatException e) {
+            request.setAttribute("errorMessage", "ID không hợp lệ.");
+            request.getRequestDispatcher("updateblog.jsp").forward(request, response);
         } catch (Exception e) {
             request.setAttribute("errorMessage", "Lỗi khi cập nhật blog: " + e.getMessage());
             request.getRequestDispatcher("updateblog.jsp").forward(request, response);
         }
     }
-
 
     @Override
     public String getServletInfo() {

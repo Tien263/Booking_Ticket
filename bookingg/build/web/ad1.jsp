@@ -5,9 +5,25 @@
 <html>
     <head>
         <title>Lịch Sử Giao Dịch</title>
+        
     </head>
- <body>
-   <!-- Bộ lọc -->
+    <body>
+        <%
+       Integer hour = (Integer) request.getAttribute("hour");
+        Integer minute = (Integer) request.getAttribute("minute");
+        String travelDate = (String) request.getAttribute("travelDate");
+
+        if (hour == null) {
+            hour = 5; // Mặc định 5 giờ
+        }
+        if (minute == null) {
+            minute = 0; // Mặc định 0 phút
+        }
+        if (travelDate == null) {
+            travelDate = "";
+        }
+        %>
+        <!-- Bộ lọc -->
         <form action="ViewUserOrderHistory" method="GET">
             <div class="row">
                 <!-- Thời gian -->
@@ -16,9 +32,9 @@
                         <h4 class="input_title">Thời gian</h4>
                         <div class="d-flex align-items-center gap-2">
                             <label for="hour">Giờ:</label>
-                            <input type="number" id="hour" name="hour" class="form-control w-25" min="0" max="23" required>
+                            <input type="number" id="hour" name="hour" class="form-control w-25" min="0" max="23" value="<%= hour %>" required>
                             <label for="minute">Phút:</label>
-                            <input type="number" id="minute" name="minute" class="form-control w-25" min="0" max="59" required>
+                            <input type="number" id="minute" name="minute" class="form-control w-25" min="0" max="59" value="<%= minute %>" required>
                         </div>
                     </div>
                 </div>
@@ -27,9 +43,10 @@
                 <div class="col-lg-6 col-md-6 col-sm-12" data-aos="fade-up" data-aos-delay="500">
                     <div class="form_item">
                         <h4 class="input_title">Ngày đi</h4>
-                        <input type="date" name="travelDate" class="form-control" required>
-                    </div>
+                     <input type="date" name="travelDate" class="form-control" value="<%= (travelDate != null) ? travelDate : "" %>" required>                    </div>
                 </div>
+
+
             </div>
 
 
@@ -38,8 +55,8 @@
                 <div class="col-lg-6 col-md-6 col-sm-12" data-aos="fade-up" data-aos-delay="500">
                     <div class="form_item">
                         <h4 class="input_title">Điểm đi</h4>
-                        <select name="departure" class="form-control" required>
-                            <option value="">Chọn tỉnh/thành phố</option>
+                        <select name="departure" class="form-control" >
+                            <option >Chọn tỉnh/thành phố</option>
                             <option value="An Giang">An Giang</option>
                             <option value="Bà Rịa - Vũng Tàu">Bà Rịa - Vũng Tàu</option>
                             <option value="Bắc Giang">Bắc Giang</option>
@@ -113,8 +130,8 @@
                 <div class="col-lg-6 col-md-6 col-sm-12" data-aos="fade-up" data-aos-delay="500">
                     <div class="form_item">
                         <h4 class="input_title">Điểm đến</h4>
-                        <select name="arrival" class="form-control" required>
-                            <option value="">Chọn tỉnh/thành phố</option>
+                        <select name="arrival" class="form-control" >
+                            <option >Chọn tỉnh/thành phố</option>
                             <option value="An Giang">An Giang</option>
                             <option value="Bà Rịa - Vũng Tàu">Bà Rịa - Vũng Tàu</option>
                             <option value="Bắc Giang">Bắc Giang</option>
@@ -182,15 +199,24 @@
                     </div>
                 </div>
             </div>
-    
-        <div class="row">
-        <div class="col-lg-12 text-center" data-aos="fade-up" data-aos-delay="500">
-            <button type="submit" class="btn btn-primary">Tìm kiếm</button>
-        </div>
-        </div>
+
+           
+
+            <div class="row">
+                <div class="col-lg-12 text-center" data-aos="fade-up" data-aos-delay="500">
+                    <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+                </div>
+            </div>
         </form>
 
-     <!-- Ghi chú lịch trình tuyến -->
+        <% String error = (String) request.getAttribute("error"); %>
+        <% if (error != null) { %>
+        <div style="color: red; font-weight: bold;">
+            <%= error %>
+        </div>
+        <% } %>
+
+        <!-- Ghi chú lịch trình tuyến -->
 
         <h1>Lịch Sử Giao Dịch</h1>
         <table border="1">
@@ -222,5 +248,7 @@
                     <td>${user.oh_totalAmount}</td>            </tr>
                 </c:forEach>
         </table>
+        
+        
     </body>
 </html>

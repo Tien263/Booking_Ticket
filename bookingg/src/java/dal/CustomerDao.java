@@ -17,6 +17,28 @@ import java.util.logging.Logger;
  */
 public class CustomerDao extends DBContext<Customer> {
 
+    public Customer getByID(int c_id) {
+        String query = "SELECT * FROM Customer WHERE c_id = ?";
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setInt(1, c_id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return new Customer(
+                        rs.getString("c_email"),
+                        rs.getString("c_fullname"),
+                        rs.getString("c_phone"),
+                        rs.getString("c_address"),
+                        rs.getBoolean("c_gender"),
+                        rs.getString("c_username"),
+                        rs.getString("c_password")
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public boolean isUsernameExists(String username, String email) {
         String query = "SELECT COUNT(*) FROM Customer WHERE c_username = ? AND c_email != ?";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
@@ -223,30 +245,33 @@ public class CustomerDao extends DBContext<Customer> {
 
     public Customer getCustomerByEmail(String email, String password) {
         try {
-            String sqlcheck = "select * from customer where c_email = ? and c_password = ?";
+            String sqlcheck = "SELECT * FROM customer WHERE c_email = ?";
             PreparedStatement stm = connection.prepareStatement(sqlcheck);
-            BCrypt bCrypt = new BCrypt();
             stm.setString(1, email);
-            stm.setString(2, password);
             ResultSet rs = stm.executeQuery();
-            if (rs.next()) {
-                Customer c = new Customer();
-                c.setEmail(email);
-                c.setFullname(rs.getString("c_fullname"));
-                c.setPhone(rs.getString("c_phone"));
-                c.setGender(rs.getBoolean("c_gender"));
-                c.setAddress(rs.getString("c_address"));
-                c.setUsername(rs.getString("c_username"));
-                bCrypt.hashpw(rs.getString("c_password"),bCrypt.gensalt());
-                return c;
-            }
 
+            if (rs.next()) {
+                String storedHashedPassword = rs.getString("c_password");
+
+                // So sánh mật khẩu nhập vào với mật khẩu đã mã hóa trong database
+                if (BCrypt.checkpw(password, storedHashedPassword)) {
+                    Customer c = new Customer();
+                    c.setEmail(email);
+                    c.setFullname(rs.getString("c_fullname"));
+                    c.setPhone(rs.getString("c_phone"));
+                    c.setGender(rs.getBoolean("c_gender"));
+                    c.setAddress(rs.getString("c_address"));
+                    c.setUsername(rs.getString("c_username"));
+                    c.setPassword(storedHashedPassword); // Giữ mật khẩu đã mã hóa
+                    return c;
+                }
+            }
         } catch (SQLException ex) {
             Logger.getLogger(CustomerDao.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        return null;
+        return null; // Trả về null nếu không tìm thấy user hoặc mật khẩu sai
     }
+
     public void resetPassword(String email, String newPassword) {
         String sql_update = "UPDATE [dbo].[Customer]\n"
                 + "   SET [c_password] = ?\n"
@@ -263,8 +288,9 @@ public class CustomerDao extends DBContext<Customer> {
 
         } catch (SQLException ex) {
             Logger.getLogger(CustomerDao.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+        }
     }
+
     public boolean isEmailExists(String email) {
         String sql = "SELECT COUNT(*) AS count FROM Customer WHERE c_email = ?";
         try (PreparedStatement stm = connection.prepareStatement(sql)) {
@@ -280,7 +306,6 @@ public class CustomerDao extends DBContext<Customer> {
         return false;
     }
 
-
     public String getPasswordByEmail(String email) {
         String query = "SELECT c_password FROM Customer WHERE c_email = ?";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
@@ -294,25 +319,5 @@ public class CustomerDao extends DBContext<Customer> {
         }
         return null; // Nếu không tìm thấy email trong cơ sở dữ liệu
     }
-public Customer getByID(int c_id) {
-        String query = "SELECT * FROM Customer WHERE c_id = ?";
-        try (PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.setInt(1, c_id);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                return new Customer(
-                        rs.getString("c_email"),
-                        rs.getString("c_fullname"),
-                        rs.getString("c_phone"),
-                        rs.getString("c_address"),
-                        rs.getBoolean("c_gender"),
-                        rs.getString("c_username"),
-                        rs.getString("c_password")
-                );
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
+
 }
