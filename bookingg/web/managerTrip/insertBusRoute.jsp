@@ -65,7 +65,7 @@
                     </ol>
                 </nav>
                 <div class="card p-4">
-                    <form>
+                    <form action="BusRouteURL" method="get">
                         <input type="hidden" name="service" value="insert">
                         <div class="row g-3">
                             <div class="col-md-6">
@@ -106,50 +106,6 @@
                 </div>
             </div>
         </div>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCU41RrJpPRR4mzeSKi-a2qLiIlRckELkE&libraries=places"></script>
-        <script>
-            function calculateDistance() {
-                var origin = document.getElementById("br_from").value.trim();
-                var destination = document.getElementById("br_to").value.trim();
-
-                if (!origin || !destination) {
-                    document.getElementById("br_distance").value = "";
-                    return;
-                }
-
-                var service = new google.maps.DistanceMatrixService();
-                service.getDistanceMatrix(
-                        {
-                            origins: [origin],
-                            destinations: [destination],
-                            travelMode: google.maps.TravelMode.DRIVING,
-                        },
-                        function (response, status) {
-                            if (status !== "OK") {
-                                console.error("Lỗi kết nối Google Maps API:", status);
-                                document.getElementById("br_distance").value = "";
-                                return;
-                            }
-
-                            var result = response.rows[0]?.elements[0];
-                            if (!result || result.status !== "OK") {
-                                console.error("Không thể tính khoảng cách. Vui lòng kiểm tra lại địa điểm!");
-                                document.getElementById("br_distance").value = "";
-                                return;
-                            }
-
-                            var distanceText = result.distance.text; // Ví dụ: "10.5 km"
-                            var distanceValue = parseFloat(distanceText.replace(/[^\d.]/g, "")); // Chỉ lấy số
-                            document.getElementById("br_distance").value = distanceValue;
-                        }
-                );
-            }
-
-            document.addEventListener("DOMContentLoaded", function () {
-                document.getElementById("br_from").addEventListener("change", calculateDistance);
-                document.getElementById("br_to").addEventListener("change", calculateDistance);
-            });
-        </script>
         <script src="assets/js/bootstrap.bundle.min.js"></script>
     </body>
 </html>
