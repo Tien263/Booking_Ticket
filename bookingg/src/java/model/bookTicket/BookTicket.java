@@ -10,12 +10,12 @@ import java.util.Date;
 /**
  *
  * @author Admin
- */
-public class BookTicket {
+ */public class BookTicket {
 
     private int t_id;
     private String c_fullname;
     private String c_phone;
+    private Date bt_purchaseDate;
     private Date bt_bookingDate;
     private String br_adress;
     private String bt1_time;
@@ -25,15 +25,24 @@ public class BookTicket {
     public BookTicket() {
     }
 
-    public BookTicket(int t_id, String c_fullname, String c_phone, Date bt_bookingDate, String br_adress, String bt1_time, String s_name, float br_price) {
+    public BookTicket(int t_id, String c_fullname, String c_phone, Date bt_purchaseDate, Date bt_bookingDate, String br_adress, String bt1_time, String s_name, float br_price) {
         this.t_id = t_id;
         this.c_fullname = c_fullname;
         this.c_phone = c_phone;
+        this.bt_purchaseDate = bt_purchaseDate;
         this.bt_bookingDate = bt_bookingDate;
         this.br_adress = br_adress;
         this.bt1_time = bt1_time;
         this.s_name = s_name;
         this.br_price = br_price;
+    }
+
+    public Date getBt_purchaseDate() {
+        return bt_purchaseDate;
+    }
+
+    public void setBt_purchaseDate(Date bt_purchaseDate) {
+        this.bt_purchaseDate = bt_purchaseDate;
     }
 
     public int getT_id() {

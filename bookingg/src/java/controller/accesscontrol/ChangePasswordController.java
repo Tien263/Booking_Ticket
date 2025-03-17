@@ -1,121 +1,98 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package controller.accesscontrol;
 
+import MD5.BCrypt;
 import dal.CustomerDao;
+import model.Customer;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.Customer;
+import jakarta.servlet.http.HttpSession;
 
-/**
- *
- * @author ADMIN
- */
 public class ChangePasswordController extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ChangePasswordController</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ChangePasswordController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.getRequestDispatcher("changepassword.jsp").forward(request, response);
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String email = request.getParameter("email");
+        HttpSession session = request.getSession();
+        CustomerDao customerDao = new CustomerDao();
+
+        // Lấy email từ session (người dùng đang đăng nhập)
+        Customer loggedInCustomer = (Customer) session.getAttribute("customer");
+        if (loggedInCustomer == null) {
+            request.setAttribute("error", "Bạn chưa đăng nhập!");
+            request.getRequestDispatcher("login.jsp").forward(request, response);
+            return;
+        }
+
+        String email = loggedInCustomer.getEmail();
         String currentPassword = request.getParameter("currentPassword");
         String newPassword = request.getParameter("newPassword");
         String retypeNewPassword = request.getParameter("retypeNewPassword");
 
-        if (currentPassword == null || newPassword == null || retypeNewPassword == null || email == null) {
-            request.setAttribute("error", "All fields are required!");
+        // Kiểm tra trường nhập vào
+        if (currentPassword == null || currentPassword.trim().isEmpty()) {
+            request.setAttribute("error", "Mật khẩu cũ không được để trống!");
             request.getRequestDispatcher("changepassword.jsp").forward(request, response);
             return;
         }
 
-        CustomerDao customerDao = new CustomerDao();
+        if (newPassword == null || newPassword.trim().isEmpty()) {
+            request.setAttribute("error", "Mật khẩu mới không được để trống!");
+            request.getRequestDispatcher("changepassword.jsp").forward(request, response);
+            return;
+        }
+
+        if (retypeNewPassword == null || retypeNewPassword.trim().isEmpty()) {
+            request.setAttribute("error", "Mật khẩu xác nhận không được để trống!");
+            request.getRequestDispatcher("changepassword.jsp").forward(request, response);
+            return;
+        }
+
+        // Kiểm tra mật khẩu cũ
         Customer customer = customerDao.getByEmail(email);
-
-        // Kiểm tra mật khẩu hiện tại
-        if (customer == null || !customer.getPassword().equals(currentPassword)) {
-            request.setAttribute("error", "Current password is incorrect!");
+        if (customer == null) {
+            request.setAttribute("error", "Không tìm thấy tài khoản!");
             request.getRequestDispatcher("changepassword.jsp").forward(request, response);
             return;
         }
 
-        // Kiểm tra xem mật khẩu mới có khớp
+        // So sánh mật khẩu nhập vào với mật khẩu đã mã hóa trong CSDL
+        if (!BCrypt.checkpw(currentPassword, customer.getPassword())) {
+            request.setAttribute("error", "Mật khẩu cũ không chính xác!");
+            request.getRequestDispatcher("changepassword.jsp").forward(request, response);
+            return;
+        }
+
+        // Kiểm tra mật khẩu mới có khớp không
         if (!newPassword.equals(retypeNewPassword)) {
-            request.setAttribute("error", "New passwords do not match!");
+            request.setAttribute("error", "Mật khẩu xác nhận không khớp!");
             request.getRequestDispatcher("changepassword.jsp").forward(request, response);
             return;
         }
-        customer.setPassword(newPassword);
+
+        // **Mã hóa mật khẩu mới trước khi cập nhật vào database**
+        String hashedPassword = BCrypt.hashpw(newPassword, BCrypt.gensalt());
+
+        // Cập nhật mật khẩu mới
+        customer.setPassword(hashedPassword);
         customerDao.update(customer);
 
         // Hiển thị thông báo thành công
-        request.setAttribute("success", "Password updated successfully!");
+        request.setAttribute("success", "Mật khẩu đã được thay đổi thành công!");
         request.getRequestDispatcher("changepassword.jsp").forward(request, response);
-
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
+        return "Change Password Controller with Password Encryption";
+    }
 }

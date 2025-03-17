@@ -1,5 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="6.0" xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd">
+    <filter>
+        <filter-name>authenticationBlog</filter-name>
+        <filter-class>filter.authenticationBlog</filter-class>
+    </filter>
+    <filter>
+        <filter-name>authenticationPromotion</filter-name>
+        <filter-class>filter.authenticationPromotion</filter-class>
+    </filter>
+    <filter>
+        <filter-name>authenticationTripRoute</filter-name>
+        <filter-class>filter.authenticationTripRoute</filter-class>
+    </filter>
+    <filter>
+        <filter-name>authenticationVehicle</filter-name>
+        <filter-class>filter.authenticationVehicle</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>authenticationVehicle</filter-name>
+        <url-pattern>/vehicle/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>authenticationTripRoute</filter-name>
+        <url-pattern>/BusTripURL/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>authenticationTripRoute</filter-name>
+        <url-pattern>/BusRouteURL/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>authenticationPromotion</filter-name>
+        <url-pattern>/promotion/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>authenticationBlog</filter-name>
+        <url-pattern>/blog/*</url-pattern>
+    </filter-mapping>
     <servlet>
         <servlet-name>Register</servlet-name>
         <servlet-class>controller.accesscontrol.RegisterController</servlet-class>
@@ -17,48 +53,68 @@
         <servlet-class>controller.accesscontrol.ChangeAccountController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>CusListBlogController</servlet-name>
-        <servlet-class>controller.accesscontrol.CusListBlogController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>CusBlogDetailController</servlet-name>
-        <servlet-class>controller.accesscontrol.CusBlogDetailController</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>ChangePasswordController</servlet-name>
         <servlet-class>controller.accesscontrol.ChangePasswordController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>SelectSeatController</servlet-name>
-        <servlet-class>controller.bookTicket.SelectSeatController</servlet-class>
+        <servlet-name>BlogDeleteController</servlet-name>
+        <servlet-class>controller.blog.BlogDeleteController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>BookTicketController</servlet-name>
-        <servlet-class>controller.bookTicket.BookTicketController</servlet-class>
+        <servlet-name>BlogUpdateController</servlet-name>
+        <servlet-class>controller.blog.BlogUpdateController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BlogListController</servlet-name>
+        <servlet-class>controller.blog.BlogListController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BlogCreateServlet</servlet-name>
+        <servlet-class>controller.blog.BlogCreateServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>OTPVerificationController</servlet-name>
+        <servlet-class>controller.forgotpass.otp.OTPVerificationController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ResetPasswordCustomerController</servlet-name>
+        <servlet-class>controller.forgotpass.otp.ResetPasswordCustomerController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ForgotPasswordController</servlet-name>
+        <servlet-class>controller.forgotpass.otp.ForgotPasswordController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CusListBlogController</servlet-name>
+        <servlet-class>controller.blog.customer.CusListBlogController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CusBlogDetailController</servlet-name>
+        <servlet-class>controller.blog.customer.CusBlogDetailController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CheckCId</servlet-name>
         <servlet-class>controller.bookTicket.CheckCId</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>DAOUsers</servlet-name>
-        <servlet-class>dal.bookTicket.DAOUsers</servlet-class>
+        <servlet-name>SeatController</servlet-name>
+        <servlet-class>controller.bookTicket.SeatController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ViewUserOrderHistory</servlet-name>
-        <servlet-class>controller.accesscontrol.ViewUserOrderHistory</servlet-class>
+        <servlet-name>ContactController</servlet-name>
+        <servlet-class>controller.accesscontrol.ContactController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ViewUserDetail</servlet-name>
-        <servlet-class>controller.accesscontrol.ViewUserDetail</servlet-class>
+        <servlet-name>ContactListController</servlet-name>
+        <servlet-class>controller.accesscontrol.ContactListController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ViewUserpPaymentHistory</servlet-name>
-        <servlet-class>controller.accesscontrol.ViewUserpPaymentHistory</servlet-class>
+        <servlet-name>LogoutController</servlet-name>
+        <servlet-class>controller.accesscontrol.LogoutController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ReportFinacial</servlet-name>
-        <servlet-class>controller.accesscontrol.ReportFinacial</servlet-class>
+        <servlet-name>VehicleController</servlet-name>
+        <servlet-class>controller.accesscontrol.VehicleController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Register</servlet-name>
@@ -77,14 +133,6 @@
         <url-pattern>/change1</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>CusListBlogController</servlet-name>
-        <url-pattern>/cuslistblog</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>CusBlogDetailController</servlet-name>
-        <url-pattern>/cusblogdetail</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>ChangePasswordController</servlet-name>
         <url-pattern>/changepassword</url-pattern>
     </servlet-mapping>
@@ -95,6 +143,14 @@
     <servlet>
         <servlet-name>EmployeeLoginnController</servlet-name>
         <servlet-class>controller.accesscontrol.EmployeeLoginnController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BusRouteController</servlet-name>
+        <servlet-class>controller.managerTrip.BusRouteController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BusTripController</servlet-name>
+        <servlet-class>controller.managerTrip.BusTripController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>UpdateEmployeeController</servlet-name>
@@ -124,6 +180,14 @@
         <servlet-name>VerifyUsernameController</servlet-name>
         <url-pattern>/verify_username</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>SelectSeatController</servlet-name>
+        <servlet-class>controller.bookTicket.SelectSeatController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BookTicketController</servlet-name>
+        <servlet-class>controller.bookTicket.BookTicketController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SelectSeatController</servlet-name>
         <url-pattern>/SelectSeatURL</url-pattern>
@@ -141,25 +205,71 @@
         <url-pattern>/booking</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>OTPVerificationController</servlet-name>
+        <url-pattern>/verification</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ResetPasswordCustomerController</servlet-name>
+        <url-pattern>/resetpasswordcustomer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ForgotPasswordController</servlet-name>
+        <url-pattern>/forgotpassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CusListBlogController</servlet-name>
+        <url-pattern>/cuslistblog</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CusBlogDetailController</servlet-name>
+        <url-pattern>/cusblogdetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BlogListController</servlet-name>
+        <url-pattern>/blog/listblog</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BlogCreateServlet</servlet-name>
+        <url-pattern>/blog/createblog</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BlogDeleteController</servlet-name>
+        <url-pattern>/blog/deleteblog</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BlogUpdateController</servlet-name>
+        <url-pattern>/blog/updateblog</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>CheckCId</servlet-name>
         <url-pattern>/CheckCId</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>default</servlet-name>
-        <url-pattern>/assets/*</url-pattern>
+        <servlet-name>SeatController</servlet-name>
+        <url-pattern>/SeatURL</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>DAOUsers</servlet-name>
-        <url-pattern>/DAOUsers</url-pattern>
+        <servlet-name>ContactController</servlet-name>
+        <url-pattern>/contact</url-pattern>
     </servlet-mapping>
-    
     <servlet-mapping>
-        <servlet-name>ViewUserOrderHistory</servlet-name>
-        <url-pattern>/ViewUserOrderHistory</url-pattern>
+        <servlet-name>ContactListController</servlet-name>
+        <url-pattern>/contactlist</url-pattern>
     </servlet-mapping>
-    
     <servlet-mapping>
-        <servlet-name>ReportFinacial</servlet-name>
-        <url-pattern>/ReportFinacial</url-pattern>
+        <servlet-name>LogoutController</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BusRouteController</servlet-name>
+        <url-pattern>/BusRouteURL</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BusTripController</servlet-name>
+        <url-pattern>/BusTripURL</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>VehicleController</servlet-name>
+        <url-pattern>/vehicle/vehicle</url-pattern>
     </servlet-mapping>
 </web-app>
