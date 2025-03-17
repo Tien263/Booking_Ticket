@@ -30,7 +30,7 @@ import jakarta.servlet.http.HttpServletResponse;
 public class ajaxServlet extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         
         String vnp_Version = "2.1.0";
         String vnp_Command = "pay";

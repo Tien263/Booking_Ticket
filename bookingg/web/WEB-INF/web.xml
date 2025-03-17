@@ -116,10 +116,6 @@
         <servlet-name>VehicleController</servlet-name>
         <servlet-class>controller.accesscontrol.VehicleController</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>ViewUserOrderHistory</servlet-name>
-        <servlet-class>controller.accesscontrol.ViewUserOrderHistory</servlet-class>
-    </servlet>
     <servlet-mapping>
         <servlet-name>Register</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -275,9 +271,5 @@
     <servlet-mapping>
         <servlet-name>VehicleController</servlet-name>
         <url-pattern>/vehicle/vehicle</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ViewUserOrderHistory</servlet-name>
-        <url-pattern>/ViewUserOrderHistory</url-pattern>
     </servlet-mapping>
 </web-app>

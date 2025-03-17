@@ -228,14 +228,14 @@
                             <nav class="main_menu clearfix">
                                 <ul class="ul_li_center clearfix">
                                     <li class="active has_child">
-                                        <a href="home.jsp">Home</a>
+                                        <a href="home.jsp">Trang chủ</a>
                                     </li>
-                                    <li><a href="booking">Booking Ticket</a></li>
+                                    <li><a href="booking">Đặt vé</a></li>
                                     <li><a href="cuslistblog">Blog</a></li>
                                     <li>
-                                        <a href="contact.jsp">Contact Us</a>
+                                        <a href="contact.jsp">Liên hệ</a>
                                     </li>
-                                    <li><a href="employee_login.jsp">Employee Login</a></li>
+                                    <li><a href="employee_login.jsp">Nhân viên</a></li>
                                 </ul>
                             </nav>
                         </div>
@@ -293,14 +293,13 @@
                             <li><a href="cuslistblog">Tin tức</a></li>
                             <li><a href="contact.jsp">Liên hệ</a></li>
                             <li><a href="employee_login.jsp">Đăng nhập của nhân viên</a></li>
-                            
+
                         </ul>
                     </div>
 
                     <div class="booking_car_form">
-                        <h3 class="title_text text-white mb-2">Book A Car</h3>
+                        <h3 class="title_text text-white mb-2">Đặt vé</h3>
                         <p class="mb_15">
-                            Nullam id dolor auctor, dignissim magna eu, mattis ante. Pellentesque tincidunt, elit a facilisis efficitur.
                         </p>
                         <form action="#">
                             <div class="form_item">
@@ -791,7 +790,7 @@
                             <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
                                 <div class="serial_number text-right" data-aos="fade-up" data-aos-delay="100">
                                     <span>02</span>
-                                    <h4 class="mb-0">Choose a travel destination</h4>
+                                    <h4 class="mb-0">Chọn điểm đến du lịch</h4>
                                 </div>
                             </div>
 
@@ -800,11 +799,11 @@
                                     <div class="thumbnail_carousel">
                                         <div class="item">
                                             <div class="item_head">
-                                                <h4 class="item_title mb-0">Top tourist destination</h4>
+                                                <h4 class="item_title mb-0">Các điểm đến du lịch hàng đầu</h4>
                                                 <ul class="review_text ul_li_right clearfix">
                                                     <li class="text-right">
                                                         <strong>Super</strong>
-                                                        <small>24+ Reviews</small>
+                                                        <small>24+ Đánh giá</small>
                                                     </li>
                                                     <li><span class="bg_default_blue">4.8/5</span></li>
                                                 </ul>
@@ -815,18 +814,18 @@
                                                     <span class="custom_btn btn_width bg_default_blue"><del>$800/Day</del> $400/Day</span>
                                                 </li>
                                                 <li>
-                                                    <a href="#!" class="custom_btn btn_width bg_default_red text-uppercase">Book Ticket <img src="assets/images/icons/icon_01.png" alt="icon_not_found"></a>
+                                                    <a href="booking" class="custom_btn btn_width bg_default_red text-uppercase">Đặt vé <img src="assets/images/icons/icon_01.png" alt="icon_not_found"></a>
                                                 </li>
                                             </ul>
                                         </div>
 
                                         <div class="item">
                                             <div class="item_head">
-                                                <h4 class="item_title mb-0">Top tourist destination</h4>
+                                                <h4 class="item_title mb-0">Các điểm đến du lịch hàng đầu</h4>
                                                 <ul class="review_text ul_li_right clearfix">
                                                     <li class="text-right">
                                                         <strong>Super</strong>
-                                                        <small>24+ Reviews</small>
+                                                        <small>24+ Đánh giá</small>
                                                     </li>
                                                     <li><span class="bg_default_blue">4.8/5</span></li>
                                                 </ul>
@@ -837,18 +836,18 @@
                                                     <span class="custom_btn btn_width bg_default_blue"><del>$800/Day</del> $400/Day</span>
                                                 </li>
                                                 <li>
-                                                    <a href="#!" class="custom_btn btn_width bg_default_red text-uppercase">Book Ticket <img src="assets/images/icons/icon_01.png" alt="icon_not_found"></a>
+                                                    <a href="booking" class="custom_btn btn_width bg_default_red text-uppercase">Đặt vé <img src="assets/images/icons/icon_01.png" alt="icon_not_found"></a>
                                                 </li>
                                             </ul>
                                         </div>
 
                                         <div class="item">
                                             <div class="item_head">
-                                                <h4 class="item_title mb-0">Top tourist destination</h4>
+                                                <h4 class="item_title mb-0">Các điểm đến du lịch hàng đầu</h4>
                                                 <ul class="review_text ul_li_right clearfix">
                                                     <li class="text-right">
                                                         <strong>Super</strong>
-                                                        <small>24+ Reviews</small>
+                                                        <small>24+ Đánh giá</small>
                                                     </li>
                                                     <li><span class="bg_default_blue">4.8/5</span></li>
                                                 </ul>
@@ -859,18 +858,18 @@
                                                     <span class="custom_btn btn_width bg_default_blue"><del>$800/Day</del> $400/Day</span>
                                                 </li>
                                                 <li>
-                                                    <a href="#!" class="custom_btn btn_width bg_default_red text-uppercase">Book Ticket <img src="assets/images/icons/icon_01.png" alt="icon_not_found"></a>
+                                                    <a href="booking" class="custom_btn btn_width bg_default_red text-uppercase">Đặt vé <img src="assets/images/icons/icon_01.png" alt="icon_not_found"></a>
                                                 </li>
                                             </ul>
                                         </div>
 
                                         <div class="item">
                                             <div class="item_head">
-                                                <h4 class="item_title mb-0">Top tourist destination</h4>
+                                                <h4 class="item_title mb-0">Các điểm đến du lịch hàng đầu</h4>
                                                 <ul class="review_text ul_li_right clearfix">
                                                     <li class="text-right">
                                                         <strong>Super</strong>
-                                                        <small>24+ Reviews</small>
+                                                        <small>24+ Đánh giá</small>
                                                     </li>
                                                     <li><span class="bg_default_blue">4.8/5</span></li>
                                                 </ul>
@@ -881,18 +880,18 @@
                                                     <span class="custom_btn btn_width bg_default_blue"><del>$800/Day</del> $400/Day</span>
                                                 </li>
                                                 <li>
-                                                    <a href="#!" class="custom_btn btn_width bg_default_red text-uppercase">Book Ticket <img src="assets/images/icons/icon_01.png" alt="icon_not_found"></a>
+                                                    <a href="booking" class="custom_btn btn_width bg_default_red text-uppercase">Đặt vé <img src="assets/images/icons/icon_01.png" alt="icon_not_found"></a>
                                                 </li>
                                             </ul>
                                         </div>
 
                                         <div class="item">
                                             <div class="item_head">
-                                                <h4 class="item_title mb-0">Top tourist destination</h4>
+                                                <h4 class="item_title mb-0">Các điểm đến du lịch hàng đầu</h4>
                                                 <ul class="review_text ul_li_right clearfix">
                                                     <li class="text-right">
                                                         <strong>Super</strong>
-                                                        <small>24+ Reviews</small>
+                                                        <small>24+ Đánh giá</small>
                                                     </li>
                                                     <li><span class="bg_default_blue">4.8/5</span></li>
                                                 </ul>
@@ -903,18 +902,18 @@
                                                     <span class="custom_btn btn_width bg_default_blue"><del>$800/Day</del> $400/Day</span>
                                                 </li>
                                                 <li>
-                                                    <a href="#!" class="custom_btn btn_width bg_default_red text-uppercase">Book Ticket <img src="assets/images/icons/icon_01.png" alt="icon_not_found"></a>
+                                                    <a href="booking" class="custom_btn btn_width bg_default_red text-uppercase">Đặt vé <img src="assets/images/icons/icon_01.png" alt="icon_not_found"></a>
                                                 </li>
                                             </ul>
                                         </div>
 
                                         <div class="item">
                                             <div class="item_head">
-                                                <h4 class="item_title mb-0">Top tourist destination</h4>
+                                                <h4 class="item_title mb-0">Các điểm đến du lịch hàng đầu</h4>
                                                 <ul class="review_text ul_li_right clearfix">
                                                     <li class="text-right">
                                                         <strong>Super</strong>
-                                                        <small>24+ Reviews</small>
+                                                        <small>24+ Đánh giá</small>
                                                     </li>
                                                     <li><span class="bg_default_blue">4.8/5</span></li>
                                                 </ul>
@@ -925,7 +924,7 @@
                                                     <span class="custom_btn btn_width bg_default_blue"><del>$800/Day</del> $400/Day</span>
                                                 </li>
                                                 <li>
-                                                    <a href="#!" class="custom_btn btn_width bg_default_red text-uppercase">Book Ticket <img src="assets/images/icons/icon_01.png" alt="icon_not_found"></a>
+                                                    <a href="booking" class="custom_btn btn_width bg_default_red text-uppercase">Đặt vé <img src="assets/images/icons/icon_01.png" alt="icon_not_found"></a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -954,13 +953,13 @@
 
                                 <div class="car_choose_content" data-aos="fade-up" data-aos-delay="500">
                                     <ul class="info_list ul_li_block mb_15 clearfix">
-                                        <li><strong>Passengers:</strong> 1</li>
-                                        <li><strong>Suitcase:</strong> 1 Large, 2 Small</li>
-                                        <li><strong>Departure:</strong> Ha Noi</li>
-                                        <li><strong>Ticket Type:</strong> Standard</li>
-                                        <li><strong>Amenities:</strong> Free drinking water, WiFi, Air conditioning, Charging ports, Blanket</li>
+                                        <li><strong>Hành khách:</strong> 1</li>
+                                        <li><strong>Hành lý:</strong> 1 vali lớn, 2 vali nhỏ</li>
+                                        <li><strong>Khởi hành:</strong> Ha Noi</li>
+                                        <li><strong>Loại vé:</strong> Tiêu chuẩn</li>
+                                        <li><strong>Tiện ích:</strong>Nước uống miễn phí, WiFi, Điều hòa, Cổng sạc, Chăn</li>
                                     </ul>
-                                    <a class="terms_condition" href="#!"><i class="fas fa-info-circle mr-1"></i> Terms and conditions</a>
+                                    <a class="terms_condition" href="#!"><i class="fas fa-info-circle mr-1"></i>Điều khoản và điều kiện</a>
                                 </div>
                             </div>
                         </div>
@@ -1149,18 +1148,17 @@
                             <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
                                 <div class="serial_number text-right" data-aos="fade-up" data-aos-delay="100">
                                     <span>03</span>
-                                    <h4 class="mb-0">What our offer includes</h4>
+                                    <h4 class="mb-0">Những gì chúng tôi cung cấp</h4>
                                 </div>
                             </div>
 
                             <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
                                 <div class="offer_content">
                                     <h2 class="item_title" data-aos="fade-up" data-aos-delay="100">
-                                        The Best Bus Ticket Booking Experience
+                                        Trải nghiệm đặt vé xe buýt tốt nhất
                                     </h2>
                                     <p class="mb-0" data-aos="fade-up" data-aos-delay="300">
-                                        We are committed to providing a safe, convenient, and transparent bus ticket booking experience. With our modern system, you can easily select your preferred route, enjoy high-quality services, and access exclusive deals.
-                                    </p>
+                                        Chúng tôi cam kết cung cấp một trải nghiệm đặt vé xe buýt an toàn, thuận tiện và minh bạch. Với hệ thống hiện đại, bạn có thể dễ dàng chọn tuyến đường yêu thích, tận hưởng dịch vụ chất lượng cao và tiếp cận các ưu đãi đặc biệt.                                    </p>
                                     <div class="row">
                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                             <div class="offer_info" data-aos="fade-up" data-aos-delay="100">
@@ -1169,11 +1167,9 @@
                                                 </div>
                                                 <div class="item_content">
                                                     <h4 class="item_title">
-                                                        Secured Payment Guarantee
-                                                    </h4>
+                                                        Đảm bảo thanh toán an toàn                                                    </h4>
                                                     <p class="mb-0">
-                                                        Safe and secure payment options with maximum customer data protection.
-                                                    </p>
+                                                        Các phương thức thanh toán an toàn và bảo vệ tối đa dữ liệu khách hàng.                                                    </p>
                                                 </div>
                                             </div>
                                         </div>
@@ -1185,11 +1181,9 @@
                                                 </div>
                                                 <div class="item_content">
                                                     <h4 class="item_title">
-                                                        Easy Bus Ticket Booking
-                                                    </h4>
+                                                        Đặt vé xe buýt dễ dàng                                                    </h4>
                                                     <p class="mb-0">
-                                                        Quickly choose your bus route with multiple ticket options and trusted operators.
-                                                    </p>
+                                                        Chọn nhanh chóng tuyến xe buýt với nhiều lựa chọn vé và các nhà điều hành uy tín.                                                    </p>
                                                 </div>
                                             </div>
                                         </div>
@@ -1201,11 +1195,10 @@
                                                 </div>
                                                 <div class="item_content">
                                                     <h4 class="item_title">
-                                                        Multi-language Support 24/7
+                                                        Hỗ trợ đa ngôn ngữ 24/7
                                                     </h4>
                                                     <p class="mb-0">
-                                                        Multi-language assistance available anytime to support your needs.
-                                                    </p>
+                                                        Hỗ trợ đa ngôn ngữ bất cứ khi nào để đáp ứng nhu cầu của bạn.                                                    </p>
                                                 </div>
                                             </div>
                                         </div>
@@ -1217,11 +1210,9 @@
                                                 </div>
                                                 <div class="item_content">
                                                     <h4 class="item_title">
-                                                        Emergency technical assistance
-                                                    </h4>
+                                                        Hỗ trợ kỹ thuật khẩn cấp                                                    </h4>
                                                     <p class="mb-0">
-                                                        Immediate support to ensure your journey is smooth and hassle-free.
-                                                    </p>
+                                                        Hỗ trợ ngay lập tức để đảm bảo hành trình của bạn luôn suôn sẻ và không gặp rắc rối.                                                    </p>
                                                 </div>
                                             </div>
                                         </div>
@@ -1245,11 +1236,10 @@
                         <div class="col-lg-7 col-md-9 col-sm-12 col-xs-12">
                             <div class="section_title mb_60 text-center text-white" data-aos="fade-up" data-aos-delay="100">
                                 <h2 class="title_text text-white mb_15">
-                                    <span>BusGo Headquarters</span>
+                                    <span>Trụ sở chính BusGo</span>
                                 </h2>
                                 <p class="mb-0">
-                                    We operate from our central headquarters, ensuring smooth operations and premium customer service. Our main office is strategically located to support our network of routes and enhance the travel experience for all passengers.
-                                </p>
+                                    Chúng tôi hoạt động từ trụ sở trung tâm, đảm bảo vận hành suôn sẻ và cung cấp dịch vụ khách hàng cao cấp. Văn phòng chính của chúng tôi được đặt tại khu công nghệ cao nhằm hỗ trợ mạng lưới tuyến đường và nâng cao trải nghiệm di chuyển cho tất cả hành khách.                                </p>
                             </div>
                         </div>
                     </div>
@@ -1307,14 +1297,14 @@
                             <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
                                 <div class="serial_number text-right" data-aos="fade-up" data-aos-delay="100">
                                     <span>04</span>
-                                    <h4 class="mb-0">Enjoy the ride and leave your feedback</h4>
+                                    <h4 class="mb-0">Tận hưởng chuyến đi và để lại phản hồi của bạn</h4>
                                 </div>
                             </div>
 
                             <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
                                 <div class="testimonial_contants_wrap">
                                     <h2 class="item_title mb_30" data-aos="fade-up" data-aos-delay="100">
-                                        Reviews and videos from our clients:
+                                        Đánh giá và video, hình ảnh từ khách hàng của chúng tôi:
                                     </h2>
 
                                     <div class="testimonial_item clearfix">
@@ -1550,15 +1540,12 @@
 
                         <div class="col-lg-4 col-md-4 col-sm-12 col-sm-12">
                             <div class="footer_useful_links" data-aos="fade-up" data-aos-delay="300">
-                                <h3 class="footer_widget_title">Information:</h3>
+                                <h3 class="footer_widget_title">Thông tin:</h3>
                                 <ul class="ul_li_block clearfix">
-                                    <li><a href="#!"><i class="fal fa-angle-right"></i> Find a Car for Rent in the Nearest Location</a></li>
-                                    <li><a href="#!"><i class="fal fa-angle-right"></i> Cars Catalog</a></li>
-                                    <li><a href="#!"><i class="fal fa-angle-right"></i> F.A.Q.</a></li>
-                                    <li><a href="#!"><i class="fal fa-angle-right"></i> About Us</a></li>
-                                    <li><a href="#!"><i class="fal fa-angle-right"></i> Contact Us</a></li>
-                                    <li><a href="#!"><i class="fal fa-angle-right"></i> Help Center</a></li>
-                                    <li><a href="#!"><i class="fal fa-angle-right"></i> Privacy Police</a></li>
+                                    <li><a href="booking"><i class="fal fa-angle-right"></i> Find a Car for Rent in the Nearest Location</a></li>
+                                    <li><a href="contact.jsp"><i class="fal fa-angle-right"></i> Liên hệ với chúng tôi</a></li>
+                                    <li><a href="#!"><i class="fal fa-angle-right"></i> Trung tâm hỗ trợ</a></li>
+                                    <li><a href="policy.jsp"><i class="fal fa-angle-right"></i> Chính sách bảo mật</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -1570,7 +1557,7 @@
                 <div class="container">
                     <div class="row align-items-center justify-content-lg-between">
                         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                            <p class="copyright_text mb-0">Copyright © 2020. Rotors by <a class="author_links text-white" href="#!">Merkulove</a></p>
+                            <p class="copyright_text mb-0">Bản quyền © 2020. Được phát triển bởi <a class="author_links text-white" href="login.jsp">BusGo</a></p>
                         </div>
 
                         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">

@@ -45,8 +45,17 @@ public class SeatController extends HttpServlet {
         session.setAttribute("to", request.getParameter("to"));
         session.setAttribute("departureTime", request.getParameter("departureTime"));
         session.setAttribute("arrivalTime", request.getParameter("arrivalTime"));
-        try (PrintWriter out = response.getWriter()) {
-            int c_id = Integer.parseInt(request.getParameter("c_id"));
+       
+       //kiểm 
+       int c_id = 0;
+       try {
+           session.setAttribute("flag",1 );
+           c_id = (int) session.getAttribute("c_id");
+       } catch (Exception e) {
+            response.sendRedirect("login.jsp");
+            return;
+       }
+       
             CustomerDao dao = new CustomerDao();
             Customer cus = new Customer();
             cus = dao.getByID(c_id);
@@ -65,9 +74,8 @@ public class SeatController extends HttpServlet {
             request.setAttribute("customer", cus);
             request.setAttribute("seats", seats);
             request.getRequestDispatcher("selectSeat.jsp").forward(request, response);
-
         }
-    }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
