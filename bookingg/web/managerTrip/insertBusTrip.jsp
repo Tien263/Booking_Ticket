@@ -40,20 +40,33 @@
                 <ul class="nav flex-column">
                     <li class="nav-item"><a class="nav-link text-dark" href="#"><i class="fas fa-home"></i> Trang Chủ</a></li>
                     <li class="nav-item"><a class="nav-link text-dark" href="#"><i class="fas fa-users"></i> Người Dùng</a></li>
+
+                    <!-- Quản lý Tuyến Xe -->
                     <li class="nav-item">
-                        <a class="nav-link text-dark" href="BusRouteURL?service=listOfAll"><i class="fas fa-bus"></i> Quản lý Tuyến Xe</a>
+                        <a class="nav-link fw-bold text-dark" href="#" id="toggleBusRoute">
+                            <i class="fas fa-bus"></i> Quản lý Tuyến Xe
+                        </a>
+                        <ul class="list-unstyled ps-3 d-none text-muted" id="busRouteMenu">
+                            <li><a class="nav-link text-secondary" href="BusRouteURL?service=listOfAll"><i class="fas fa-list"></i> Danh sách tuyến xe</a></li>
+                            <li><a class="nav-link text-secondary" href="BusRouteURL?service=insert"><i class="fas fa-plus"></i> Thêm tuyến xe</a></li>
+                        </ul>
                     </li>
+
+                    <!-- Quản lý Chuyến Xe -->
                     <li class="nav-item">
-                        <a class="nav-link text-dark" href="BusTripURL?service=listOfAll"><i class="fas fa-route"></i> Quản lý Chuyến xe</a>
-                        <ul class="list-unstyled ps-3">
-                            <li><a class="nav-link text-dark" href="BusTripURL?service=listOfAll"><i class="fas fa-list"></i> Danh sách chuyến xe</a></li>
-                            <li><a class="nav-link text-dark active bg-light" href="BusTripURL?service=insert"><i class="fas fa-plus"></i> Thêm chuyến xe</a></li>
+                        <a class="nav-link fw-bold text-dark" href="#" id="toggleBusTrip">
+                            <i class="fas fa-route"></i> Quản lý Chuyến xe
+                        </a>
+                        <ul class="list-unstyled ps-3 d-none text-muted" id="busTripMenu">
+                            <li><a class="nav-link text-secondary" href="BusTripURL?service=listOfAll"><i class="fas fa-list"></i> Danh sách chuyến xe</a></li>
+                            <li><a class="nav-link text-secondary active bg-light" href="BusTripURL?service=insert"><i class="fas fa-plus"></i> Thêm chuyến xe</a></li>
                         </ul>
                     </li>
                 </ul>
             </nav>
+            <!--End-Sidebar -->
             <!-- Main Content -->
-            <div class="col-md-9 p-4">
+            <div class="container-fluid p-4">
                 <header class="d-flex justify-content-between align-items-center mb-4">
                     <h2>Thêm Chuyến Xe</h2>
                     <div class="d-flex align-items-center">
@@ -68,7 +81,7 @@
                         <li class="breadcrumb-item active">Thêm chuyến Xe</li>
                     </ol>
                 </nav>
-                <div class="bg-white p-4 rounded shadow">
+                <div class="card p-4 rounded shadow">
                     <form action="BusTripURL" method="get">
                         <input type="hidden" name="service" value="insert">
                         <div class="row g-3">
@@ -96,12 +109,12 @@
                                 <label class="form-label" for="br_id">Mã Tuyến</label>
                                 <input type="text" class="form-control" id="br_id" name="br_id" required>
                             </div>
-                            <div class="col-md-6 d-flex flex-col">
-                                <label class="form-label">Biển số xe</label>
-                                <select name="vehicleId" id="vehicleId">
-                                    <%while(rsVehicle.next()){%>
-                                    <option value="<%=rsVehicle.getInt(1)%>"><%=rsVehicle.getString(2)%></option>
-                                    <%}%>
+                            <div class="col-md-6">
+                                <label class="form-label" for="vehicleId">Biển số xe</label>
+                                <select class="form-control" id="vehicleId" name="vehicleId" required>
+                                    <% while (rsVehicle.next()) { %>
+                                    <option value="<%= rsVehicle.getInt(1) %>"><%= rsVehicle.getString(2) %></option>
+                                    <% } %>
                                 </select>
                             </div>
                         </div>
@@ -113,5 +126,26 @@
                 </div>
             </div>
         </div>
+
+        <script>
+            // Toggle danh sách Tuyến Xe
+            document.getElementById("toggleBusRoute").addEventListener("click", function (event) {
+                event.preventDefault();
+                document.getElementById("busRouteMenu").classList.toggle("d-none");
+            });
+
+            // Toggle danh sách Chuyến Xe
+            document.getElementById("toggleBusTrip").addEventListener("click", function (event) {
+                event.preventDefault();
+                document.getElementById("busTripMenu").classList.toggle("d-none");
+            });
+            // Kiểm tra URL hiện tại để giữ menu mở
+            window.addEventListener("DOMContentLoaded", function () {
+                const currentUrl = window.location.href;
+                if (currentUrl.includes("BusTripURL?service=listOfAll") || currentUrl.includes("BusTripURL?service=insert")) {
+                    document.getElementById("busTripMenu").classList.remove("d-none");
+                }
+            });
+        </script>
     </body>
 </html>

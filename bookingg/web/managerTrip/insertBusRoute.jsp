@@ -12,17 +12,17 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <title>My Bus - Thêm tuyến xe</title>
 
-        <link rel="shortcut icon" href="assets/images/logo/favourite_icon.png">
-        <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="assets/css/fontawesome.css">
-        <link rel="stylesheet" type="text/css" href="assets/css/aos.css">
-        <link rel="stylesheet" type="text/css" href="assets/css/animate.css">
-        <link rel="stylesheet" type="text/css" href="assets/css/slick.css">
-        <link rel="stylesheet" type="text/css" href="assets/css/slick-theme.css">
-        <link rel="stylesheet" type="text/css" href="assets/css/magnific-popup.css">
-        <link rel="stylesheet" type="text/css" href="assets/css/nice-select.css">
-        <link rel="stylesheet" type="text/css" href="assets/css/jquery-ui.css">
-        <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+        <!-- CSS Libraries -->
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/css/fontawesome.css">
+        <link rel="stylesheet" href="assets/css/aos.css">
+        <link rel="stylesheet" href="assets/css/animate.css">
+        <link rel="stylesheet" href="assets/css/slick.css">
+        <link rel="stylesheet" href="assets/css/slick-theme.css">
+        <link rel="stylesheet" href="assets/css/magnific-popup.css">
+        <link rel="stylesheet" href="assets/css/nice-select.css">
+        <link rel="stylesheet" href="assets/css/jquery-ui.css">
+        <link rel="stylesheet" href="assets/css/style.css">
 
     </head>
     <body class="bg-light">
@@ -36,17 +36,31 @@
                 <ul class="nav flex-column">
                     <li class="nav-item"><a class="nav-link text-dark" href="#"><i class="fas fa-home"></i> Trang Chủ</a></li>
                     <li class="nav-item"><a class="nav-link text-dark" href="#"><i class="fas fa-users"></i> Người Dùng</a></li>
+
+                    <!-- Quản lý Tuyến Xe -->
                     <li class="nav-item">
-                        <a class="nav-link text-dark" href=""BusRouteURL?service=listOfAll""><i class="fas fa-bus"></i> Quản lý Tuyến Xe</a>
-                        <ul class="list-unstyled ps-3">
-                            <li><a class="nav-link text-dark" href="BusRouteURL?service=listOfAll"><i class="fas fa-list"></i> Danh sách tuyến xe</a></li>
-                            <li><a class="nav-link text-dark active bg-light" href="BusRouteURL?service=insert"><i class="fas fa-plus"></i> Thêm tuyến xe</a></li>
+                        <a class="nav-link fw-bold text-dark" href="#" id="toggleBusRoute">
+                            <i class="fas fa-bus"></i> Quản lý Tuyến Xe
+                        </a>
+                        <ul class="list-unstyled ps-3 d-none text-muted" id="busRouteMenu">
+                            <li><a class="nav-link text-secondary" href="BusRouteURL?service=listOfAll"><i class="fas fa-list"></i> Danh sách tuyến xe</a></li>
+                            <li><a class="nav-link text-secondary active bg-light" href="BusRouteURL?service=insert"><i class="fas fa-plus"></i> Thêm tuyến xe</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item"><a class="nav-link text-dark" href="BusTripURL?service=listOfAll"><i class="fas fa-route"></i> Quản lý Chuyến xe</a></li>
+
+                    <!-- Quản lý Chuyến Xe -->
+                    <li class="nav-item">
+                        <a class="nav-link fw-bold text-dark" href="#" id="toggleBusTrip">
+                            <i class="fas fa-route"></i> Quản lý Chuyến xe
+                        </a>
+                        <ul class="list-unstyled ps-3 d-none text-muted" id="busTripMenu">
+                            <li><a class="nav-link text-secondary" href="BusTripURL?service=listOfAll"><i class="fas fa-list"></i> Danh sách chuyến xe</a></li>
+                            <li><a class="nav-link text-secondary" href="BusTripURL?service=insert"><i class="fas fa-plus"></i> Thêm chuyến xe</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </nav>
-
+            <!--End-Sidebar -->
             <!-- Main Content -->
             <div class="container-fluid p-4">
                 <header class="d-flex justify-content-between align-items-center mb-4">
@@ -64,7 +78,7 @@
                         <li class="breadcrumb-item active">Thêm tuyến Xe</li>
                     </ol>
                 </nav>
-                <div class="card p-4">
+                <div class="card p-4 rounded shadow">
                     <form action="BusRouteURL" method="get">
                         <input type="hidden" name="service" value="insert">
                         <div class="row g-3">
@@ -106,7 +120,27 @@
                 </div>
             </div>
         </div>
-        <script src="assets/js/bootstrap.bundle.min.js"></script>
+        <script>
+            // Toggle danh sách Tuyến Xe
+            document.getElementById("toggleBusRoute").addEventListener("click", function (event) {
+                event.preventDefault();
+                document.getElementById("busRouteMenu").classList.toggle("d-none");
+            });
+
+            // Toggle danh sách Chuyến Xe
+            document.getElementById("toggleBusTrip").addEventListener("click", function (event) {
+                event.preventDefault();
+                document.getElementById("busTripMenu").classList.toggle("d-none");
+            });
+            // Kiểm tra URL hiện tại để giữ menu mở
+            window.addEventListener("DOMContentLoaded", function () {
+                const currentUrl = window.location.href;
+                if (currentUrl.includes("BusRouteURL?service=insert") || currentUrl.includes("BusRouteURL?service=insert")) {
+                    document.getElementById("busRouteMenu").classList.remove("d-none");
+                }
+            });
+        </script>
+        
     </body>
 </html>
 

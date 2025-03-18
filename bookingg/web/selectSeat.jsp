@@ -276,13 +276,13 @@
                                 </h3>
                                 <p class="text-black">
                                     <span class="text-red-500">(*)</span> Quý khách vui lòng có mặt tại bến xuất phát của xe
-                                    trước ít nhất 30 phút giờ khởi hành, mang theo thông báo đã thanh toán vé thành công có
-                                    chứa mã vé được gửi từ hệ thống FUTA BUS LINES. Vui lòng liên hệ Trung tâm tổng đài 1900
-                                    6067 để được hỗ trợ.
+                                    trước ít nhất 15 phút giờ khởi hành, mang theo thông báo đã thanh toán vé thành công có
+                                    chứa mã vé được gửi từ hệ thống BusGo. Vui lòng liên hệ Trung tâm tổng đài 1900
+                                    6969 để được hỗ trợ.
                                 </p>
                                 <p class="text-black">
                                     <span class="text-red-500">(*)</span> Nếu quý khách có nhu cầu trung chuyển, vui lòng
-                                    liên hệ Tổng đài trung chuyển 1900 6918 trước khi đặt vé. Chúng tôi không đón/trung
+                                    liên hệ Tổng đài trung chuyển 1900 6969 trước khi đặt vé. Chúng tôi không đón/trung
                                     chuyển tại những điểm xe trung chuyển không thể tới được.
                                 </p>
                             </div>
@@ -301,10 +301,10 @@
                             Thời gian xuất bến: <%= session.getAttribute("departureTime") %>
                         </p>
                         <p>
-                            Số lượng ghế: <span id="seatCount">0</span> Ghế
+                            Thời gian đến dự kiến: <%= session.getAttribute("arrivalTime") %>
                         </p>
                         <p>
-                            Tổng tiền lượt đi: <span id="totalPrice">0</span> VND
+                            Giá vé lượt đi: <%= session.getAttribute("price") %>
                         </p>
                     </div>
                     <div class="bg-white p-4 rounded shadow">
@@ -312,13 +312,10 @@
                             Chi tiết giá
                         </h2>
                         <p>
-                            Giá vé lượt đi: 0đ
+                            Số vé đặt: <span id="seatCount">0</span> vé
                         </p>
                         <p>
-                            Phí thanh toán: 0đ
-                        </p>
-                        <p>
-                            Tổng tiền: 0đ
+                            Tổng tiền: <span id="totalPrice">0</span> VND
                         </p>
                     </div>
                 </div>

@@ -40,18 +40,31 @@
                 <ul class="nav flex-column">
                     <li class="nav-item"><a class="nav-link text-dark" href="#"><i class="fas fa-home"></i> Trang Chủ</a></li>
                     <li class="nav-item"><a class="nav-link text-dark" href="#"><i class="fas fa-users"></i> Người Dùng</a></li>
+
+                    <!-- Quản lý Tuyến Xe -->
                     <li class="nav-item">
-                        <a class="nav-link text-dark" href="BusRouteURL?service=listOfAll"><i class="fas fa-bus"></i> Quản lý Tuyến Xe</a>
+                        <a class="nav-link fw-bold text-dark" href="#" id="toggleBusRoute">
+                            <i class="fas fa-bus"></i> Quản lý Tuyến Xe
+                        </a>
+                        <ul class="list-unstyled ps-3 d-none text-muted" id="busRouteMenu">
+                            <li><a class="nav-link text-secondary" href="BusRouteURL?service=listOfAll"><i class="fas fa-list"></i> Danh sách tuyến xe</a></li>
+                            <li><a class="nav-link text-secondary" href="BusRouteURL?service=insert"><i class="fas fa-plus"></i> Thêm tuyến xe</a></li>
+                        </ul>
                     </li>
+
+                    <!-- Quản lý Chuyến Xe -->
                     <li class="nav-item">
-                        <a class="nav-link text-dark" href="BusTripURL?service=listOfAll"><i class="fas fa-route"></i> Quản lý Chuyến xe</a>
-                        <ul class="list-unstyled ps-3">
-                            <li><a class="nav-link text-dark active bg-light" href="BusTripURL?service=listOfAll"><i class="fas fa-list"></i> Danh sách chuyến xe</a></li>
-                            <li><a class="nav-link text-dark" href="BusTripURL?service=insert"><i class="fas fa-plus"></i> Thêm chuyến xe</a></li>
+                        <a class="nav-link fw-bold text-dark" href="#" id="toggleBusTrip">
+                            <i class="fas fa-route"></i> Quản lý Chuyến xe
+                        </a>
+                        <ul class="list-unstyled ps-3 d-none text-muted" id="busTripMenu">
+                            <li><a class="nav-link text-secondary active bg-light" href="BusTripURL?service=listOfAll"><i class="fas fa-list"></i> Danh sách chuyến xe</a></li>
+                            <li><a class="nav-link text-secondary" href="BusTripURL?service=insert"><i class="fas fa-plus"></i> Thêm chuyến xe</a></li>
                         </ul>
                     </li>
                 </ul>
             </nav>
+            <!--End-Sidebar -->
 
             <!-- Main Content -->
             <div class="flex-grow-1 p-4">
@@ -140,6 +153,35 @@
                 </div>
             </div>
         </div>
+
+        <script>
+            // Toggle danh sách Tuyến Xe
+            document.getElementById("toggleBusRoute").addEventListener("click", function (event) {
+                event.preventDefault();
+                document.getElementById("busRouteMenu").classList.toggle("d-none");
+            });
+
+            // Toggle danh sách Chuyến Xe
+            document.getElementById("toggleBusTrip").addEventListener("click", function (event) {
+                event.preventDefault();
+                document.getElementById("busTripMenu").classList.toggle("d-none");
+            });
+            // Kiểm tra URL hiện tại để giữ menu mở
+            window.addEventListener("DOMContentLoaded", function () {
+                const currentUrl = window.location.href;
+                if (currentUrl.includes("BusRouteURL?service=listOfAll") || currentUrl.includes("BusRouteURL?service=insert")) {
+                    document.getElementById("busRouteMenu").classList.remove("d-none");
+                }
+            });
+            // Kiểm tra URL hiện tại để giữ menu mở
+            window.addEventListener("DOMContentLoaded", function () {
+                const currentUrl = window.location.href;
+                if (currentUrl.includes("BusTripURL?service=listOfAll") || currentUrl.includes("BusTripURL?service=insert")) {
+                    document.getElementById("busTripMenu").classList.remove("d-none");
+                }
+            });
+        </script>
+        
     </body>
 </html>
 

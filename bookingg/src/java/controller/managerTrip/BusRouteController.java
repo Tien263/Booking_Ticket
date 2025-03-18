@@ -33,21 +33,22 @@ public class BusRouteController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         BusRouteDAO dao = new BusRouteDAO();
-        try (PrintWriter out = response.getWriter()) {
-            String service = request.getParameter("service");
-            if ("detail".equals(service)) {
-                String br_id = request.getParameter("br_id");
-                BusRouteDAO busRouteDAO = new BusRouteDAO();
-                BusRoute busRoute = busRouteDAO.get(Integer.parseInt(br_id));
 
-                request.setAttribute("busRoute", busRoute);
-                request.getRequestDispatcher("/managerTrip/busRouteDetail.jsp").forward(request, response);
+        String service = request.getParameter("service");
+        if ("detail".equals(service)) {
+            String br_id = request.getParameter("br_id");
+            BusRouteDAO busRouteDAO = new BusRouteDAO();
+            BusRoute busRoute = busRouteDAO.get(Integer.parseInt(br_id));
+
+            request.setAttribute("busRoute", busRoute);
+            request.getRequestDispatcher("/managerTrip/busRouteDetail.jsp").forward(request, response);
+        }
+        if (service.endsWith("insert")) {
+            String submit = request.getParameter("submit");
+            if (submit == null) {
+                request.getRequestDispatcher("/managerTrip/insertBusRoute.jsp").forward(request, response);
             }
-            if (service.endsWith("insert")) {
-                String submit = request.getParameter("submit");
-                if (submit == null) {
-                    request.getRequestDispatcher("/managerTrip/insertBusRoute.jsp").forward(request, response);
-                }
+            if (submit != null) {
                 int distance = Integer.parseInt(request.getParameter("br_distance"));
                 String from = request.getParameter("br_from");
                 String to = request.getParameter("br_to");
@@ -57,25 +58,25 @@ public class BusRouteController extends HttpServlet {
                 BusRoute busRoute = new BusRoute(0, distance, from, to, (double) price, description, status);
                 dao.insert(busRoute);
                 response.sendRedirect("BusRouteURL?service=listOfAll");
-
             }
+        }
 
-            if (service.endsWith("delete")) {
+        if (service.endsWith("delete")) {
+            int id = Integer.parseInt(request.getParameter("br_id"));
+            BusRoute busRoute = dao.get(id);
+            dao.delete(busRoute);
+            response.sendRedirect("BusRouteURL?service=listOfAll");
+        }
+
+        if (service.endsWith("update")) {
+            String submit = request.getParameter("submit");
+            if (submit == null) {
                 int id = Integer.parseInt(request.getParameter("br_id"));
                 BusRoute busRoute = dao.get(id);
-                dao.delete(busRoute);
-                response.sendRedirect("BusRouteURL?service=listOfAll");
+                request.setAttribute("busRoute", busRoute);
+                request.getRequestDispatcher("/managerTrip/updateBusRoute.jsp").forward(request, response);
             }
-
-            if (service.endsWith("update")) {
-                String submit = request.getParameter("submit");
-                if (submit == null) {
-                    int id = Integer.parseInt(request.getParameter("br_id"));
-                    BusRoute busRoute = dao.get(id);
-                    request.setAttribute("busRoute", busRoute);
-                    request.getRequestDispatcher("/managerTrip/updateBusRoute.jsp").forward(request, response);
-                }
-
+            if (submit != null) {
                 int id = Integer.parseInt(request.getParameter("br_id"));
                 int distance = Integer.parseInt(request.getParameter("br_distance"));
                 String from = request.getParameter("br_from");
@@ -86,31 +87,31 @@ public class BusRouteController extends HttpServlet {
                 BusRoute busRoute = new BusRoute(id, distance, from, to, (double) price, description, status);
                 dao.update(busRoute);
                 response.sendRedirect("BusRouteURL?service=listOfAll");
-
-            }
-
-            if (service.endsWith("listOfAll")) {
-                String submit = request.getParameter("submit");
-                String sql = "SELECT [br_id],[br_distance],[br_from],[br_to],[br_price],[br_description],[br_status] FROM [dbo].[BusRoutes] WHERE 1=1";
-                // Kiểm tra nếu người dùng bấm nút filter
-                if (submit != null) {
-                    String from = request.getParameter("br_from");
-                    String to = request.getParameter("br_to");
-                    // Nếu có nhập điểm đi
-                    if (from != null && !from.trim().isEmpty()) {
-                        sql += " AND br_from LIKE N'%" + from + "%'";
-                    }
-
-                    // Nếu có nhập điểm đến
-                    if (to != null && !to.trim().isEmpty()) {
-                        sql += " AND br_to LIKE N'%" + to + "%'";
-                    }
-                }
-                ArrayList<BusRoute> list = dao.list(sql);
-                request.setAttribute("listBusRoute", list);
-                request.getRequestDispatcher("/managerTrip/listBusRoute.jsp").forward(request, response);
             }
         }
+
+        if (service.endsWith("listOfAll")) {
+            String submit = request.getParameter("submit");
+            String sql = "SELECT [br_id],[br_distance],[br_from],[br_to],[br_price],[br_description],[br_status] FROM [dbo].[BusRoutes] WHERE 1=1";
+            // Kiểm tra nếu người dùng bấm nút filter
+            if (submit != null) {
+                String from = request.getParameter("br_from");
+                String to = request.getParameter("br_to");
+                // Nếu có nhập điểm đi
+                if (from != null && !from.trim().isEmpty()) {
+                    sql += " AND br_from LIKE N'%" + from + "%'";
+                }
+
+                // Nếu có nhập điểm đến
+                if (to != null && !to.trim().isEmpty()) {
+                    sql += " AND br_to LIKE N'%" + to + "%'";
+                }
+            }
+            ArrayList<BusRoute> list = dao.list(sql);
+            request.setAttribute("listBusRoute", list);
+            request.getRequestDispatcher("/managerTrip/listBusRoute.jsp").forward(request, response);
+        }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
