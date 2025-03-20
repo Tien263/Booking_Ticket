@@ -132,7 +132,7 @@ public class BusTripController extends HttpServlet {
                         }
                     }
                 }
-
+                sql += " ORDER BY bt1_id DESC";
                 ArrayList<BusTrips> list = dao.list(sql);
                 request.setAttribute("listBusTrip", list);
                 request.getRequestDispatcher("/managerTrip/listBusTrip.jsp").forward(request, response);

@@ -5,21 +5,14 @@
 package controller.bookTicket;
 
 import dal.bookTicket.BookTicketDAO;
-import dal.bookTicket.ConfirmationDAO;
-import dal.bookTicket.DAOSeats;
-import dal.bookTicket.DAOTickets;
 import dal.bookTicket.SeatsDAO;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 import model.bookTicket.BookTicket;
 
 /**
@@ -61,6 +54,7 @@ public class BookTicketController extends HttpServlet {
                 handleError(request, response, "No seat selected or missing data!");
                 return;
             }
+            
 
             int bookingId = ticketsDAO.createAndBookTickets(userId, seatIds, tripId);
             if (bookingId == -1) {

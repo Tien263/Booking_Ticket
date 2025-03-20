@@ -188,6 +188,10 @@
         <servlet-name>BookTicketController</servlet-name>
         <servlet-class>controller.bookTicket.BookTicketController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>TicketController</servlet-name>
+        <servlet-class>controller.ticket.TicketController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SelectSeatController</servlet-name>
         <url-pattern>/SelectSeatURL</url-pattern>
@@ -263,6 +267,10 @@
     <servlet-mapping>
         <servlet-name>BusRouteController</servlet-name>
         <url-pattern>/BusRouteURL</url-pattern>
+    </servlet-mapping>
+        <servlet-mapping>
+        <servlet-name>TicketController</servlet-name>
+        <url-pattern>/TicketURL</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>BusTripController</servlet-name>

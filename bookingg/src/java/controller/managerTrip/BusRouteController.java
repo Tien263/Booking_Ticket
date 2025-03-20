@@ -106,6 +106,7 @@ public class BusRouteController extends HttpServlet {
                         sql += " AND br_to LIKE N'%" + to + "%'";
                     }
                 }
+                 sql += " ORDER BY br_id DESC";
                 ArrayList<BusRoute> list = dao.list(sql);
                 request.setAttribute("listBusRoute", list);
                 request.getRequestDispatcher("/managerTrip/listBusRoute.jsp").forward(request, response);
