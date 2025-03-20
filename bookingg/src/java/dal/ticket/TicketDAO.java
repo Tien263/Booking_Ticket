@@ -43,6 +43,25 @@ public class TicketDAO extends DBContext {
         return tickets;
     }
 
+    public static void main(String[] args) {
+        String sql = "SELECT t.t_id,c.c_fullname,br.br_from,br.br_to,t.t_purchaseDate,\n"
+                + "    bt1.bt1_date,bt1.bt1_departureTime,bt1.bt1_arrivalTime,\n"
+                + "    s.s_name,v.v_type,v.v_licensePlate,br.br_price,t.t_status\n"
+                + "FROM Tickets t\n"
+                + "JOIN BookTickets bt ON t.bt_id = bt.bt_id\n"
+                + "JOIN Customer c ON bt.c_id = c.c_id\n"
+                + "JOIN BusTrips bt1 ON t.bt1_id = bt1.bt1_id\n"
+                + "JOIN BusRoutes br ON bt1.br_id = br.br_id\n"
+                + "JOIN Seats s ON t.s_id = s.s_id\n"
+                + "JOIN Vehicles v ON s.v_id = v.v_id\n"
+                + "WHERE 1=1 ";
+        sql += "ORDER BY t.t_id DESC";
+        TicketDAO dao = new TicketDAO();
+        ArrayList<Ticket> tickets = dao.getTicket(sql);
+        for (Ticket ticket : tickets) {
+            System.out.println(ticket);
+        }
+    }
 
     @Override
     public void insert(Object entity) {

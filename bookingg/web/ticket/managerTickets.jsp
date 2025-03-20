@@ -5,9 +5,9 @@
 --%>
 
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ page import="java.util.ArrayList, model.ticket.BusRoute" %>
+<%@ page import="java.util.ArrayList, model.ticket.Ticket" %>
 <%
-    ArrayList<Ticket> list = (ArrayList<Ticket>) request.getAttribute("tickets");
+    ArrayList<Ticket> tickets = (ArrayList<Ticket>) request.getAttribute("tickets");
 %>
 
 <!DOCTYPE html>
@@ -42,7 +42,7 @@
                     <li class="nav-item">
                         <a class="nav-link text-dark" href="TicketURL?service=listOfAll"><i class="fas fa-ticket"></i> Quản lí vé xe</a>
                         <ul class="list-unstyled ps-3">
-                            <li><a class="nav-link text-dark active bg-light" href="BusRouteURL?service=listOfAll"><i class="fas fa-ticket"></i> Danh sách tuyến xe</a></li>
+                            <li><a class="nav-link text-dark active bg-light" href="TicketURL?service=listOfAll"><i class="fas fa-ticket"></i> Danh sách vé xe</a></li>
                         </ul>
                     </li>
                     <li class="nav-item"><a class="nav-link text-dark" href="BusRouteURL?service=listOfAll"><i class="fas fa-bus"></i> Quản lý Tuyến Xe</a></li>
@@ -62,51 +62,62 @@
                 <nav>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="#">Trang Chủ</a></li>
-                        <li class="breadcrumb-item"><a href="BusRouteURL?service=listOfAll">Quản lý tuyến xe</a></li>
-                        <li class="breadcrumb-item active">Danh sách tuyến Xe</li>
+                        <li class="breadcrumb-item"><a href="TicketURL?service=listOfAll">Quản lý vé xe</a></li>
+                        <li class="breadcrumb-item active">Danh sách vé Xe</li>
                     </ol>
                 </nav>
                 <div class="card p-4">
-                    <form action="BusRouteURL" method="get" class="form-inline mb-3">
+                    <form action="TicketURL" method="get" class="form-inline mb-3">
                         <input type="hidden" name="service" value="listOfAll"> 
+                        <label class="mr-2" for="departureDate">Ngày khởi hành:</label>
+                        <input class="form-control mr-3" type="date" name="departureDate" id="departureDate">
+                        <label class="mr-2" for="purchaseDate">Ngày mua vé:</label>
+                        <input class="form-control mr-3" type="date" name="purchaseDate" id="purchaseDate">
                         <label class="mr-2" for="br_from">Điểm đi:</label>
                         <input class="form-control mr-3" type="text" name="br_from" id="br_from">
                         <label class="mr-2" for="br_to">Điểm đến:</label>
                         <input class="form-control mr-3" type="text" name="br_to" id="br_to">
+                        <label class="mr-2" for="departureTime">Giờ khởi hành:</label>
+                        <input class="form-control mr-3" type="time" name="departureTime" id="departureTime">
                         <button class="btn btn-primary" type="submit" name="submit">Search</button>
                         <button type="reset" class="btn btn-secondary">Xóa</button>
                     </form>
                 </div>
                 <div class="card p-4">
-                    <div class="d-flex justify-content-end mb-3">
-                        <a href="BusRouteURL?service=insert" class="btn btn-success">+ Thêm tuyến xe</a>
-                    </div>
                     <table class="table table-bordered mt-4">
                         <thead class="thead-dark">
                             <tr>
-                                <th>ID Tuyến</th>
+                                <th>ID</th>
+                                <th>Khách hàng</th>
                                 <th>Điểm đi</th>
                                 <th>Điểm đến</th>
-                                <th>Giá hiện hành</th>
-                                <th>Quãng đường</th>
-                                <th>Mô tả</th>
+                                <th>Ngày mua</th>
+                                <th>Ngày đi</th>
+                                <th>Giờ khởi hành</th>
+                                <th>Giờ đến</th>
+                                <th>Chỗ ngồi</th>
+                                <th>Loại xe</th>
+                                <th>Biển số</th>
+                                <th>Giá</th>
                                 <th>Trạng thái</th>
-                                <th>Sửa</th>
-                                <th>Xóa</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <% for(BusRoute busRoute: list) { %>
+                            <% for(Ticket ticket : tickets) { %>
                             <tr>
-                                <td><%=busRoute.getBr_id()%></td>
-                                <td><%=busRoute.getBr_from()%></td>
-                                <td><%=busRoute.getBr_to()%></td>
-                                <td><%=busRoute.getBr_price()%></td>
-                                <td><%=busRoute.getBr_distance()%></td>
-                                <td><%=busRoute.getBr_description()%></td>
-                                <td><%=busRoute.getBr_status()%></td>
-                                <td><a href="BusRouteURL?service=update&br_id=<%=busRoute.getBr_id()%>" class="text-primary"><i class="fas fa-edit"></i></a></td>
-                                <td><a href="BusRouteURL?service=delete&br_id=<%=busRoute.getBr_id()%>" class="text-danger"><i class="fas fa-trash-alt"></i></a></td>
+                                <td><%= ticket.getTicketID() %></td>
+                                <td><%= ticket.getCustomerName() %></td>
+                                <td><%= ticket.getDeparture() %></td>
+                                <td><%= ticket.getDestination() %></td>
+                                <td><%= ticket.getPurchaseDate() %></td>
+                                <td><%= ticket.getTravelDate() %></td>
+                                <td><%= ticket.getDepartureTime() %></td>
+                                <td><%= ticket.getArrivalTime() %></td>
+                                <td><%= ticket.getSeatName() %></td>
+                                <td><%= ticket.getVehicleType() %></td>
+                                <td><%= ticket.getLicensePlate() %></td>
+                                <td><%= ticket.getPrice() %> VND</td>
+                                <td><%= ticket.getStatus() %></td>
                             </tr>
                             <% } %>
                         </tbody>

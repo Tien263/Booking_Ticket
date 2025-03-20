@@ -8,7 +8,6 @@ import dal.ticket.TicketDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -19,7 +18,6 @@ import model.ticket.Ticket;
  *
  * @author Admin
  */
-@WebServlet(name = "TicketController", urlPatterns = {"/TicketURL"})
 public class TicketController extends HttpServlet {
 
     /**
@@ -34,38 +32,48 @@ public class TicketController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        TicketDAO ticketDAO = new TicketDAO();
         try (PrintWriter out = response.getWriter()) {
+            TicketDAO ticketDAO = new TicketDAO();
             String service = request.getParameter("service");
-            if (service.endsWith("listOfAll")) {
+            if (service == null || "listOfAll".equals(service)) {
                 String submit = request.getParameter("submit");
-                String sql = "SELECT t.t_id,c.c_fullname,br.br_from,br.br_to,t.t_purchaseDate,"
-                        + "    bt1.bt1_date,bt1.bt1_departureTime,bt1.bt1_arrivalTime,"
-                        + "    s.s_name,v.v_type,v.v_licensePlate,br.br_price,t.t_status"
+                String sql = "SELECT t.t_id,c.c_fullname,br.br_from,br.br_to,t.t_purchaseDate,\n"
+                        + "    bt1.bt1_date,bt1.bt1_departureTime,bt1.bt1_arrivalTime,\n"
+                        + "    s.s_name,v.v_type,v.v_licensePlate,br.br_price,t.t_status\n"
                         + "FROM Tickets t\n"
                         + "JOIN BookTickets bt ON t.bt_id = bt.bt_id\n"
                         + "JOIN Customer c ON bt.c_id = c.c_id\n"
                         + "JOIN BusTrips bt1 ON t.bt1_id = bt1.bt1_id\n"
                         + "JOIN BusRoutes br ON bt1.br_id = br.br_id\n"
                         + "JOIN Seats s ON t.s_id = s.s_id\n"
-                        + "JOIN Vehicles v ON s.v_id = v.v_id;";
+                        + "JOIN Vehicles v ON s.v_id = v.v_id\n"
+                        + "WHERE 1=1 ";
                 if (submit != null) {
                     String departureDate = request.getParameter("departureDate");
-                    String routeID = request.getParameter("routeID");
+                    String from = request.getParameter("br_from");
+                    String to = request.getParameter("br_to");
                     String departureTime = request.getParameter("departureTime");
                     if (departureDate != null && !departureDate.isEmpty()) {
-                        sql += "AND t.travelDate = '" + departureDate + "' ";
+                        sql += "AND bt1.bt1_date = '" + departureDate + "' ";
                     }
-                    if (routeID != null && !routeID.isEmpty()) {
-                        sql += "AND br.routeID = " + routeID + " ";
+                    if (from != null && !from.trim().isEmpty()) {
+                        sql += " AND br_from LIKE N'%" + from + "%'";
+                    }
+                    if (to != null && !to.trim().isEmpty()) {
+                        sql += " AND br_to LIKE N'%" + to + "%'";
                     }
                     if (departureTime != null && !departureTime.isEmpty()) {
-                        sql += "AND t.departureTime = '" + departureTime + "' ";
+                        sql += "AND bt1.bt1_departureTime = '" + departureTime + "' ";
                     }
-                    ArrayList<Ticket> tickets = ticketDAO.getTicket(sql);
-                    request.setAttribute("tickets", tickets);
-                    request.getRequestDispatcher("managerTicket.jsp").forward(request, response);
                 }
+                sql += " ORDER BY t.t_id DESC";
+                ArrayList<Ticket> tickets = ticketDAO.getTicket(sql);
+                if (tickets == null) {
+                    request.setAttribute("message", "Không có vé nào phù hợp.");
+                    request.getRequestDispatcher("erro.jsp").forward(request, response);
+                }
+                request.setAttribute("tickets", tickets);
+                request.getRequestDispatcher("/ticket/managerTickets.jsp").forward(request, response);
             }
         }
     }
