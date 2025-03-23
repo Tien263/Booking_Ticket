@@ -21,6 +21,37 @@ import java.util.Date;
     private String bt1_time;
     private String s_name;
     private float br_price;
+    private String bt_status;
+    private int bt_id;
+    private double TotalAmount;
+
+    public int getBt_id() {
+        return bt_id;
+    }
+
+    public void setBt_id(int bt_id) {
+        this.bt_id = bt_id;
+    }
+
+    public double getTotalAmount() {
+        return TotalAmount;
+    }
+
+    public void setTotalAmount(double TotalAmount) {
+        this.TotalAmount = TotalAmount;
+    }
+
+    
+
+    public String getBt_status() {
+        return bt_status;
+    }
+
+    public void setBt_status(String bt_status) {
+        this.bt_status = bt_status;
+    }
+    
+    
 
     public BookTicket() {
     }

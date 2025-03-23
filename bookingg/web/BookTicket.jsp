@@ -49,6 +49,12 @@
             </c:forEach>
         </table>
         <br>
-        <a href="search_results.jsp">Đặt vé mới</a>
+        <p><strong>Tổng giá:</strong> <%= session.getAttribute("totalPrice") %> VNĐ</p>
+
+        <form action="payment" method="post">
+            <input type="hidden" name="tripId" value="<%= session.getAttribute("tripId") %>">
+            <input type="hidden" name="totalPrice" value="<%= session.getAttribute("totalPrice") %>">
+            <input type="submit" value="Thanh toán">
+        </form>
     </body>
 </html>

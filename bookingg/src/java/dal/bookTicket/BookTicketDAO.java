@@ -19,13 +19,56 @@ import java.util.List;
  */
 public class BookTicketDAO extends DBContext {
 
-    public int createAndBookTickets(int userId, List<Integer> seatIds, int tripId) {
+    public int insertBookTicket(BookTicket bookTicket) {
+        String sql = "INSERT INTO [dbo].[BookTickets]\n"
+                + "           ([c_id]\n"
+                + "           ,[bt_totalAmount])\n"
+                + "     VALUES\n"
+                + "           (?,?)";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+            st.setInt(1, bookTicket.getBt_id());
+            st.setDouble(2, bookTicket.getTotalAmount());
+            int affectedRows =st.executeUpdate();
+            if(affectedRows == 0){
+                throw  new SQLException("Create payment failed, no rows affected.");
+            }
+            try (ResultSet generatedKeys = st.getGeneratedKeys()){
+                if(generatedKeys.next()){
+                    return generatedKeys.getInt(1);
+                }else{
+                    throw new SQLException("Creating payment failed, no ID obtained.");
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+            return 1;
+        }
+                
+    }
+
+    public boolean updateStatus(BookTicket bt) {
+        String sql = "UPDATE [dbo].[BookTickets]\n"
+                + "   SET [bt_status] = ?\n"
+                + " WHERE [bt_id] = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, bt.getBt_status());
+            st.setInt(2, bt.getBt_id());
+            return st.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return false;
+    }
+
+    public int createAndBookTickets(int userId, List<Integer> seatIds, int tripId, double totalAmount) {
         int n = -1;
         try {
             connection.setAutoCommit(false); // Bắt đầu transaction
 
             // Tạo một bản ghi trong BookTickets trước
-            int btId = insertBookTicket(userId, seatIds.size());
+            int btId = insertBookTicket(userId, seatIds.size(), totalAmount);
             if (btId == -1) {
                 connection.rollback();
                 return n;
@@ -55,12 +98,14 @@ public class BookTicketDAO extends DBContext {
     }
 
 // Tạo một bản ghi BookTickets và lấy ID
-    private int insertBookTicket(int userId, int ticketCount) throws SQLException {
-        String bookSQL = "INSERT INTO BookTickets (bt_status, bt_bookingDate, c_id, bt_ticketNumber) VALUES ('pending', GETDATE(), ?, ?)";
+    private int insertBookTicket(int userId, int ticketCount, double totalAmount) throws SQLException {
+        String bookSQL = "INSERT INTO BookTickets (bt_status, bt_bookingDate, c_id, bt_ticketNumber, bt_totalAmount) VALUES ('pending', GETDATE(), ?, ?, ?)";
 
         try (PreparedStatement psBook = connection.prepareStatement(bookSQL, Statement.RETURN_GENERATED_KEYS)) {
             psBook.setInt(1, userId);
             psBook.setInt(2, ticketCount);
+            psBook.setDouble(3, totalAmount);
+
             psBook.executeUpdate();
 
             try (ResultSet rs = psBook.getGeneratedKeys()) {
@@ -113,9 +158,9 @@ public class BookTicketDAO extends DBContext {
                 + "WHERE bt.bt_id = ?";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setInt(1, bookingId);
-            try (ResultSet rs = ps.executeQuery()){ 
-                while(rs.next()) {
-                     BookTicket bookTicket = new BookTicket(
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    BookTicket bookTicket = new BookTicket(
                             rs.getInt("t_id"),
                             rs.getString("c_fullname"),
                             rs.getString("c_phone"),
@@ -126,16 +171,16 @@ public class BookTicketDAO extends DBContext {
                             rs.getString("s_name"),
                             rs.getFloat("br_price")
                     );
-                      tickets.add(bookTicket);
+                    tickets.add(bookTicket);
                 }
             }
-        
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
 
-            return tickets;
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+
+        return tickets;
+    }
 
     @Override
     public void insert(Object entity) {

@@ -5,9 +5,6 @@
 package controller.bookTicket;
 
 import dal.bookTicket.BookTicketDAO;
-import dal.bookTicket.ConfirmationDAO;
-import dal.bookTicket.DAOSeats;
-import dal.bookTicket.DAOTickets;
 import dal.bookTicket.SeatsDAO;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -48,25 +45,26 @@ public class BookTicketController extends HttpServlet {
 
             // Lấy giá trị từ session và kiểm tra trước khi chuyển đổi
             String tripIdStr = (String) session.getAttribute("tripId");
-            String userIdStr = (String) session.getAttribute("customerId");
+            int userId = (int) session.getAttribute("c_id");
+            
 
             Integer tripId = (tripIdStr != null && !tripIdStr.isEmpty()) ? Integer.parseInt(tripIdStr) : null;
-            Integer userId = (userIdStr != null && !userIdStr.isEmpty()) ? Integer.parseInt(userIdStr) : null;
 
             // Lấy danh sách ghế đã chọn từ session
             List<Integer> seatIds = (List<Integer>) session.getAttribute("seatIds");
 
             // Kiểm tra nếu dữ liệu bị thiếu
-            if (tripId == null || userId == null || seatIds == null || seatIds.isEmpty()) {
+            if (tripId == null || seatIds == null || seatIds.isEmpty()) {
                 handleError(request, response, "No seat selected or missing data!");
                 return;
             }
-
-            int bookingId = ticketsDAO.createAndBookTickets(userId, seatIds, tripId);
+            double totalAmount = (double) session.getAttribute("totalPrice");
+            int bookingId = ticketsDAO.createAndBookTickets(userId, seatIds, tripId, totalAmount);
             if (bookingId == -1) {
                 handleError(request, response, "Đặt vé thất bại!");
                 return;
             }
+            
             // Cập nhật trạng thái ghế đã đặt
             for (Integer seatId : seatIds) {
                 boolean success = seatsDAO.isSeatBooked(seatId, "booked");
@@ -83,7 +81,7 @@ public class BookTicketController extends HttpServlet {
                 return;
             }
             session.removeAttribute("vehicleId");
-            session.removeAttribute("tripId");
+//            session.removeAttribute("tripId");
             session.removeAttribute("routeId");
             session.removeAttribute("price");
             session.removeAttribute("from");
@@ -91,6 +89,7 @@ public class BookTicketController extends HttpServlet {
             session.removeAttribute("departureTime");
             session.removeAttribute("arrivalTime");
             request.setAttribute("bookedTickets", bookedTickets);
+            session.setAttribute("bookId", bookingId);
             request.getRequestDispatcher("BookTicket.jsp").forward(request, response);
 
         } catch (NumberFormatException e) {
