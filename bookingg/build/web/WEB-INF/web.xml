@@ -116,6 +116,10 @@
         <servlet-name>VehicleController</servlet-name>
         <servlet-class>controller.accesscontrol.VehicleController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SearchServlet</servlet-name>
+        <servlet-class>controller.accesscontrol.SearchServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Register</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -271,5 +275,9 @@
     <servlet-mapping>
         <servlet-name>VehicleController</servlet-name>
         <url-pattern>/vehicle/vehicle</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchServlet</servlet-name>
+        <url-pattern>/SearchServlet</url-pattern>
     </servlet-mapping>
 </web-app>

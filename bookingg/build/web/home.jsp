@@ -42,20 +42,26 @@
 
         <!-- custom - css include -->
         <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+        
+        
 
     </head>
 
 
     <%
+        
      response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
      response.setHeader("Pragma", "no-cache");
      response.setHeader("Expires", "0");
-
      String user = (String) session.getAttribute("user"); // Chỉ khai báo 1 lần
+     
     %>
 
     <body>
+         <!-- Biểu tượng chat -->
+   
 
+   
 
         <% if (user != null) { %>
         <p>Chào mừng, <%= user %>! <a href="LogoutController">Đăng xuất</a></p>
@@ -225,20 +231,19 @@
                         </div>
 
                         <div class="col-lg-6 col-md-12">
-                            <nav class="main_menu clearfix">
-                                <ul class="ul_li_center clearfix">
-                                    <li class="active has_child">
-                                        <a href="home.jsp">Trang chủ</a>
-                                    </li>
-                                    <li><a href="booking">Đặt vé</a></li>
-                                    <li><a href="cuslistblog">Blog</a></li>
-                                    <li>
-                                        <a href="contact.jsp">Liên hệ</a>
-                                    </li>
-                                    <li><a href="employee_login.jsp">Nhân viên</a></li>
-                                </ul>
-                            </nav>
-                        </div>
+    <nav class="main_menu clearfix">
+        <ul class="ul_li_center clearfix">
+            <li class="active has_child">
+                <a href="home.jsp">Trang chủ</a>
+            </li>
+            <li><a href="booking">Đặt vé</a></li>
+            <li><a href="cuslistblog">Blog</a></li>
+            <li><a href="contact.jsp">Liên hệ</a></li>
+            <li><a href="employee_login.jsp">Nhân viên</a></li>
+            <li><a href="search.jsp" target="_blank">Chat hướng dẫn</a></li>
+        </ul>
+    </nav>
+</div>
 
                     </div>
                 </div>
@@ -1580,7 +1585,7 @@
         <script src="assets/js/jquery-3.5.1.min.js"></script>
         <script src="assets/js/popper.min.js"></script>
         <script src="assets/js/bootstrap.min.js"></script>
-
+       
         <!-- animation - jquery include -->
         <script src="assets/js/aos.js"></script>
         <script src="assets/js/parallaxie.js"></script>

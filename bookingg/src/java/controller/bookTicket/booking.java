@@ -34,10 +34,10 @@ public class booking extends HttpServlet {
     // Lấy thông tin từ request
     bookingDAO dao = new bookingDAO();
     String email = request.getParameter("email");
-    String from = request.getParameter("from");
-    String to = request.getParameter("to");
-    String hourStr = request.getParameter("hour");
-    String minuteStr = request.getParameter("minute");
+    String from =  request.getParameter("from");
+    String to =  request.getParameter("to");
+    String hourStr =  request.getParameter("hour");
+    String minuteStr =  request.getParameter("minute");
     String date = null;
     String time = null;
     Customer cus = null;
