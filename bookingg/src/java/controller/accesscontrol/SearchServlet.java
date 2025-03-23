@@ -96,12 +96,12 @@ faqDatabase.put("Có cần tài khoản để đặt hàng không?", "Không b�
             // Khi người dùng chọn một câu hỏi gợi ý
             bestQuestion = selectedQuestion;
             if(bestQuestion.equals("Làm thế nào để tạo tài khoản trên website?")){
-             System.out.println("Tétttt");
+ 
              response.sendRedirect("booking");
              return;  }
              if(bestQuestion.equals("Xem lịch trình các chuyến xe làm như thế nào?")){
-             System.out.println("Tétttt");
-             response.sendRedirect("home.jsp");
+             
+             response.sendRedirect("ITrucBook.jsp");
              return;  }
             bestAnswer = faqDatabase.get(selectedQuestion);
 

@@ -28,6 +28,5 @@
         
         <img src="assets/hd_ĐặtXe/hd7.png"" alt="Hướngdẫn" style="width:1000px; height:auto;">
         
-        
     </body>
 </html>
