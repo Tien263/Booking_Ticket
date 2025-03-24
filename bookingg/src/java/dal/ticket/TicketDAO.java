@@ -43,24 +43,74 @@ public class TicketDAO extends DBContext {
         return tickets;
     }
 
-    public static void main(String[] args) {
-        String sql = "SELECT t.t_id,c.c_fullname,br.br_from,br.br_to,t.t_purchaseDate,\n"
-                + "    bt1.bt1_date,bt1.bt1_departureTime,bt1.bt1_arrivalTime,\n"
-                + "    s.s_name,v.v_type,v.v_licensePlate,br.br_price,t.t_status\n"
-                + "FROM Tickets t\n"
-                + "JOIN BookTickets bt ON t.bt_id = bt.bt_id\n"
-                + "JOIN Customer c ON bt.c_id = c.c_id\n"
-                + "JOIN BusTrips bt1 ON t.bt1_id = bt1.bt1_id\n"
-                + "JOIN BusRoutes br ON bt1.br_id = br.br_id\n"
-                + "JOIN Seats s ON t.s_id = s.s_id\n"
-                + "JOIN Vehicles v ON s.v_id = v.v_id\n"
-                + "WHERE 1=1 ";
-        sql += "ORDER BY t.t_id DESC";
-        TicketDAO dao = new TicketDAO();
-        ArrayList<Ticket> tickets = dao.getTicket(sql);
-        for (Ticket ticket : tickets) {
-            System.out.println(ticket);
+    public ArrayList<Ticket> getTicket(String sql, String email) {
+        ArrayList<Ticket> tickets = new ArrayList<>();
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Ticket ticket = new Ticket();
+                ticket.setTicketID(rs.getInt("t_id"));
+                ticket.setCustomerName(rs.getString("c_fullname"));
+                ticket.setDeparture(rs.getString("br_from"));
+                ticket.setDestination(rs.getString("br_to"));
+                ticket.setPurchaseDate(rs.getDate("t_purchaseDate").toLocalDate());
+                ticket.setTravelDate(rs.getDate("bt1_date").toLocalDate());
+                ticket.setDepartureTime(rs.getTime("bt1_departureTime").toLocalTime());
+                ticket.setArrivalTime(rs.getTime("bt1_arrivalTime").toLocalTime());
+                ticket.setSeatName(rs.getString("s_name"));
+                ticket.setVehicleType(rs.getString("v_type"));
+                ticket.setLicensePlate(rs.getString("v_licensePlate"));
+                ticket.setPrice(rs.getDouble("br_price"));
+                ticket.setStatus(rs.getString("t_status"));
+                tickets.add(ticket);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+        return tickets;
+    }
+
+    public Ticket getTicket(String sql, int ticketId) {
+        Ticket ticket = null;
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, ticketId);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                ticket = new Ticket();
+                ticket.setTicketID(rs.getInt("t_id"));
+                ticket.setCustomerName(rs.getString("c_fullname"));
+                ticket.setDeparture(rs.getString("br_from"));
+                ticket.setDestination(rs.getString("br_to"));
+                ticket.setPurchaseDate(rs.getDate("t_purchaseDate").toLocalDate());
+                ticket.setTravelDate(rs.getDate("bt1_date").toLocalDate());
+                ticket.setDepartureTime(rs.getTime("bt1_departureTime").toLocalTime());
+                ticket.setArrivalTime(rs.getTime("bt1_arrivalTime").toLocalTime());
+                ticket.setSeatName(rs.getString("s_name"));
+                ticket.setVehicleType(rs.getString("v_type"));
+                ticket.setLicensePlate(rs.getString("v_licensePlate"));
+                ticket.setPrice(rs.getDouble("br_price"));
+                ticket.setStatus(rs.getString("t_status"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ticket;
+    }
+
+    public boolean updateTicketStatus(int ticketId, String newStatus) {
+        String sql = "UPDATE Tickets SET t_status = ? WHERE t_id = ? AND t_status = 'pending'";
+
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, newStatus);
+            ps.setInt(2, ticketId);
+
+            int rowsUpdated = ps.executeUpdate();
+            return rowsUpdated > 0; // Trả về true nếu có bản ghi được cập nhật
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     @Override

@@ -30,7 +30,7 @@
         <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     </head>
     <body class="bg-light">
-        <div class="d-flex">
+        <div class="d-flex">          
             <!-- Sidebar -->
             <nav class="bg-white shadow p-3 vh-100" style="width: 300px">
                 <div class="text-center mb-4">
@@ -39,25 +39,44 @@
                 </div>
                 <ul class="nav flex-column">
                     <li class="nav-item"><a class="nav-link text-dark" href="#"><i class="fas fa-home"></i> Trang Chủ</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark" href="#"><i class="fas fa-users"></i> Người Dùng</a></li>
+                    <!-- Quản lý vé Xe -->
                     <li class="nav-item">
-                        <a class="nav-link text-dark" href="TicketURL?service=listOfAll"><i class="fas fa-ticket"></i> Quản lí vé xe</a>
-                        <ul class="list-unstyled ps-3">
-                            <li><a class="nav-link text-dark active bg-light" href="TicketURL?service=listOfAll"><i class="fas fa-ticket"></i> Danh sách vé xe</a></li>
+                        <a class="nav-link fw-bold text-dark" href="TicketURL?service=listOfAll" id="toggleTicket">
+                            <i class="fas fa-bus"></i> Quản lý Vé Xe
+                        </a>
+                        <ul class="list-unstyled ps-3 d-none text-muted" id="ticketMenu">
+                            <li><a class="nav-link text-secondary active bg-light" href="TicketURL?service=listOfAll"><i class="fas fa-ticket"></i> Danh sách Vé xe</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item"><a class="nav-link text-dark" href="BusRouteURL?service=listOfAll"><i class="fas fa-bus"></i> Quản lý Tuyến Xe</a></li>
-                    <li class="nav-item"><a class="nav-link text-dark" href="BusTripURL?service=listOfAll"><i class="fas fa-route"></i> Quản lý Chuyến xe</a></li>
+                    <!-- Quản lý Tuyến Xe -->
+                    <li class="nav-item">
+                        <a class="nav-link fw-bold text-dark" href="#" id="toggleBusRoute">
+                            <i class="fas fa-bus"></i> Quản lý Tuyến Xe
+                        </a>
+                        <ul class="list-unstyled ps-3 d-none text-muted" id="busRouteMenu">
+                            <li><a class="nav-link text-secondary" href="BusRouteURL?service=listOfAll"><i class="fas fa-list"></i> Danh sách tuyến xe</a></li>
+                            <li><a class="nav-link text-secondary " href="BusRouteURL?service=insert"><i class="fas fa-plus"></i> Thêm tuyến xe</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- Quản lý Chuyến Xe -->
+                    <li class="nav-item">
+                        <a class="nav-link fw-bold text-dark" href="#" id="toggleBusTrip">
+                            <i class="fas fa-route"></i> Quản lý Chuyến xe
+                        </a>
+                        <ul class="list-unstyled ps-3 d-none text-muted" id="busTripMenu">
+                            <li><a class="nav-link text-secondary" href="BusTripURL?service=listOfAll"><i class="fas fa-list"></i> Danh sách chuyến xe</a></li>
+                            <li><a class="nav-link text-secondary" href="BusTripURL?service=insert"><i class="fas fa-plus"></i> Thêm chuyến xe</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </nav>
-
+            <!--End-Sidebar -->
             <!-- Main Content -->
             <main class="col-md-10 ml-sm-auto px-4">
                 <div class="d-flex justify-content-between align-items-center py-3">
                     <h2>Danh Sách Tuyến Xe</h2>
-                    <div>
-                        <span class="mr-3">Xin chào Admin</span>
-                        <img src="https://storage.googleapis.com/a1aa/image/f8PlcxgsScKTpIWEKXOlgvOQYRWzrcRJl01e8rgIgFM.jpg" class="rounded-circle" width="40" height="40" alt="Admin avatar">
-                    </div>
                 </div>
                 <nav>
                     <ol class="breadcrumb">
@@ -126,6 +145,31 @@
             </main>
         </div>
     </div>
+    <script>
+        // Toggle danh sách Tuyến Xe
+        document.getElementById("toggleBusRoute").addEventListener("click", function (event) {
+            event.preventDefault();
+            document.getElementById("busRouteMenu").classList.toggle("d-none");
+        });
+
+        // Toggle danh sách Chuyến Xe
+        document.getElementById("toggleBusTrip").addEventListener("click", function (event) {
+            event.preventDefault();
+            document.getElementById("busTripMenu").classList.toggle("d-none");
+        });
+        // Toggle danh sách Vé Xe
+        document.getElementById("toggleTicket").addEventListener("click", function (event) {
+            event.preventDefault();
+            document.getElementById("ticketMenu").classList.toggle("d-none");
+        });
+        // Kiểm tra URL hiện tại để giữ menu mở
+        window.addEventListener("DOMContentLoaded", function () {
+            const currentUrl = window.location.href;
+            if (currentUrl.includes("BusRouteURL?service=listOfAll") || currentUrl.includes("BusRouteURL?service=insert")) {
+                document.getElementById("busRouteMenu").classList.remove("d-none");
+            }
+        });
+    </script>
 
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>

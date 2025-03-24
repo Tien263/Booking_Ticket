@@ -224,13 +224,14 @@
                             </ul>
                         </div>
 
-                        <div class="col-lg-6 col-md-12">
+                        <div class="col-lg-7 col-md-12">
                             <nav class="main_menu clearfix">
                                 <ul class="ul_li_center clearfix">
                                     <li class="active has_child">
                                         <a href="home.jsp">Home</a>
                                     </li>
                                     <li><a href="booking">Booking Ticket</a></li>
+                                    <li><a href="CustomerTicketURL?service=listOfAll">Ticket History</a></li>
                                     <li><a href="cuslistblog">Blog</a></li>
                                     <li>
                                         <a href="contact.jsp">Contact Us</a>
