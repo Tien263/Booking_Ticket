@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
+import java.util.List;
 import model.managerTrip.BusRoute;
 
 /**
@@ -91,24 +92,58 @@ public class BusRouteController extends HttpServlet {
         }
 
         if (service.endsWith("listOfAll")) {
-            String submit = request.getParameter("submit");
-            String sql = "SELECT [br_id],[br_distance],[br_from],[br_to],[br_price],[br_description],[br_status] FROM [dbo].[BusRoutes] WHERE 1=1";
-            // Kiểm tra nếu người dùng bấm nút filter
-            if (submit != null) {
-                String from = request.getParameter("br_from");
-                String to = request.getParameter("br_to");
-                // Nếu có nhập điểm đi
-                if (from != null && !from.trim().isEmpty()) {
-                    sql += " AND br_from LIKE N'%" + from + "%'";
-                }
+            int page = 1;
+            int recordsPerPage = 8; // Số bản ghi mỗi trang
 
-                // Nếu có nhập điểm đến
-                if (to != null && !to.trim().isEmpty()) {
-                    sql += " AND br_to LIKE N'%" + to + "%'";
-                }
+            if (request.getParameter("page") != null) {
+                page = Integer.parseInt(request.getParameter("page"));
             }
-            ArrayList<BusRoute> list = dao.list(sql);
+
+            // Câu lệnh SQL cơ bản
+            String baseSql = "FROM BusRoutes WHERE 1=1";
+            List<Object> params = new ArrayList<>();
+
+            // **Lấy dữ liệu từ request**
+            String from = request.getParameter("br_from");
+            String to = request.getParameter("br_to");
+
+            // **Thêm điều kiện lọc**
+            if (from != null && !from.trim().isEmpty()) {
+                baseSql += " AND br_from LIKE ?";
+                params.add("%" + from + "%");
+            }
+            if (to != null && !to.trim().isEmpty()) {
+                baseSql += " AND br_to LIKE ?";
+                params.add("%" + to + "%");
+            }
+
+            // **Tính tổng số bản ghi**
+            int totalRecords = dao.getTotalBusRoutes(baseSql, params);
+            int endPage = (int) Math.ceil((double) totalRecords / recordsPerPage);
+
+            // **Thêm phân trang**
+            String sql = "SELECT br_id, br_distance, br_from, br_to, br_price, br_description, br_status "
+                    + baseSql + " ORDER BY br_id DESC OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+
+            params.add((page - 1) * recordsPerPage); // OFFSET
+            params.add(recordsPerPage); // FETCH NEXT
+
+            // **Debug SQL**
+            System.out.println("Final SQL: " + sql);
+            System.out.println("Params: " + params);
+
+            // **Lấy danh sách tuyến xe**
+            ArrayList<BusRoute> list = dao.list(sql, params);
+            if (list == null || list.isEmpty()) {
+                request.setAttribute("message", "Không có vé nào phù hợp.");
+            }
+            // **Giữ lại dữ liệu filter**
             request.setAttribute("listBusRoute", list);
+            request.setAttribute("currentPage", page);
+            request.setAttribute("endPage", endPage);
+            request.setAttribute("br_from", from);
+            request.setAttribute("br_to", to);
+
             request.getRequestDispatcher("/managerTrip/listBusRoute.jsp").forward(request, response);
         }
 

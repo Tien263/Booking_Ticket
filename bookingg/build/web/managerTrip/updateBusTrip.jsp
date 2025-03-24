@@ -52,13 +52,19 @@
             <!-- Sidebar -->
             <nav class="bg-white shadow p-3 vh-100" style="width: 300px">
                 <div class="text-center mb-4">
-                    <img src="https://storage.googleapis.com/a1aa/image/bleOVH5WQzge5bjdCt5D9VkP58J-hf_O90hRj2rGXv0.jpg" alt="Bus logo" class="img-fluid" width="50">
-                    <h4 class="mt-2">My Bus</h4>
+                    <img src="assets/images/logo/logo_01_1.png" srcset="assets/images/logo/logo_01_1.png 2x" alt="logo_not_found">
+                    <h4 class="mt-2">BusGo</h4>
                 </div>
                 <ul class="nav flex-column">
-                    <li class="nav-item"><a class="nav-link text-dark" href="#"><i class="fas fa-home"></i> Trang Chủ</a></li>
-                    <li class="nav-item"><a class="nav-link text-dark" href="#"><i class="fas fa-users"></i> Người Dùng</a></li>
-
+                    <!-- Quản lý vé Xe -->
+                    <li class="nav-item">
+                        <a class="nav-link fw-bold text-dark" href="TicketURL?service=listOfAll" id="toggleTicket">
+                            <i class="fas fa-bus"></i> Quản lý Vé Xe
+                        </a>
+                        <ul class="list-unstyled ps-3 d-none text-muted" id="ticketMenu">
+                            <li><a class="nav-link text-secondary" href="TicketURL?service=listOfAll"><i class="fas fa-ticket"></i> Danh sách Vé xe</a></li>
+                        </ul>
+                    </li>
                     <!-- Quản lý Tuyến Xe -->
                     <li class="nav-item">
                         <a class="nav-link fw-bold text-dark" href="#" id="toggleBusRoute">
@@ -89,10 +95,6 @@
                 <!-- Header -->
                 <header class="d-flex justify-content-between align-items-center mb-3">
                     <h2>Danh Sách Tuyến Xe</h2>
-                    <div class="d-flex align-items-center">
-                        <span class="me-3">Xin chào Admin</span>
-                        <img src="https://storage.googleapis.com/a1aa/image/f8PlcxgsScKTpIWEKXOlgvOQYRWzrcRJl01e8rgIgFM.jpg" class="rounded-circle" width="40" height="40" alt="Admin Avatar">
-                    </div>
                 </header>
 
                 <!-- Breadcrumb -->
@@ -129,9 +131,10 @@
                                 <label for="bt1_status" class="form-label">Trạng thái</label>
                                 <select class="form-select" id="bt1_status" name="bt1_status">
                                     <option value="<%=busTrips.getBt1_status()%>"><%=busTrips.getBt1_status()%></option>
-                                    <option value="Hoàn thành">Hoàn thành</option>
-                                    <option value="Đang chạy">Đang chạy</option>
-                                    <option value="Đang chờ">Đang chờ</option>
+                                    <option value="pending">pending</option>
+                                    <option value="active">active</option>
+                                    <option value="inactive">inactive</option>
+                                    <option value="complete">complete</option>
                                 </select>
                             </div>
                             <div class="col-md-6">
@@ -158,6 +161,11 @@
             document.getElementById("toggleBusTrip").addEventListener("click", function (event) {
                 event.preventDefault();
                 document.getElementById("busTripMenu").classList.toggle("d-none");
+            });
+            // Toggle danh sách Vé Xe
+            document.getElementById("toggleTicket").addEventListener("click", function (event) {
+                event.preventDefault();
+                document.getElementById("ticketMenu").classList.toggle("d-none");
             });
         </script>
         <script src="assets/js/bootstrap.bundle.min.js"></script>

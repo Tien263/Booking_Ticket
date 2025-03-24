@@ -1,33 +1,34 @@
 <%-- 
-    Document   : listBusRoute
-    Created on : Mar 6, 2025, 1:18:42 PM
+    Document   : managerTickets
+    Created on : Mar 20, 2025, 10:05:59 PM
     Author     : Admin
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="java.util.ArrayList, model.managerTrip.BusRoute" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page import="java.util.ArrayList, model.ticket.Ticket" %>
 <%
-    ArrayList<BusRoute> list = (ArrayList<BusRoute>) request.getAttribute("listBusRoute");
+    ArrayList<Ticket> tickets = (ArrayList<Ticket>) request.getAttribute("tickets");
 %>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <title>My Bus - Danh Sách Tuyến Xe</title>
+        <title>My Bus - Danh Sách vé Xe</title>
 
-        <!-- CSS Libraries -->
-        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-        <link rel="stylesheet" href="assets/css/fontawesome.css">
-        <link rel="stylesheet" href="assets/css/aos.css">
-        <link rel="stylesheet" href="assets/css/animate.css">
-        <link rel="stylesheet" href="assets/css/slick.css">
-        <link rel="stylesheet" href="assets/css/slick-theme.css">
-        <link rel="stylesheet" href="assets/css/magnific-popup.css">
-        <link rel="stylesheet" href="assets/css/nice-select.css">
-        <link rel="stylesheet" href="assets/css/jquery-ui.css">
-        <link rel="stylesheet" href="assets/css/style.css">
+        <link rel="shortcut icon" href="assets/images/logo/favourite_icon.png">
+        <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/fontawesome.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/aos.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/animate.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/slick.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/slick-theme.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/magnific-popup.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/nice-select.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/jquery-ui.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/style.css">
         <style>
             .pagination {
                 display: flex;
@@ -74,7 +75,7 @@
         </style>
     </head>
     <body class="bg-light">
-        <div class="d-flex">
+        <div class="d-flex">          
             <!-- Sidebar -->
             <nav class="bg-white shadow p-3 vh-100" style="width: 300px">
                 <div class="text-center mb-4">
@@ -88,7 +89,7 @@
                             <i class="fas fa-bus"></i> Quản lý Vé Xe
                         </a>
                         <ul class="list-unstyled ps-3 d-none text-muted" id="ticketMenu">
-                            <li><a class="nav-link text-secondary" href="TicketURL?service=listOfAll"><i class="fas fa-ticket"></i> Danh sách Vé xe</a></li>
+                            <li><a class="nav-link text-secondary active bg-light" href="TicketURL?service=listOfAll"><i class="fas fa-ticket"></i> Danh sách Vé xe</a></li>
                         </ul>
                     </li>
                     <!-- Quản lý Tuyến Xe -->
@@ -97,7 +98,7 @@
                             <i class="fas fa-bus"></i> Quản lý Tuyến Xe
                         </a>
                         <ul class="list-unstyled ps-3 d-none text-muted" id="busRouteMenu">
-                            <li><a class="nav-link text-secondary active bg-light" href="BusRouteURL?service=listOfAll"><i class="fas fa-list"></i> Danh sách tuyến xe</a></li>
+                            <li><a class="nav-link text-secondary" href="BusRouteURL?service=listOfAll"><i class="fas fa-list"></i> Danh sách tuyến xe</a></li>
                             <li><a class="nav-link text-secondary " href="BusRouteURL?service=insert"><i class="fas fa-plus"></i> Thêm tuyến xe</a></li>
                         </ul>
                     </li>
@@ -123,8 +124,8 @@
                 <nav>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="#">Trang Chủ</a></li>
-                        <li class="breadcrumb-item"><a href="BusRouteURL?service=listOfAll">Quản lý tuyến xe</a></li>
-                        <li class="breadcrumb-item active">Danh sách tuyến Xe</li>
+                        <li class="breadcrumb-item"><a href="TicketURL?service=listOfAll">Quản lý vé xe</a></li>
+                        <li class="breadcrumb-item active">Danh sách vé Xe</li>
                     </ol>
                 </nav>
                 <c:if test="${not empty message}">
@@ -133,47 +134,51 @@
                     </div>
                 </c:if>
                 <div class="card p-4">
-                    <form action="BusRouteURL" method="get" class="form-inline mb-3">
-                        <input type="hidden" name="service" value="listOfAll"> 
+                    <form action="TicketURL" method="get" class="form-inline mb-3">
+                        <input type="hidden" name="service" value="listOfAll">                        
                         <label class="mr-2" for="br_from">Điểm đi:</label>
                         <input class="form-control mr-3" type="text" name="br_from" id="br_from" value="${br_from}">
                         <label class="mr-2" for="br_to">Điểm đến:</label>
                         <input class="form-control mr-3" type="text" name="br_to" id="br_to" value="${br_to}">
-                        <button class="btn btn-primary" type="submit" >Tìm kiếm</button>
+                        <label class="mr-2" for="purchaseDate">Ngày mua vé:</label>
+                        <input class="form-control mr-3" type="date" name="purchaseDate" id="purchaseDate" value="${purchaseDate}">
+                        <label class="mr-2" for="departureDate">Ngày khởi hành:</label>
+                        <input class="form-control mr-3" type="date" name="departureDate" id="departureDate" value="${departureDate}">
+                        <button class="btn btn-primary" type="submit" name="submit">Search</button>
                         <button type="reset" class="btn btn-secondary" onclick="resetForm()">Xóa</button>
                     </form>
                 </div>
                 <div class="card p-4">
-                    <div class="d-flex justify-content-end mb-3">
-                        <a href="BusRouteURL?service=insert" class="btn btn-success">+ Thêm tuyến xe</a>
-                    </div>
-
                     <table class="table table-bordered mt-4">
                         <thead class="thead-dark">
                             <tr>
-                                <th>ID Tuyến</th>
-                                <th>Điểm đi</th>
-                                <th>Điểm đến</th>
-                                <th>Giá hiện hành</th>
-                                <th>Quãng đường</th>
-                                <th>Mô tả</th>
+                                <th>ID</th>
+                                <th>Khách hàng</th>
+                                <th>Địa điểm</th>
+                                <th>Ngày mua vé</th>
+                                <th>Ngày Khởi hành</th>
+                                <th>Thời gian</th>
+                                <th>Chỗ ngồi</th>
+                                <th>Loại xe</th>
+                                <th>Biển số</th>
+                                <th>Giá</th>
                                 <th>Trạng thái</th>
-                                <th>Sửa</th>
-                                <th>Xóa</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <% for(BusRoute busRoute: list) { %>
+                            <% for(Ticket ticket : tickets) { %>
                             <tr>
-                                <td><%=busRoute.getBr_id()%></td>
-                                <td><%=busRoute.getBr_from()%></td>
-                                <td><%=busRoute.getBr_to()%></td>
-                                <td><%=busRoute.getBr_price()%></td>
-                                <td><%=busRoute.getBr_distance()%></td>
-                                <td><%=busRoute.getBr_description()%></td>
-                                <td><%=busRoute.getBr_status()%></td>
-                                <td><a href="BusRouteURL?service=update&br_id=<%=busRoute.getBr_id()%>" class="text-primary"><i class="fas fa-edit"></i></a></td>
-                                <td><a href="BusRouteURL?service=delete&br_id=<%=busRoute.getBr_id()%>" class="text-danger"><i class="fas fa-trash-alt"></i></a></td>
+                                <td><%= ticket.getTicketID() %></td>
+                                <td><%= ticket.getCustomerName() %></td>
+                                <td><%= ticket.getDeparture() %> - <%= ticket.getDestination() %></td>
+                                <td><%= ticket.getPurchaseDate() %></td>
+                                <td><%= ticket.getTravelDate() %></td>
+                                <td><%= ticket.getDepartureTime() %> - <%= ticket.getArrivalTime() %></td>
+                                <td><%= ticket.getSeatName() %></td>
+                                <td><%= ticket.getVehicleType() %></td>
+                                <td><%= ticket.getLicensePlate() %></td>
+                                <td><%= ticket.getPrice() %> VND</td>
+                                <td><%= ticket.getStatus() %></td>
                             </tr>
                             <% } %>
                         </tbody>
@@ -181,18 +186,17 @@
                 </div>
                 <div class="pagination">
                     <c:if test="${currentPage > 1}">
-                        <a href="BusRouteURL?service=listOfAll&page=${currentPage - 1}" class="page-link prev">Trang trước</a>
+                        <a href="TicketURL?service=listOfAll&page=${currentPage - 1}" class="page-link prev">Trang trước</a>
                     </c:if>
 
                     <c:forEach begin="1" end="${endPage}" var="i">
-                        <a href="BusRouteURL?service=listOfAll&page=${i}" class="${i == currentPage ? 'page-link active' : 'page-link'}">${i}</a>
+                        <a href="TicketURL?service=listOfAll&page=${i}" class="${i == currentPage ? 'page-link active' : 'page-link'}">${i}</a>
                     </c:forEach>
 
                     <c:if test="${currentPage < endPage}">
-                        <a href="BusRouteURL?service=listOfAll&page=${currentPage + 1}" class="page-link next">Trang tiếp</a>
+                        <a href="TicketURL?service=listOfAll&page=${currentPage + 1}" class="page-link next">Trang tiếp</a>
                     </c:if>
                 </div>
-
             </main>
         </div>
     </div>
@@ -216,15 +220,18 @@
         // Kiểm tra URL hiện tại để giữ menu mở
         window.addEventListener("DOMContentLoaded", function () {
             const currentUrl = window.location.href;
-            if (currentUrl.includes("BusRouteURL?service=listOfAll") || currentUrl.includes("BusRouteURL?service=insert")) {
-                document.getElementById("busRouteMenu").classList.remove("d-none");
+            if (currentUrl.includes("TicketURL?service=listOfAll")) {
+                document.getElementById("ticketMenu").classList.remove("d-none");
             }
         });
     </script>
     <script>
         function resetForm() {
-            window.location.href = "BusRouteURL?service=listOfAll"; // Điều hướng về trang gốc
+            window.location.href = "TicketURL?service=listOfAll"; // Điều hướng về trang gốc
         }
     </script>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
