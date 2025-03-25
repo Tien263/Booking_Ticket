@@ -5,9 +5,10 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ page import="model.ticket.Ticket" %>
+<%@ page import="java.util.ArrayList, model.ticket.Ticket" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
-    Ticket ticket = (Ticket) request.getAttribute("ticket");
+    ArrayList<Ticket> tickets = (ArrayList<Ticket>) request.getAttribute("tickets");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -43,6 +44,51 @@
 
         <!-- custom - css include -->
         <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
+        <style>
+            .pagination {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 10px;
+                margin: 20px 0;
+                font-family: Arial, sans-serif;
+            }
+
+            .page-link {
+                text-decoration: none;
+                padding: 8px 12px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                color: #333;
+                background-color: #fff;
+                transition: all 0.3s ease;
+            }
+
+            .page-link:hover {
+                background-color: #f0f0f0;
+                border-color: #aaa;
+            }
+
+            .page-link.active {
+                background-color: #007bff;
+                color: #fff;
+                border-color: #007bff;
+                pointer-events: none;
+            }
+
+            .prev, .next {
+                font-weight: bold;
+            }
+
+            .prev::before {
+                content: "« ";
+            }
+
+            .next::after {
+                content: " »";
+            }
+        </style>
     </head>
 
     <body>
@@ -160,7 +206,22 @@
                     </div>
                 </div>
             </section>
+            <!-- Hiển thị thông báo lỗi nếu có -->
+            <c:if test="${not empty sessionScope.error}">
+                <div class="alert alert-danger">
+                    ${sessionScope.error}
+                </div>
+                <c:remove var="error" scope="session" />
+            </c:if>
 
+            <!-- Chỉ hiển thị thông báo thành công nếu không có lỗi -->
+            <c:if test="${empty sessionScope.error and not empty sessionScope.message}">
+                <div class="alert alert-success">
+                    ${sessionScope.message}
+                </div>
+                <c:remove var="message" scope="session" />
+            </c:if>
+            <% for(Ticket ticket : tickets) { %>
             <div class="bg-white shadow-lg rounded-lg p-6 mb-6 max-w-3xl mx-auto border border-gray-200">
                 <div class="flex justify-between items-start space-x-6">
                     <!-- Cột thông tin chuyến đi -->
@@ -221,6 +282,20 @@
                         Hủy vé
                     </a>
                 </div>
+            </div>
+            <% } %>
+            <div class="pagination">
+                <c:if test="${currentPage > 1}">
+                    <a href="CustomerTicketURL?service=detail&page=${currentPage - 1}" class="page-link prev">Trang trước</a>
+                </c:if>
+
+                <c:forEach begin="1" end="${endPage}" var="i">
+                    <a href="CustomerTicketURL?service=detail&page=${i}" class="${i == currentPage ? 'page-link active' : 'page-link'}">${i}</a>
+                </c:forEach>
+
+                <c:if test="${currentPage < endPage}">
+                    <a href="CustomerTicketURL?service=detail&page=${currentPage + 1}" class="page-link next">Trang tiếp</a>
+                </c:if>
             </div>
         </main>
         <!-- main body - end -->

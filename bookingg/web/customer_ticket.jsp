@@ -5,10 +5,10 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList, model.ticket.Ticket" %>
+<%@ page import="java.util.ArrayList, model.ticket.BookedTicket" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
-    ArrayList<Ticket> tickets = (ArrayList<Ticket>) request.getAttribute("tickets");
+    ArrayList<BookedTicket> tickets = (ArrayList<BookedTicket>) request.getAttribute("tickets");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -44,6 +44,50 @@
 
         <!-- custom - css include -->
         <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+        <style>
+            .pagination {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 10px;
+                margin: 20px 0;
+                font-family: Arial, sans-serif;
+            }
+
+            .page-link {
+                text-decoration: none;
+                padding: 8px 12px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                color: #333;
+                background-color: #fff;
+                transition: all 0.3s ease;
+            }
+
+            .page-link:hover {
+                background-color: #f0f0f0;
+                border-color: #aaa;
+            }
+
+            .page-link.active {
+                background-color: #007bff;
+                color: #fff;
+                border-color: #007bff;
+                pointer-events: none;
+            }
+
+            .prev, .next {
+                font-weight: bold;
+            }
+
+            .prev::before {
+                content: "« ";
+            }
+
+            .next::after {
+                content: " »";
+            }
+        </style>
     </head>
 
     <body>
@@ -120,7 +164,6 @@
                                 <ul class="ul_li_center clearfix">
                                     <li><a href="home.jsp">Home</a></li>
                                     <li><a href="booking">Booking Ticket</a></li>
-                                    <li  class="active has_child"><a href="CustomerTicketURL?service=listOfAll">Ticket History</a></li>
                                     <li><a href="cuslistblog">Blog</a></li>
                                     <li>
                                         <a href="contact.jsp">Contact Us</a>
@@ -175,42 +218,56 @@
                 </div>
                 <c:remove var="message" scope="session" />
             </c:if>
-            <% for(Ticket ticket : tickets) { %>
+            <% for(BookedTicket ticket : tickets) { %>
+            <!-- Form lọc -->
             <div class="bg-white shadow-md rounded-lg p-4 mb-4 max-w-3xl mx-auto">
                 <div class="flex justify-between items-center">
                     <div class="flex flex-col">
                         <h3 class="text-lg font-bold">
-                            <%= ticket.getDeparture() %> - <%= ticket.getDestination() %>
+                            Mã vé: <%= ticket.getBtId() %> 
                         </h3>
                         <p class="text-gray-600">
-                            Date: <%= ticket.getTravelDate() %>
+                            Ngày mua: <%= ticket.getBtBookingDate() %>
                         </p>
                         <p class="text-gray-600">
-                            Seat: <%= ticket.getSeatName() %>
+                            Giá: <%= ticket.getBtTotalAmount() %>
                         </p>
                     </div>
                     <div class="flex flex-col">
                         <p>&nbsp;</p>
                         <p class="text-gray-600">
-                            Time: <%= ticket.getDepartureTime() %> - <%= ticket.getArrivalTime() %>
+                            Số vé: <%= ticket.getBtTotalAmount() %>
                         </p>
                         <p class="text-gray-600">
-                            Status: <%= ticket.getStatus() %>
+                            Trạng thái: <%= ticket.getBtStatus() %>
                         </p>
                     </div>
                     <div class="flex space-x-2">
-                        <a href="CustomerTicketURL?service=detail&t_id=<%= ticket.getTicketID() %>" 
+                        <a href="CustomerTicketURL?service=detail&bt_id=<%= ticket.getBtId() %>" 
                            class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
                             Chi tiết vé
                         </a>
-                        <a href="CustomerTicketURL?service=cancel&t_id=<%= ticket.getTicketID() %>" 
+                        <a href="CustomerTicketURL?service=cancel&bt_id=<%= ticket.getBtId() %>" 
                            class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
                             Hủy vé
-                        </a>
+                        </a>                          
                     </div>
                 </div>
             </div>  
             <% } %>
+            <div class="pagination">
+                <c:if test="${currentPage > 1}">
+                    <a href="CustomerTicketURL?service=listOfAll&page=${currentPage - 1}" class="page-link prev">Trang trước</a>
+                </c:if>
+
+                <c:forEach begin="1" end="${endPage}" var="i">
+                    <a href="CustomerTicketURL?service=listOfAll&page=${i}" class="${i == currentPage ? 'page-link active' : 'page-link'}">${i}</a>
+                </c:forEach>
+
+                <c:if test="${currentPage < endPage}">
+                    <a href="CustomerTicketURL?service=listOfAll&page=${currentPage + 1}" class="page-link next">Trang tiếp</a>
+                </c:if>
+            </div>
         </main>
         <!-- main body - end -->
 

@@ -409,7 +409,7 @@
                                         <a data-toggle="tab" href="#profile_tab"><i class="fas fa-address-book"></i> Booking Profiles</a>
                                     </li>
                                     <li>
-                                        <a data-toggle="tab" href="#history_tab"><i class="fas fa-file-alt"></i> Booking History</a>
+                                        <a href="CustomerTicketURL?service=listOfAll"><i class="fas fa-file-alt"></i> Booking History</a>
                                     </li>
                                 </ul>
                             </div>
@@ -498,37 +498,7 @@
                                 </div>
 
                                 <div id="history_tab" class="tab-pane fade">
-                                    <div class="account_info_list" data-aos="fade-up" data-aos-delay="100">
-                                        <h3 class="list_title mb_30">Booking History:</h3>
-                                        <ul class="ul_li_block clearfix">
-                                            <li><span>Upcoming Reservations:</span> No Reservations Yet</li>
-                                            <li><span>Past Rentals:</span> 0</li>
-                                        </ul>
-                                        <a class="text_btn text-uppercase" href="#!"><span>Book A Car</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
-                                    </div>
-
-                                    <div class="account_info_list" data-aos="fade-up" data-aos-delay="300">
-                                        <h3 class="list_title mb_30">Booking Profiles:</h3>
-                                        <ul class="ul_li_block clearfix">
-                                            <li><span>Profile ID:</span> 1234557jt</li>
-                                            <li><span>Payment Method:</span> Visa Credit Card</li>
-                                            <li><span>Phone Number:</span> +1-202-555-0104</li>
-                                        </ul>
-                                    </div>
-
-                                    <div class="account_info_list" data-aos="fade-up" data-aos-delay="500">
-                                        <h3 class="list_title mb_30">Account:</h3>
-                                        <ul class="ul_li_block clearfix">
-                                            <li><span>Full Name:</span> Rakibul Islam Dewan</li>
-                                            <li><span>E-mail:</span> myname@email.com</li>
-                                            <li><span>Username:</span> myname@email.com</li>
-                                            <li><span>Password:</span> myname@email.com</li>
-                                            <li><span>Phone Number:</span> +1-202-555-0104</li>
-                                            <li><span>Gender:</span> +1-202-555-0104</li>
-                                            <li><span>Address:</span> 60 Stonybrook Lane Atlanta, GA 30303</li>
-                                        </ul>
-                                        <a class="text_btn text-uppercase" href="#!"><span>Change Account Information</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
