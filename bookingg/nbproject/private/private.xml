@@ -3,11 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/D:/ProjectSWp/Github/Booking_Ticket/bookingg/web/customer_ticket.jsp</file>
             <file>file:/D:/ProjectSWp/Github/Booking_Ticket/bookingg/web/customer_ticket_detail.jsp</file>
             <file>file:/D:/ProjectSWp/Github/Booking_Ticket/bookingg/src/java/model/ticket/BookedTicket.java</file>
             <file>file:/D:/ProjectSWp/Github/Booking_Ticket/bookingg/src/java/controller/ticket/CustomerTicketController.java</file>
             <file>file:/D:/ProjectSWp/Github/Booking_Ticket/bookingg/src/java/dal/ticket/BookedTicketDAO.java</file>
+=======
+            <file>file:/C:/Users/ADMIN/Downloads/Booking_Ticket-V1/Booking_Ticket-news2/Booking_Ticket-news1/bookingg/web/selectSeat.jsp</file>
+>>>>>>> main
         </group>
     </open-files>
 </project-private>

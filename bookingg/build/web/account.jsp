@@ -15,8 +15,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
 
+<<<<<<< HEAD
         <title>My Account - Rotors - Car Rental HTML5 Template</title>
         <link rel="shortcut icon" href="assets/images/logo/favourite_icon.png">
+=======
+        <title>BusGo</title>
+        <link rel="shortcut icon" href="assets/images/logo/logo_01_1.png">
+>>>>>>> main
 
         <!-- fraimwork - css include -->
         <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
@@ -125,6 +130,7 @@
 
                         <div class="col-lg-3 col-md-6 col-sm-6 col-6 order-last">
                             <ul class="header_action_btns ul_li_right clearfix">
+<<<<<<< HEAD
                                 
                                 <li class="dropdown">
                                     
@@ -190,6 +196,39 @@
                                             <li><a href="logout"><i class="fal fa-sign-out"></i> Logout</a></li>
                                         </ul>
                                     </div>
+=======
+
+                                <li class="dropdown">
+                                    <button type="button" class="user_btn" id="user_dropdown" 
+                                            <c:choose>
+                                                <c:when test="${not empty sessionScope.user}">
+                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                                </c:when>
+                                                <c:otherwise>
+                                                    onclick="window.location.href = 'login.jsp'"
+                                                </c:otherwise>
+                                            </c:choose>
+                                            >
+                                        <i class="fal fa-user"></i>
+                                    </button>
+                                    <c:if test="${not empty sessionScope.user}">
+                                        <div class="user_dropdown rotors_dropdown dropdown-menu clearfix" aria-labelledby="user_dropdown">
+                                            <div class="profile_info clearfix">
+                                                <a href="#!" class="user_thumbnail">
+                                                    <img src="assets/images/meta/img_01.png" alt="thumbnail_not_found">
+                                                </a>
+                                                <div class="user_content">
+                                                    <span class="user_title">${sessionScope.user}</span>
+                                                </div>
+                                            </div>
+                                            <ul class="ul_li_block clearfix">
+                                                <li><a href="account"><i class="fal fa-user-circle"></i> Profile</a></li>
+                                                <li><a href="settings.jsp"><i class="fal fa-user-cog"></i> Settings</a></li>
+                                                <li><a href="logout"><i class="fal fa-sign-out"></i> Logout</a></li>
+                                            </ul>
+                                        </div>
+                                    </c:if> 
+>>>>>>> main
                                 </li>
                                 <li>
                                     <button type="button" class="mobile_sidebar_btn"><i class="fal fa-align-right"></i></button>
@@ -201,6 +240,7 @@
                             <nav class="main_menu clearfix">
                                 <ul class="ul_li_center clearfix">
                                     <li class="active has_child">
+<<<<<<< HEAD
                                         <a href="#!">Home</a>
                                         <ul class="submenu">
                                             <li><a href="index_1.html">Home Page V.1</a></li>
@@ -243,6 +283,16 @@
                                             <li><a href="contact_wordwide.html">Contact Wordwide</a></li>
                                         </ul>
                                     </li>
+=======
+                                        <a href="home.jsp">Trang chủ</a>
+                                    </li>
+                                    <li><a href="booking">Đặt vé</a></li>
+                                    <li><a href="cuslistblog">Blog</a></li>
+                                    <li>
+                                        <a href="contact.jsp">Liên hệ</a>
+                                    </li>
+                                    <li><a href="employee_login.jsp">Nhân viên</a></li>
+>>>>>>> main
                                 </ul>
                             </nav>
                         </div>
@@ -282,15 +332,24 @@
                     <div class="about_content mb_60">
                         <div class="brand_logo mb_15">
                             <a href="index.html">
+<<<<<<< HEAD
                                 <img src="assets/images/logo/logo_01_1x.png" srcset="assets/images/logo/logo_01_2x.png 2x" alt="logo_not_found">
                             </a>
                         </div>
                         <p class="mb-0">
                             Nullam id dolor auctor, dignissim magna eu, mattis ante. Pellentesque tincidunt, elit a facilisis efficitur, nunc nisi scelerisque enim, rhoncus malesuada est velit a nulla. Cras porta mi vitae dolor tristique euismod. Lorem ipsum dolor sit amet, consectetur adipiscing elit
+=======
+                                <img src="assets/images/logo/logo_01_1.png" srcset="assets/images/logo/logo_01_1.png 2x" alt="logo_not_found">
+                            </a>
+                        </div>
+                        <p class="mb-0">
+                            BusGo cam kết cung cấp dịch vụ đặt vé xe buýt đáng tin cậy và chất lượng cao với thông tin minh bạch, giá cả rõ ràng và hỗ trợ khách hàng tận tình, đảm bảo hành trình của bạn luôn thuận tiện và an toàn.
+>>>>>>> main
                         </p>
                     </div>
 
                     <div class="menu_list mb_60 clearfix">
+<<<<<<< HEAD
                         <h3 class="title_text text-white">Menu List</h3>
                         <ul class="ul_li_block clearfix">
                             <li class="active dropdown">
@@ -336,13 +395,30 @@
                                     <li><a href="contact_wordwide.html">Contact Wordwide</a></li>
                                 </ul>
                             </li>
+=======
+                        <h3 class="title_text text-white">Danh mục</h3>
+                        <ul class="ul_li_block clearfix">
+                            <li class="active dropdown">
+                                <a href="home.jsp" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Home</a>
+                            </li>
+                            <li><a href="booking">Đặt vé</a></li>
+                            <li><a href="cuslistblog">Tin tức</a></li>
+                            <li><a href="contact.jsp">Liên hệ</a></li>
+                            <li><a href="employee_login.jsp">Đăng nhập của nhân viên</a></li>
+
+>>>>>>> main
                         </ul>
                     </div>
 
                     <div class="booking_car_form">
+<<<<<<< HEAD
                         <h3 class="title_text text-white mb-2">Book A Car</h3>
                         <p class="mb_15">
                             Nullam id dolor auctor, dignissim magna eu, mattis ante. Pellentesque tincidunt, elit a facilisis efficitur.
+=======
+                        <h3 class="title_text text-white mb-2">Đặt vé</h3>
+                        <p class="mb_15">
+>>>>>>> main
                         </p>
                         <form action="#">
                             <div class="form_item">
@@ -356,7 +432,11 @@
                                 <h4 class="input_title text-white">Pick A Date</h4>
                                 <input type="date" name="date">
                             </div>
+<<<<<<< HEAD
                             <button type="submit" class="custom_btn bg_default_red btn_width text-uppercase">Book A Car <img src="assets/images/icons/icon_01.png" alt="icon_not_found"></button>
+=======
+                            <button type="submit" class="custom_btn bg_default_red btn_width text-uppercase">Book  <img src="assets/images/icons/icon_01.png" alt="icon_not_found"></button>
+>>>>>>> main
                         </form>
                     </div>
 
@@ -373,14 +453,23 @@
                 <div class="page_title_area has_overlay d-flex align-items-center clearfix" data-bg-image="assets/images/breadcrumb/bg_10.jpg">
                     <div class="overlay"></div>
                     <div class="container" data-aos="fade-up" data-aos-delay="100">
+<<<<<<< HEAD
                         <h1 class="page_title text-white mb-0">My Account</h1>
+=======
+                        <h1 class="page_title text-white mb-0">Tài khoản của tôi</h1>
+>>>>>>> main
                     </div>
                 </div>
                 <div class="breadcrumb_nav clearfix" data-bg-color="#F2F2F2">
                     <div class="container">
                         <ul class="ul_li clearfix">
+<<<<<<< HEAD
                             <li><a href="index.html">Home</a></li>
                             <li>Account</li>
+=======
+                            <li><a href="index.html">Trang chủ</a></li>
+                            <li>Tài khoản</li>
+>>>>>>> main
                         </ul>
                     </div>
                 </div>
@@ -397,12 +486,17 @@
 
                         <div class="col-lg-4 col-md-8 col-sm-10 col-xs-12">
                             <div class="account_tabs_menu clearfix" data-bg-color="#F2F2F2" data-aos="fade-up" data-aos-delay="100">
+<<<<<<< HEAD
                                 <h3 class="list_title mb_15">Account Details:</h3>
+=======
+                                <h3 class="list_title mb_15">Tài khoản chi tiết</h3>
+>>>>>>> main
                                 <ul class="ul_li_block nav" role="tablist">
                                     <li>
                                         <a class="active" data-toggle="tab" href="#admin_tab"><i class="fas fa-user"></i> ${customer.username}</a>
                                     </li>
                                     <li>
+<<<<<<< HEAD
                                         <a href="logout"><i class="fas fa-sign-out-alt"></i> Log Out <img class="arrow" src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
                                     </li>
                                     <li>
@@ -410,6 +504,15 @@
                                     </li>
                                     <li>
                                         <a href="CustomerTicketURL?service=listOfAll"><i class="fas fa-file-alt"></i> Booking History</a>
+=======
+                                        <a href="logout"><i class="fas fa-sign-out-alt"></i> Đăng xuất <img class="arrow" src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
+                                    </li>
+                                    <li>
+                                        <a data-toggle="tab" href="booking"><i class="fas fa-address-book"></i> Đặt vé</a>
+                                    </li>
+                                    <li>
+                                        <a data-toggle="tab" href="#history_tab"><i class="fas fa-file-alt"></i> Lịch sử đặt vé</a>
+>>>>>>> main
                                     </li>
                                 </ul>
                             </div>
@@ -425,6 +528,7 @@
                                     </c:if>
 
                                     <div class="account_info_list" data-aos="fade-up" data-aos-delay="100">
+<<<<<<< HEAD
                                         <h3 class="list_title mb_30">Account:</h3>
                                         <ul class="ul_li_block clearfix">
                                             <li><span>Full Name:</span> ${customer.getFullname()} </li>
@@ -440,10 +544,28 @@
 
                                         <div>
                                             <a class="text_btn text-uppercase" href="changepassword"><span>Change Password</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
+=======
+                                        <h3 class="list_title mb_30">Thông tin cá nhân:</h3>
+                                        <ul class="ul_li_block clearfix">
+                                            <li><span>Họ và tên:</span> ${customer.getFullname()} </li>
+                                            <li><span>Email:</span> ${customer.getEmail()} </li>
+                                            <li><span>Tên người dùng:</span> ${customer.getUsername()} </li>
+                                            <li><span>Số điện thoại:</span> ${customer.getPhone()} </li>
+                                            <li><span>Giới tính:</span> ${customer.isGender() ? 'Male' : 'Female'}</li>
+                                            <li><span>Địa chỉ:</span> ${customer.getAddress()}</li>
+                                        </ul>
+
+
+                                        <a class="text_btn text-uppercase" href="change1"><span>Thay đổi thông tin cá nhân</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
+
+                                        <div>
+                                            <a class="text_btn text-uppercase" href="changepassword"><span>Thay đổi mật khẩu</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
+>>>>>>> main
 
                                         </div>
                                     </div>
 
+<<<<<<< HEAD
                                     <div class="account_info_list" data-aos="fade-up" data-aos-delay="300">
                                         <h3 class="list_title mb_30">Booking Profiles:</h3>
                                         <ul class="ul_li_block clearfix">
@@ -455,15 +577,26 @@
 
                                     <div class="account_info_list" data-aos="fade-up" data-aos-delay="500">
                                         <h3 class="list_title mb_30">Booking History:</h3>
+=======
+
+
+                                    <div class="account_info_list" data-aos="fade-up" data-aos-delay="500">
+                                        <h3 class="list_title mb_30">Lịch sử đặt vé:</h3>
+>>>>>>> main
                                         <ul class="ul_li_block clearfix">
                                             <li><span>Upcoming Reservations:</span> No Reservations Yet</li>
                                             <li><span>Past Rentals:</span> 0</li>
                                         </ul>
+<<<<<<< HEAD
                                         <a class="text_btn text-uppercase" href="#!"><span>Book A Car</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
+=======
+                                        <a class="text_btn text-uppercase" href="booking"><span>Đặt vé</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
+>>>>>>> main
                                     </div>
                                 </div>
 
                                 <div id="profile_tab" class="tab-pane fade">
+<<<<<<< HEAD
                                     <div class="account_info_list" data-aos="fade-up" data-aos-delay="100">
                                         <h3 class="list_title mb_30">Booking Profiles:</h3>
                                         <ul class="ul_li_block clearfix">
@@ -475,16 +608,27 @@
 
                                     <div class="account_info_list" data-aos="fade-up" data-aos-delay="300">
                                         <h3 class="list_title mb_30">Booking History:</h3>
+=======
+
+
+                                    <div class="account_info_list" data-aos="fade-up" data-aos-delay="300">
+                                        <h3 class="list_title mb_30">Lịch sử đặt vé:</h3>
+>>>>>>> main
                                         <ul class="ul_li_block clearfix">
                                             <li><span>Upcoming Reservations:</span> No Reservations Yet</li>
                                             <li><span>Past Rentals:</span> 0</li>
                                         </ul>
+<<<<<<< HEAD
                                         <a class="text_btn text-uppercase" href="#!"><span>Book A Car</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
+=======
+                                        <a class="text_btn text-uppercase" href="booking"><span>Đặt vé</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
+>>>>>>> main
                                     </div>
 
                                     <div class="account_info_list" data-aos="fade-up" data-aos-delay="500">
                                         <h3 class="list_title mb_30">Account:</h3>
                                         <ul class="ul_li_block clearfix">
+<<<<<<< HEAD
                                             <li><span>Full Name:</span> Rakibul Islam Dewan</li>
                                             <li><span>E-mail:</span> myname@email.com</li>
                                             <li><span>Username:</span> myname@email.com</li>
@@ -493,12 +637,44 @@
                                             <li><span>Gender:</span> +1-202-555-0104</li>
                                             <li><span>Address:</span> 60 Stonybrook Lane Atlanta, GA 30303</li>
                                         </ul>
+=======
+                                            <li><span>Họ và tên:</span> ${customer.getFullname()} </li>
+                                            <li><span>Email:</span> ${customer.getEmail()} </li>
+                                            <li><span>Tên người dùng:</span> ${customer.getUsername()} </li>
+                                            <li><span>Số điện thoại:</span> ${customer.getPhone()} </li>
+                                            <li><span>Giới tính:</span> ${customer.isGender() ? 'Male' : 'Female'}</li>
+                                            <li><span>Địa chỉ:</span> ${customer.getAddress()}</li>                                        </ul>
+>>>>>>> main
                                         <a class="text_btn text-uppercase" href="#!"><span>Change Account Information</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
                                     </div>
                                 </div>
 
                                 <div id="history_tab" class="tab-pane fade">
+<<<<<<< HEAD
                                     
+=======
+                                    <div class="account_info_list" data-aos="fade-up" data-aos-delay="100">
+                                        <h3 class="list_title mb_30">Booking History:</h3>
+                                        <ul class="ul_li_block clearfix">
+                                            <li><span>Upcoming Reservations:</span> No Reservations Yet</li>
+                                            <li><span>Past Rentals:</span> 0</li>
+                                        </ul>
+                                        <a class="text_btn text-uppercase" href="#!"><span>Book A Car</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
+                                    </div>
+
+                                    <div class="account_info_list" data-aos="fade-up" data-aos-delay="500">
+                                        <h3 class="list_title mb_30">Tài khoản</h3>
+                                        <ul class="ul_li_block clearfix">
+                                            <li><span>Họ và tên:</span> ${customer.getFullname()} </li>
+                                            <li><span>Email:</span> ${customer.getEmail()} </li>
+                                            <li><span>Tên người dùng:</span> ${customer.getUsername()} </li>
+                                            <li><span>Số điện thoại:</span> ${customer.getPhone()} </li>
+                                            <li><span>Giới tính:</span> ${customer.isGender() ? 'Male' : 'Female'}</li>
+                                            <li><span>Địa chỉ:</span> ${customer.getAddress()}</li>
+                                        </ul>
+                                        <a class="text_btn text-uppercase" href="change1"><span>Thay đổi thông tin tài khoản</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
+                                    </div>
+>>>>>>> main
                                 </div>
                             </div>
                         </div>
@@ -529,10 +705,17 @@
                                     </a>
                                 </div>
                                 <p class="mb_15">
+<<<<<<< HEAD
                                     BusGo is committed to providing a reliable and high-quality bus ticket booking service with transparent information, clear pricing, and dedicated customer support, ensuring your journey is always convenient and safe
                                 </p>
                                 <div class="footer_useful_links mb_30">
                                     
+=======
+                                    BusGo cam kết cung cấp dịch vụ đặt vé xe buýt đáng tin cậy và chất lượng cao với thông tin minh bạch, giá cả rõ ràng và hỗ trợ khách hàng tận tâm, đảm bảo hành trình của bạn luôn thuận tiện và an toàn.                                </p>
+                                </p>
+                                <div class="footer_useful_links mb_30">
+
+>>>>>>> main
                                 </div>
                                 <div class="form_item mb-0">
                                     <form action="#">
@@ -562,6 +745,7 @@
 
                         <div class="col-lg-4 col-md-4 col-sm-12 col-sm-12">
                             <div class="footer_useful_links" data-aos="fade-up" data-aos-delay="300">
+<<<<<<< HEAD
                                 <h3 class="footer_widget_title">Information:</h3>
                                 <ul class="ul_li_block clearfix">
                                     <li><a href="#!"><i class="fal fa-angle-right"></i> Find a Car for Rent in the Nearest Location</a></li>
@@ -571,6 +755,14 @@
                                     <li><a href="#!"><i class="fal fa-angle-right"></i> Contact Us</a></li>
                                     <li><a href="#!"><i class="fal fa-angle-right"></i> Help Center</a></li>
                                     <li><a href="#!"><i class="fal fa-angle-right"></i> Privacy Police</a></li>
+=======
+                                <h3 class="footer_widget_title">Thông tin:</h3>
+                                <ul class="ul_li_block clearfix">
+                                    <li><a href="booking"><i class="fal fa-angle-right"></i> Find a Car for Rent in the Nearest Location</a></li>
+                                    <li><a href="contact.jsp"><i class="fal fa-angle-right"></i> Liên hệ với chúng tôi</a></li>
+                                    <li><a href="#!"><i class="fal fa-angle-right"></i> Trung tâm hỗ trợ</a></li>
+                                    <li><a href="policy.jsp"><i class="fal fa-angle-right"></i> Chính sách bảo mật</a></li>
+>>>>>>> main
                                 </ul>
                             </div>
                         </div>

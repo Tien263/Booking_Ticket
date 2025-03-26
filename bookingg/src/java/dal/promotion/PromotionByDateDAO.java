@@ -112,4 +112,33 @@ public class PromotionByDateDAO extends DBContext<Promotions_By_Date>{
         return null;
     }
     
+<<<<<<< HEAD
+=======
+    
+    public ArrayList<Promotions_By_Date> list1() {
+        ArrayList<Promotions_By_Date> list = new ArrayList<>();
+        String sql = "SELECT * FROM Promotions_By_Date";
+        try {
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                Promotions_By_Date promo = new Promotions_By_Date(
+                    rs.getInt("pbd_id"),
+                    rs.getNString("pbd_name"),
+                    rs.getDate("pbd_startDate"),
+                    rs.getDate("pbd_endDate"),
+                    rs.getDouble("pbd_discount"),
+                    rs.getInt("pbd_quantity"),
+                    rs.getInt("e_id") == 0 ? null : rs.getInt("e_id"),
+                    rs.getInt("priority") == 0 ? null : rs.getInt("priority")
+                );
+                list.add(promo);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+    
+>>>>>>> main
 }

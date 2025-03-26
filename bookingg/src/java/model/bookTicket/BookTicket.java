@@ -21,6 +21,85 @@ import java.util.Date;
     private String bt1_time;
     private String s_name;
     private float br_price;
+    private String bt_status;
+    private int bt_id;
+    private double TotalAmount;
+    // Thêm các thuộc tính liên quan đến khuyến mãi
+    private Integer pbcId; // ID của mã khuyến mãi (Promotions_By_Code)
+    private Integer pbdId; // ID của chương trình khuyến mãi theo ngày (Promotions_By_Date)
+    private Integer pbpId; // ID của chương trình khuyến mãi theo hành khách (Promotions_By_Passengers)
+
+    public BookTicket(int t_id, String c_fullname, String c_phone, Date bt_purchaseDate, Date bt_bookingDate, String br_adress, String bt1_time, String s_name, float br_price, String bt_status, int bt_id, double TotalAmount, Integer pbcId, Integer pbdId, Integer pbpId) {
+        this.t_id = t_id;
+        this.c_fullname = c_fullname;
+        this.c_phone = c_phone;
+        this.bt_purchaseDate = bt_purchaseDate;
+        this.bt_bookingDate = bt_bookingDate;
+        this.br_adress = br_adress;
+        this.bt1_time = bt1_time;
+        this.s_name = s_name;
+        this.br_price = br_price;
+        this.bt_status = bt_status;
+        this.bt_id = bt_id;
+        this.TotalAmount = TotalAmount;
+        this.pbcId = pbcId;
+        this.pbdId = pbdId;
+        this.pbpId = pbpId;
+    }
+
+    public Integer getPbcId() {
+        return pbcId;
+    }
+
+    public void setPbcId(Integer pbcId) {
+        this.pbcId = pbcId;
+    }
+
+    public Integer getPbdId() {
+        return pbdId;
+    }
+
+    public void setPbdId(Integer pbdId) {
+        this.pbdId = pbdId;
+    }
+
+    public Integer getPbpId() {
+        return pbpId;
+    }
+
+    public void setPbpId(Integer pbpId) {
+        this.pbpId = pbpId;
+    }
+    
+    
+
+    public int getBt_id() {
+        return bt_id;
+    }
+
+    public void setBt_id(int bt_id) {
+        this.bt_id = bt_id;
+    }
+
+    public double getTotalAmount() {
+        return TotalAmount;
+    }
+
+    public void setTotalAmount(double TotalAmount) {
+        this.TotalAmount = TotalAmount;
+    }
+
+    
+
+    public String getBt_status() {
+        return bt_status;
+    }
+
+    public void setBt_status(String bt_status) {
+        this.bt_status = bt_status;
+    }
+    
+    
 
     public BookTicket() {
     }

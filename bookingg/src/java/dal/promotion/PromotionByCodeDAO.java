@@ -11,6 +11,49 @@ import model.promotion.Promotions_By_Code;
 
 public class PromotionByCodeDAO extends DBContext<Promotions_By_Code> {
 
+<<<<<<< HEAD
+=======
+    // Fetch a promotion by its code
+    public Promotions_By_Code getPromotionByCode(String code) {
+        String sql = "SELECT * FROM Promotions_By_Code " +
+                     "WHERE pbc_code = ? AND pbc_endDate >= GETDATE() AND pbc_quantity > 0";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, code);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return new Promotions_By_Code(
+                        rs.getInt("pbc_id"),
+                        rs.getNString("pbc_name"),
+                        rs.getString("pbc_code"),
+                        rs.getDouble("pbc_discount"),
+                        rs.getDate("pbc_endDate"),
+                        rs.getInt("pbc_quantity"),
+                        rs.getInt("a_id") == 0 ? null : rs.getInt("a_id"),
+                        rs.getInt("e_id") == 0 ? null : rs.getInt("e_id"),
+                        rs.getInt("priority") == 0 ? null : rs.getInt("priority")
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    // Decrease the quantity of a promotion after use
+    public boolean decreasePromotionQuantity(int pbcId) {
+        String sql = "UPDATE Promotions_By_Code SET pbc_quantity = pbc_quantity - 1 " +
+                     "WHERE pbc_id = ? AND pbc_quantity > 0";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, pbcId);
+            int rowsAffected = ps.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+>>>>>>> main
     /**
      * Chèn một mã giảm giá mới vào database
      */
@@ -130,4 +173,32 @@ public class PromotionByCodeDAO extends DBContext<Promotions_By_Code> {
         }
     }
 
+<<<<<<< HEAD
+=======
+    public ArrayList<Promotions_By_Code> list1() {
+        ArrayList<Promotions_By_Code> list = new ArrayList<>();
+        String sql = "SELECT * FROM Promotions_By_Code";
+        try {
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                Promotions_By_Code promo = new Promotions_By_Code(
+                        rs.getInt("pbc_id"),
+                        rs.getNString("pbc_name"),
+                        rs.getString("pbc_code"),
+                        rs.getDouble("pbc_discount"),
+                        rs.getDate("pbc_endDate"),
+                        rs.getInt("pbc_quantity"),
+                        rs.getInt("a_id") == 0 ? null : rs.getInt("a_id"),
+                        rs.getInt("e_id") == 0 ? null : rs.getInt("e_id"),
+                        rs.getInt("priority") == 0 ? null : rs.getInt("priority")
+                );
+                list.add(promo);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+>>>>>>> main
 }

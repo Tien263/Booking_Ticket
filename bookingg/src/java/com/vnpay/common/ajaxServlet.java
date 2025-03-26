@@ -5,8 +5,12 @@
  */
 package com.vnpay.common;
 
+<<<<<<< HEAD
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+=======
+import dal.bookTicket.BookTicketDAO;
+>>>>>>> main
 import java.io.IOException;import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
@@ -22,6 +26,11 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+<<<<<<< HEAD
+=======
+import jakarta.servlet.http.HttpSession;
+import model.bookTicket.BookTicket;
+>>>>>>> main
 
 /**
  *
@@ -30,15 +39,37 @@ import jakarta.servlet.http.HttpServletResponse;
 public class ajaxServlet extends HttpServlet {
 
     @Override
+<<<<<<< HEAD
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+=======
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) 
+            throws ServletException, IOException {
+        String bankCode = req.getParameter("bankCode");
+        if(req.getParameter("totalPrice") == null) {
+         resp.sendRedirect("cart");//create cart servlet
+         return;
+        }
+        double amountDouble = Double.parseDouble(req.getParameter("totalPrice"));
+        HttpSession session = req.getSession();
+        BookTicketDAO bookTicketDao = new BookTicketDAO();
+//        int userId = (int) session.getAttribute("c_id");
+                
+        int bookTicketId =(int) session.getAttribute("bookId");
+>>>>>>> main
         
         String vnp_Version = "2.1.0";
         String vnp_Command = "pay";
         String orderType = "other";
+<<<<<<< HEAD
         long amount = Integer.parseInt(req.getParameter("amount"))*100;
         String bankCode = req.getParameter("bankCode");
         
         String vnp_TxnRef = Config.getRandomNumber(8);
+=======
+        
+        long amount = (long) (amountDouble * 100);
+        String vnp_TxnRef = bookTicketId+"";//dky ma rieng
+>>>>>>> main
         String vnp_IpAddr = Config.getIpAddress(req);
 
         String vnp_TmnCode = Config.vnp_TmnCode;
@@ -102,6 +133,7 @@ public class ajaxServlet extends HttpServlet {
         String vnp_SecureHash = Config.hmacSHA512(Config.secretKey, hashData.toString());
         queryUrl += "&vnp_SecureHash=" + vnp_SecureHash;
         String paymentUrl = Config.vnp_PayUrl + "?" + queryUrl;
+<<<<<<< HEAD
         com.google.gson.JsonObject job = new JsonObject();
         job.addProperty("code", "00");
         job.addProperty("message", "success");
@@ -110,4 +142,8 @@ public class ajaxServlet extends HttpServlet {
         resp.getWriter().write(gson.toJson(job));
     }
 
+=======
+        resp.sendRedirect(paymentUrl);
+    }
+>>>>>>> main
 }

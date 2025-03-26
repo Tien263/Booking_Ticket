@@ -9,13 +9,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%
+  
     String from = (String) request.getAttribute("from");
     String to = (String) request.getAttribute("to");
     String hour = (String) request.getAttribute("hour");
     String minute = (String) request.getAttribute("minute");
     String time = (String) request.getAttribute("time");
     String travelDate = request.getParameter("travelDate");
-
+   
     // Nếu `travelDate` chưa có giá trị, lấy ngày hiện tại
     if (travelDate == null || travelDate.isEmpty()) {
         java.util.Date today = new java.util.Date();
@@ -50,8 +51,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
+<<<<<<< HEAD
     <title>Kết quả tìm kiếm chuyến xe - Rotors</title>
     <link rel="shortcut icon" href="assets/images/logo/favourite_icon.png">
+=======
+    <title>Tìm tuyến xe - BusGo</title>
+    <link rel="shortcut icon" href="assets/images/logo/logo_01_1.png">
+>>>>>>> main
 
     <!-- fraimwork - css include -->
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
@@ -122,9 +128,15 @@
                 <div class="row align-items-center">
                     <div class="col-lg-7">
                         <ul class="header_contact_info ul_li clearfix">
+<<<<<<< HEAD
                             <li><i class="fal fa-envelope"></i> rotorsmail@email.com</li>
                             <li><i class="fal fa-phone"></i> +1-202-555-0156</li>
                         </ul>
+=======
+                                <li><i class="fal fa-envelope"></i> Busgo@email.com</li>
+                                <li><i class="fal fa-phone"></i> 0398 996 177</li>
+                            </ul>
+>>>>>>> main
                     </div>
                     <div class="col-lg-5">
                         <ul class="primary_social_links ul_li_right clearfix">
@@ -153,6 +165,7 @@
                             <nav class="main_menu clearfix">
                                 <ul class="ul_li_center clearfix">
                                     <li class="active has_child">
+<<<<<<< HEAD
                                         <a href="home.jsp">Home</a>
                                     </li>
                                     <li><a href="booking">Booking Ticket</a></li>
@@ -161,6 +174,16 @@
                                         <a href="contact.jsp">Contact Us</a>
                                     </li>
                                     <li><a href="employee_login.jsp">Employee Login</a></li>
+=======
+                                        <a href="home.jsp">Trang chủ</a>
+                                    </li>
+                                    <li><a href="booking">Đặt vé</a></li>
+                                    <li><a href="cuslistblog">Blog</a></li>
+                                    <li>
+                                        <a href="contact.jsp">Liên hệ</a>
+                                    </li>
+                                    <li><a href="employee_login.jsp">Nhân viên</a></li>
+>>>>>>> main
                                 </ul>
                             </nav>
                         </div>
@@ -231,7 +254,7 @@
                                 <% for (String province : provinces) { 
                                     boolean isSelected = (to != null && province.equals(to));
                                 %>
-                                <option value="<%= province %>" <%= isSelected ? "selected" : "" %>>
+                                <option value="<%=province%>" <%=isSelected ? "selected" : "" %>>
                                     <%= province %>
                                 </option>
                                 <% } %>
@@ -298,8 +321,8 @@
                             <li>Khoảng cách: <%= trip.getBrDistance() %> km</li>
                             <li>Biển hiệu: <%= trip.getV_id() %></li>
                         </ul>
-                        <form action="CheckCId" method="GET">
-                            <input type="hidden" name="c_id" value="<%= c_id %>">
+                        <form action="SeatURL" method="GET">
+                         
                             <input type="hidden" name="brId" value="<%= trip.getBrId() %>">
                             <input type="hidden" name="from" value="<%= trip.getBrFrom() %>">
                             <input type="hidden" name="to" value="<%= trip.getBrTo() %>">
@@ -331,13 +354,22 @@
                         <div class="col-lg-4 col-md-4 col-sm-12 col-sm-12">
                             <div class="footer_about" data-aos="fade-up" data-aos-delay="100">
                                 <div class="brand_logo mb_30">
+<<<<<<< HEAD
                                     <a href="index.html">
+=======
+                                    <a href="home.jsp">
+>>>>>>> main
                                         <img src="assets/images/logo/logo_01_1.png" srcset="assets/images/logo/logo_01_1.png 2x" alt="logo_not_found">
                                     </a>
                                 </div>
                                 <p class="mb_15">
+<<<<<<< HEAD
                                     BusGo is committed to providing a reliable and high-quality bus ticket booking service with transparent information, clear pricing, and dedicated customer support, ensuring your journey is always convenient and safe
                                 </p>
+=======
+                                    BusGo cam kết cung cấp dịch vụ đặt vé xe buýt đáng tin cậy và chất lượng cao với thông tin minh bạch, giá cả rõ ràng và hỗ trợ khách hàng tận tình, đảm bảo hành trình của bạn luôn thuận tiện và an toàn.
+                                <p>
+>>>>>>> main
                                 <div class="footer_useful_links mb_30">
                                     <ul class="ul_li_block clearfix">
 
@@ -371,6 +403,7 @@
 
                         <div class="col-lg-4 col-md-4 col-sm-12 col-sm-12">
                             <div class="footer_useful_links" data-aos="fade-up" data-aos-delay="300">
+<<<<<<< HEAD
                                 <h3 class="footer_widget_title">Information:</h3>
                                 <ul class="ul_li_block clearfix">
                                     <li><a href="#!"><i class="fal fa-angle-right"></i> Find a Car for Rent in the Nearest Location</a></li>
@@ -380,6 +413,14 @@
                                     <li><a href="#!"><i class="fal fa-angle-right"></i> Contact Us</a></li>
                                     <li><a href="#!"><i class="fal fa-angle-right"></i> Help Center</a></li>
                                     <li><a href="#!"><i class="fal fa-angle-right"></i> Privacy Police</a></li>
+=======
+                                <h3 class="footer_widget_title">Thông tin:</h3>
+                                <ul class="ul_li_block clearfix">
+                                    <li><a href="booking"><i class="fal fa-angle-right"></i> Find a Car for Rent in the Nearest Location</a></li>
+                                    <li><a href="contact.jsp"><i class="fal fa-angle-right"></i> Liên hệ với chúng tôi</a></li>
+                                    <li><a href="contact.jsp"><i class="fal fa-angle-right"></i> Trung tâm hỗ trợ</a></li>
+                                    <li><a href="policy.jsp"><i class="fal fa-angle-right"></i> Chính sách bảo mật</a></li>
+>>>>>>> main
                                 </ul>
                             </div>
                         </div>
@@ -391,7 +432,11 @@
                 <div class="container">
                     <div class="row align-items-center justify-content-lg-between">
                         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+<<<<<<< HEAD
                             <p class="copyright_text mb-0">Copyright © 2020. Rotors by <a class="author_links text-white" href="#!">Merkulove</a></p>
+=======
+                            <p class="copyright_text mb-0">Bản quyền © 2020. Được phát triển bởi <a class="author_links text-white" href="login.jsp">BusGo</a></p>
+>>>>>>> main
                         </div>
 
                         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">

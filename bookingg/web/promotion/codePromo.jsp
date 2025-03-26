@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <%-- 
     Document   : codePromo
     Created on : Feb 14, 2025, 2:00:30 PM
@@ -68,10 +69,85 @@
             </thead>
             <tbody>
                 <c:forEach var="promo" items="${promotions}">
+=======
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>All Promotions</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>All Promotions</h1>
+
+        <!-- Promotions By Date -->
+        <h2>Promotions By Date</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Discount (%)</th>
+                    <th>Quantity</th>
+                    <th>Employee ID</th>
+                    <th>Priority</th>
+                </tr>
+            </thead>
+            <tbody>
+                <c:forEach var="promo" items="${datePromotions}">
+                    <tr>
+                        <td>${promo.id}</td>
+                        <td>${promo.name}</td>
+                        <td>${promo.startDate}</td>
+                        <td>${promo.endDate}</td>
+                        <td>${promo.discount}</td>
+                        <td>${promo.quantity}</td>
+                        <td>
+                            <c:choose>
+                                <c:when test="${promo.eId != null}">${promo.eId}</c:when>
+                                <c:otherwise>N/A</c:otherwise>
+                            </c:choose>
+                        </td>
+                        <td>
+                            <c:choose>
+                                <c:when test="${promo.priority != null}">${promo.priority}</c:when>
+                                <c:otherwise>N/A</c:otherwise>
+                            </c:choose>
+                        </td>
+                    </tr>
+                </c:forEach>
+            </tbody>
+        </table>
+
+        <!-- Promotions By Code -->
+        <h2>Promotions By Code</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Code</th>
+                    <th>Discount (%)</th>
+                    <th>End Date</th>
+                    <th>Quantity</th>
+                    <th>Advertisement ID</th>
+                    <th>Employee ID</th>
+                    <th>Priority</th>
+                </tr>
+            </thead>
+            <tbody>
+                <c:forEach var="promo" items="${codePromotions}">
+>>>>>>> main
                     <tr>
                         <td>${promo.id}</td>
                         <td>${promo.name}</td>
                         <td>${promo.code}</td>
+<<<<<<< HEAD
                         <td>${promo.discount}%</td>
                         <td>${promo.endDate}</td>
                         <td>${promo.quantity}</td>
@@ -104,6 +180,66 @@
                                     <a href="deletePromotion?id=${promo.id}" class="btn btn-danger btn-sm"
                                        onclick="return confirm('Bạn có chắc chắn muốn xóa?');">Xóa</a>
                                 </c:otherwise>
+=======
+                        <td>${promo.discount}</td>
+                        <td>${promo.endDate}</td>
+                        <td>${promo.quantity}</td>
+                        <td>
+                            <c:choose>
+                                <c:when test="${promo.aId != null}">${promo.aId}</c:when>
+                                <c:otherwise>N/A</c:otherwise>
+                            </c:choose>
+                        </td>
+                        <td>
+                            <c:choose>
+                                <c:when test="${promo.eId != null}">${promo.eId}</c:when>
+                                <c:otherwise>N/A</c:otherwise>
+                            </c:choose>
+                        </td>
+                        <td>
+                            <c:choose>
+                                <c:when test="${promo.priority != null}">${promo.priority}</c:when>
+                                <c:otherwise>N/A</c:otherwise>
+                            </c:choose>
+                        </td>
+                    </tr>
+                </c:forEach>
+            </tbody>
+        </table>
+
+        <!-- Promotions By Passengers -->
+        <h2>Promotions By Passengers</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Discount (%)</th>
+                    <th>Min Tickets</th>
+                    <th>Min Points</th>
+                    <th>Employee ID</th>
+                    <th>Priority</th>
+                </tr>
+            </thead>
+            <tbody>
+                <c:forEach var="promo" items="${passengerPromotions}">
+                    <tr>
+                        <td>${promo.id}</td>
+                        <td>${promo.name}</td>
+                        <td>${promo.discount}</td>
+                        <td>${promo.minTickets}</td>
+                        <td>${promo.minPoints}</td>
+                        <td>
+                            <c:choose>
+                                <c:when test="${promo.eId != null}">${promo.eId}</c:when>
+                                <c:otherwise>N/A</c:otherwise>
+                            </c:choose>
+                        </td>
+                        <td>
+                            <c:choose>
+                                <c:when test="${promo.priority != null}">${promo.priority}</c:when>
+                                <c:otherwise>N/A</c:otherwise>
+>>>>>>> main
                             </c:choose>
                         </td>
                     </tr>
@@ -111,6 +247,7 @@
             </tbody>
         </table>
     </div>
+<<<<<<< HEAD
 
     <!-- Modal Thêm Mã Giảm Giá -->
     <div class="modal fade" id="addCodeModal" tabindex="-1" aria-labelledby="addCodeModalLabel" aria-hidden="true">
@@ -193,3 +330,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+=======
+</body>
+</html>
+>>>>>>> main
