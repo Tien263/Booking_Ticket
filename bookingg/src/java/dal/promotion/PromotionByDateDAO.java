@@ -112,8 +112,6 @@ public class PromotionByDateDAO extends DBContext<Promotions_By_Date>{
         return null;
     }
     
-<<<<<<< HEAD
-=======
     
     public ArrayList<Promotions_By_Date> list1() {
         ArrayList<Promotions_By_Date> list = new ArrayList<>();
@@ -140,5 +138,4 @@ public class PromotionByDateDAO extends DBContext<Promotions_By_Date>{
         return list;
     }
     
->>>>>>> main
 }

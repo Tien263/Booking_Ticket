@@ -121,61 +121,9 @@
                             </div>
                         </form>
                     </div>
-<<<<<<< HEAD
-=======
-                </header>
-                <!-- Breadcrumb -->
-                <nav>
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">Trang Chủ</a></li>
-                        <li class="breadcrumb-item"><a href="BusRouteURL?service=listOfAll">Quản lý tuyến xe</a></li>
-                        <li class="breadcrumb-item active">Thêm tuyến Xe</li>
-                    </ol>
-                </nav>
-                <div class="card p-4">
-                    <form action="BusRouteURL" method="get">
-                        <input type="hidden" name="service" value="insert">
-                        <div class="row g-3">
-                            <div class="col-md-6">
-                                <label for="br_id" class="form-label">Mã Tuyến</label>
-                                <input type="text" class="form-control" id="br_id" name="br_id" readonly>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="br_from" class="form-label">Điểm đi</label>
-                                <input type="text" class="form-control" id="br_from" name="br_from" required>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="br_to" class="form-label">Điểm đến</label>
-                                <input type="text" class="form-control" id="br_to" name="br_to" required>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="br_price" class="form-label">Giá</label>
-                                <input type="text" class="form-control" id="br_price" name="br_price" required>
-                            </div>
-
-                            <div class="col-md-6">
-                                <label for="br_distance" class="form-label">Khoảng Cách (km)</label>
-                                <input type="text" class="form-control" id="br_distance" name="br_distance" >
-                            </div>
-                            <div class="col-md-6">
-                                <label for="br_description" class="form-label">Mô tả</label>
-                                <input type="text" class="form-control" id="br_description" name="br_description" required>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="br_status" class="form-label">Trạng thái</label>
-                                <input type="text" class="form-control" id="br_status" name="br_status" value="active" readonly>
-                            </div>
-                        </div>
-                        <div class="mt-4">
-                            <button type="submit" name="submit" class="btn btn-success">Thêm tuyến xe</button>
-                            <button type="reset" class="btn btn-secondary">Clear</button>
-                        </div>
-                    </form>
->>>>>>> main
                 </div>
             </main>
         </div>
-<<<<<<< HEAD
         <script>
             // Toggle danh sách Tuyến Xe
             document.getElementById("toggleBusRoute").addEventListener("click", function (event) {
@@ -202,9 +150,6 @@
             });
         </script>
 
-=======
-        <script src="assets/js/bootstrap.bundle.min.js"></script>
->>>>>>> main
     </body>
 </html>
 

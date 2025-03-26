@@ -288,9 +288,9 @@ public class BookTicketDAO extends DBContext {
                 + "WHERE bt.bt_id = ?";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setInt(1, bookingId);
-            try (ResultSet rs = ps.executeQuery()){ 
-                while(rs.next()) {
-                     BookTicket bookTicket = new BookTicket(
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    BookTicket bookTicket = new BookTicket(
                             rs.getInt("t_id"),
                             rs.getString("c_fullname"),
                             rs.getString("c_phone"),
@@ -301,16 +301,16 @@ public class BookTicketDAO extends DBContext {
                             rs.getString("s_name"),
                             rs.getFloat("br_price")
                     );
-                      tickets.add(bookTicket);
+                    tickets.add(bookTicket);
                 }
             }
-        
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
 
-            return tickets;
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+
+        return tickets;
+    }
 
     @Override
     public void insert(Object entity) {

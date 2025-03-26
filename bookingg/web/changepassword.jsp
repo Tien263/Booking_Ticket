@@ -8,13 +8,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-<<<<<<< HEAD
-        <title>Change Password - Rotors - Car Rental HTML5 Template</title>
-        <link rel="shortcut icon" href="assets/images/logo/favourite_icon.png">
-=======
         <title>Change Password</title>
         <link rel="shortcut icon" href="assets/images/logo/logo_01_1.png">
->>>>>>> main
 
         <!-- fraimwork - css include -->
         <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
@@ -106,15 +101,9 @@
 
                         <div class="col-lg-3 col-md-6 col-sm-6 col-6 order-last">
                             <ul class="header_action_btns ul_li_right clearfix">
-<<<<<<< HEAD
-                                
-                                <li class="dropdown">
-                                    
-=======
 
                                 <li class="dropdown">
 
->>>>>>> main
                                     <div class="cart_dropdown rotors_dropdown dropdown-menu" aria-labelledby="cart_dropdown">
                                         <h4 class="wrap_title">Cart Items: (3)</h4>
                                         <ul class="cart_items_list ul_li_block clearfix">
@@ -186,50 +175,6 @@
                             <nav class="main_menu clearfix">
                                 <ul class="ul_li_center clearfix">
                                     <li class="active has_child">
-<<<<<<< HEAD
-                                        <a href="#!">Home</a>
-                                        <ul class="submenu">
-                                            <li><a href="index_1.html">Home Page V.1</a></li>
-                                            <li><a href="index_2.html">Home Page V.2</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="gallery.html">Our Cars</a></li>
-                                    <li><a href="review.html">Reviews</a></li>
-                                    <li><a href="about.html">About</a></li>
-                                    <li class="has_child">
-                                        <a href="#!">Pages</a>
-                                        <ul class="submenu">
-                                            <li><a href="service.html">Our Service</a></li>
-                                            <li><a href="gallery.html">Car Gallery</a></li>
-                                            <li><a href="account.html">My Account</a></li>
-                                            <li><a href="reservation.html">Reservation</a></li>
-                                            <li class="has_child">
-                                                <a href="#!">Blogs</a>
-                                                <ul class="submenu">
-                                                    <li><a href="blog.html">Blog</a></li>
-                                                    <li><a href="blog_details.html">Blog Details</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="has_child">
-                                                <a href="#!">Our Cars</a>
-                                                <ul class="submenu">
-                                                    <li><a href="car.html">Cars</a></li>
-                                                    <li><a href="car_details.html">Car Details</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="cart.html">Shopping Cart</a></li>
-                                            <li><a href="faq.html">F.A.Q.</a></li>
-                                            <li><a href="login.html">Login</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="has_child">
-                                        <a href="#!">Contact Us</a>
-                                        <ul class="submenu">
-                                            <li><a href="contact.html">Contact Default</a></li>
-                                            <li><a href="contact_wordwide.html">Contact Wordwide</a></li>
-                                        </ul>
-                                    </li>
-=======
                                         <a href="home.jsp">Trang chủ</a>
                                     </li>
                                     <li><a href="booking">Đặt vé</a></li>
@@ -238,7 +183,6 @@
                                         <a href="contact.jsp">Liên hệ</a>
                                     </li>
                                     <li><a href="employee_login.jsp">Nhân viên</a></li>
->>>>>>> main
                                 </ul>
                             </nav>
                         </div>
@@ -273,11 +217,7 @@
                             </a>
                         </div>
                         <p class="mb-0">
-<<<<<<< HEAD
-                            Nullam id dolor auctor, dignissim magna eu, mattis ante. Pellentesque tincidunt, elit a facilisis efficitur, nunc nisi scelerisque enim, rhoncus malesuada est velit a nulla. Cras porta mi vitae dolor tristique euismod. Lorem ipsum dolor sit amet, consectetur adipiscing elit
-=======
                             BusGo cam kết cung cấp dịch vụ đặt vé xe buýt đáng tin cậy và chất lượng cao với thông tin minh bạch, giá cả rõ ràng và hỗ trợ khách hàng tận tình, đảm bảo hành trình của bạn luôn thuận tiện và an toàn.
->>>>>>> main
                         </p>
                     </div>
                     <div class="menu_list mb_60 clearfix">
@@ -331,10 +271,6 @@
                     <div class="booking_car_form">
                         <h3 class="title_text text-white mb-2">Book A Car</h3>
                         <p class="mb_15">
-<<<<<<< HEAD
-                            Nullam id dolor auctor, dignissim magna eu, mattis ante. Pellentesque tincidunt, elit a facilisis efficitur.
-=======
->>>>>>> main
                         </p>
                         <form action="#">
                             <div class="form_item">
@@ -472,17 +408,10 @@
                                     </a>
                                 </div>
                                 <p class="mb_15">
-<<<<<<< HEAD
-                                    BusGo is committed to providing a reliable and high-quality bus ticket booking service with transparent information, clear pricing, and dedicated customer support, ensuring your journey is always convenient and safe
-                                </p>
-                                <div class="footer_useful_links mb_30">
-                                    
-=======
                                     BusGo cam kết cung cấp dịch vụ đặt vé xe buýt đáng tin cậy và chất lượng cao với thông tin minh bạch, giá cả rõ ràng và hỗ trợ khách hàng tận tình, đảm bảo hành trình của bạn luôn thuận tiện và an toàn.
                                 </p>
                                 <div class="footer_useful_links mb_30">
 
->>>>>>> main
                                 </div>
                                 <div class="form_item mb-0">
                                     <form action="#">
@@ -512,24 +441,12 @@
 
                         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                             <div class="footer_useful_links" data-aos="fade-up" data-aos-delay="300">
-<<<<<<< HEAD
-                                <h3 class="footer_widget_title">Information:</h3>
-                                <ul class="ul_li_block clearfix">
-                                    <li><a href="#!"><i class="fal fa-angle-right"></i> Find a Car for Rent in the Nearest Location</a></li>
-                                    <li><a href="#!"><i class="fal fa-angle-right"></i> Cars Catalog</a></li>
-                                    <li><a href="#!"><i class="fal fa-angle-right"></i> F.A.Q.</a></li>
-                                    <li><a href="#!"><i class="fal fa-angle-right"></i> About Us</a></li>
-                                    <li><a href="#!"><i class="fal fa-angle-right"></i> Contact Us</a></li>
-                                    <li><a href="#!"><i class="fal fa-angle-right"></i> Help Center</a></li>
-                                    <li><a href="#!"><i class="fal fa-angle-right"></i> Privacy Police</a></li>
-=======
                                 <h3 class="footer_widget_title">Thông tin:</h3>
                                 <ul class="ul_li_block clearfix">
                                     <li><a href="booking"><i class="fal fa-angle-right"></i> Find a Car for Rent in the Nearest Location</a></li>
                                     <li><a href="contact.jsp"><i class="fal fa-angle-right"></i> Liên hệ với chúng tôi</a></li>
                                     <li><a href="contact.jsp"><i class="fal fa-angle-right"></i> Trung tâm hỗ trợ</a></li>
                                     <li><a href="policy.jsp"><i class="fal fa-angle-right"></i> Chính sách bảo mật</a></li>
->>>>>>> main
                                 </ul>
                             </div>
                         </div>
@@ -541,11 +458,7 @@
                 <div class="container">
                     <div class="row align-items-center justify-content-lg-between">
                         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-<<<<<<< HEAD
-                            <p class="copyright_text mb-0">Copyright © 2020. Rotors by <a class="author_links text-white" href="#!">Merkulove</a></p>
-=======
                             <p class="copyright_text mb-0">Bản quyền © 2020. Được phát triển bởi <a class="author_links text-white" href="login.jsp">BusGo</a></p>
->>>>>>> main
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                             <ul class="primary_social_links ul_li_right clearfix">

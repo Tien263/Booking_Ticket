@@ -24,8 +24,6 @@ public class Customer {
     public Customer() {
     }
 
-<<<<<<< HEAD
-=======
     public String getMembershipLevel() {
         return membershipLevel;
     }
@@ -58,7 +56,6 @@ public class Customer {
 
     
     
->>>>>>> main
     public Customer(int id, String email, String fullname, String phone, String address, boolean gender, String username, String password) {
         this.id = id;
         this.email = email;

@@ -6,17 +6,6 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<<<<<<< HEAD
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Xác nhận Đặt Vé</title>     
-    </head>
-    <body>
-        <h2>Thông tin vé của bạn</h2>
-        <table border="1"> <!-- Table in ra vé -->
-=======
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html lang="vi">
@@ -72,17 +61,12 @@
     <body>
         <h2>Thông tin vé của bạn</h2>
         <table border="1"> <!-- Bảng in ra vé -->
->>>>>>> main
             <tr>
                 <th>Mã vé</th>
                 <th>Tên khách hàng</th>
                 <th>Số điện thoại</th>
                 <th>Ngày đặt vé</th>
-<<<<<<< HEAD
-                <th>Địa Điểm </th>
-=======
                 <th>Địa điểm</th>
->>>>>>> main
                 <th>Thời gian</th>
                 <th>Ghế</th>
                 <th>Giá</th>
@@ -99,23 +83,6 @@
 
             <c:forEach var="ticket" items="${bookedTickets}">
                 <tr>
-<<<<<<< HEAD
-                    <td>${ticket.getT_id()}</td>
-                    <td>${ticket.getC_fullname()}</td>
-                    <td>${ticket.getC_phone()}</td>
-                    <td>${ticket.getBt_bookingDate()}</td>
-                    <td>${ticket.getBr_adress()}</td>
-                    <td>${ticket.getBt1_time()}</td>
-                    <td>${ticket.getS_name()}</td>
-                    <td>${ticket.getBr_price()} VNĐ</td>
-                </tr>
-            </c:forEach>
-        </table>
-        <br>
-        <a href="search_results.jsp">Đặt vé mới</a>
-    </body>
-</html>
-=======
                     <td>${ticket.t_id}</td>
                     <td>${ticket.c_fullname}</td>
                     <td>${ticket.c_phone}</td>
@@ -162,4 +129,3 @@
         </form>
     </body>
 </html>
->>>>>>> main

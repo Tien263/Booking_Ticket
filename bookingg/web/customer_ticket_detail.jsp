@@ -246,12 +246,15 @@
 
                     <!-- Cột thông tin khách hàng -->
                     <div class="flex-1">
-                        <h3 class="text-lg font-bold text-gray-800 mb-2">
+<!--                        <h3 class="text-lg font-bold text-gray-800 mb-2">
                             <%= ticket.getCustomerName() %>
-                        </h3>
+                        </h3>-->
                         <div class="space-y-2 border-b pb-3">
                             <p class="text-gray-700">
                                 <strong class="text-gray-900">Ngày mua vé:</strong> <%= ticket.getPurchaseDate() %>
+                            </p>
+                            <p class="text-gray-700">
+                                <strong class="text-gray-900">Ghế:</strong> <%= ticket.getSeatName() %>
                             </p>
                             <p class="text-gray-700">
                                 <strong class="text-gray-900">Biển số:</strong> <%= ticket.getLicensePlate() %>
