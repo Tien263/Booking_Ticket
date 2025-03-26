@@ -12,7 +12,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Thanh toan</title>
+        <title>Thanh toán</title>
         <link rel="shortcut icon" href="assets/images/logo/favourite_icon.png">
         <!-- fraimwork - css include -->
         <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
@@ -135,12 +135,20 @@
                         </div>
                     </div>
                 </div>
+            </div>
         </header>
         <!-- header_section - end -->
+
         <main class="flex items-center justify-center min-h-screen bg-gray-100">
             <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
                 <h1 class="text-3xl font-bold mb-6 text-center text-green-600">Thông tin đặt vé</h1>
-                <form action="BookTicketURL" method="get">
+                <!-- Hiển thị thông báo lỗi nếu có -->
+                <c:if test="${not empty error}">
+                    <div class="mb-4 text-red-600 text-center">
+                        ${error}
+                    </div>
+                </c:if>
+                <form action="BookTicketURL" method="post">
                     <div class="mb-4">
                         <span class="font-semibold text-gray-700">Điểm đi:</span> <span class="text-gray-900"><%= session.getAttribute("from") %></span>
                     </div>
@@ -154,17 +162,39 @@
                         <span class="font-semibold text-gray-700">Thời gian đến:</span> <span class="text-gray-900"><%= session.getAttribute("arrivalTime") %></span>
                     </div>
                     <div class="mb-4">
+                        <span class="font-semibold text-gray-700">Số lượng vé:</span> <span class="text-gray-900">${seatNames.size()}</span>
+                    </div>
+                    <div class="mb-4">
                         <span class="font-semibold text-gray-700">Ghế đã chọn:</span>
                         <ul class="list-disc list-inside text-gray-900">
                             <c:forEach var="seatName" items="${seatNames}">
                                 <li>${seatName}</li>
-                                </c:forEach>
+                            </c:forEach>
                         </ul>
                     </div>
-                    <div class="mb-6">
-                        <span class="font-semibold text-gray-700">Tổng giá:</span> <span class="text-gray-900"><%= session.getAttribute("totalPrice") %> VNĐ</span>
+                    <div class="mb-4">
+                        <span class="font-semibold text-gray-700">Tổng giá:</span> 
+                        <span class="text-gray-900">
+                            <c:choose>
+                                <c:when test="${not empty totalPriceAfterDiscount}">
+                                    ${totalPrice} VNĐ
+                                </c:when>
+                                <c:otherwise>
+                                    ${totalPrice} VNĐ
+                                </c:otherwise>
+                            </c:choose>
+                        </span>
                     </div>
-                    <button class="w-full bg-green-500 text-white py-2 rounded-lg hover:bg-green-600 transition duration-300">
+                    <!-- Trường nhập mã khuyến mãi -->
+                    <div class="mb-4">
+                        <label for="promoCode" class="font-semibold text-gray-700">Mã khuyến mãi:</label>
+                        <input type="text" id="promoCode" name="promoCode" class="w-full p-2 border rounded-lg" placeholder="Nhập mã khuyến mãi">
+                    </div>
+                    <!-- Liên kết đến danh sách khuyến mãi -->
+                    <div class="mb-4">
+                        <a href="promotions" class="text-blue-500 hover:underline">Xem danh sách khuyến mãi</a>
+                    </div>
+                    <button type="submit" class="w-full bg-green-500 text-white py-2 rounded-lg hover:bg-green-600 transition duration-300">
                         <i class="fas fa-credit-card mr-2"></i> Thanh toán
                     </button>
                 </form>

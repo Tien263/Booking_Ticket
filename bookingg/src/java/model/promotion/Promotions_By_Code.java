@@ -17,10 +17,27 @@ public class Promotions_By_Code {
     private double discount;
     private Date endDate;
     private int quantity;
+    private Integer aId; // Liên kết với bảng Advertise, có thể null
+    private Integer eId; // Liên kết với bảng Employee, có thể null
+    private Integer priority; // Có thể null
 
+    
+    
     public Promotions_By_Code() {
     }
 
+    public Promotions_By_Code(int id, String name, String code, double discount, Date endDate, int quantity, Integer aId, Integer eId, Integer priority) {
+        this.id = id;
+        this.name = name;
+        this.code = code;
+        this.discount = discount;
+        this.endDate = endDate;
+        this.quantity = quantity;
+        this.aId = aId;
+        this.eId = eId;
+        this.priority = priority;
+    }
+    
     public Promotions_By_Code(int id, String name, String code, double discount, Date endDate, int quantity) {
         this.id = id;
         this.name = name;
@@ -30,6 +47,32 @@ public class Promotions_By_Code {
         this.quantity = quantity;
     }
 
+    public Integer getaId() {
+        return aId;
+    }
+
+    public void setaId(Integer aId) {
+        this.aId = aId;
+    }
+
+    public Integer geteId() {
+        return eId;
+    }
+
+    public void seteId(Integer eId) {
+        this.eId = eId;
+    }
+
+    public Integer getPriority() {
+        return priority;
+    }
+
+    public void setPriority(Integer priority) {
+        this.priority = priority;
+    }
+
+    
+    
     public String getName() {
         return name;
     }
@@ -80,5 +123,19 @@ public class Promotions_By_Code {
         this.endDate = endDate;
     }
     
+   @Override
+    public String toString() {
+        return "Promotions_By_Code{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", code='" + code + '\'' +
+                ", discount=" + discount +
+                ", endDate=" + endDate +
+                ", quantity=" + quantity +
+                ", aId=" + aId +
+                ", eId=" + eId +
+                ", priority=" + priority +
+                '}';
+    }
     
 }

@@ -5,6 +5,7 @@
 package dal.bookTicket;
 
 import dal.*;
+import dal.promotion.PromotionByCodeDAO;
 import model.bookTicket.BookTicket;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -12,6 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.*;
 
 /**
  *
@@ -19,6 +21,82 @@ import java.util.List;
  */
 public class BookTicketDAO extends DBContext {
 
+    /**
+     * Cập nhật tổng số tiền và mã khuyến mãi cho BookTicket, đồng thời giảm số lượng mã khuyến mãi.
+     *
+     * @param btId ID của BookTicket
+     * @param newTotalAmount tổng số tiền mới
+     * @param pbcId ID của mã khuyến mãi
+     * @param promoDAO đối tượng PromotionByCodeDAO để giảm số lượng mã khuyến mãi
+     * @return true nếu cập nhật thành công, false nếu thất bại
+     */
+    public boolean applyPromotion(int btId, double newTotalAmount, Integer pbcId, PromotionByCodeDAO promoDAO) {
+        String sqlUpdateBookTickets = "UPDATE BookTickets SET bt_totalAmount = ?, pbc_id = ? WHERE bt_id = ?";
+
+        try {
+            connection.setAutoCommit(false);
+
+            // Cập nhật BookTickets
+            try (PreparedStatement psUpdate = connection.prepareStatement(sqlUpdateBookTickets)) {
+                psUpdate.setDouble(1, newTotalAmount);
+                if (pbcId != null) {
+                    psUpdate.setInt(2, pbcId);
+                } else {
+                    psUpdate.setNull(2, Types.INTEGER);
+                }
+                psUpdate.setInt(3, btId);
+                int rowsAffected = psUpdate.executeUpdate();
+                if (rowsAffected <= 0) {
+                    throw new SQLException("Không thể cập nhật tổng số tiền và mã khuyến mãi.");
+                }
+            }
+
+            // Giảm số lượng mã khuyến mãi
+            boolean quantityDecreased = promoDAO.decreasePromotionQuantity(pbcId);
+            if (!quantityDecreased) {
+                throw new SQLException("Không thể giảm số lượng mã khuyến mãi.");
+            }
+
+            connection.commit();
+            return true;
+
+        } catch (SQLException e) {
+            try {
+                connection.rollback();
+            } catch (SQLException rollbackEx) {
+                System.out.println("Hoàn tác thất bại: " + rollbackEx);
+            }
+            System.out.println("Lỗi: " + e);
+            return false;
+
+        } finally {
+            try {
+                connection.setAutoCommit(true);
+            } catch (SQLException closeEx) {
+                System.out.println("Lỗi khi đặt lại auto-commit: " + closeEx);
+            }
+        }
+    }
+    
+    // Update the total amount and pbc_id for a BookTicket
+    public boolean updateTotalAmountAndPromotion(int btId, double newTotalAmount, Integer pbcId) {
+        String sql = "UPDATE BookTickets SET bt_totalAmount = ?, pbc_id = ? WHERE bt_id = ?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setDouble(1, newTotalAmount);
+            if (pbcId != null) {
+                ps.setInt(2, pbcId);
+            } else {
+                ps.setNull(2, Types.INTEGER);
+            }
+            ps.setInt(3, btId);
+            int rowsAffected = ps.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
     public int insertBookTicket(BookTicket bookTicket) {
         String sql = "INSERT INTO [dbo].[BookTickets]\n"
                 + "           ([c_id]\n"
@@ -26,17 +104,17 @@ public class BookTicketDAO extends DBContext {
                 + "     VALUES\n"
                 + "           (?,?)";
         try {
-            PreparedStatement st = connection.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement st = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             st.setInt(1, bookTicket.getBt_id());
             st.setDouble(2, bookTicket.getTotalAmount());
-            int affectedRows =st.executeUpdate();
-            if(affectedRows == 0){
-                throw  new SQLException("Create payment failed, no rows affected.");
+            int affectedRows = st.executeUpdate();
+            if (affectedRows == 0) {
+                throw new SQLException("Create payment failed, no rows affected.");
             }
-            try (ResultSet generatedKeys = st.getGeneratedKeys()){
-                if(generatedKeys.next()){
+            try (ResultSet generatedKeys = st.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
                     return generatedKeys.getInt(1);
-                }else{
+                } else {
                     throw new SQLException("Creating payment failed, no ID obtained.");
                 }
             }
@@ -44,22 +122,74 @@ public class BookTicketDAO extends DBContext {
             System.out.println(e);
             return 1;
         }
-                
+
     }
 
+//    public boolean updateStatus(BookTicket bt) {
+//        String sql = "UPDATE [dbo].[BookTickets]\n"
+//                + "   SET [bt_status] = ?\n"
+//                + " WHERE [bt_id] = ?";
+//        try {
+//            PreparedStatement st = connection.prepareStatement(sql);
+//            st.setString(1, bt.getBt_status());
+//            st.setInt(2, bt.getBt_id());
+//            return st.executeUpdate() > 0;
+//        } catch (SQLException e) {
+//            System.out.println(e);
+//        }
+//        return false;
+//    }
     public boolean updateStatus(BookTicket bt) {
-        String sql = "UPDATE [dbo].[BookTickets]\n"
+        String sqlBookTickets = "UPDATE [dbo].[BookTickets]\n"
                 + "   SET [bt_status] = ?\n"
                 + " WHERE [bt_id] = ?";
+
+        String sqlTickets = "UPDATE [dbo].[Tickets]\n"
+                + "   SET [t_status] = 'confirmed'\n"
+                + " WHERE [bt_id] = ? AND [t_status] = 'pending'";
+
+        PreparedStatement stBookTickets = null;
+        PreparedStatement stTickets = null;
+
         try {
-            PreparedStatement st = connection.prepareStatement(sql);
-            st.setString(1, bt.getBt_status());
-            st.setInt(2, bt.getBt_id());
-            return st.executeUpdate() > 0;
+            connection.setAutoCommit(false);
+
+            stBookTickets = connection.prepareStatement(sqlBookTickets);
+            stBookTickets.setString(1, bt.getBt_status());
+            stBookTickets.setInt(2, bt.getBt_id());
+            int bookTicketsUpdated = stBookTickets.executeUpdate();
+
+            if (bookTicketsUpdated > 0) {
+                stTickets = connection.prepareStatement(sqlTickets);
+                stTickets.setInt(1, bt.getBt_id());
+                stTickets.executeUpdate();
+            }
+
+            connection.commit();
+            return bookTicketsUpdated > 0;
+
         } catch (SQLException e) {
-            System.out.println(e);
+            try {
+                connection.rollback();
+            } catch (SQLException rollbackEx) {
+                System.out.println("Rollback failed: " + rollbackEx);
+            }
+            System.out.println("Error: " + e);
+            return false;
+
+        } finally {
+            try {
+                if (stBookTickets != null) {
+                    stBookTickets.close();
+                }
+                if (stTickets != null) {
+                    stTickets.close();
+                }
+                connection.setAutoCommit(true);
+            } catch (SQLException closeEx) {
+                System.out.println("Error closing resources: " + closeEx);
+            }
         }
-        return false;
     }
 
     public int createAndBookTickets(int userId, List<Integer> seatIds, int tripId, double totalAmount) {

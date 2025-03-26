@@ -18,12 +18,29 @@ public abstract class DBContext<T> {
             String url = "jdbc:sqlserver://localhost:1433;databaseName=PROJECTV01;trustServerCertificate=true;";
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             connection = DriverManager.getConnection(url, user, pass);
+            if (connection == null) {
+                throw new SQLException("Không thể thiết lập kết nối đến cơ sở dữ liệu.");
+            }
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(DBContext.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DBContext.class.getName()).log(Level.SEVERE, "Không tìm thấy driver SQL Server.", ex);
+            throw new RuntimeException("Không thể tải driver SQL Server.", ex);
         } catch (SQLException ex) {
-            Logger.getLogger(DBContext.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DBContext.class.getName()).log(Level.SEVERE, "Không thể kết nối đến cơ sở dữ liệu.", ex);
+            throw new RuntimeException("Không thể kết nối đến cơ sở dữ liệu.", ex);
         }
+    }
 
+    /**
+     * Lấy kết nối đến cơ sở dữ liệu.
+     *
+     * @return đối tượng Connection
+     * @throws SQLException nếu kết nối không tồn tại
+     */
+    public Connection getConnection() throws SQLException {
+        if (connection == null || connection.isClosed()) {
+            throw new SQLException("Kết nối đến cơ sở dữ liệu không tồn tại hoặc đã bị đóng.");
+        }
+        return connection;
     }
 
     public abstract void insert(T entity);
