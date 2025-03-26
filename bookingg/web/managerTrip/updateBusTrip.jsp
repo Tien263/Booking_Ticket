@@ -131,7 +131,6 @@
                                 <label for="bt1_status" class="form-label">Trạng thái</label>
                                 <select class="form-select" id="bt1_status" name="bt1_status">
                                     <option value="<%=busTrips.getBt1_status()%>"><%=busTrips.getBt1_status()%></option>
-                                    <option value="pending">pending</option>
                                     <option value="active">active</option>
                                     <option value="inactive">inactive</option>
                                     <option value="complete">complete</option>

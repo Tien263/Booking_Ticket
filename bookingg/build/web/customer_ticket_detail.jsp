@@ -165,7 +165,6 @@
                                 <ul class="ul_li_center clearfix">
                                     <li><a href="home.jsp">Home</a></li>
                                     <li><a href="booking">Booking Ticket</a></li>
-                                    <li  class="active has_child"><a href="CustomerTicketURL?service=listOfAll">Ticket History</a></li>
                                     <li><a href="cuslistblog">Blog</a></li>
                                     <li>
                                         <a href="contact.jsp">Contact Us</a>
@@ -270,20 +269,8 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Nút Cancel -->
-                <div class="flex justify-end mt-4 space-x-2">
-                    <a href="CustomerTicketURL?service=listOfAll" 
-                       class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-                        Trở lại
-                    </a>
-                    <a href="CustomerTicketURL?service=cancel&t_id=<%= ticket.getTicketID() %>" 
-                       class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
-                        Hủy vé
-                    </a>
-                </div>
             </div>
-            <% } %>
+            <% } %>     
             <div class="pagination">
                 <c:if test="${currentPage > 1}">
                     <a href="CustomerTicketURL?service=detail&page=${currentPage - 1}" class="page-link prev">Trang trước</a>

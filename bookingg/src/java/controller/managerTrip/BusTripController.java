@@ -165,10 +165,6 @@ public class BusTripController extends HttpServlet {
                 params.add((page - 1) * recordsPerPage); // OFFSET
                 params.add(recordsPerPage); // FETCH NEXT
 
-                // **Ghi log SQL để debug**
-                System.out.println("Final SQL: " + sql);
-                System.out.println("Params: " + params);
-
                 // **Lấy danh sách chuyến xe**
                 ArrayList<BusTrips> list = dao.list(sql, params);
 

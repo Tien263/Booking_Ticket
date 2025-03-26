@@ -133,7 +133,7 @@
                         ${message}
                     </div>
                 </c:if>
-                <div class="card p-4">
+                <div class="card p-4 mb-4">
                     <form action="TicketURL" method="get" class="form-inline mb-3">
                         <input type="hidden" name="service" value="listOfAll">                        
                         <label class="mr-2" for="br_from">Điểm đi:</label>

@@ -3,7 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/ProjectSWp/Github/Booking_Ticket/bookingg/src/java/dal/ticket/TicketDAO.java</file>
+            <file>file:/D:/ProjectSWp/Github/Booking_Ticket/bookingg/web/account.jsp</file>
+            <file>file:/D:/ProjectSWp/Github/Booking_Ticket/bookingg/web/customer_ticket.jsp</file>
+            <file>file:/D:/ProjectSWp/Github/Booking_Ticket/bookingg/web/customer_ticket_detail.jsp</file>
             <file>file:/D:/ProjectSWp/Github/Booking_Ticket/bookingg/src/java/controller/ticket/CustomerTicketController.java</file>
         </group>
     </open-files>

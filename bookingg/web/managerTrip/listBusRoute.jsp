@@ -80,7 +80,7 @@
                 <div class="text-center mb-4">
                     <img src="assets/images/logo/logo_01_1.png" srcset="assets/images/logo/logo_01_1.png 2x" alt="logo_not_found">
                     <h4 class="mt-2">BusGo</h4>
-                </div>
+                </div>              
                 <ul class="nav flex-column">
                     <!-- Quản lý vé Xe -->
                     <li class="nav-item">
@@ -119,7 +119,8 @@
             <main class="col-md-10 ml-sm-auto px-4">
                 <div class="d-flex justify-content-between align-items-center py-3">
                     <h2>Danh Sách Tuyến Xe</h2>
-                </div>
+                    <li><a href="logout"><i class="fal fa-sign-out"></i> Logout</a></li>    
+                </div>                    
                 <nav>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="#">Trang Chủ</a></li>
@@ -132,7 +133,7 @@
                         ${message}
                     </div>
                 </c:if>
-                <div class="card p-4">
+                <div class="card p-4 mb-4">
                     <form action="BusRouteURL" method="get" class="form-inline mb-3">
                         <input type="hidden" name="service" value="listOfAll"> 
                         <label class="mr-2" for="br_from">Điểm đi:</label>
@@ -148,7 +149,7 @@
                         <a href="BusRouteURL?service=insert" class="btn btn-success">+ Thêm tuyến xe</a>
                     </div>
 
-                    <table class="table table-bordered mt-4">
+                    <table class="table table-bordered">
                         <thead class="thead-dark">
                             <tr>
                                 <th>ID Tuyến</th>

@@ -84,12 +84,12 @@ public class BusTripDAO extends DBContext<BusTrips> {
 
     @Override
     public void delete(BusTrips busTrips) {
-        String sql = "UPDATE [dbo].[BusTrips] SET bt1_status = 'Inactive' WHERE bt1_id = ? AND bt1_status = 'Pending'";
+        String sql = "UPDATE [dbo].[BusTrips] SET bt1_status = 'Inactive' WHERE bt1_id = ? AND bt1_status = 'Active'";
         try (PreparedStatement pre = connection.prepareStatement(sql)) {
             pre.setInt(1, busTrips.getBt1_id());
             int affectedRows = pre.executeUpdate();
             if (affectedRows == 0) {
-                Logger.getLogger(BusTripDAO.class.getName()).log(Level.WARNING, "Không có chuyến xe nào ở trạng thái 'Pending' để hủy");
+                Logger.getLogger(BusTripDAO.class.getName()).log(Level.WARNING, "Không có chuyến xe nào ở trạng thái 'Active' để hủy");
             }
         } catch (SQLException e) {
             Logger.getLogger(BusTripDAO.class.getName()).log(Level.SEVERE, "Lỗi khi cập nhật trạng thái chuyến xe buýt", e);

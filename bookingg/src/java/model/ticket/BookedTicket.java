@@ -14,7 +14,7 @@ public class BookedTicket {
     private int btId;
     private String btStatus;
     private LocalDate btBookingDate;
-    private String btTicketNumber;
+    private int btTicketNumber;
     private Double btTotalAmount;
     private String cEmail;
     private String cFullname;
@@ -23,7 +23,7 @@ public class BookedTicket {
     public BookedTicket() {
     }
 
-    public BookedTicket(int btId, String btStatus, LocalDate btBookingDate, String btTicketNumber, Double btTotalAmount, String cEmail, String cFullname, String cPhone) {
+    public BookedTicket(int btId, String btStatus, LocalDate btBookingDate, int btTicketNumber, Double btTotalAmount, String cEmail, String cFullname, String cPhone) {
         this.btId = btId;
         this.btStatus = btStatus;
         this.btBookingDate = btBookingDate;
@@ -60,11 +60,11 @@ public class BookedTicket {
         this.btBookingDate = btBookingDate;
     }
 
-    public String getBtTicketNumber() {
+    public int getBtTicketNumber() {
         return btTicketNumber;
     }
 
-    public void setBtTicketNumber(String btTicketNumber) {
+    public void setBtTicketNumber(int btTicketNumber) {
         this.btTicketNumber = btTicketNumber;
     }
 

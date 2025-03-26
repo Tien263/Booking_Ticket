@@ -118,10 +118,11 @@
             <!--End-Sidebar -->
 
             <!-- Main Content -->
-            <div class="flex-grow-1 p-4">
-                <header class="d-flex justify-content-between align-items-center mb-4">
+            <div class="col-md-10 ml-sm-auto px-4">
+                <div class="d-flex justify-content-between align-items-center py-3">
                     <h2>Danh Sách Chuyến Xe</h2>
-                </header>
+                    <li><a href="logout"><i class="fal fa-sign-out"></i> Logout</a></li>    
+                </div>  
                 <nav>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="#">Trang Chủ</a></li>

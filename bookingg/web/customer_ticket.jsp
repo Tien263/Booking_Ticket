@@ -6,6 +6,8 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList, model.ticket.BookedTicket" %>
+<%@ page import="java.time.LocalDateTime, java.time.temporal.ChronoUnit" %>
+<%@ page import="java.time.LocalDate" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
     ArrayList<BookedTicket> tickets = (ArrayList<BookedTicket>) request.getAttribute("tickets");
@@ -236,7 +238,7 @@
                     <div class="flex flex-col">
                         <p>&nbsp;</p>
                         <p class="text-gray-600">
-                            Số vé: <%= ticket.getBtTotalAmount() %>
+                            Số vé: <%= ticket.getBtTicketNumber() %>
                         </p>
                         <p class="text-gray-600">
                             Trạng thái: <%= ticket.getBtStatus() %>
@@ -247,10 +249,20 @@
                            class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
                             Chi tiết vé
                         </a>
+                        <%
+                        LocalDate bookingLocalDate = ticket.getBtBookingDate();
+                        LocalDateTime bookingDate = bookingLocalDate.atStartOfDay(); // Thêm 00:00:00
+                        LocalDateTime currentDate = LocalDateTime.now();
+                        long daysDifference = ChronoUnit.DAYS.between(bookingDate, currentDate);
+                        if (!"confirmed".equals(ticket.getBtStatus()) 
+                        && !"cancelled".equals(ticket.getBtStatus()) 
+                        && daysDifference <= 1) { 
+                        %>
                         <a href="CustomerTicketURL?service=cancel&bt_id=<%= ticket.getBtId() %>" 
                            class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
                             Hủy vé
-                        </a>                          
+                        </a>
+                        <% } %>                     
                     </div>
                 </div>
             </div>  

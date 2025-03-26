@@ -115,7 +115,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label" for="bt1_status">Trạng thái</label>
-                                    <input type="text" class="form-control" id="bt1_status" name="bt1_status" value="pending" readonly>
+                                    <input type="text" class="form-control" id="bt1_status" name="bt1_status" value="active" readonly>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label" for="br_id">Mã Tuyến</label>
