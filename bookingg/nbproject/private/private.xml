@@ -3,11 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/ADMIN/Downloads/Booking_Ticket-main%20(7)/Booking_Ticket-main/bookingg/src/java/dal/CustomerDao.java</file>
-            <file>file:/C:/Users/ADMIN/Downloads/Booking_Ticket-main%20(7)/Booking_Ticket-main/bookingg/src/java/controller/accesscontrol/EmployeeLoginnController.java</file>
-            <file>file:/C:/Users/ADMIN/Downloads/Booking_Ticket-main%20(7)/Booking_Ticket-main/bookingg/src/java/controller/accesscontrol/CustomerLogin.java</file>
-            <file>file:/C:/Users/ADMIN/Downloads/Booking_Ticket-main%20(7)/Booking_Ticket-main/bookingg/src/java/MD5/BCrypt.java</file>
-            <file>file:/C:/Users/ADMIN/Downloads/Booking_Ticket-main%20(7)/Booking_Ticket-main/bookingg/src/java/controller/accesscontrol/RegisterController.java</file>
+            <file>file:/D:/DEMO_V1.0/bookingg/src/java/controller/forgotpass/otp/ResetPasswordCustomerController.java</file>
+            <file>file:/D:/DEMO_V1.0/bookingg/src/java/controller/forgotpass/otp/ForgotPasswordController.java</file>
+            <file>file:/D:/DEMO_V1.0/bookingg/web/blogdetail.jsp</file>
+            <file>file:/D:/DEMO_V1.0/bookingg/src/java/model/Email.java</file>
+            <file>file:/D:/DEMO_V1.0/bookingg/src/java/controller/forgotpass/otp/OTPVerificationController.java</file>
+            <file>file:/D:/DEMO_V1.0/bookingg/src/java/controller/accesscontrol/ChangePasswordController.java</file>
+            <file>file:/D:/DEMO_V1.0/bookingg/src/java/dal/CustomerDao.java</file>
         </group>
     </open-files>
 </project-private>

@@ -54,9 +54,10 @@ public class OTPVerificationController extends HttpServlet {
         OTP newotp = new OTP();
         newotp.setEmail(email);
         newotp.setOtp(otp);
-         if (action.equals("submitOTPReset")) {
+        
+        if (action.equals("submitOTPReset")) {
             OTPDBContext otpDB = new OTPDBContext();
-            if (otpDB.verifyOTP(email, otp)) {
+            if (otpDB.verifyOTP(email, otp)) { //Kiểm tra mã OTP 
                 // Cho phép truy cập vào reset password
                 session.setAttribute("allowReset", true);
                 session.removeAttribute("allowOTP"); // Xóa trạng thái OTP để tránh dùng lại
@@ -68,8 +69,11 @@ public class OTPVerificationController extends HttpServlet {
                 request.setAttribute("email", email);
                 request.getRequestDispatcher("forgotpassword/otp_fo.jsp").forward(request, response);
             }
+
+        } 
+        //Kiểm tra có phải là forgotpassword không 
+        //(được đặt trong ForgotPasswordController).
         
-        }
         else if (action.equals("resendOTPResetPassword")) {
             OTPDBContext otpDB = new OTPDBContext();
             OTP otpSend = new OTP();
@@ -84,7 +88,7 @@ public class OTPVerificationController extends HttpServlet {
                     request.getRequestDispatcher("forgotpassword/forgot_password.jsp").forward(request, response);
                 }
             }
-            
+
             request.getRequestDispatcher("forgotpassword/otp_fo.jsp").forward(request, response);
         }
     }
