@@ -4,6 +4,7 @@
     Author     : Admin
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.ArrayList, model.managerTrip.BusTrips" %>
 <%
@@ -28,40 +29,100 @@
         <link rel="stylesheet" href="assets/css/nice-select.css">
         <link rel="stylesheet" href="assets/css/jquery-ui.css">
         <link rel="stylesheet" href="assets/css/style.css">
+        <style>
+            .pagination {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 10px;
+                margin: 20px 0;
+                font-family: Arial, sans-serif;
+            }
+
+            .page-link {
+                text-decoration: none;
+                padding: 8px 12px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                color: #333;
+                background-color: #fff;
+                transition: all 0.3s ease;
+            }
+
+            .page-link:hover {
+                background-color: #f0f0f0;
+                border-color: #aaa;
+            }
+
+            .page-link.active {
+                background-color: #007bff;
+                color: #fff;
+                border-color: #007bff;
+                pointer-events: none;
+            }
+
+            .prev, .next {
+                font-weight: bold;
+            }
+
+            .prev::before {
+                content: "« ";
+            }
+
+            .next::after {
+                content: " »";
+            }
+        </style>
     </head>
     <body class="bg-light">
         <div class="d-flex">
             <!-- Sidebar -->
             <nav class="bg-white shadow p-3 vh-100" style="width: 300px">
                 <div class="text-center mb-4">
-                    <img src="https://storage.googleapis.com/a1aa/image/bleOVH5WQzge5bjdCt5D9VkP58J-hf_O90hRj2rGXv0.jpg" alt="Bus logo" class="img-fluid" width="50">
-                    <h4 class="mt-2">My Bus</h4>
+                    <img src="assets/images/logo/logo_01_1.png" srcset="assets/images/logo/logo_01_1.png 2x" alt="logo_not_found">
+                    <h4 class="mt-2">BusGo</h4>
                 </div>
                 <ul class="nav flex-column">
-                    <li class="nav-item"><a class="nav-link text-dark" href="#"><i class="fas fa-home"></i> Trang Chủ</a></li>
-                    <li class="nav-item"><a class="nav-link text-dark" href="#"><i class="fas fa-users"></i> Người Dùng</a></li>
+                    <!-- Quản lý vé Xe -->
                     <li class="nav-item">
-                        <a class="nav-link text-dark" href="BusRouteURL?service=listOfAll"><i class="fas fa-bus"></i> Quản lý Tuyến Xe</a>
+                        <a class="nav-link fw-bold text-dark" href="TicketURL?service=listOfAll" id="toggleTicket">
+                            <i class="fas fa-bus"></i> Quản lý Vé Xe
+                        </a>
+                        <ul class="list-unstyled ps-3 d-none text-muted" id="ticketMenu">
+                            <li><a class="nav-link text-secondary active bg-light" href="TicketURL?service=listOfAll"><i class="fas fa-ticket"></i> Danh sách Vé xe</a></li>
+                        </ul>
                     </li>
+                    <!-- Quản lý Tuyến Xe -->
                     <li class="nav-item">
-                        <a class="nav-link text-dark" href="BusTripURL?service=listOfAll"><i class="fas fa-route"></i> Quản lý Chuyến xe</a>
-                        <ul class="list-unstyled ps-3">
-                            <li><a class="nav-link text-dark active bg-light" href="BusTripURL?service=listOfAll"><i class="fas fa-list"></i> Danh sách chuyến xe</a></li>
-                            <li><a class="nav-link text-dark" href="BusTripURL?service=insert"><i class="fas fa-plus"></i> Thêm chuyến xe</a></li>
+                        <a class="nav-link fw-bold text-dark" href="#" id="toggleBusRoute">
+                            <i class="fas fa-bus"></i> Quản lý Tuyến Xe
+                        </a>
+                        <ul class="list-unstyled ps-3 d-none text-muted" id="busRouteMenu">
+                            <li><a class="nav-link text-secondary" href="BusRouteURL?service=listOfAll"><i class="fas fa-list"></i> Danh sách tuyến xe</a></li>
+                            <li><a class="nav-link text-secondary" href="BusRouteURL?service=insert"><i class="fas fa-plus"></i> Thêm tuyến xe</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- Quản lý Chuyến Xe -->
+                    <li class="nav-item">
+                        <a class="nav-link fw-bold text-dark" href="#" id="toggleBusTrip">
+                            <i class="fas fa-route"></i> Quản lý Chuyến xe
+                        </a>
+                        <ul class="list-unstyled ps-3 d-none text-muted" id="busTripMenu">
+                            <li><a class="nav-link text-secondary active bg-light" href="BusTripURL?service=listOfAll"><i class="fas fa-list"></i> Danh sách chuyến xe</a></li>
+                            <li><a class="nav-link text-secondary" href="BusTripURL?service=insert"><i class="fas fa-plus"></i> Thêm chuyến xe</a></li>
                         </ul>
                     </li>
                 </ul>
             </nav>
+            <!--End-Sidebar -->
 
             <!-- Main Content -->
-            <div class="flex-grow-1 p-4">
-                <header class="d-flex justify-content-between align-items-center mb-4">
+            <div class="col-md-10 ml-sm-auto px-4">
+                <div class="d-flex justify-content-between align-items-center py-3">
                     <h2>Danh Sách Chuyến Xe</h2>
-                    <div class="d-flex align-items-center">
-                        <span class="me-3">Xin chào Admin</span>
-                        <img src="https://storage.googleapis.com/a1aa/image/f8PlcxgsScKTpIWEKXOlgvOQYRWzrcRJl01e8rgIgFM.jpg" class="rounded-circle" width="40" alt="Admin avatar">
-                    </div>
-                </header>
+                    <li><a href="logout"><i class="fal fa-sign-out"></i> Logout</a></li>    
+                </div>  
                 <nav>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="#">Trang Chủ</a></li>
@@ -75,24 +136,15 @@
                         <input type="hidden" name="service" value="listOfAll"> 
                         <div class="col-md-3">
                             <label for="bt1_date" class="form-label">Ngày:</label>
-                            <input type="date" class="form-control" name="bt1_date" id="bt1_date">
-                        </div>
-                        <div class="col-md-3 d-flex flex-column">
-                            <label for="bt1_status" class="form-label order-1">Trạng thái:</label>
-                            <select class="form-select order-2" name="bt1_status" id="bt1_status">
-                                <option value="">-- Chọn trạng thái --</option>
-                                <option value="Hoàn thành">Hoàn thành</option>
-                                <option value="Đang chạy">Đang chạy</option>
-                                <option value="Đang chờ">Đang chờ</option>
-                            </select>
+                            <input type="date" class="form-control" name="bt1_date" id="bt1_date" value="${bt1_date}">
                         </div>
                         <div class="col-md-3">
                             <label for="br_id" class="form-label">Mã tuyến:</label>
-                            <input type="number" class="form-control" name="br_id" id="br_id" min="1">
+                            <input type="number" class="form-control" name="br_id" id="br_id" min="1" value="${br_id}">
                         </div>
                         <div class="col-md-3 d-flex align-items-end">
-                            <button type="submit" name="submit" class="btn btn-primary me-2">Tìm kiếm</button>
-                            <button type="reset" class="btn btn-secondary">Xóa</button>
+                            <button type="submit" class="btn btn-primary me-2">Tìm kiếm</button>
+                            <button type="reset" class="btn btn-secondary" onclick="resetForm()">Xóa</button>
                         </div>
                     </form>
 
@@ -138,8 +190,60 @@
                         <% } %>
                     </table>
                 </div>
+                <div class="pagination">
+                    <c:if test="${currentPage > 1}">
+                        <a href="BusTripURL?service=listOfAll&page=${currentPage - 1}" class="page-link prev">Trang trước</a>
+                    </c:if>
+
+                    <c:forEach begin="1" end="${endPage}" var="i">
+                        <a href="BusTripURL?service=listOfAll&page=${i}" class="${i == currentPage ? 'page-link active' : 'page-link'}">${i}</a>
+                    </c:forEach>
+
+                    <c:if test="${currentPage < endPage}">
+                        <a href="BusTripURL?service=listOfAll&page=${currentPage + 1}" class="page-link next">Trang tiếp</a>
+                    </c:if>
+                </div>
+
             </div>
         </div>
+
+        <script>
+            // Toggle danh sách Tuyến Xe
+            document.getElementById("toggleBusRoute").addEventListener("click", function (event) {
+                event.preventDefault();
+                document.getElementById("busRouteMenu").classList.toggle("d-none");
+            });
+
+            // Toggle danh sách Chuyến Xe
+            document.getElementById("toggleBusTrip").addEventListener("click", function (event) {
+                event.preventDefault();
+                document.getElementById("busTripMenu").classList.toggle("d-none");
+            });
+            // Kiểm tra URL hiện tại để giữ menu mở
+            window.addEventListener("DOMContentLoaded", function () {
+                const currentUrl = window.location.href;
+                if (currentUrl.includes("BusRouteURL?service=listOfAll") || currentUrl.includes("BusRouteURL?service=insert")) {
+                    document.getElementById("busRouteMenu").classList.remove("d-none");
+                }
+            });
+            // Toggle danh sách Vé Xe
+            document.getElementById("toggleTicket").addEventListener("click", function (event) {
+                event.preventDefault();
+                document.getElementById("ticketMenu").classList.toggle("d-none");
+            });
+            // Kiểm tra URL hiện tại để giữ menu mở
+            window.addEventListener("DOMContentLoaded", function () {
+                const currentUrl = window.location.href;
+                if (currentUrl.includes("BusTripURL?service=listOfAll") || currentUrl.includes("BusTripURL?service=insert")) {
+                    document.getElementById("busTripMenu").classList.remove("d-none");
+                }
+            });
+        </script>
+        <script>
+            function resetForm() {
+                window.location.href = "BusTripURL?service=listOfAll"; // Điều hướng về trang gốc
+            }
+        </script>
     </body>
 </html>
 

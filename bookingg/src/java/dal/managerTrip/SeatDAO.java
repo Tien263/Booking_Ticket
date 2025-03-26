@@ -50,7 +50,7 @@ public class SeatDAO extends DBContext {
         }
     }
     
-    public ResultSet getVehicle(String sql){
+    public ResultSet getData(String sql){
         ResultSet rs = null;
         try {
             Statement state = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);

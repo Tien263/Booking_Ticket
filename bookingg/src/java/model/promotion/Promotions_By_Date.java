@@ -17,12 +17,17 @@ public class Promotions_By_Date {
     private Date endDate;
     private double discount;
     private int quantity;
+<<<<<<< HEAD
+=======
     private Integer eId; // Liên kết với bảng Employee, có thể null
     private Integer priority; // Có thể null
+>>>>>>> main
 
     public Promotions_By_Date() {
     }
 
+<<<<<<< HEAD
+=======
     public Promotions_By_Date(int id, String name, Date startDate, Date endDate, double discount, int quantity, Integer eId, Integer priority) {
         this.id = id;
         this.name = name;
@@ -34,6 +39,7 @@ public class Promotions_By_Date {
         this.priority = priority;
     }
     
+>>>>>>> main
     public Promotions_By_Date(int id, String name, Date startDate, Date endDate, double discount, int quantity) {
         this.id = id;
         this.name = name;
@@ -43,6 +49,8 @@ public class Promotions_By_Date {
         this.quantity = quantity;
     }
 
+<<<<<<< HEAD
+=======
     public Integer geteId() {
         return eId;
     }
@@ -61,6 +69,7 @@ public class Promotions_By_Date {
     
     
 
+>>>>>>> main
     public String getName() {
         return name;
     }
@@ -109,6 +118,9 @@ public class Promotions_By_Date {
         this.quantity = quantity;
     }
     
+<<<<<<< HEAD
+    
+=======
     @Override
     public String toString() {
         return "Promotions_By_Date{" +
@@ -122,5 +134,6 @@ public class Promotions_By_Date {
                 ", priority=" + priority +
                 '}';
     }
+>>>>>>> main
     
 }

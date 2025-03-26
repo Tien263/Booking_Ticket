@@ -10,8 +10,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
 
+<<<<<<< HEAD
+        <title>Login - Rotors - Car Rental HTML5 Template</title>
+        <link rel="shortcut icon" href="assets/images/logo/favourite_icon.png">
+=======
         <title>Login - BusGo</title>
         <link rel="shortcut icon" href="assets/images/logo/logo_01_1.png">
+>>>>>>> main
 
         <!-- fraimwork - css include -->
         <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
@@ -44,6 +49,9 @@
 
     <body>
 
+<<<<<<< HEAD
+
+=======
         <c:if test="${not empty success}">
             <div id="success-alert" class="alert alert-success alert-dismissible fade show position-fixed"
                  role="alert" 
@@ -54,6 +62,7 @@
                 </button>
             </div>
         </c:if>
+>>>>>>> main
         <!-- backtotop - start -->
         <div id="thetop"></div>
         <div class="backtotop">
@@ -97,8 +106,13 @@
                     <div class="row align-items-center">
                         <div class="col-lg-7">
                             <ul class="header_contact_info ul_li clearfix">
+<<<<<<< HEAD
+                                <li><i class="fal fa-envelope"></i> rotorsmail@email.com</li>
+                                <li><i class="fal fa-phone"></i> +1-202-555-0156</li>
+=======
                                 <li><i class="fal fa-envelope"></i> Busgo@email.com</li>
                                 <li><i class="fal fa-phone"></i> 0398 996 177</li>
+>>>>>>> main
                             </ul>
                         </div>
 
@@ -130,9 +144,22 @@
 
                         <div class="col-lg-3 col-md-6 col-sm-6 col-6 order-last">
                             <ul class="header_action_btns ul_li_right clearfix">
+<<<<<<< HEAD
+                                <li>
+                                    <button type="button" class="search_btn" data-toggle="collapse" data-target="#collapse_search_body" aria-expanded="false" aria-controls="collapse_search_body">
+                                        <i class="fal fa-search"></i>
+                                    </button>
+                                </li>
+                                <li class="dropdown">
+                                    <button type="button" class="cart_btn" id="cart_dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fal fa-shopping-cart"></i>
+                                        <span class="cart_counter bg_default_red">3</span>
+                                    </button>
+=======
 
                                 <li class="dropdown">
 
+>>>>>>> main
                                     <div class="cart_dropdown rotors_dropdown dropdown-menu" aria-labelledby="cart_dropdown">
                                         <h4 class="wrap_title">Cart Items: (3)</h4>
                                         <ul class="cart_items_list ul_li_block clearfix">
@@ -192,7 +219,11 @@
                                         <ul class="ul_li_block clearfix">
                                             <li><a href="#!"><i class="fal fa-user-circle"></i> Profile</a></li>
                                             <li><a href="#!"><i class="fal fa-user-cog"></i> Settings</a></li>
+<<<<<<< HEAD
+                                            <li><a href="#!"><i class="fal fa-sign-out"></i> Logout</a></li>
+=======
                                             <li><a href="logout"><i class="fal fa-sign-out"></i> Logout</a></li>
+>>>>>>> main
                                         </ul>
                                     </div>
                                 </li>
@@ -206,6 +237,50 @@
                             <nav class="main_menu clearfix">
                                 <ul class="ul_li_center clearfix">
                                     <li class="active has_child">
+<<<<<<< HEAD
+                                        <a href="#!">Home</a>
+                                        <ul class="submenu">
+                                            <li><a href="index_1.html">Home Page V.1</a></li>
+                                            <li><a href="index_2.html">Home Page V.2</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="gallery.html">Our Cars</a></li>
+                                    <li><a href="review.html">Reviews</a></li>
+                                    <li><a href="about.html">About</a></li>
+                                    <li class="has_child">
+                                        <a href="#!">Pages</a>
+                                        <ul class="submenu">
+                                            <li><a href="service.html">Our Service</a></li>
+                                            <li><a href="gallery.html">Car Gallery</a></li>
+                                            <li><a href="account.html">My Account</a></li>
+                                            <li><a href="reservation.html">Reservation</a></li>
+                                            <li class="has_child">
+                                                <a href="#!">Blogs</a>
+                                                <ul class="submenu">
+                                                    <li><a href="blog.html">Blog</a></li>
+                                                    <li><a href="blog_details.html">Blog Details</a></li>
+                                                </ul>
+                                            </li>
+                                            <li class="has_child">
+                                                <a href="#!">Our Cars</a>
+                                                <ul class="submenu">
+                                                    <li><a href="car.html">Cars</a></li>
+                                                    <li><a href="car_details.html">Car Details</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="cart.html">Shopping Cart</a></li>
+                                            <li><a href="faq.html">F.A.Q.</a></li>
+                                            <li><a href="login.html">Login</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="has_child">
+                                        <a href="#!">Contact Us</a>
+                                        <ul class="submenu">
+                                            <li><a href="contact.html">Contact Default</a></li>
+                                            <li><a href="contact_wordwide.html">Contact Wordwide</a></li>
+                                        </ul>
+                                    </li>
+=======
                                         <a href="home.jsp">Home</a>
                                     </li>
                                     <li><a href="booking">Booking Ticket</a></li>
@@ -214,6 +289,7 @@
                                         <a href="contact.jsp">Contact Us</a>
                                     </li>
                                     <li><a href="employee_login.jsp">Employee Login</a></li>
+>>>>>>> main
                                 </ul>
                             </nav>
                         </div>
@@ -252,7 +328,11 @@
 
                     <div class="about_content mb_60">
                         <div class="brand_logo mb_15">
+<<<<<<< HEAD
+                            <a href="index.html">
+=======
                             <a href="home.jsp">
+>>>>>>> main
                                 <img src="assets/images/logo/logo_01_1.png" srcset="assets/images/logo/logo_01_1.png 2x" alt="logo_not_found">
                             </a>
                         </div>
@@ -350,7 +430,11 @@
                 <div class="breadcrumb_nav clearfix" data-bg-color="#F2F2F2">
                     <div class="container">
                         <ul class="ul_li clearfix">
+<<<<<<< HEAD
+                            <li><a href="index.html">Home</a></li>
+=======
                             <li><a href="home.jsp">Home</a></li>
+>>>>>>> main
                             <li>Login</li>
                         </ul>
                     </div>
@@ -377,7 +461,11 @@
                                 <div class="reg_form" data-aos="fade-up" data-aos-delay="500">
                                     <h3 class="form_title">LogIn:</h3>
                                     <p>
+<<<<<<< HEAD
+                                        Savings of up to 15% with our car rental solutions, global coverage and a dedicated customer team
+=======
                                           Savings of up to 15% with our car rental solutions, global coverage and a dedicated customer team
+>>>>>>> main
                                     </p>
                                     <span class="new_account mb_15">Log In or <a href="#!">Create an Account?</a></span>
                                     <form action="booking" method="post">
@@ -415,6 +503,13 @@
                                     </div>
                                     <div class="form_item">
                                         <label for="email">Email*</label>
+<<<<<<< HEAD
+                                        <input type="email" id="email" name="email" placeholder="Your Email" value="${email}" required>
+                                    </div>
+                                    <div class="form_item">
+                                        <label for="username">Username*</label>
+                                        <input type="text" id="username" name="username" placeholder="Username" value="${username}" required>
+=======
                                         <input type="email" id="email" name="email" placeholder="Your Email" value="${email}" required pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}" title="Vui lòng nhập đúng định dạng email">
                                     </div>
                                     <div class="form_item position-relative">
@@ -424,28 +519,49 @@
                                               style="right: 10px; top: 75%; transform: translateY(-50%); display: none;">
                                             <i class="fas fa-exclamation-circle" title="Username đã tồn tại"></i>
                                         </span>
+>>>>>>> main
                                     </div>
                                     <div class="form_item">
                                         <label for="phone">Phone Number*</label>
                                         <input type="tel" id="phone" name="phone" placeholder="Phone Number" value="${phone}" required pattern="[0-9]{10}">
                                     </div>
+<<<<<<< HEAD
+=======
                                     <div class="form_item"><label for="gender">Gender*</label><select id="gender" name="gender" required><option value="1" <c:if test="${gender}">selected</c:if>>Male</option><option value="0" <c:if test="${gender}">selected</c:if>>Female</option></select></div>
                                     <div class="form_item"><label for="address">Address</label><input type="text" id="address" name="address" placeholder="Address" value="${address}"></div>
+>>>>>>> main
                                 </div>
 
                                 <!-- Cột bên phải -->
                                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" data-aos="fade-up" data-aos-delay="700">
                                     <div class="form_item">
                                         <label for="password">Password*</label>
+<<<<<<< HEAD
+                                        <input type="password" id="password" name="password" placeholder="Password" required>
+=======
                                         <div class="position-relative">
                                             <input type="password" id="password" name="password" placeholder="Password" required>
                                             <i id="togglePassword" class="fas fa-eye input_icon" style="cursor: pointer;"></i>
                                         </div>
+>>>>>>> main
                                     </div>
                                     <div class="form_item">
                                         <label for="confirmpass">Confirm Password*</label>
                                         <input type="password" id="confirmpass" name="confirmpass" placeholder="Confirm Password" required>
                                     </div>
+<<<<<<< HEAD
+                                    <div class="form_item">
+                                        <label for="gender">Gender*</label>
+                                        <select id="gender" name="gender" required>
+                                            <option value="1" <c:if test="${gender}">selected</c:if>>Male</option>
+                                            <option value="0" <c:if test="${gender}">selected</c:if>>Female</option>
+                                            </select>
+                                        </div>
+                                        <div class="form_item">
+                                            <label for="address">Address</label>
+                                            <input type="text" id="address" name="address" placeholder="Address" value="${address}">
+                                    </div>
+=======
                                     <!-- Password Requirements -->
                                     <div id="result" class="alert d-none" role="alert">
                                         <span id="resultText"></span>
@@ -467,6 +583,7 @@
                                         </ul>
                                     </div>
 
+>>>>>>> main
                                 </div>
                             </div>
 
@@ -506,7 +623,12 @@
                                 </p>
                                 <div class="footer_useful_links mb_30">
                                     <ul class="ul_li_block clearfix">
+<<<<<<< HEAD
+                                        <li><a href="#!"><i class="fal fa-angle-right"></i> Rental Information</a></li>
+                                        <li><a href="#!"><i class="fal fa-angle-right"></i> F.A.Q.</a></li>
+=======
 
+>>>>>>> main
                                     </ul>
                                 </div>
                                 <div class="form_item mb-0">
@@ -520,6 +642,20 @@
 
                         <div class="col-lg-3 col-md-4 col-sm-12 col-sm-12">
                             <div class="footer_contact_info" data-aos="fade-up" data-aos-delay="200">
+<<<<<<< HEAD
+                                <h3 class="footer_widget_title">Contact Us:</h3>
+                                <ul class="ul_li_block clearfix">
+                                    <li>
+                                        <strong><i class="fas fa-map-marker-alt"></i> Main Office Address:</strong>
+                                        <p class="mb-0">
+                                            Unit 9, Manor Industrial Estate, Lower Wash Lane, Warrington, WA4
+                                        </p>
+                                    </li>
+                                    <li><i class="fas fa-clock"></i> 8:00am-9:30pm</li>
+                                    <li><i class="far fa-angle-right"></i> Other Office Locations</li>
+                                    <li><i class="fas fa-envelope"></i> <strong>rotorseml@eml.fr</strong></li>
+                                    <li><i class="fas fa-phone"></i> <strong>+880 1680 6361 89</strong></li>
+=======
                                 <h3 class="footer_widget_title">Liên hệ:</h3>
                                 <ul class="ul_li_block clearfix">
                                     <li>
@@ -531,6 +667,7 @@
                                     <li><i class="fas fa-clock"></i> 7:00 - 22:00</li>
                                     <li><i class="fas fa-envelope"></i> <strong>BusGo@gmail.com</strong></li>
                                     <li><i class="fas fa-phone"></i> <strong>0398 996 177</strong></li>
+>>>>>>> main
                                 </ul>
                             </div>
                         </div>
@@ -620,6 +757,8 @@
         <script src="assets/js/custom.js"></script>
 
 
+<<<<<<< HEAD
+=======
         <!-- Password Validation Script -->
         <script>
                                             $(document).ready(function () {
@@ -758,5 +897,6 @@
                 }, 3000);
             });
         </script>
+>>>>>>> main
     </body>
 </html>

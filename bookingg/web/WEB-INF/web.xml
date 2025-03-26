@@ -164,6 +164,14 @@
         <servlet-name>VerifyUsernameController</servlet-name>
         <servlet-class>controller.accesscontrol.VerifyUsernameController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>TicketController</servlet-name>
+        <servlet-class>controller.ticket.TicketController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CustomerTicketController</servlet-name>
+        <servlet-class>controller.ticket.CustomerTicketController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>EmployeeLoginnController</servlet-name>
         <url-pattern>/employee_login</url-pattern>
@@ -272,6 +280,15 @@
         <servlet-name>VehicleController</servlet-name>
         <url-pattern>/vehicle/vehicle</url-pattern>
     </servlet-mapping>
+<<<<<<< HEAD
+    <servlet-mapping>
+        <servlet-name>TicketController</servlet-name>
+        <url-pattern>/TicketURL</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CustomerTicketController</servlet-name>
+        <url-pattern>/CustomerTicketURL</url-pattern>
+=======
     <servlet>
         <servlet-name>ajaxServlet</servlet-name>
         <servlet-class>com.vnpay.common.ajaxServlet</servlet-class>
@@ -288,5 +305,6 @@
     <servlet-mapping>
         <servlet-name>VnpayReturn</servlet-name>
         <url-pattern>/vn_pay/vnpayReturn</url-pattern>
+>>>>>>> main
     </servlet-mapping>
 </web-app>

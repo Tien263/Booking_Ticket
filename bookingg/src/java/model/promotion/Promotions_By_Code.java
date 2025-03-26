@@ -17,6 +17,12 @@ public class Promotions_By_Code {
     private double discount;
     private Date endDate;
     private int quantity;
+<<<<<<< HEAD
+
+    public Promotions_By_Code() {
+    }
+
+=======
     private Integer aId; // Liên kết với bảng Advertise, có thể null
     private Integer eId; // Liên kết với bảng Employee, có thể null
     private Integer priority; // Có thể null
@@ -38,6 +44,7 @@ public class Promotions_By_Code {
         this.priority = priority;
     }
     
+>>>>>>> main
     public Promotions_By_Code(int id, String name, String code, double discount, Date endDate, int quantity) {
         this.id = id;
         this.name = name;
@@ -47,6 +54,8 @@ public class Promotions_By_Code {
         this.quantity = quantity;
     }
 
+<<<<<<< HEAD
+=======
     public Integer getaId() {
         return aId;
     }
@@ -73,6 +82,7 @@ public class Promotions_By_Code {
 
     
     
+>>>>>>> main
     public String getName() {
         return name;
     }
@@ -123,6 +133,8 @@ public class Promotions_By_Code {
         this.endDate = endDate;
     }
     
+<<<<<<< HEAD
+=======
    @Override
     public String toString() {
         return "Promotions_By_Code{" +
@@ -137,5 +149,6 @@ public class Promotions_By_Code {
                 ", priority=" + priority +
                 '}';
     }
+>>>>>>> main
     
 }

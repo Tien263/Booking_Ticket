@@ -2,7 +2,10 @@ package controller.bookTicket;
 
 import dal.bookTicket.BookTicketDAO;
 import dal.bookTicket.SeatsDAO;
+<<<<<<< HEAD
+=======
 import dal.promotion.PromotionByCodeDAO;
+>>>>>>> main
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;

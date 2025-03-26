@@ -13,6 +13,9 @@ import java.sql.ResultSet;
 import java.sql.PreparedStatement;
 import java.sql.Time;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.YearMonth;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -22,29 +25,38 @@ import java.util.logging.Logger;
  */
 public class BusTripDAO extends DBContext<BusTrips> {
 
+    public List<Integer> insertBusTripForMonth(int year, int month, BusTrips busTrips) {
+        List<Integer> generatedIds = new ArrayList<>();
+        String sql = "INSERT INTO [dbo].[BusTrips]([bt1_date],[bt1_departureTime],[bt1_arrivalTime],[bt1_status],[br_id]) "
+                + "VALUES(?,?,?,?,?)";
 
-    public int insertBusTrip(BusTrips busTrips) {
-        int generatedId = -1;
-        String sql = "INSERT INTO [dbo].[BusTrips]([bt1_date],[bt1_departureTime],[bt1_arrivalTime],[bt1_status],[br_id])\n"
-                + "     VALUES(?,?,?,?,?)";
+        // Xác định số ngày trong tháng
+        YearMonth yearMonth = YearMonth.of(year, month);
+        int daysInMonth = yearMonth.lengthOfMonth();
+
         try (PreparedStatement pre = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            pre.setDate(1, Date.valueOf(busTrips.getBt1_date()));
-            pre.setTime(2, Time.valueOf(busTrips.getBt1_departureTime()));
-            pre.setTime(3, Time.valueOf(busTrips.getBt1_arrivalTime()));
-            pre.setString(4, busTrips.getBt1_status());
-            pre.setInt(5, busTrips.getBr_id());
-            int affectedRows = pre.executeUpdate();
-            if (affectedRows > 0) {
-                try (ResultSet generatedKeys = pre.getGeneratedKeys()) {
-                    if (generatedKeys.next()) {
-                        generatedId = generatedKeys.getInt(1); // Lấy ID vừa insert
+            for (int day = 1; day <= daysInMonth; day++) {
+                LocalDate tripDate = LocalDate.of(year, month, day);
+
+                pre.setDate(1, Date.valueOf(tripDate)); // Ngày chuyến xe
+                pre.setTime(2, Time.valueOf(busTrips.getBt1_departureTime())); // Giờ khởi hành
+                pre.setTime(3, Time.valueOf(busTrips.getBt1_arrivalTime())); // Giờ đến
+                pre.setString(4, busTrips.getBt1_status()); // Trạng thái
+                pre.setInt(5, busTrips.getBr_id()); // Tuyến đường
+
+                int affectedRows = pre.executeUpdate();
+                if (affectedRows > 0) {
+                    try (ResultSet generatedKeys = pre.getGeneratedKeys()) {
+                        if (generatedKeys.next()) {
+                            generatedIds.add(generatedKeys.getInt(1)); // Lưu ID của chuyến xe
+                        }
                     }
                 }
             }
         } catch (SQLException e) {
             Logger.getLogger(BusTripDAO.class.getName()).log(Level.SEVERE, null, e);
         }
-        return generatedId;
+        return generatedIds; // Trả về danh sách ID của các chuyến xe đã chèn
     }
 
     @Override
@@ -72,18 +84,25 @@ public class BusTripDAO extends DBContext<BusTrips> {
 
     @Override
     public void delete(BusTrips busTrips) {
-        String sql = "DELETE FROM [dbo].[BusTrips] WHERE [bt1_id] = ?";
+        String sql = "UPDATE [dbo].[BusTrips] SET bt1_status = 'Inactive' WHERE bt1_id = ? AND bt1_status = 'Active'";
         try (PreparedStatement pre = connection.prepareStatement(sql)) {
             pre.setInt(1, busTrips.getBt1_id());
-            pre.executeUpdate();
+            int affectedRows = pre.executeUpdate();
+            if (affectedRows == 0) {
+                Logger.getLogger(BusTripDAO.class.getName()).log(Level.WARNING, "Không có chuyến xe nào ở trạng thái 'Active' để hủy");
+            }
         } catch (SQLException e) {
-            Logger.getLogger(BusTripDAO.class.getName()).log(Level.SEVERE, "Lỗi khi xóa tuyến xe buýt", e);
+            Logger.getLogger(BusTripDAO.class.getName()).log(Level.SEVERE, "Lỗi khi cập nhật trạng thái chuyến xe buýt", e);
         }
     }
 
-    public ArrayList<BusTrips> list(String sql) {
+    public ArrayList<BusTrips> list(String sql, List<Object> params) {
         ArrayList<BusTrips> list = new ArrayList<>();
-        try (PreparedStatement pre = connection.prepareStatement(sql); ResultSet rs = pre.executeQuery()) {
+        try (PreparedStatement pre = connection.prepareStatement(sql)) {
+            for (int i = 0; i < params.size(); i++) {
+                pre.setObject(i + 1, params.get(i)); // Gán tham số
+            }
+            ResultSet rs = pre.executeQuery();
             while (rs.next()) {
                 BusTrips busTrips = new BusTrips(rs.getInt("bt1_id"),
                         rs.getDate("bt1_date").toLocalDate(),
@@ -91,11 +110,11 @@ public class BusTripDAO extends DBContext<BusTrips> {
                         rs.getTime("bt1_arrivalTime").toLocalTime(),
                         rs.getString("bt1_status"),
                         rs.getInt("br_id"),
-                rs.getString("v_licensePlate"));
+                        rs.getString("v_licensePlate"));
                 list.add(busTrips);
             }
         } catch (SQLException e) {
-            Logger.getLogger(BusRouteDAO.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(BusTripDAO.class.getName()).log(Level.SEVERE, null, e);
         }
         return list;
     }
@@ -116,9 +135,27 @@ public class BusTripDAO extends DBContext<BusTrips> {
                 }
             }
         } catch (SQLException e) {
-            Logger.getLogger(BusRouteDAO.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(BusTripDAO.class.getName()).log(Level.SEVERE, null, e);
         }
         return null;
+    }
+
+    public int getTotalBusTrips(String baseSql, List<Object> params) {
+        int count = 0;
+        String sql = "SELECT COUNT(DISTINCT bt.bt1_id)" + baseSql;
+
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            for (int i = 0; i < params.size(); i++) {
+                ps.setObject(i + 1, params.get(i));
+            }
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                count = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(BusTripDAO.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return count;
     }
 
     @Override

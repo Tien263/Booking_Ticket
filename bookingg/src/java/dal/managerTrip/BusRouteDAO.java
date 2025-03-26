@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -85,11 +86,18 @@ public class BusRouteDAO extends DBContext<BusRoute> {
         }
     }
 
-    public ArrayList<BusRoute> list(String sql) {
-        ArrayList<BusRoute> list = new ArrayList<>();
-        try (PreparedStatement pre = connection.prepareStatement(sql); ResultSet rs = pre.executeQuery()) {
+    public ArrayList<BusRoute> list(String sql, List<Object> params) {
+    ArrayList<BusRoute> list = new ArrayList<>();
+
+    try (PreparedStatement pre = connection.prepareStatement(sql)) {
+        for (int i = 0; i < params.size(); i++) {
+            pre.setObject(i + 1, params.get(i));
+        }
+
+        try (ResultSet rs = pre.executeQuery()) {
             while (rs.next()) {
-                BusRoute busRoute = new BusRoute(rs.getInt("br_id"),
+                BusRoute busRoute = new BusRoute(
+                        rs.getInt("br_id"),
                         rs.getInt("br_distance"),
                         rs.getString("br_from"),
                         rs.getString("br_to"),
@@ -98,11 +106,12 @@ public class BusRouteDAO extends DBContext<BusRoute> {
                         rs.getString("br_status"));
                 list.add(busRoute);
             }
-        } catch (Exception e) {
-            Logger.getLogger(BusRouteDAO.class.getName()).log(Level.SEVERE, null, e);
         }
-        return list;
+    } catch (SQLException e) {
+        e.printStackTrace();
     }
+    return list;
+}
 
     @Override
     public BusRoute get(int id) {
@@ -126,11 +135,24 @@ public class BusRouteDAO extends DBContext<BusRoute> {
         return null;
     }
 
-    public static void main(String[] args) {
-        BusRouteDAO dao = new BusRouteDAO();
-        BusRouteDAO busRouteDAO = new BusRouteDAO();
-                BusRoute busRoute = busRouteDAO.get(1);
-                System.out.println(busRoute);
+    public int getTotalBusRoutes(String baseSql, List<Object> params) {
+        int count = 0;
+        String sql = "SELECT COUNT(*) " + baseSql; // Chỉ đếm số bản ghi
+
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            for (int i = 0; i < params.size(); i++) {
+                ps.setObject(i + 1, params.get(i));
+            }
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    count = rs.getInt(1);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
     }
 
     @Override

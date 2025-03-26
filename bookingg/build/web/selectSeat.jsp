@@ -290,7 +290,10 @@
                     </div>
                 </div>
                 <div class="lg:col-span-1 space-y-4">
+<<<<<<< HEAD
+=======
                     <div class="lg:col-span-1 space-y-4">
+>>>>>>> main
                     <div class="bg-white p-4 rounded shadow">
                         <h2 class="text-xl font-bold mb-4">
                             Thông tin lượt đi
@@ -320,7 +323,10 @@
                         </p>
                     </div>
                 </div>
+<<<<<<< HEAD
+=======
                 </div>
+>>>>>>> main
             </div>
             <!-- Xác nhận -->
             <input type="submit" value="Xác nhận đặt vé" class="bg-green-500 hover:bg-green-600 text-white p-3 rounded mt-4 custom_btn bg_default_red btn_width text-uppercase" data-aos="fade-up" data-aos-delay="700">

@@ -125,6 +125,25 @@
 
                         <div class="col-lg-3 col-md-6 col-sm-6 col-6 order-last">
                             <ul class="header_action_btns ul_li_right clearfix">
+<<<<<<< HEAD
+                                
+                                <li class="dropdown">
+                                    
+                                    <div class="cart_dropdown rotors_dropdown dropdown-menu" aria-labelledby="cart_dropdown">
+                                        <h4 class="wrap_title">Cart Items: (3)</h4>
+                                        <ul class="cart_items_list ul_li_block clearfix">
+                                            <li>
+                                                <div class="item_image">
+                                                    <img src="assets/images/cart/img_2.png" alt="image_not_found">
+                                                </div>
+                                                <div class="item_content">
+                                                    <h4 class="item_title">Digital Infrared Thermometer</h4>
+                                                    <span class="item_price">$39.50</span>
+                                                </div>
+                                                <button type="button" class="remove_btn"><i class="fal fa-times"></i></button>
+                                            </li>
+=======
+>>>>>>> main
 
                                 <li class="dropdown">
                                     <button type="button" class="user_btn" id="user_dropdown" 
@@ -155,7 +174,16 @@
                                                 <li><a href="logout"><i class="fal fa-sign-out"></i> Logout</a></li>
                                             </ul>
                                         </div>
+<<<<<<< HEAD
+                                        <ul class="ul_li_block clearfix">
+                                            <li><a href="#!"><i class="fal fa-user-circle"></i> Profile</a></li>
+                                            <li><a href="#!"><i class="fal fa-user-cog"></i> Settings</a></li>
+                                            <li><a href="logout"><i class="fal fa-sign-out"></i> Logout</a></li>
+                                        </ul>
+                                    </div>
+=======
                                     </c:if> 
+>>>>>>> main
                                 </li>
                                 <li>
                                     <button type="button" class="mobile_sidebar_btn"><i class="fal fa-align-right"></i></button>
@@ -299,13 +327,21 @@
                                         <a class="active" data-toggle="tab" href="#admin_tab"><i class="fas fa-user"></i> ${customer.username}</a>
                                     </li>
                                     <li>
+<<<<<<< HEAD
+                                        <a href="logout"><i class="fas fa-sign-out-alt"></i> Log Out <img class="arrow" src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
+=======
                                         <a href="logout"><i class="fas fa-sign-out-alt"></i> Đăng xuất <img class="arrow" src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
+>>>>>>> main
                                     </li>
                                     <li>
                                         <a data-toggle="tab" href="booking"><i class="fas fa-address-book"></i> Đặt vé</a>
                                     </li>
                                     <li>
+<<<<<<< HEAD
+                                        <a href="CustomerTicketURL?service=listOfAll"><i class="fas fa-file-alt"></i> Booking History</a>
+=======
                                         <a data-toggle="tab" href="#history_tab"><i class="fas fa-file-alt"></i> Lịch sử đặt vé</a>
+>>>>>>> main
                                     </li>
                                 </ul>
                             </div>
@@ -378,6 +414,9 @@
                                 </div>
 
                                 <div id="history_tab" class="tab-pane fade">
+<<<<<<< HEAD
+                                    
+=======
                                     <div class="account_info_list" data-aos="fade-up" data-aos-delay="100">
                                         <h3 class="list_title mb_30">Booking History:</h3>
                                         <ul class="ul_li_block clearfix">
@@ -399,6 +438,7 @@
                                         </ul>
                                         <a class="text_btn text-uppercase" href="change1"><span>Thay đổi thông tin tài khoản</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
                                     </div>
+>>>>>>> main
                                 </div>
                             </div>
                         </div>
@@ -429,10 +469,17 @@
                                     </a>
                                 </div>
                                 <p class="mb_15">
+<<<<<<< HEAD
+                                    BusGo is committed to providing a reliable and high-quality bus ticket booking service with transparent information, clear pricing, and dedicated customer support, ensuring your journey is always convenient and safe
+                                </p>
+                                <div class="footer_useful_links mb_30">
+                                    
+=======
                                     BusGo cam kết cung cấp dịch vụ đặt vé xe buýt đáng tin cậy và chất lượng cao với thông tin minh bạch, giá cả rõ ràng và hỗ trợ khách hàng tận tâm, đảm bảo hành trình của bạn luôn thuận tiện và an toàn.                                </p>
                                 </p>
                                 <div class="footer_useful_links mb_30">
 
+>>>>>>> main
                                 </div>
                                 <div class="form_item mb-0">
                                     <form action="#">

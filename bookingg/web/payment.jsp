@@ -12,7 +12,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<<<<<<< HEAD
+        <title>Thanh toan</title>
+=======
         <title>Thanh toán</title>
+>>>>>>> main
         <link rel="shortcut icon" href="assets/images/logo/favourite_icon.png">
         <!-- fraimwork - css include -->
         <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
@@ -135,6 +139,14 @@
                         </div>
                     </div>
                 </div>
+<<<<<<< HEAD
+        </header>
+        <!-- header_section - end -->
+        <main class="flex items-center justify-center min-h-screen bg-gray-100">
+            <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+                <h1 class="text-3xl font-bold mb-6 text-center text-green-600">Thông tin đặt vé</h1>
+                <form action="BookTicketURL" method="get">
+=======
             </div>
         </header>
         <!-- header_section - end -->
@@ -149,6 +161,7 @@
                     </div>
                 </c:if>
                 <form action="BookTicketURL" method="post">
+>>>>>>> main
                     <div class="mb-4">
                         <span class="font-semibold text-gray-700">Điểm đi:</span> <span class="text-gray-900"><%= session.getAttribute("from") %></span>
                     </div>
@@ -162,13 +175,25 @@
                         <span class="font-semibold text-gray-700">Thời gian đến:</span> <span class="text-gray-900"><%= session.getAttribute("arrivalTime") %></span>
                     </div>
                     <div class="mb-4">
+<<<<<<< HEAD
+=======
                         <span class="font-semibold text-gray-700">Số lượng vé:</span> <span class="text-gray-900">${seatNames.size()}</span>
                     </div>
                     <div class="mb-4">
+>>>>>>> main
                         <span class="font-semibold text-gray-700">Ghế đã chọn:</span>
                         <ul class="list-disc list-inside text-gray-900">
                             <c:forEach var="seatName" items="${seatNames}">
                                 <li>${seatName}</li>
+<<<<<<< HEAD
+                                </c:forEach>
+                        </ul>
+                    </div>
+                    <div class="mb-6">
+                        <span class="font-semibold text-gray-700">Tổng giá:</span> <span class="text-gray-900"><%= request.getAttribute("totalPrice") %> VNĐ</span>
+                    </div>
+                    <button class="w-full bg-green-500 text-white py-2 rounded-lg hover:bg-green-600 transition duration-300">
+=======
                             </c:forEach>
                         </ul>
                     </div>
@@ -195,6 +220,7 @@
                         <a href="promotions" class="text-blue-500 hover:underline">Xem danh sách khuyến mãi</a>
                     </div>
                     <button type="submit" class="w-full bg-green-500 text-white py-2 rounded-lg hover:bg-green-600 transition duration-300">
+>>>>>>> main
                         <i class="fas fa-credit-card mr-2"></i> Thanh toán
                     </button>
                 </form>

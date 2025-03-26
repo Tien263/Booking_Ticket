@@ -11,6 +11,8 @@ import model.promotion.Promotions_By_Code;
 
 public class PromotionByCodeDAO extends DBContext<Promotions_By_Code> {
 
+<<<<<<< HEAD
+=======
     // Fetch a promotion by its code
     public Promotions_By_Code getPromotionByCode(String code) {
         String sql = "SELECT * FROM Promotions_By_Code " +
@@ -51,6 +53,7 @@ public class PromotionByCodeDAO extends DBContext<Promotions_By_Code> {
         }
     }
     
+>>>>>>> main
     /**
      * Chèn một mã giảm giá mới vào database
      */
@@ -170,6 +173,8 @@ public class PromotionByCodeDAO extends DBContext<Promotions_By_Code> {
         }
     }
 
+<<<<<<< HEAD
+=======
     public ArrayList<Promotions_By_Code> list1() {
         ArrayList<Promotions_By_Code> list = new ArrayList<>();
         String sql = "SELECT * FROM Promotions_By_Code";
@@ -195,4 +200,5 @@ public class PromotionByCodeDAO extends DBContext<Promotions_By_Code> {
         }
         return list;
     }
+>>>>>>> main
 }
