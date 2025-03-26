@@ -33,6 +33,7 @@ public class EmployeeLoginnController extends HttpServlet {
 
         HttpSession session = request.getSession();
         session.setAttribute("user", user); // Lưu user vào session
+session.setAttribute("username", user.getUsername());  // Assuming 'user.getName()' retrieves the user's name
 
         // Xử lý "Remember Me"
         if ("ON".equals(rememberMe)) {
@@ -58,6 +59,9 @@ public class EmployeeLoginnController extends HttpServlet {
                 break;
             case 5:
                 response.sendRedirect(request.getContextPath() + "/promotion/Promotion.jsp");
+                break;
+            case 6:
+                response.sendRedirect(request.getContextPath() + "/vehicle/vehicle");
                 break;
             default:
                 response.sendRedirect(request.getContextPath() + "/home");

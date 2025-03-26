@@ -256,7 +256,9 @@ public class CustomerDao extends DBContext<Customer> {
                 // So sánh mật khẩu nhập vào với mật khẩu đã mã hóa trong database
                 if (BCrypt.checkpw(password, storedHashedPassword)) {
                     Customer c = new Customer();
+                   
                     c.setEmail(email);
+                    c.setId(Integer.parseInt(rs.getString("c_id")));
                     c.setFullname(rs.getString("c_fullname"));
                     c.setPhone(rs.getString("c_phone"));
                     c.setGender(rs.getBoolean("c_gender"));

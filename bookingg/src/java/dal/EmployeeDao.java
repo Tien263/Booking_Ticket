@@ -4,6 +4,7 @@
  */
 package dal;
 
+import model.Role;
 import MD5.BCrypt;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,6 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.User;
 import java.sql.*;
+import model.Roles;
 
 /**
  *
@@ -117,7 +119,7 @@ public class EmployeeDao extends DBContext<Employee> {
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-                user = new User(rs.getString("u_username"), bCrypt.hashpw(rs.getString("u_password"),bCrypt.gensalt()));
+                user = new User(rs.getString("u_username"), bCrypt.hashpw(rs.getString("u_password"), bCrypt.gensalt()));
                 int retrievedEId = rs.getInt("e_id"); // Lấy e_id từ DB, sql));
                 user.seteId(retrievedEId);
             }
@@ -158,10 +160,32 @@ public class EmployeeDao extends DBContext<Employee> {
 
     @Override
     public ArrayList<Employee> list() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        ArrayList<Employee> list = new ArrayList<>();
+        String sql = "select e_id, e_name, e_phone,e_gender,e_address, r_name from employee e join Roles r on e.r_id = r.r_id";
+
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Employee e = new Employee();
+                e.setId(rs.getInt("e_id"));
+                e.setName(rs.getString("e_name"));
+                e.setPhone(rs.getString("e_phone"));
+                e.setGender(rs.getBoolean("e_gender"));
+                e.setAddress(rs.getString("e_address"));
+                Role role = new Role();
+                role.setName(rs.getString("r_name"));
+                e.setRole(role);
+                list.add(e);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(EmployeeDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
     }
 
-     @Override
+    @Override
     public Employee get(int id) {
         String sql = "SELECT * FROM Employee WHERE e_id = ?";
         PreparedStatement stmt = null;
@@ -186,36 +210,110 @@ public class EmployeeDao extends DBContext<Employee> {
             Logger.getLogger(EmployeeDao.class.getName()).log(Level.SEVERE, null, e);
         } finally {
             try {
-                if (rs != null) rs.close();
-                if (stmt != null) stmt.close();
+                if (rs != null) {
+                    rs.close();
+                }
+                if (stmt != null) {
+                    stmt.close();
+                }
             } catch (Exception e) {
                 Logger.getLogger(EmployeeDao.class.getName()).log(Level.SEVERE, null, e);
             }
         }
         return null;
     }
+
     public Employee getEmployeeById(int eId) {
-    Employee employee = null;
-    String sql = "SELECT e_id, e_name, e_phone, e_address, e_gender FROM Employee WHERE e_id = ?";
+        Employee employee = null;
+        String sql = "SELECT e_id, e_name, e_phone, e_address, e_gender FROM Employee WHERE e_id = ?";
 
-    try {
-        PreparedStatement ps = connection.prepareStatement(sql);
-        ps.setInt(1, eId);
-        ResultSet rs = ps.executeQuery();
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, eId);
+            ResultSet rs = ps.executeQuery();
 
-        if (rs.next()) {
-            employee = new Employee();
-            employee.setId(rs.getInt("e_id"));
-            employee.setName(rs.getString("e_name"));
-            employee.setPhone(rs.getString("e_phone"));
-            employee.setAddress(rs.getString("e_address"));
-            employee.setGender(rs.getBoolean("e_gender"));
+            if (rs.next()) {
+                employee = new Employee();
+                employee.setId(rs.getInt("e_id"));
+                employee.setName(rs.getString("e_name"));
+                employee.setPhone(rs.getString("e_phone"));
+                employee.setAddress(rs.getString("e_address"));
+                employee.setGender(rs.getBoolean("e_gender"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-    } catch (SQLException e) {
-        e.printStackTrace();
+        return employee;
     }
-    return employee;
-}
 
+    public ArrayList<Employee> search(Integer id, String name, String phone, String address, Boolean gender, Integer roleId) {
+        String sql = "select e.e_id, e.e_name, e.e_phone, e.e_address\n"
+                + ", e.e_gender,r.r_name from employee e join roles r \n"
+                + "on e.r_id = r.r_id\n"
+                + "where 1 = 1";
+
+        ArrayList<Employee> emps = new ArrayList<>();
+        ArrayList<Object> paramValues = new ArrayList<>();
+        if (id != null) {
+            sql += "AND e.e_id = ?";
+            paramValues.add(id);
+        }
+        if (name != null) {
+            sql += "AND e.e_name LIKE '%' + ? + '%'";
+            paramValues.add(name);
+        }
+        if (phone != null) {
+            sql += "AND e.e_phone LIKE '%' + ? + '%'";
+            paramValues.add(phone);
+        }
+        if (address != null) {
+            sql += " AND e.e_address LIKE '%' + ? + '%'";
+            paramValues.add(address);
+
+        }
+        if (gender != null) {
+            sql += " AND e.e_gender = ?";
+            paramValues.add(gender);
+        }
+        if (roleId != null && roleId != -1) {
+            sql += " AND r.r_id  = ?";
+            paramValues.add(roleId);
+        }
+        PreparedStatement stm = null;
+
+
+        try {
+            stm = connection.prepareStatement(sql);
+            for (int i = 0; i < paramValues.size(); i++) {
+                stm.setObject((i + 1), paramValues.get(i));
+            }
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Employee e = new Employee();
+                e.setId(rs.getInt("e_id"));
+                e.setName(rs.getString("e_name"));
+                e.setGender(rs.getBoolean("e_gender"));
+                e.setAddress(rs.getString("e_address"));
+                e.setPhone(rs.getString("e_phone"));
+
+                Role r = new Role();
+                r.setName(rs.getString("r_name"));  // Lấy Role Name từ ResultSet
+                e.setRole(r);
+
+                emps.add(e);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(EmployeeDao.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                stm.close();
+                connection.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(EmployeeDao.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return emps;
+
+    }
 
 }

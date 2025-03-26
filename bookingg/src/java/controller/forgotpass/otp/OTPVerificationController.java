@@ -31,7 +31,8 @@ public class OTPVerificationController extends HttpServlet {
         Boolean allowOTP = (Boolean) session.getAttribute("allowOTP");
         String email = (String) session.getAttribute("resetEmail");
 
-        if (allowOTP == null || !allowOTP || email == null) {
+        //Đảm bảo chỉ những người dùng đã gửi email hợp lệ (trong bước quên mật khẩu trước đó) mới được truy cập vào trang xác minh OTP.
+        if (allowOTP == null || !allowOTP || email == null) { //thì người dùng không có quyền truy cập trang xác minh OTP.
             response.sendError(HttpServletResponse.SC_FORBIDDEN, "Truy cập không hợp lệ!");
             return;
         }

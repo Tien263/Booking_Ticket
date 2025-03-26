@@ -20,21 +20,9 @@ import model.Customer;
  */
 public class RegisterController extends HttpServlet {
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Register</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Register at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+    public boolean isValidEmail(String email) {
+        String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
+        return email.matches(emailRegex);
     }
 
     @Override
@@ -50,7 +38,7 @@ public class RegisterController extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String fullname = request.getParameter("fullname");
         String email = request.getParameter("email");
@@ -98,6 +86,20 @@ public class RegisterController extends HttpServlet {
             request.setAttribute("phone", phone);
             request.setAttribute("address", address);
             request.setAttribute("gender", gender);
+            request.getRequestDispatcher("login.jsp").forward(request, response);
+            return;
+        }
+
+        if (!isValidEmail(email)) {
+            request.setAttribute("error", "Email không hợp lệ! Vui lòng nhập đúng định dạng.");
+            request.setAttribute("fullname", fullname);
+            request.setAttribute("username", username);
+            request.setAttribute("password", password);
+            request.setAttribute("confirmpass", confirmpass);
+            request.setAttribute("phone", phone);
+            request.setAttribute("address", address);
+            request.setAttribute("gender", gender);
+
             request.getRequestDispatcher("login.jsp").forward(request, response);
             return;
         }

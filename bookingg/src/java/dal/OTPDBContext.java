@@ -18,12 +18,29 @@ import java.util.logging.Logger;
  */
 public class OTPDBContext extends DBContext<OTP> {
 
+    /**
+     * Tạo ra một mã OTP ngẫu nhiên gồm 6 chữ số.
+     * random.nextInt(900000) tạo một số ngẫu nhiên từ 0 đến 899999.
+     * Cộng thêm 100000 -> OTP luôn là 6 chữ số (từ 100000 đến 999999).
+     * Chuyển số thành chuỗi bằng String.valueOf(otp) và trả về.
+     * 
+     * @return 
+     */
     private static String generateOTP() {
         Random random = new Random();
         int otp = 100000 + random.nextInt(900000);
         return String.valueOf(otp);
     }
 
+    /**
+     * Chèn một bản ghi OTP mới vào bảng OTP.
+     * created_at: Thời gian tạo, sử dụng CURRENT_TIMESTAMP (thời gian hiện tại của hệ thống).
+     * expires_at: Thời gian hết hạn, sử dụng 
+     * DATEADD(MINUTE, 4, CURRENT_TIMESTAMP) -> thời gian hết hạn là 4 phút sau khi tạo.
+     * used: Đặt mặc định là 0 (chưa sử dụng).
+     * 
+     * @param entity 
+     */
     @Override
     public void insert(OTP entity) {
         String sql_insert = "INSERT INTO [dbo].[OTP]\n"
@@ -65,6 +82,16 @@ public class OTPDBContext extends DBContext<OTP> {
     }
 
 
+    /**
+     * Lấy mã OTP mới nhất (chưa sử dụng và chưa hết hạn) cho một email cụ thể.
+     * @param email: Email cần lấy mã OTP.
+     * expires_at > GETDATE(): Chỉ lấy mã OTP chưa hết hạn 
+     * (GETDATE() là thời gian hiện tại trong SQL Server).
+     * ORDER BY created_at DESC: Sắp xếp theo thời gian tạo giảm dần để lấy mã OTP mới nhất.
+     * 
+     * @return 
+     */
+    
     public String getOTP(String email) {
         String sql = "SELECT TOP 1 otp FROM [dbo].[OTP] "
                 + "WHERE c_email = ? "
@@ -85,6 +112,13 @@ public class OTPDBContext extends DBContext<OTP> {
         return null;
     }
 
+    
+    /**
+     * Xác minh xem một mã OTP có hợp lệ không (tức là có tồn tại, chưa sử dụng, và chưa hết hạn).
+     * @param email
+     * @param otp
+     * @return 
+     */
     public boolean verifyOTP(String email, String otp) {
         String sql = "SELECT TOP 1 * FROM OTP WHERE otp = ? "
                 + "AND c_email = ? AND used = 0 AND expires_at > GETDATE() ORDER BY  expires_at DESC ";
@@ -103,6 +137,12 @@ public class OTPDBContext extends DBContext<OTP> {
         return false;
     }
 
+    
+    /**
+     * Cập nhật trạng thái của một mã OTP thành đã sử dụng (used = 1).
+     * 
+     * @param entity 
+     */
     @Override
     public void update(OTP entity) {
         String sql_update = "UPDATE OTP SET used = 1 WHERE c_email = ? AND otp = ?";

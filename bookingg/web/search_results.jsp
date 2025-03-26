@@ -9,13 +9,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%
+  
     String from = (String) request.getAttribute("from");
     String to = (String) request.getAttribute("to");
     String hour = (String) request.getAttribute("hour");
     String minute = (String) request.getAttribute("minute");
     String time = (String) request.getAttribute("time");
     String travelDate = request.getParameter("travelDate");
-
+   
     // Nếu `travelDate` chưa có giá trị, lấy ngày hiện tại
     if (travelDate == null || travelDate.isEmpty()) {
         java.util.Date today = new java.util.Date();
@@ -231,7 +232,7 @@
                                 <% for (String province : provinces) { 
                                     boolean isSelected = (to != null && province.equals(to));
                                 %>
-                                <option value="<%= province %>" <%= isSelected ? "selected" : "" %>>
+                                <option value="<%=province%>" <%=isSelected ? "selected" : "" %>>
                                     <%= province %>
                                 </option>
                                 <% } %>
@@ -298,8 +299,8 @@
                             <li>Khoảng cách: <%= trip.getBrDistance() %> km</li>
                             <li>Biển hiệu: <%= trip.getV_id() %></li>
                         </ul>
-                        <form action="CheckCId" method="GET">
-                            <input type="hidden" name="c_id" value="<%= c_id %>">
+                        <form action="SeatURL" method="GET">
+                         
                             <input type="hidden" name="brId" value="<%= trip.getBrId() %>">
                             <input type="hidden" name="from" value="<%= trip.getBrFrom() %>">
                             <input type="hidden" name="to" value="<%= trip.getBrTo() %>">

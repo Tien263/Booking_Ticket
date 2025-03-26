@@ -136,7 +136,7 @@
 
                         <div class="col-lg-3 col-md-6 col-sm-6 col-6 order-last">
                             <ul class="header_action_btns ul_li_right clearfix">
-                                
+
                                 <li class="dropdown">
                                     <!--                                    <button type="button" class="cart_btn" id="cart_dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                                             <i class="fal fa-shopping-cart"></i>
@@ -228,14 +228,14 @@
                             <nav class="main_menu clearfix">
                                 <ul class="ul_li_center clearfix">
                                     <li class="active has_child">
-                                        <a href="home.jsp">Home</a>
+                                        <a href="home.jsp">Trang chủ</a>
                                     </li>
-                                    <li><a href="booking">Booking Ticket</a></li>
+                                    <li><a href="booking">Đặt vé</a></li>
                                     <li><a href="cuslistblog">Blog</a></li>
                                     <li>
-                                        <a href="contact.jsp">Contact Us</a>
+                                        <a href="contact.jsp">Liên hệ</a>
                                     </li>
-                                    <li><a href="employee_login.jsp">Employee Login</a></li>
+                                    <li><a href="employee_login.jsp">Nhân viên</a></li>
                                 </ul>
                             </nav>
                         </div>
@@ -244,18 +244,18 @@
                 </div>
             </div>
 
-<!--            <div id="collapse_search_body" class="collapse_search_body collapse">
-                <div class="search_body">
-                    <div class="container">
-                        <form action="#">
-                            <div class="form_item">
-                                <input type="search" name="search" placeholder="Type here...">
-                                <button type="submit"><i class="fal fa-search"></i></button>
+            <!--            <div id="collapse_search_body" class="collapse_search_body collapse">
+                            <div class="search_body">
+                                <div class="container">
+                                    <form action="#">
+                                        <div class="form_item">
+                                            <input type="search" name="search" placeholder="Type here...">
+                                            <button type="submit"><i class="fal fa-search"></i></button>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
-                        </form>
-                    </div>
-                </div>
-            </div>-->
+                        </div>-->
         </header>
         <!-- header_section - end
         ================================================== -->
@@ -275,67 +275,31 @@
                     <div class="about_content mb_60">
                         <div class="brand_logo mb_15">
                             <a href="index.html">
-                                <img src="assets/images/logo/logo_01_1.png" srcset="assets/images/logo/logo_01_2x.png 2x" alt="logo_not_found">
+                                <img src="assets/images/logo/logo_01_1.png" srcset="assets/images/logo/logo_01_1.png 2x" alt="logo_not_found">
                             </a>
                         </div>
                         <p class="mb-0">
-                            Nullam id dolor auctor, dignissim magna eu, mattis ante. Pellentesque tincidunt, elit a facilisis efficitur, nunc nisi scelerisque enim, rhoncus malesuada est velit a nulla. Cras porta mi vitae dolor tristique euismod. Lorem ipsum dolor sit amet, consectetur adipiscing elit
+                            BusGo cam kết cung cấp dịch vụ đặt vé xe buýt đáng tin cậy và chất lượng cao với thông tin minh bạch, giá cả rõ ràng và hỗ trợ khách hàng tận tình, đảm bảo hành trình của bạn luôn thuận tiện và an toàn.
                         </p>
                     </div>
 
                     <div class="menu_list mb_60 clearfix">
-                        <h3 class="title_text text-white">Menu List</h3>
+                        <h3 class="title_text text-white">Danh mục</h3>
                         <ul class="ul_li_block clearfix">
                             <li class="active dropdown">
-                                <a href="#!" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Home</a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="index_1.html">Home Page V.1</a></li>
-                                    <li><a href="index_2.html">Home Page V.2</a></li>
-                                </ul>
+                                <a href="home.jsp" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Trang chủ</a>
                             </li>
-                            <li><a href="gallery.html">Our Cars</a></li>
-                            <li><a href="review.html">Reviews</a></li>
-                            <li><a href="about.html">About</a></li>
-                            <li class="dropdown">
-                                <a href="#!" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages</a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="service.html">Our Service</a></li>
-                                    <li><a href="gallery.html">Car Gallery</a></li>
-                                    <li><a href="account.html">My Account</a></li>
-                                    <li><a href="reservation.html">Reservation</a></li>
-                                    <li class="dropdown">
-                                        <a href="#!" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Blogs</a>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="blog.html">Blog</a></li>
-                                            <li><a href="blog_details.html">Blog Details</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="dropdown">
-                                        <a href="#!" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Our Cars</a>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="car.html">Cars</a></li>
-                                            <li><a href="car_details.html">Car Details</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="cart.html">Shopping Cart</a></li>
-                                    <li><a href="faq.html">F.A.Q.</a></li>
-                                    <li><a href="login.html">Login</a></li>
-                                </ul>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#!" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Contact Us</a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="contact.html">Contact Default</a></li>
-                                    <li><a href="contact_wordwide.html">Contact Wordwide</a></li>
-                                </ul>
-                            </li>
+                            <li><a href="booking">Đặt vé</a></li>
+                            <li><a href="cuslistblog">Blog</a></li>
+                            <li><a href="contact.jsp">Liên hệ</a></li>
+                            <li><a href="employee_login.jsp">Đăng nhập của nhân viên</a></li>
+
                         </ul>
                     </div>
 
                     <div class="booking_car_form">
-                        <h3 class="title_text text-white mb-2">Book A Car</h3>
+                        <h3 class="title_text text-white mb-2">Đặt vé</h3>
                         <p class="mb_15">
-                            Nullam id dolor auctor, dignissim magna eu, mattis ante. Pellentesque tincidunt, elit a facilisis efficitur.
                         </p>
                         <form action="#">
                             <div class="form_item">
@@ -374,7 +338,7 @@
                                 BusGo cam kết cung cấp trải nghiệm đặt vé xe buýt đáng tin cậy với thông tin minh bạch và hỗ trợ khách hàng tận tâm. Đặt vé ngay để có chuyến đi thuận tiện và an toàn!
                                 </p>
                                 <div data-aos="fade-up" data-aos-delay="500">
-                                    <a class="custom_btn bg_default_red btn_width text-uppercase" href="booking">Book Ticket <img src="assets/images/icons/icon_01.png" alt="icon_not_found"></a>
+                                    <a class="custom_btn bg_default_red btn_width text-uppercase" href="booking">Đặt vé <img src="assets/images/icons/icon_01.png" alt="icon_not_found"></a>
                                 </div>
                             </div>
                         </div>
@@ -826,7 +790,7 @@
                             <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
                                 <div class="serial_number text-right" data-aos="fade-up" data-aos-delay="100">
                                     <span>02</span>
-                                    <h4 class="mb-0">Choose a travel destination</h4>
+                                    <h4 class="mb-0">Chọn điểm đến du lịch</h4>
                                 </div>
                             </div>
 
@@ -835,11 +799,11 @@
                                     <div class="thumbnail_carousel">
                                         <div class="item">
                                             <div class="item_head">
-                                                <h4 class="item_title mb-0">Top tourist destination</h4>
+                                                <h4 class="item_title mb-0">Các điểm đến du lịch hàng đầu</h4>
                                                 <ul class="review_text ul_li_right clearfix">
                                                     <li class="text-right">
                                                         <strong>Super</strong>
-                                                        <small>24+ Reviews</small>
+                                                        <small>24+ Đánh giá</small>
                                                     </li>
                                                     <li><span class="bg_default_blue">4.8/5</span></li>
                                                 </ul>
@@ -850,18 +814,18 @@
                                                     <span class="custom_btn btn_width bg_default_blue"><del>$800/Day</del> $400/Day</span>
                                                 </li>
                                                 <li>
-                                                    <a href="#!" class="custom_btn btn_width bg_default_red text-uppercase">Book Ticket <img src="assets/images/icons/icon_01.png" alt="icon_not_found"></a>
+                                                    <a href="booking" class="custom_btn btn_width bg_default_red text-uppercase">Đặt vé <img src="assets/images/icons/icon_01.png" alt="icon_not_found"></a>
                                                 </li>
                                             </ul>
                                         </div>
 
                                         <div class="item">
                                             <div class="item_head">
-                                                <h4 class="item_title mb-0">Top tourist destination</h4>
+                                                <h4 class="item_title mb-0">Các điểm đến du lịch hàng đầu</h4>
                                                 <ul class="review_text ul_li_right clearfix">
                                                     <li class="text-right">
                                                         <strong>Super</strong>
-                                                        <small>24+ Reviews</small>
+                                                        <small>24+ Đánh giá</small>
                                                     </li>
                                                     <li><span class="bg_default_blue">4.8/5</span></li>
                                                 </ul>
@@ -872,18 +836,18 @@
                                                     <span class="custom_btn btn_width bg_default_blue"><del>$800/Day</del> $400/Day</span>
                                                 </li>
                                                 <li>
-                                                    <a href="#!" class="custom_btn btn_width bg_default_red text-uppercase">Book Ticket <img src="assets/images/icons/icon_01.png" alt="icon_not_found"></a>
+                                                    <a href="booking" class="custom_btn btn_width bg_default_red text-uppercase">Đặt vé <img src="assets/images/icons/icon_01.png" alt="icon_not_found"></a>
                                                 </li>
                                             </ul>
                                         </div>
 
                                         <div class="item">
                                             <div class="item_head">
-                                                <h4 class="item_title mb-0">Top tourist destination</h4>
+                                                <h4 class="item_title mb-0">Các điểm đến du lịch hàng đầu</h4>
                                                 <ul class="review_text ul_li_right clearfix">
                                                     <li class="text-right">
                                                         <strong>Super</strong>
-                                                        <small>24+ Reviews</small>
+                                                        <small>24+ Đánh giá</small>
                                                     </li>
                                                     <li><span class="bg_default_blue">4.8/5</span></li>
                                                 </ul>
@@ -894,18 +858,18 @@
                                                     <span class="custom_btn btn_width bg_default_blue"><del>$800/Day</del> $400/Day</span>
                                                 </li>
                                                 <li>
-                                                    <a href="#!" class="custom_btn btn_width bg_default_red text-uppercase">Book Ticket <img src="assets/images/icons/icon_01.png" alt="icon_not_found"></a>
+                                                    <a href="booking" class="custom_btn btn_width bg_default_red text-uppercase">Đặt vé <img src="assets/images/icons/icon_01.png" alt="icon_not_found"></a>
                                                 </li>
                                             </ul>
                                         </div>
 
                                         <div class="item">
                                             <div class="item_head">
-                                                <h4 class="item_title mb-0">Top tourist destination</h4>
+                                                <h4 class="item_title mb-0">Các điểm đến du lịch hàng đầu</h4>
                                                 <ul class="review_text ul_li_right clearfix">
                                                     <li class="text-right">
                                                         <strong>Super</strong>
-                                                        <small>24+ Reviews</small>
+                                                        <small>24+ Đánh giá</small>
                                                     </li>
                                                     <li><span class="bg_default_blue">4.8/5</span></li>
                                                 </ul>
@@ -916,18 +880,18 @@
                                                     <span class="custom_btn btn_width bg_default_blue"><del>$800/Day</del> $400/Day</span>
                                                 </li>
                                                 <li>
-                                                    <a href="#!" class="custom_btn btn_width bg_default_red text-uppercase">Book Ticket <img src="assets/images/icons/icon_01.png" alt="icon_not_found"></a>
+                                                    <a href="booking" class="custom_btn btn_width bg_default_red text-uppercase">Đặt vé <img src="assets/images/icons/icon_01.png" alt="icon_not_found"></a>
                                                 </li>
                                             </ul>
                                         </div>
 
                                         <div class="item">
                                             <div class="item_head">
-                                                <h4 class="item_title mb-0">Top tourist destination</h4>
+                                                <h4 class="item_title mb-0">Các điểm đến du lịch hàng đầu</h4>
                                                 <ul class="review_text ul_li_right clearfix">
                                                     <li class="text-right">
                                                         <strong>Super</strong>
-                                                        <small>24+ Reviews</small>
+                                                        <small>24+ Đánh giá</small>
                                                     </li>
                                                     <li><span class="bg_default_blue">4.8/5</span></li>
                                                 </ul>
@@ -938,18 +902,18 @@
                                                     <span class="custom_btn btn_width bg_default_blue"><del>$800/Day</del> $400/Day</span>
                                                 </li>
                                                 <li>
-                                                    <a href="#!" class="custom_btn btn_width bg_default_red text-uppercase">Book Ticket <img src="assets/images/icons/icon_01.png" alt="icon_not_found"></a>
+                                                    <a href="booking" class="custom_btn btn_width bg_default_red text-uppercase">Đặt vé <img src="assets/images/icons/icon_01.png" alt="icon_not_found"></a>
                                                 </li>
                                             </ul>
                                         </div>
 
                                         <div class="item">
                                             <div class="item_head">
-                                                <h4 class="item_title mb-0">Top tourist destination</h4>
+                                                <h4 class="item_title mb-0">Các điểm đến du lịch hàng đầu</h4>
                                                 <ul class="review_text ul_li_right clearfix">
                                                     <li class="text-right">
                                                         <strong>Super</strong>
-                                                        <small>24+ Reviews</small>
+                                                        <small>24+ Đánh giá</small>
                                                     </li>
                                                     <li><span class="bg_default_blue">4.8/5</span></li>
                                                 </ul>
@@ -960,7 +924,7 @@
                                                     <span class="custom_btn btn_width bg_default_blue"><del>$800/Day</del> $400/Day</span>
                                                 </li>
                                                 <li>
-                                                    <a href="#!" class="custom_btn btn_width bg_default_red text-uppercase">Book Ticket <img src="assets/images/icons/icon_01.png" alt="icon_not_found"></a>
+                                                    <a href="booking" class="custom_btn btn_width bg_default_red text-uppercase">Đặt vé <img src="assets/images/icons/icon_01.png" alt="icon_not_found"></a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -989,13 +953,13 @@
 
                                 <div class="car_choose_content" data-aos="fade-up" data-aos-delay="500">
                                     <ul class="info_list ul_li_block mb_15 clearfix">
-                                        <li><strong>Passengers:</strong> 1</li>
-                                        <li><strong>Suitcase:</strong> 1 Large, 2 Small</li>
-                                        <li><strong>Departure:</strong> Ha Noi</li>
-                                        <li><strong>Ticket Type:</strong> Standard</li>
-                                        <li><strong>Amenities:</strong> Free drinking water, WiFi, Air conditioning, Charging ports, Blanket</li>
+                                        <li><strong>Hành khách:</strong> 1</li>
+                                        <li><strong>Hành lý:</strong> 1 vali lớn, 2 vali nhỏ</li>
+                                        <li><strong>Khởi hành:</strong> Ha Noi</li>
+                                        <li><strong>Loại vé:</strong> Tiêu chuẩn</li>
+                                        <li><strong>Tiện ích:</strong>Nước uống miễn phí, WiFi, Điều hòa, Cổng sạc, Chăn</li>
                                     </ul>
-                                    <a class="terms_condition" href="#!"><i class="fas fa-info-circle mr-1"></i> Terms and conditions</a>
+                                    <a class="terms_condition" href="#!"><i class="fas fa-info-circle mr-1"></i>Điều khoản và điều kiện</a>
                                 </div>
                             </div>
                         </div>
@@ -1184,18 +1148,17 @@
                             <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
                                 <div class="serial_number text-right" data-aos="fade-up" data-aos-delay="100">
                                     <span>03</span>
-                                    <h4 class="mb-0">What our offer includes</h4>
+                                    <h4 class="mb-0">Những gì chúng tôi cung cấp</h4>
                                 </div>
                             </div>
 
                             <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
                                 <div class="offer_content">
                                     <h2 class="item_title" data-aos="fade-up" data-aos-delay="100">
-                                        The Best Bus Ticket Booking Experience
+                                        Trải nghiệm đặt vé xe buýt tốt nhất
                                     </h2>
                                     <p class="mb-0" data-aos="fade-up" data-aos-delay="300">
-                                        We are committed to providing a safe, convenient, and transparent bus ticket booking experience. With our modern system, you can easily select your preferred route, enjoy high-quality services, and access exclusive deals.
-                                    </p>
+                                        Chúng tôi cam kết cung cấp một trải nghiệm đặt vé xe buýt an toàn, thuận tiện và minh bạch. Với hệ thống hiện đại, bạn có thể dễ dàng chọn tuyến đường yêu thích, tận hưởng dịch vụ chất lượng cao và tiếp cận các ưu đãi đặc biệt.                                    </p>
                                     <div class="row">
                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                             <div class="offer_info" data-aos="fade-up" data-aos-delay="100">
@@ -1204,11 +1167,9 @@
                                                 </div>
                                                 <div class="item_content">
                                                     <h4 class="item_title">
-                                                        Secured Payment Guarantee
-                                                    </h4>
+                                                        Đảm bảo thanh toán an toàn                                                    </h4>
                                                     <p class="mb-0">
-                                                        Safe and secure payment options with maximum customer data protection.
-                                                    </p>
+                                                        Các phương thức thanh toán an toàn và bảo vệ tối đa dữ liệu khách hàng.                                                    </p>
                                                 </div>
                                             </div>
                                         </div>
@@ -1220,11 +1181,9 @@
                                                 </div>
                                                 <div class="item_content">
                                                     <h4 class="item_title">
-                                                        Easy Bus Ticket Booking
-                                                    </h4>
+                                                        Đặt vé xe buýt dễ dàng                                                    </h4>
                                                     <p class="mb-0">
-                                                        Quickly choose your bus route with multiple ticket options and trusted operators.
-                                                    </p>
+                                                        Chọn nhanh chóng tuyến xe buýt với nhiều lựa chọn vé và các nhà điều hành uy tín.                                                    </p>
                                                 </div>
                                             </div>
                                         </div>
@@ -1236,11 +1195,10 @@
                                                 </div>
                                                 <div class="item_content">
                                                     <h4 class="item_title">
-                                                        Multi-language Support 24/7
+                                                        Hỗ trợ đa ngôn ngữ 24/7
                                                     </h4>
                                                     <p class="mb-0">
-                                                        Multi-language assistance available anytime to support your needs.
-                                                    </p>
+                                                        Hỗ trợ đa ngôn ngữ bất cứ khi nào để đáp ứng nhu cầu của bạn.                                                    </p>
                                                 </div>
                                             </div>
                                         </div>
@@ -1252,11 +1210,9 @@
                                                 </div>
                                                 <div class="item_content">
                                                     <h4 class="item_title">
-                                                        Emergency technical assistance
-                                                    </h4>
+                                                        Hỗ trợ kỹ thuật khẩn cấp                                                    </h4>
                                                     <p class="mb-0">
-                                                        Immediate support to ensure your journey is smooth and hassle-free.
-                                                    </p>
+                                                        Hỗ trợ ngay lập tức để đảm bảo hành trình của bạn luôn suôn sẻ và không gặp rắc rối.                                                    </p>
                                                 </div>
                                             </div>
                                         </div>
@@ -1280,11 +1236,10 @@
                         <div class="col-lg-7 col-md-9 col-sm-12 col-xs-12">
                             <div class="section_title mb_60 text-center text-white" data-aos="fade-up" data-aos-delay="100">
                                 <h2 class="title_text text-white mb_15">
-                                    <span>BusGo Headquarters</span>
+                                    <span>Trụ sở chính BusGo</span>
                                 </h2>
                                 <p class="mb-0">
-                                    We operate from our central headquarters, ensuring smooth operations and premium customer service. Our main office is strategically located to support our network of routes and enhance the travel experience for all passengers.
-                                </p>
+                                    Chúng tôi hoạt động từ trụ sở trung tâm, đảm bảo vận hành suôn sẻ và cung cấp dịch vụ khách hàng cao cấp. Văn phòng chính của chúng tôi được đặt tại khu công nghệ cao nhằm hỗ trợ mạng lưới tuyến đường và nâng cao trải nghiệm di chuyển cho tất cả hành khách.                                </p>
                             </div>
                         </div>
                     </div>
@@ -1294,7 +1249,7 @@
                             <div class="row" data-aos="fade-up" data-aos-delay="300">
                                 <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
                                     <div class="form_item mb-0">
-                                        <input id="world_location_search" type="search" name="search" placeholder="Search for a Country">
+                                        <input id="world_location_search" type="search" name="search" placeholder="Search for a address">
                                         <label for="world_location_search" class="input_icon"><i class="fal fa-search"></i></label>
                                     </div>
                                 </div>
@@ -1305,25 +1260,9 @@
                             </div>
                         </form>
 
-                        <div class="map_wrap position-relative" data-aos="fade-up" data-aos-delay="400">
-                            <div id="mapBox" data-lat="40.701083" data-lon="-74.1522848" data-zoom="14" data-info="PO Box CT16122 Collins Street West, Victoria 8007, Australia." data-mlat="40.701083" data-mlon="-74.1522848">
-                            </div>
-                            <div class="location_content">
-                                <h4>Marseille Seaport</h4>
-                                <p>
-                                    <i class="fas fa-map-marker-alt"></i>
-                                    Chemin du Littoral, Porte 4, Marseille
-                                </p>
-                                <p>
-                                    Office opening hours: 
-                                    <span>MON-SAT: 9:00am-9:00pm</span>
-                                </p>
-                                <div class="save_btn">
-                                    <a href="#"><i class="fas fa-envelope"></i> Save for Later</a>
-                                </div>
-                                <a class="text_btn text-uppercase" href="#!"><span>View All Offers</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
-                            </div>
-                        </div>
+                        <div style="display: flex; justify-content: center; margin-top: 20px;">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3540.2208718984925!2d105.52271427503094!3d21.012416680632846!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135abc60e7d3f19%3A0x2be9d7d0b5abcbf4!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBGUFQgSMOgIE7hu5lp!5e1!3m2!1svi!2s!4v1742054129300!5m2!1svi!2s" width="1100" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
                     </div>
 
                 </div>
@@ -1342,14 +1281,14 @@
                             <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
                                 <div class="serial_number text-right" data-aos="fade-up" data-aos-delay="100">
                                     <span>04</span>
-                                    <h4 class="mb-0">Enjoy the ride and leave your feedback</h4>
+                                    <h4 class="mb-0">Tận hưởng chuyến đi và để lại phản hồi của bạn</h4>
                                 </div>
                             </div>
 
                             <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
                                 <div class="testimonial_contants_wrap">
                                     <h2 class="item_title mb_30" data-aos="fade-up" data-aos-delay="100">
-                                        Reviews and videos from our clients:
+                                        Đánh giá và video, hình ảnh từ khách hàng của chúng tôi:
                                     </h2>
 
                                     <div class="testimonial_item clearfix">
@@ -1474,61 +1413,61 @@
 
             <!-- blog_section - start
             ================================================== -->
-<!--            <section class="blog_section clearfix">
-                <div class="updown_style_wrap">
-
-                    <div class="updown_style">
-                        <div class="blog_fullimage" data-aos="fade-up" data-aos-delay="100">
-                            <img src="assets/images/blog/img_01.jpg" alt="image_not_found">
-                            <div class="item_content text-white">
-                                <h3 class="item_title text-white">Cras eu ante bibendum, lacinia velit sit amet, scelerisque enim</h3>
-                                <p>
-                                    Phasellus porta pulvinar metus, sit amet bibendum lectus hendrerit vel. Duis ullamcorper, justo quis hendrerit venenatis, purus mi volutpat dui, vel commodo urna eros eget sapien
-                                </p>
-                                <a class="text_btn text-uppercase" href="#!"><span>Read in our blog</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
+            <!--            <section class="blog_section clearfix">
+                            <div class="updown_style_wrap">
+            
+                                <div class="updown_style">
+                                    <div class="blog_fullimage" data-aos="fade-up" data-aos-delay="100">
+                                        <img src="assets/images/blog/img_01.jpg" alt="image_not_found">
+                                        <div class="item_content text-white">
+                                            <h3 class="item_title text-white">Cras eu ante bibendum, lacinia velit sit amet, scelerisque enim</h3>
+                                            <p>
+                                                Phasellus porta pulvinar metus, sit amet bibendum lectus hendrerit vel. Duis ullamcorper, justo quis hendrerit venenatis, purus mi volutpat dui, vel commodo urna eros eget sapien
+                                            </p>
+                                            <a class="text_btn text-uppercase" href="#!"><span>Read in our blog</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
+                                        </div>
+                                    </div>
+            
+                                    <div class="blog_fullimage" data-aos="fade-up" data-aos-delay="300">
+                                        <img src="assets/images/blog/img_02.jpg" alt="image_not_found">
+                                        <div class="item_content text-white">
+                                            <h3 class="item_title text-white">Phasellus porta pulvinar metus</h3>
+                                            <p>
+                                                Phasellus porta pulvinar metus, sit amet bibendum lectus hendrerit vel. Duis ullamcorper, justo quis hendrerit venenatis, purus mi volutpat dui, vel commodo urna eros eget sapien
+                                            </p>
+                                            <a class="text_btn text-uppercase" href="#!"><span>Read in our blog</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
+                                        </div>
+                                    </div>
+                                </div>
+            
+                                <div class="updown_style">
+                                    <div class="blog_fullimage" data-aos="fade-up" data-aos-delay="100">
+                                        <img src="assets/images/blog/img_03.jpg" alt="image_not_found">
+                                        <div class="item_content text-white">
+                                            <h3 class="item_title text-white">Fed finibus mi et purus finibus, ut condimentum mauris fringilla</h3>
+                                            <p>
+                                                Phasellus porta pulvinar metus, sit amet bibendum lectus hendrerit vel. Duis ullamcorper, justo quis hendrerit venenatis, purus mi volutpat dui, vel commodo urna eros eget sapien
+                                            </p>
+                                            <a class="text_btn text-uppercase" href="#!"><span>Read in our blog</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
+                                        </div>
+                                    </div>
+            
+                                    <div class="blog_fullimage" data-aos="fade-up" data-aos-delay="300">
+                                        <img src="assets/images/blog/img_04.jpg" alt="image_not_found">
+                                        <div class="item_content text-white">
+                                            <h3 class="item_title text-white">Maecenas sagittis turpis non pharetra pulvinar. Nullam mollis tortor eget</h3>
+                                            <p>
+                                                Phasellus porta pulvinar metus, sit amet bibendum lectus hendrerit vel. Duis ullamcorper, justo quis hendrerit venenatis, purus mi volutpat dui, vel commodo urna eros eget sapien
+                                            </p>
+                                            <a class="text_btn text-uppercase" href="#!"><span>Read in our blog</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
+                                        </div>
+                                    </div>
+                                </div>
+            
                             </div>
-                        </div>
-
-                        <div class="blog_fullimage" data-aos="fade-up" data-aos-delay="300">
-                            <img src="assets/images/blog/img_02.jpg" alt="image_not_found">
-                            <div class="item_content text-white">
-                                <h3 class="item_title text-white">Phasellus porta pulvinar metus</h3>
-                                <p>
-                                    Phasellus porta pulvinar metus, sit amet bibendum lectus hendrerit vel. Duis ullamcorper, justo quis hendrerit venenatis, purus mi volutpat dui, vel commodo urna eros eget sapien
-                                </p>
-                                <a class="text_btn text-uppercase" href="#!"><span>Read in our blog</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="updown_style">
-                        <div class="blog_fullimage" data-aos="fade-up" data-aos-delay="100">
-                            <img src="assets/images/blog/img_03.jpg" alt="image_not_found">
-                            <div class="item_content text-white">
-                                <h3 class="item_title text-white">Fed finibus mi et purus finibus, ut condimentum mauris fringilla</h3>
-                                <p>
-                                    Phasellus porta pulvinar metus, sit amet bibendum lectus hendrerit vel. Duis ullamcorper, justo quis hendrerit venenatis, purus mi volutpat dui, vel commodo urna eros eget sapien
-                                </p>
-                                <a class="text_btn text-uppercase" href="#!"><span>Read in our blog</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
-                            </div>
-                        </div>
-
-                        <div class="blog_fullimage" data-aos="fade-up" data-aos-delay="300">
-                            <img src="assets/images/blog/img_04.jpg" alt="image_not_found">
-                            <div class="item_content text-white">
-                                <h3 class="item_title text-white">Maecenas sagittis turpis non pharetra pulvinar. Nullam mollis tortor eget</h3>
-                                <p>
-                                    Phasellus porta pulvinar metus, sit amet bibendum lectus hendrerit vel. Duis ullamcorper, justo quis hendrerit venenatis, purus mi volutpat dui, vel commodo urna eros eget sapien
-                                </p>
-                                <a class="text_btn text-uppercase" href="#!"><span>Read in our blog</span> <img src="assets/images/icons/icon_02.png" alt="icon_not_found"></a>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </section>
-             blog_section - end
-            ================================================== -->
+                        </section>
+                         blog_section - end
+                        ================================================== -->
 
 
         </main>
@@ -1550,8 +1489,8 @@
                                     </a>
                                 </div>
                                 <p class="mb_15">
-                                    BusGo is committed to providing a reliable and high-quality bus ticket booking service with transparent information, clear pricing, and dedicated customer support, ensuring your journey is always convenient and safe
-                                </p>
+                                    BusGo cam kết cung cấp dịch vụ đặt vé xe buýt đáng tin cậy và chất lượng cao với thông tin minh bạch, giá cả rõ ràng và hỗ trợ khách hàng tận tình, đảm bảo hành trình của bạn luôn thuận tiện và an toàn.
+                                <p>
                                 <div class="footer_useful_links mb_30">
                                     <ul class="ul_li_block clearfix">
 
@@ -1585,15 +1524,12 @@
 
                         <div class="col-lg-4 col-md-4 col-sm-12 col-sm-12">
                             <div class="footer_useful_links" data-aos="fade-up" data-aos-delay="300">
-                                <h3 class="footer_widget_title">Information:</h3>
+                                <h3 class="footer_widget_title">Thông tin:</h3>
                                 <ul class="ul_li_block clearfix">
-                                    <li><a href="#!"><i class="fal fa-angle-right"></i> Find a Car for Rent in the Nearest Location</a></li>
-                                    <li><a href="#!"><i class="fal fa-angle-right"></i> Cars Catalog</a></li>
-                                    <li><a href="#!"><i class="fal fa-angle-right"></i> F.A.Q.</a></li>
-                                    <li><a href="#!"><i class="fal fa-angle-right"></i> About Us</a></li>
-                                    <li><a href="#!"><i class="fal fa-angle-right"></i> Contact Us</a></li>
-                                    <li><a href="#!"><i class="fal fa-angle-right"></i> Help Center</a></li>
-                                    <li><a href="#!"><i class="fal fa-angle-right"></i> Privacy Police</a></li>
+                                    <li><a href="booking"><i class="fal fa-angle-right"></i> Find a Car for Rent in the Nearest Location</a></li>
+                                    <li><a href="contact.jsp"><i class="fal fa-angle-right"></i> Liên hệ với chúng tôi</a></li>
+                                    <li><a href="contact.jsp"><i class="fal fa-angle-right"></i> Trung tâm hỗ trợ</a></li>
+                                    <li><a href="policy.jsp"><i class="fal fa-angle-right"></i> Chính sách bảo mật</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -1605,7 +1541,7 @@
                 <div class="container">
                     <div class="row align-items-center justify-content-lg-between">
                         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                            <p class="copyright_text mb-0">Copyright © 2020. Rotors by <a class="author_links text-white" href="#!">Merkulove</a></p>
+                            <p class="copyright_text mb-0">Bản quyền © 2020. Được phát triển bởi <a class="author_links text-white" href="login.jsp">BusGo</a></p>
                         </div>
 
                         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
