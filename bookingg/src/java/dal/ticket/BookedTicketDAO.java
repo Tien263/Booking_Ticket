@@ -87,43 +87,34 @@ public class BookedTicketDAO extends DBContext{
         try {
             connection.setAutoCommit(false); // Bắt đầu transaction
 
-            // 2. Lấy ngày đặt vé
-            String getBookingDateQuery = "SELECT bt_bookingDate FROM BookTickets WHERE bt_id = ?";
-            pstmt = connection.prepareStatement(getBookingDateQuery);
+            // 1. Cập nhật trạng thái trong BookTickets
+            String updateBookingQuery = "UPDATE BookTickets SET bt_status = 'cancelled' WHERE bt_id = ?";
+            pstmt = connection.prepareStatement(updateBookingQuery);
+            pstmt.setInt(1, btId);
+            int rowsAffected = pstmt.executeUpdate();
+            if (rowsAffected == 0) {
+                // Không tìm thấy vé với bt_id
+                return false;
+            }
+
+            // 2. Cập nhật trạng thái trong Tickets dựa trên bt_id
+            String updateTicketsQuery = "UPDATE Tickets SET t_status = 'cancelled' WHERE bt_id = ?";
+            pstmt = connection.prepareStatement(updateTicketsQuery);
+            pstmt.setInt(1, btId);
+            pstmt.executeUpdate();
+
+            // 3. Lấy danh sách s_id từ Tickets với bt_id
+            String selectSeatsQuery = "SELECT s_id FROM Tickets WHERE bt_id = ?";
+            pstmt = connection.prepareStatement(selectSeatsQuery);
             pstmt.setInt(1, btId);
             rs = pstmt.executeQuery();
 
-            // 3. Tính khoảng cách thời gian
-            Timestamp bookingTimestamp = rs.getTimestamp("bt_bookingDate");
-            LocalDateTime bookingDate = bookingTimestamp.toLocalDateTime();
-            LocalDateTime currentDate = LocalDateTime.now();
-            long daysDifference = ChronoUnit.DAYS.between(bookingDate, currentDate);
-
-            // 4. Thực hiện hủy vé dựa trên điều kiện
-            if (daysDifference <= 1) {
-                // Chỉ cập nhật bảng BookTickets
-                String updateBookingQuery = "UPDATE BookTickets SET bt_status = 'cancelled' WHERE bt_id = ?";
-                pstmt = connection.prepareStatement(updateBookingQuery);
-                pstmt.setInt(1, btId);
-                pstmt.executeUpdate();
-            } else {
-                // Cập nhật cả 3 bảng
-                // Update BookTickets
-                String updateBookingQuery = "UPDATE BookTickets SET bt_status = 'cancelled' WHERE bt_id = ?";
-                pstmt = connection.prepareStatement(updateBookingQuery);
-                pstmt.setInt(1, btId);
-                pstmt.executeUpdate();
-
-                // Update Tickets
-                String updateTicketsQuery = "UPDATE Tickets SET t_status = 'cancelled' WHERE bt_id = ?";
-                pstmt = connection.prepareStatement(updateTicketsQuery);
-                pstmt.setInt(1, btId);
-                pstmt.executeUpdate();
-
-                // Update Seats
-                String updateSeatsQuery = "UPDATE Seats SET s_status = 'available' WHERE bt1_id = ?";
-                pstmt = connection.prepareStatement(updateSeatsQuery);
-                pstmt.setInt(1, btId);
+            // 4. Cập nhật trạng thái trong Seats dựa trên s_id
+            String updateSeatsQuery = "UPDATE Seats SET s_status = 'available' WHERE s_id = ?";
+            pstmt = connection.prepareStatement(updateSeatsQuery);
+            while (rs.next()) {
+                int sId = rs.getInt("s_id");
+                pstmt.setInt(1, sId);
                 pstmt.executeUpdate();
             }
 
@@ -140,6 +131,7 @@ public class BookedTicketDAO extends DBContext{
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
+            e.printStackTrace();
             return false;
         } finally {
             // Đóng các resource
@@ -153,12 +145,7 @@ public class BookedTicketDAO extends DBContext{
         }
     }
 
-    // Main để test
-    public static void main(String[] args) {
-        BookedTicketDAO manager = new BookedTicketDAO();
-        boolean result = manager.cancelBookingTicket(52); // Thay 1 bằng bt_id cần test
-        System.out.println("Kết quả: " + (result ? "Thành công" : "Thất bại"));
-    }
+
     @Override
     public void insert(Object entity) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
