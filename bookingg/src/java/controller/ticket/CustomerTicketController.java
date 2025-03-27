@@ -92,8 +92,8 @@ public class CustomerTicketController extends HttpServlet {
             ArrayList<BookedTicket> tickets = bookedTicketDAO.findByCustomerEmail(sql, params); // Sử dụng method mới
 
             if (tickets == null || tickets.isEmpty()) {
-                request.setAttribute("message", "Không có vé nào phù hợp.");
-                request.getRequestDispatcher("error.jsp").forward(request, response);
+                session.setAttribute("error", "Không có lịch sử đặt vé.");
+                request.getRequestDispatcher("account").forward(request, response);
                 return;
             }
 

@@ -43,7 +43,20 @@
 
         <!-- custom - css include -->
         <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-
+        <style>
+            .error-message {
+                background-color: #ffe6e6;
+                color: #d8000c;
+                padding: 15px;
+                border-radius: 8px;
+                border: 1px solid #d8000c;
+                text-align: center;
+                max-width: 500px;
+                margin: 20px auto;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+                font-family: Arial, sans-serif;
+            }
+        </style>
     </head>
 
 
@@ -125,9 +138,9 @@
 
                         <div class="col-lg-3 col-md-6 col-sm-6 col-6 order-last">
                             <ul class="header_action_btns ul_li_right clearfix">
-                                
+
                                 <li class="dropdown">
-                                    
+
                                     <div class="cart_dropdown rotors_dropdown dropdown-menu" aria-labelledby="cart_dropdown">
                                         <h4 class="wrap_title">Cart Items: (3)</h4>
                                         <ul class="cart_items_list ul_li_block clearfix">
@@ -416,14 +429,18 @@
                         </div>
 
                         <div class="col-lg-8 col-md-8 col-sm-10 col-xs-12">
+                            <c:if test="${not empty sessionScope.error}">
+                                <div class="error-message">
+                                    ${sessionScope.error}
+                                </div>
+                                <c:remove var="error" scope="session" />
+                            </c:if>
                             <div class="account_tab_content tab-content">
                                 <div id="admin_tab" class="tab-pane active">
-
                                     <c:if test="${not empty sessionScope.successMessage}">
                                         <p style="color: green; text-align: center;">${sessionScope.successMessage}</p>
                                         <c:remove var="successMessage" scope="session"/>
                                     </c:if>
-
                                     <div class="account_info_list" data-aos="fade-up" data-aos-delay="100">
                                         <h3 class="list_title mb_30">Account:</h3>
                                         <ul class="ul_li_block clearfix">
@@ -498,7 +515,7 @@
                                 </div>
 
                                 <div id="history_tab" class="tab-pane fade">
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -532,7 +549,7 @@
                                     BusGo is committed to providing a reliable and high-quality bus ticket booking service with transparent information, clear pricing, and dedicated customer support, ensuring your journey is always convenient and safe
                                 </p>
                                 <div class="footer_useful_links mb_30">
-                                    
+
                                 </div>
                                 <div class="form_item mb-0">
                                     <form action="#">

@@ -27,7 +27,7 @@
     List<BusTrip> trips = (List<BusTrip>) request.getAttribute("trips");
     String error = (String) request.getAttribute("error");
     String message = (String) request.getAttribute("message");
-    String c_id = (String) request.getAttribute("c_id");
+
     // Xử lý ngày mặc định
     if (time == null) {
         java.util.Date today = new java.util.Date();
@@ -299,7 +299,6 @@
                             <li>Biển hiệu: <%= trip.getV_id() %></li>
                         </ul>
                         <form action="CheckCId" method="GET">
-                            <input type="hidden" name="c_id" value="<%= c_id %>">
                             <input type="hidden" name="brId" value="<%= trip.getBrId() %>">
                             <input type="hidden" name="from" value="<%= trip.getBrFrom() %>">
                             <input type="hidden" name="to" value="<%= trip.getBrTo() %>">
