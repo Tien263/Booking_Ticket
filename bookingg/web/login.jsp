@@ -364,8 +364,13 @@
                                         <label for="phone">Số điện thoại*</label>
                                         <input type="tel" id="phone" name="phone" placeholder="Số điện thoại" value="${phone}" required pattern="[0-9]{10}">
                                     </div>
-                                    <div class="form_item"><label for="gender">Giới tính*</label><select id="gender" name="gender" required><option value="1" <c:if test="${gender}">selected</c:if>>Nam</option><option value="0" <c:if test="${gender}">selected</c:if>>Nữ</option></select></div>
-                                    <div class="form_item"><label for="address">Địa chỉ</label><input type="text" id="address" name="address" placeholder="Địa chỉ" value="${address}"></div>
+                                    <div class="form_item">
+                                        <label for="gender">Giới tính*</label>
+                                        <select id="gender" name="gender" required>
+                                            <option value="1" <c:if test="${gender == true}">selected</c:if>>Nam</option>
+                                            <option value="0" <c:if test="${gender == false}">selected</c:if>>Nữ</option>
+                                            </select>
+                                        </div>                                    <div class="form_item"><label for="address">Địa chỉ</label><input type="text" id="address" name="address" placeholder="Địa chỉ" value="${address}"></div>
                                 </div>
 
                                 <!-- Cột bên phải -->

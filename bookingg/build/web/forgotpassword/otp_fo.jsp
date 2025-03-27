@@ -341,7 +341,7 @@
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" data-aos="fade-up" data-aos-delay="500">
                                     <div class="form_item text-center">
-                                        <p class="countdown-text">Gửi lại sau <span id="countdown">4:00</span>:</p>
+                                        <p class="countdown-text">Gửi lại sau <span id="countdown">2:00</span>:</p>
                                         <input type="submit" id="resendButton" value="Gửi lại" class="custom_btn bg_default_blue text-uppercase" disabled/>
                                     </div>
                                 </div>
@@ -473,8 +473,8 @@
                 }, 1000);
             }
 
-            // Bắt đầu đếm ngược 4 phút (240 giây)
-            startCountdown(240);
+            // Bắt đầu đếm ngược 2 phút (120 giây)
+            startCountdown(120);
         </script>
     </body>
 </html>

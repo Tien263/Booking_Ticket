@@ -3,13 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/DEMO_V1.0/bookingg/src/java/controller/forgotpass/otp/ResetPasswordCustomerController.java</file>
-            <file>file:/D:/DEMO_V1.0/bookingg/src/java/controller/forgotpass/otp/ForgotPasswordController.java</file>
-            <file>file:/D:/DEMO_V1.0/bookingg/web/blogdetail.jsp</file>
-            <file>file:/D:/DEMO_V1.0/bookingg/src/java/model/Email.java</file>
             <file>file:/D:/DEMO_V1.0/bookingg/src/java/controller/forgotpass/otp/OTPVerificationController.java</file>
-            <file>file:/D:/DEMO_V1.0/bookingg/src/java/controller/accesscontrol/ChangePasswordController.java</file>
-            <file>file:/D:/DEMO_V1.0/bookingg/src/java/dal/CustomerDao.java</file>
         </group>
     </open-files>
 </project-private>

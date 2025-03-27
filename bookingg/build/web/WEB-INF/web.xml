@@ -124,6 +124,10 @@
         <servlet-name>EmployeeSearchController</servlet-name>
         <servlet-class>controller.employee.EmployeeSearchController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>OTPVerificationRegisterController</servlet-name>
+        <servlet-class>controller.forgotpass.otp.OTPVerificationRegisterController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Register</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -287,5 +291,9 @@
     <servlet-mapping>
         <servlet-name>EmployeeSearchController</servlet-name>
         <url-pattern>/admin/employeesearch</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OTPVerificationRegisterController</servlet-name>
+        <url-pattern>/registverification</url-pattern>
     </servlet-mapping>
 </web-app>
