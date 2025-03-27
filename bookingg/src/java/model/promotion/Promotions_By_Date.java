@@ -17,10 +17,29 @@ public class Promotions_By_Date {
     private Date endDate;
     private double discount;
     private int quantity;
+<<<<<<< HEAD
+=======
+    private Integer eId; // Liên kết với bảng Employee, có thể null
+    private Integer priority; // Có thể null
+>>>>>>> main
 
     public Promotions_By_Date() {
     }
 
+<<<<<<< HEAD
+=======
+    public Promotions_By_Date(int id, String name, Date startDate, Date endDate, double discount, int quantity, Integer eId, Integer priority) {
+        this.id = id;
+        this.name = name;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.discount = discount;
+        this.quantity = quantity;
+        this.eId = eId;
+        this.priority = priority;
+    }
+    
+>>>>>>> main
     public Promotions_By_Date(int id, String name, Date startDate, Date endDate, double discount, int quantity) {
         this.id = id;
         this.name = name;
@@ -30,6 +49,27 @@ public class Promotions_By_Date {
         this.quantity = quantity;
     }
 
+<<<<<<< HEAD
+=======
+    public Integer geteId() {
+        return eId;
+    }
+
+    public void seteId(Integer eId) {
+        this.eId = eId;
+    }
+
+    public Integer getPriority() {
+        return priority;
+    }
+
+    public void setPriority(Integer priority) {
+        this.priority = priority;
+    }
+    
+    
+
+>>>>>>> main
     public String getName() {
         return name;
     }
@@ -78,6 +118,22 @@ public class Promotions_By_Date {
         this.quantity = quantity;
     }
     
+<<<<<<< HEAD
     
+=======
+    @Override
+    public String toString() {
+        return "Promotions_By_Date{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", discount=" + discount +
+                ", quantity=" + quantity +
+                ", eId=" + eId +
+                ", priority=" + priority +
+                '}';
+    }
+>>>>>>> main
     
 }

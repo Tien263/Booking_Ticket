@@ -280,6 +280,7 @@
         <servlet-name>VehicleController</servlet-name>
         <url-pattern>/vehicle/vehicle</url-pattern>
     </servlet-mapping>
+<<<<<<< HEAD
     <servlet-mapping>
         <servlet-name>TicketController</servlet-name>
         <url-pattern>/TicketURL</url-pattern>
@@ -287,5 +288,23 @@
     <servlet-mapping>
         <servlet-name>CustomerTicketController</servlet-name>
         <url-pattern>/CustomerTicketURL</url-pattern>
+=======
+    <servlet>
+        <servlet-name>ajaxServlet</servlet-name>
+        <servlet-class>com.vnpay.common.ajaxServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ajaxServlet</servlet-name>
+        <url-pattern>/payment</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>VnpayReturn</servlet-name>
+        <servlet-class>com.vnpay.common.VnpayReturn</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>VnpayReturn</servlet-name>
+        <url-pattern>/vn_pay/vnpayReturn</url-pattern>
+>>>>>>> main
     </servlet-mapping>
 </web-app>

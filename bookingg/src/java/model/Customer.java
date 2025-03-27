@@ -18,10 +18,47 @@ public class Customer {
     private boolean gender;
     private String username;
     private String password;
+    private String membershipLevel;
+    private int points;
 
     public Customer() {
     }
 
+<<<<<<< HEAD
+=======
+    public String getMembershipLevel() {
+        return membershipLevel;
+    }
+
+    public void setMembershipLevel(String membershipLevel) {
+        this.membershipLevel = membershipLevel;
+    }
+
+    public int getPoints() {
+        return points;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
+    }
+
+    
+    public Customer(int id, String email, String fullname, String phone, String address, boolean gender, String username, String password, String membershipLevel, int points) {
+        this.id = id;
+        this.email = email;
+        this.fullname = fullname;
+        this.phone = phone;
+        this.address = address;
+        this.gender = gender;
+        this.username = username;
+        this.password = password;
+        this.membershipLevel = membershipLevel;
+        this.points = points;
+    }
+
+    
+    
+>>>>>>> main
     public Customer(int id, String email, String fullname, String phone, String address, boolean gender, String username, String password) {
         this.id = id;
         this.email = email;

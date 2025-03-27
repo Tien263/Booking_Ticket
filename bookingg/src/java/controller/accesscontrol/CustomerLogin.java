@@ -72,13 +72,31 @@ public class CustomerLogin extends HttpServlet {
             request.getRequestDispatcher("login.jsp").forward(request, response);
             return;
         }
-
+        
         if (cd.checkEmailExist(email)) {
             Customer c = cd.getCustomerByEmail(email, password);
+<<<<<<< HEAD
 
             if (c != null) {
                 session.setAttribute("customer", c);
                 session.setAttribute("user", email);
+=======
+            if (c != null) {     
+                session.setAttribute("customer", c);
+                session.setAttribute("user", email);
+                session.setAttribute("c_id", c.getId()); 
+                int flag =0;
+                try {
+                      flag = (int) session.getAttribute("flag");
+                } catch (Exception e) {
+                     response.sendRedirect("home.jsp");
+                     return;
+                }
+                if (flag == 1) {
+                     response.sendRedirect("booking");
+                     return;
+                }
+>>>>>>> main
                 response.sendRedirect("home.jsp");
 
             } else {
@@ -126,6 +144,10 @@ public class CustomerLogin extends HttpServlet {
             request.setAttribute("error", "An error occurred. Please try again.");
             request.getRequestDispatcher("login.jsp").forward(request, response);
         }
+<<<<<<< HEAD
+=======
+        
+>>>>>>> main
     }
 
     @Override
