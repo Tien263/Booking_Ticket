@@ -6,11 +6,12 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList, model.ticket.BookedTicket" %>
+<%@ page import="dal.feedback.FeedbackDAO, model.feedback.Feedback" %>
 <%@ page import="java.time.LocalDateTime, java.time.temporal.ChronoUnit" %>
 <%@ page import="java.time.LocalDate" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
-    ArrayList<BookedTicket> tickets = (ArrayList<BookedTicket>) request.getAttribute("tickets");
+    ArrayList<BookedTicket> tickets = (ArrayList<BookedTicket>) request.getAttribute("tickets"); 
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -89,9 +90,168 @@
             .next::after {
                 content: " »";
             }
+        </style> 
+        <style>
+            /* Form đánh giá */
+            .feedback-form {
+                display: none;
+                background: #ffffff;
+                border-radius: 12px;
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+                padding: 20px;
+                margin-top: 15px;
+                border: 1px solid #e9ecef;
+                transition: all 0.3s ease;
+            }
+
+            .feedback-form.active {
+                display: block;
+            }
+
+            .feedback-form h3 {
+                color: #2c3e50;
+                font-weight: 700;
+                margin-bottom: 20px;
+                text-align: center;
+                font-size: 1.5rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 8px;
+            }
+
+            .feedback-form .form-group {
+                margin-bottom: 20px;
+            }
+
+            .feedback-form .rating-group {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .feedback-form .rating-group label {
+                color: #34495e;
+                font-weight: 600;
+                margin: 0;
+                white-space: nowrap;
+                display: flex;
+                align-items: center;
+                gap: 5px;
+            }
+
+            .feedback-form .rating-group select {
+                flex: 1;
+                border: 2px solid #dfe6e9;
+                border-radius: 8px;
+                padding: 10px;
+                font-size: 1rem;
+                transition: all 0.3s ease;
+                background: #f8f9fa;
+            }
+
+            .feedback-form select:focus {
+                border-color: #3498db;
+                box-shadow: 0 0 8px rgba(52, 152, 219, 0.2);
+                outline: none;
+            }
+
+            .feedback-form textarea {
+                border: 2px solid #dfe6e9;
+                border-radius: 8px;
+                padding: 12px;
+                width: 100%;
+                font-size: 1rem;
+                min-height: 100px;
+                resize: vertical;
+                transition: all 0.3s ease;
+                background: #f8f9fa;
+            }
+
+            .feedback-form textarea:focus {
+                border-color: #3498db;
+                box-shadow: 0 0 8px rgba(52, 152, 219, 0.2);
+                outline: none;
+            }
+
+            .feedback-form .readonly {
+                background: #e9ecef;
+                border-color: #ced4da;
+                color: #6c757d;
+            }
+
+            .feedback-form .btn-submit {
+                background: linear-gradient(90deg, #3498db, #2980b9);
+                border: none;
+                padding: 12px 20px;
+                border-radius: 8px;
+                font-weight: 600;
+                color: #fff;
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 8px;
+                transition: all 0.3s ease;
+            }
+
+            .feedback-form .btn-submit:hover {
+                background: linear-gradient(90deg, #2980b9, #1f618d);
+                transform: translateY(-2px);
+                box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3);
+            }
+
+            /* Nút Đóng màu đỏ */
+            .feedback-form .btn-close {
+                background: linear-gradient(90deg, #e74c3c, #c0392b); /* Gradient đỏ */
+                border: none;
+                padding: 12px 20px;
+                border-radius: 8px;
+                font-weight: 600;
+                color: #fff;
+                width: 100%;
+                margin-top: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 8px;
+                transition: all 0.3s ease;
+            }
+
+            .feedback-form .btn-close:hover {
+                background: linear-gradient(90deg, #c0392b, #a93226); /* Đỏ đậm hơn khi hover */
+                transform: translateY(-2px);
+                box-shadow: 0 4px 10px rgba(231, 76, 60, 0.3);
+            }
+
+            /* Thông báo màu xanh lá cây */
+            .feedback-form .disabled-message {
+                color: #27ae60; /* Xanh lá cây */
+                font-weight: 600;
+                text-align: center;
+                margin: 15px 0;
+                padding: 10px;
+                background: #eafaf1; /* Nền xanh nhạt */
+                border-radius: 8px;
+                border: 1px dashed #27ae60; /* Viền xanh lá cây */
+            }
+
+            .feedback-form.active {
+                animation: slideIn 0.3s ease-out;
+            }
+
+            @keyframes slideIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
         </style>
     </head>
-
     <body>
         <!-- backtotop - start -->
         <div id="thetop"></div>
@@ -134,8 +294,8 @@
                     <div class="row align-items-center">
                         <div class="col-lg-7">
                             <ul class="header_contact_info ul_li clearfix">
-                                <li><i class="fal fa-envelope"></i> rotorsmail@email.com</li>
-                                <li><i class="fal fa-phone"></i> +1-202-555-0156</li>
+                                <li><i class="fal fa-envelope"></i> Busgo@email.com</li>
+                                <li><i class="fal fa-phone"></i> 0398 996 177</li>
                             </ul>
                         </div>
                         <div class="col-lg-5">
@@ -164,13 +324,15 @@
                         <div class="col-lg-6 col-md-12">
                             <nav class="main_menu clearfix">
                                 <ul class="ul_li_center clearfix">
-                                    <li><a href="home.jsp">Home</a></li>
-                                    <li><a href="booking">Booking Ticket</a></li>
+                                    <li>
+                                        <a href="home.jsp">Trang chủ</a>
+                                    </li>
+                                    <li><a href="booking">Đặt vé</a></li>
                                     <li><a href="cuslistblog">Blog</a></li>
                                     <li>
-                                        <a href="contact.jsp">Contact Us</a>
+                                        <a href="contact.jsp">Liên hệ</a>
                                     </li>
-                                    <li><a href="employee_login.jsp">Employee Login</a></li>
+                                    <li><a href="employee_login.jsp">Nhân viên</a></li>
                                 </ul>
                             </nav>
                         </div>
@@ -220,7 +382,11 @@
                 </div>
                 <c:remove var="message" scope="session" />
             </c:if>
-            <% for(BookedTicket ticket : tickets) { %>
+            <% 
+            FeedbackDAO feedbackDAO = new FeedbackDAO();
+            for(BookedTicket ticket : tickets) { 
+                Feedback feedback = feedbackDAO.getFeedbackByBookTicketID(ticket.getBtId());
+            %>
             <!-- Form lọc -->
             <div class="bg-white shadow-md rounded-lg p-4 mb-4 max-w-3xl mx-auto">
                 <div class="flex justify-between items-center">
@@ -262,9 +428,51 @@
                            class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
                             Hủy vé
                         </a>
-                        <% } %>                     
+                        <% } %>     
+                        <% if ("confirmed".equals(ticket.getBtStatus())) { %>
+                        <a href="javascript:void(0);" 
+                           onclick="toggleFeedbackForm('feedback_<%= ticket.getBtId() %>')" 
+                           class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
+                            Đánh giá
+                        </a>
+                        <% } %>
                     </div>
                 </div>
+                <% if ("confirmed".equals(ticket.getBtStatus())) { %>
+                <div id="feedback_<%= ticket.getBtId() %>" class="feedback-form">
+                    <h3><i class="fas fa-star"></i> Đánh Giá Chuyến Đi</h3>
+                    <form action="FeedbackURL" method="POST">
+                        <input type="hidden" name="service" value="addFeedback">
+                        <input type="hidden" name="bookTicketId" value="<%= ticket.getBtId() %>">
+
+                        <!-- Phần đánh giá ngang hàng -->
+                        <div class="form-group rating-group">
+                            <label><i class="fas fa-star-half-alt"></i> Chọn Đánh Giá:</label>
+                            <select name="rating" class="form-control" <%= feedback != null ? "disabled" : "" %> required>
+                                <option value="" disabled <%= feedback == null ? "selected" : "" %>>Chọn số sao</option>
+                                <option value="1" <%= feedback != null && feedback.getRating() == 1 ? "selected" : "" %>> ★ - Tệ</option>
+                                <option value="2" <%= feedback != null && feedback.getRating() == 2 ? "selected" : "" %>> ★ ★ - Hơi Tệ</option>
+                                <option value="3" <%= feedback != null && feedback.getRating() == 3 ? "selected" : "" %>> ★ ★ ★ - Tốt</option>
+                                <option value="4" <%= feedback != null && feedback.getRating() == 4 ? "selected" : "" %>> ★ ★ ★ ★ - Rất Tốt</option>
+                                <option value="5" <%= feedback != null && feedback.getRating() == 5 ? "selected" : "" %>> ★ ★ ★ ★ ★ - Tuyệt vời</option>
+                            </select>
+                        </div>
+
+                        <!-- Phần bình luận bên dưới -->
+                        <div class="form-group">
+                            <label><i class="fas fa-comment"></i> Bình luận:</label>
+                            <textarea name="comment" class="form-control <%= feedback != null ? "readonly" : "" %>" <%= feedback != null ? "readonly" : "" %> required placeholder="Chia sẻ cảm nhận của bạn..."><%= feedback != null ? feedback.getComment() : "" %></textarea>
+                        </div>
+
+                        <% if (feedback == null) { %>
+                        <button type="submit" class="btn btn-submit"><i class="fas fa-paper-plane"></i> Gửi Đánh Giá</button>
+                        <% } else { %>
+                        <div class="disabled-message"><i class="fas fa-check-circle"></i> <strong>Bạn đã đánh giá rồi!</strong></div>
+                        <% } %>
+                        <button type="button" onclick="toggleFeedbackForm('feedback_<%= ticket.getBtId() %>')" class="btn btn-close"><i class="fas fa-times"></i> Đóng</button>
+                    </form>
+                </div>
+                <% } %>
             </div>  
             <% } %>
             <div class="pagination">
@@ -367,6 +575,27 @@
                 </div>
             </div>
         </footer>
+
+        <!-- Modal Đánh giá -->
+        <div class="modal fade" id="feedbackModal" tabindex="-1" role="dialog" aria-labelledby="feedbackModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="feedbackModalLabel">Đánh giá vé</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" id="feedbackModalBody">
+                        <!-- Nội dung của feedback.jsp sẽ được tải vào đây -->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- footer_section - end
         ================================================== -->
         <!-- fraimwork - jquery include -->
@@ -412,6 +641,17 @@
         <!-- custom - jquery include -->
         <script src="assets/js/custom.js"></script>
         <script src="https://cdn.tailwindcss.com">
+        </script>
+        <script>
+            function toggleFeedbackForm(formId) {
+                var form = document.getElementById(formId);
+                if (form) {
+                    form.classList.toggle("active");
+                    console.log("Toggled feedback form: " + formId); // Debug
+                } else {
+                    console.error("Form not found: " + formId); // Debug
+                }
+            }
         </script>
     </body>
 </html>

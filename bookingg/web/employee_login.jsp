@@ -4,7 +4,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>Nhân Viên - BusGo</title>
+        <link rel="shortcut icon" href="assets/images/logo/logo_01_1.png">
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -106,7 +108,7 @@
     </form>
 
     <p class="forgot-password">
-        <a href="forgot_password.jsp">Forgot Password?</a>
+        <a href="enter_username.jsp">Do you want to change password?</a>
     </p>
 </div>
 

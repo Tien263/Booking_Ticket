@@ -99,12 +99,12 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label for="br_price" class="form-label">Giá</label>
-                                    <input type="text" class="form-control" id="br_price" name="br_price" required>
+                                    <input type="number" class="form-control" id="br_price" name="br_price" required>
                                 </div>
 
                                 <div class="col-md-6">
                                     <label for="br_distance" class="form-label">Khoảng Cách (km)</label>
-                                    <input type="text" class="form-control" id="br_distance" name="br_distance" >
+                                    <input type="number" class="form-control" id="br_distance" name="br_distance" >
                                 </div>
                                 <div class="col-md-6">
                                     <label for="br_description" class="form-label">Mô tả</label>

@@ -4,6 +4,7 @@
  */
 package controller.forgotpass.otp;
 
+import MD5.BCrypt;
 import dal.CustomerDao;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -54,16 +55,20 @@ public class ResetPasswordCustomerController extends HttpServlet {
             request.getRequestDispatcher("forgotpassword/new_password.jsp").forward(request, response);
             return;
         }
-
+        String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
         // Cập nhật mật khẩu
         CustomerDao db = new CustomerDao();
-        db.resetPassword(email, password);
+        db.resetPassword(email, hashedPassword);
 
         // Xóa session để tránh truy cập lại
         session.removeAttribute("allowReset");
         session.removeAttribute("resetEmail");
 
-        response.getWriter().println("Change password successful");
+// Đặt thông báo thành công vào request
+        request.setAttribute("successMessage", "Thay đổi mật khẩu thành công!");
+
+        // Chuyển tiếp về new_password.jsp để hiển thị thông báo
+        request.getRequestDispatcher("forgotpassword/new_password.jsp").forward(request, response);
     }
 
 }

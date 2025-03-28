@@ -21,6 +21,46 @@ import java.util.logging.Logger;
  */
 public class BusRouteDAO extends DBContext<BusRoute> {
 
+    public ArrayList<BusRoute> searchBusRoutes(String from, String to) {
+        ArrayList<BusRoute> list = new ArrayList<>();
+        String sql = "SELECT [br_id], [br_from], [br_to], [br_price], [br_distance], [br_description], [br_status] "
+                + "FROM [dbo].[BusRoutes] WHERE 1=1";
+
+        // Thêm điều kiện tìm kiếm nếu from hoặc to không rỗng
+        if (from != null && !from.trim().isEmpty()) {
+            sql += " AND [br_from] LIKE ?";
+        }
+        if (to != null && !to.trim().isEmpty()) {
+            sql += " AND [br_to] LIKE ?";
+        }
+
+        try (PreparedStatement st = connection.prepareStatement(sql)) {
+            int paramIndex = 1;
+            if (from != null && !from.trim().isEmpty()) {
+                st.setString(paramIndex++, "%" + from + "%");
+            }
+            if (to != null && !to.trim().isEmpty()) {
+                st.setString(paramIndex++, "%" + to + "%");
+            }
+
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                BusRoute br = new BusRoute();
+                br.setBr_id(rs.getInt("br_id"));
+                br.setBr_from(rs.getString("br_from"));
+                br.setBr_to(rs.getString("br_to"));
+                br.setBr_price(rs.getDouble("br_price"));
+                br.setBr_distance(rs.getInt("br_distance"));
+                br.setBr_description(rs.getString("br_description"));
+                br.setBr_status(rs.getString("br_status"));
+                list.add(br);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BusRouteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+
     @Override
     public void insert(BusRoute busRoute) {
         String sql = "INSERT INTO [dbo].[BusRoutes]([br_distance],[br_from],[br_to],[br_price],[br_description],[br_status])\n"
@@ -59,11 +99,16 @@ public class BusRouteDAO extends DBContext<BusRoute> {
     }
 
     public void changeInactive(int pid, String mess) {
-        String sql = "UPDATE [dbo].[BusRoutes] SET [br_status] = '" + mess + "' WHERE br_id = " + pid;
+        Statement state = null;
         try {
-            //default: ResultSet.TYPE_FORWARD_ONLY
-            Statement state = connection.createStatement();
-            state.executeUpdate(sql);
+            // Cập nhật trạng thái BusRoutes
+            String routeSql = "UPDATE [dbo].[BusRoutes] SET [br_status] = '" + mess + "' WHERE br_id = " + pid;
+            state = connection.createStatement();
+            state.executeUpdate(routeSql);
+
+            // Cập nhật trạng thái tất cả BusTrips liên quan
+            String tripSql = "UPDATE [dbo].[BusTrips] SET [bt1_status] = 'Inactive' WHERE br_id = " + pid + " AND [bt1_status] = 'active'";
+            state.executeUpdate(tripSql);
         } catch (SQLException ex) {
             Logger.getLogger(BusRouteDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -71,47 +116,57 @@ public class BusRouteDAO extends DBContext<BusRoute> {
 
     @Override
     public void delete(BusRoute busRoute) {
-        String checkSql = "SELECT * FROM [BusTrips] WHERE br_id = " + busRoute.getBr_id();
+        String checkSql = "SELECT COUNT(*) FROM [BusTrips] WHERE br_id = ?";
+        String deleteRouteSql = "DELETE FROM [dbo].[BusRoutes] WHERE [br_id] = ?";
         try {
-            ResultSet rs = connection.createStatement().executeQuery(checkSql);
+            PreparedStatement checkStmt = connection.prepareStatement(checkSql);
+            PreparedStatement deleteRouteStmt = connection.prepareStatement(deleteRouteSql);
+            checkStmt.setInt(1, busRoute.getBr_id());
+            ResultSet rs = checkStmt.executeQuery();
+            int tripCount = 0;
             if (rs.next()) {
-                changeInactive(busRoute.getBr_id(), "inactive");
+                tripCount = rs.getInt(1);
             }
-            String sql = "DELETE FROM [dbo].[BusRoutes] WHERE [br_id] = " + busRoute.getBr_id();
-            //default: ResultSet.TYPE_FORWARD_ONLY
-            Statement state = connection.createStatement();
-            state.executeUpdate(sql);
+
+            // Nếu có BusTrips, gọi changeInactive
+            if (tripCount > 0) {
+                changeInactive(busRoute.getBr_id(), "inactive");
+            } else {
+                // Xóa BusRoute
+                deleteRouteStmt.setInt(1, busRoute.getBr_id());
+                deleteRouteStmt.executeUpdate();
+            }
         } catch (SQLException ex) {
             Logger.getLogger(BusRouteDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     public ArrayList<BusRoute> list(String sql, List<Object> params) {
-    ArrayList<BusRoute> list = new ArrayList<>();
+        ArrayList<BusRoute> list = new ArrayList<>();
 
-    try (PreparedStatement pre = connection.prepareStatement(sql)) {
-        for (int i = 0; i < params.size(); i++) {
-            pre.setObject(i + 1, params.get(i));
-        }
-
-        try (ResultSet rs = pre.executeQuery()) {
-            while (rs.next()) {
-                BusRoute busRoute = new BusRoute(
-                        rs.getInt("br_id"),
-                        rs.getInt("br_distance"),
-                        rs.getString("br_from"),
-                        rs.getString("br_to"),
-                        rs.getDouble("br_price"),
-                        rs.getString("br_description"),
-                        rs.getString("br_status"));
-                list.add(busRoute);
+        try (PreparedStatement pre = connection.prepareStatement(sql)) {
+            for (int i = 0; i < params.size(); i++) {
+                pre.setObject(i + 1, params.get(i));
             }
+
+            try (ResultSet rs = pre.executeQuery()) {
+                while (rs.next()) {
+                    BusRoute busRoute = new BusRoute(
+                            rs.getInt("br_id"),
+                            rs.getInt("br_distance"),
+                            rs.getString("br_from"),
+                            rs.getString("br_to"),
+                            rs.getDouble("br_price"),
+                            rs.getString("br_description"),
+                            rs.getString("br_status"));
+                    list.add(busRoute);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-    } catch (SQLException e) {
-        e.printStackTrace();
+        return list;
     }
-    return list;
-}
 
     @Override
     public BusRoute get(int id) {
@@ -155,9 +210,39 @@ public class BusRouteDAO extends DBContext<BusRoute> {
         return count;
     }
 
+    public static void main(String[] args) {
+        BusRouteDAO dao = new BusRouteDAO();
+        BusRoute busRoute = dao.get(4);
+        dao.delete(busRoute);
+    }
+
     @Override
     public ArrayList<BusRoute> list() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        ArrayList<BusRoute> list = new ArrayList<>();
+        String sql = "select br_id, br_from, br_to, br_price,"
+                + "br_distance, br_description,br_status "
+                + "from BusRoutes ";
+
+        PreparedStatement st;
+        try {
+            st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                BusRoute br = new BusRoute();
+                br.setBr_id(rs.getInt("br_id"));
+                br.setBr_from(rs.getString("br_from"));
+                br.setBr_to(rs.getString("br_to"));
+                br.setBr_price(rs.getDouble("br_price"));
+                br.setBr_distance(rs.getInt("br_distance"));
+                br.setBr_description(rs.getString("br_description"));
+                br.setBr_status(rs.getString("br_status"));
+                list.add(br);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(BusRouteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
     }
 
 }

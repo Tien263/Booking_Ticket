@@ -16,6 +16,14 @@
         <filter-name>authenticationVehicle</filter-name>
         <filter-class>filter.authenticationVehicle</filter-class>
     </filter>
+    <filter>
+        <filter-name>authenticationAdmin</filter-name>
+        <filter-class>filter.authenticationAdmin</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>authenticationAdmin</filter-name>
+        <url-pattern>/admin/*</url-pattern>
+    </filter-mapping>
     <filter-mapping>
         <filter-name>authenticationVehicle</filter-name>
         <url-pattern>/vehicle/*</url-pattern>
@@ -124,6 +132,34 @@
         <servlet-name>TicketController</servlet-name>
         <servlet-class>controller.ticket.TicketController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SendOtp</servlet-name>
+        <servlet-class>com.example.config.SendOtp</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>VerifyOtp</servlet-name>
+        <servlet-class>com.example.config.VerifyOtp</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FeedbackController</servlet-name>
+        <servlet-class>controller.feedback.FeedbackController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>InvoiceServlet</servlet-name>
+        <servlet-class>controller.invoice.InvoiceServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>OTPVerificationRegisterController</servlet-name>
+        <servlet-class>controller.forgotpass.otp.OTPVerificationRegisterController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManageRouteController</servlet-name>
+        <servlet-class>controller.employee.ManageRouteController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManageTripController</servlet-name>
+        <servlet-class>controller.employee.ManageTripController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Register</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -206,7 +242,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>booking</servlet-name>
-        <servlet-class>controller.bookTicket.booking</servlet-class>
+        <servlet-class>controller.bookTicket.Booking</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>booking</servlet-name>
@@ -303,5 +339,57 @@
     <servlet-mapping>
         <servlet-name>TicketController</servlet-name>
         <url-pattern>/TicketURL</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>EmployeeListController</servlet-name>
+        <servlet-class>controller.employee.EmployeeListController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EmployeeSearchController</servlet-name>
+        <servlet-class>controller.employee.EmployeeSearchController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EmployeeListController</servlet-name>
+        <url-pattern>/admin/employeelist</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EmployeeSearchController</servlet-name>
+        <url-pattern>/admin/employeesearch</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SendOtp</servlet-name>
+        <url-pattern>/send-otp</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>VerifyOtp</servlet-name>
+        <url-pattern>/verify-otp</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FeedbackController</servlet-name>
+        <url-pattern>/FeedbackURL</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InvoiceServlet</servlet-name>
+        <url-pattern>/invoice</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OTPVerificationRegisterController</servlet-name>
+        <url-pattern>/registverification</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManageRouteController</servlet-name>
+        <url-pattern>/admin/listbusroute</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManageTripController</servlet-name>
+        <url-pattern>/admin/listbustrip</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>EmployeeCreateController</servlet-name>
+        <servlet-class>controller.employee.EmployeeCreateController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EmployeeCreateController</servlet-name>
+        <url-pattern>/admin/employeecreate</url-pattern>
     </servlet-mapping>
 </web-app>

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package dal.promotion;
 
 import dal.DBContext;
@@ -50,10 +46,52 @@ public class PromotionByCodeDAO extends DBContext<Promotions_By_Code> {
             return false;
         }
     }
-    
-    /**
-     * Chèn một mã giảm giá mới vào database
-     */
+
+    // Filter promotions by name, discount, and status
+    public ArrayList<Promotions_By_Code> filter(String name, Double discount, Boolean isActive) {
+        ArrayList<Promotions_By_Code> list = new ArrayList<>();
+        StringBuilder sql = new StringBuilder("SELECT * FROM Promotions_By_Code WHERE 1=1");
+        ArrayList<Object> params = new ArrayList<>();
+
+        if (name != null && !name.trim().isEmpty()) {
+            sql.append(" AND pbc_name LIKE ?");
+            params.add("%" + name + "%");
+        }
+        if (discount != null) {
+            sql.append(" AND pbc_discount = ?");
+            params.add(discount);
+        }
+        if (isActive != null) {
+            sql.append(" AND pbc_endDate " + (isActive ? ">=" : "<") + " GETDATE()");
+        }
+
+        try (PreparedStatement ps = connection.prepareStatement(sql.toString())) {
+            for (int i = 0; i < params.size(); i++) {
+                ps.setObject(i + 1, params.get(i));
+            }
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Promotions_By_Code promo = new Promotions_By_Code(
+                            rs.getInt("pbc_id"),
+                            rs.getNString("pbc_name"),
+                            rs.getString("pbc_code"),
+                            rs.getDouble("pbc_discount"),
+                            rs.getDate("pbc_endDate"),
+                            rs.getInt("pbc_quantity"),
+                            rs.getInt("a_id") == 0 ? null : rs.getInt("a_id"),
+                            rs.getInt("e_id") == 0 ? null : rs.getInt("e_id"),
+                            rs.getInt("priority") == 0 ? null : rs.getInt("priority")
+                    );
+                    list.add(promo);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Error filtering promotions", e);
+        }
+        return list;
+    }
+
     @Override
     public void insert(Promotions_By_Code entity) {
         String sql = "INSERT INTO Promotions_By_Code (pbc_code, pbc_name, pbc_discount, pbc_endDate, pbc_quantity) VALUES (?, ?, ?, ?, ?)";
@@ -70,9 +108,6 @@ public class PromotionByCodeDAO extends DBContext<Promotions_By_Code> {
         }
     }
 
-    /**
-     * Cập nhật thông tin mã giảm giá theo ID
-     */
     @Override
     public void update(Promotions_By_Code entity) {
         String sql = "UPDATE Promotions_By_Code SET pbc_name = ?, pbc_code = ?, pbc_discount = ?, pbc_endDate = ?, pbc_quantity = ? WHERE pbc_id = ?";
@@ -90,9 +125,6 @@ public class PromotionByCodeDAO extends DBContext<Promotions_By_Code> {
         }
     }
 
-    /**
-     * Xóa mã giảm giá theo ID
-     */
     @Override
     public void delete(Promotions_By_Code entity) {
         String sql = "DELETE FROM Promotions_By_Code WHERE pbc_id = ?";
@@ -105,9 +137,6 @@ public class PromotionByCodeDAO extends DBContext<Promotions_By_Code> {
         }
     }
 
-    /**
-     * Lấy danh sách tất cả mã giảm giá
-     */
     @Override
     public ArrayList<Promotions_By_Code> list() {
         ArrayList<Promotions_By_Code> list = new ArrayList<>();
@@ -122,7 +151,10 @@ public class PromotionByCodeDAO extends DBContext<Promotions_By_Code> {
                         rs.getString("pbc_code"),
                         rs.getDouble("pbc_discount"),
                         rs.getDate("pbc_endDate"),
-                        rs.getInt("pbc_quantity")
+                        rs.getInt("pbc_quantity"),
+                        rs.getInt("a_id") == 0 ? null : rs.getInt("a_id"),
+                        rs.getInt("e_id") == 0 ? null : rs.getInt("e_id"),
+                        rs.getInt("priority") == 0 ? null : rs.getInt("priority")
                 );
                 list.add(promo);
             }
@@ -132,9 +164,6 @@ public class PromotionByCodeDAO extends DBContext<Promotions_By_Code> {
         return list;
     }
 
-    /**
-     * Lấy thông tin mã giảm giá theo ID
-     */
     @Override
     public Promotions_By_Code get(int id) {
         String sql = "SELECT * FROM Promotions_By_Code WHERE pbc_id = ?";
@@ -149,7 +178,10 @@ public class PromotionByCodeDAO extends DBContext<Promotions_By_Code> {
                         rs.getString("pbc_code"),
                         rs.getDouble("pbc_discount"),
                         rs.getDate("pbc_endDate"),
-                        rs.getInt("pbc_quantity")
+                        rs.getInt("pbc_quantity"),
+                        rs.getInt("a_id") == 0 ? null : rs.getInt("a_id"),
+                        rs.getInt("e_id") == 0 ? null : rs.getInt("e_id"),
+                        rs.getInt("priority") == 0 ? null : rs.getInt("priority")
                 );
             }
         } catch (SQLException e) {
@@ -157,7 +189,6 @@ public class PromotionByCodeDAO extends DBContext<Promotions_By_Code> {
         }
         return null;
     }
-
 
     public void delete(int id) {
         String sql = "DELETE FROM Promotions_By_Code WHERE pbc_id = ?";

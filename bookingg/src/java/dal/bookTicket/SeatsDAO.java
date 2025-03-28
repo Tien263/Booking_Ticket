@@ -89,6 +89,14 @@ public class SeatsDAO extends DBContext {
         }
         return "Không xác định";
     }
+    
+    public static void main(String[] args) {
+        SeatsDAO dao = new SeatsDAO();
+        List<Seats> seats = dao.getSeats(1, 5);
+        for (Seats seat : seats) {
+            System.out.println(seat);
+        }
+    }
 
     @Override
     public void insert(Object entity) {

@@ -25,6 +25,87 @@ import java.util.logging.Logger;
  */
 public class BusTripDAO extends DBContext<BusTrips> {
 
+    //để tìm kiếm theo bt1_date và br_id, đồng thời hỗ trợ phân trang:
+    public ArrayList<BusTrips> searchBusTrips(String date, String routeId, int page, int pageSize) {
+        ArrayList<BusTrips> list = new ArrayList<>();
+        String sql = "SELECT DISTINCT bt.bt1_id, bt.bt1_date, bt.bt1_departureTime, bt.bt1_arrivalTime, "
+                + "bt.bt1_status, bt.br_id, v.v_licensePlate "
+                + "FROM BusTrips bt "
+                + "LEFT JOIN BusRoutes br ON br.br_id = bt.br_id "
+                + "LEFT JOIN Seats s ON bt.bt1_id = s.bt1_id "
+                + "LEFT JOIN Vehicles v ON v.v_id = s.v_id "
+                + "WHERE 1=1";
+
+        // Thêm điều kiện tìm kiếm
+        if (date != null && !date.trim().isEmpty()) {
+            sql += " AND bt.bt1_date = ?";
+        }
+        if (routeId != null && !routeId.trim().isEmpty()) {
+            sql += " AND bt.br_id = ?";
+        }
+
+        sql += " ORDER BY bt.bt1_id DESC OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+
+        try (PreparedStatement st = connection.prepareStatement(sql)) {
+            int paramIndex = 1;
+            if (date != null && !date.trim().isEmpty()) {
+                st.setDate(paramIndex++, Date.valueOf(date));
+            }
+            if (routeId != null && !routeId.trim().isEmpty()) {
+                st.setInt(paramIndex++, Integer.parseInt(routeId));
+            }
+            int offset = (page - 1) * pageSize;
+            st.setInt(paramIndex++, offset);
+            st.setInt(paramIndex++, pageSize);
+
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                BusTrips bt = new BusTrips();
+                bt.setBt1_id(rs.getInt("bt1_id"));
+                bt.setBt1_date(rs.getDate("bt1_date").toLocalDate());
+                bt.setBt1_departureTime(rs.getTime("bt1_departureTime").toLocalTime());
+                bt.setBt1_arrivalTime(rs.getTime("bt1_arrivalTime").toLocalTime());
+                bt.setBt1_status(rs.getString("bt1_status"));
+                bt.setBr_id(rs.getInt("br_id"));
+                bt.setV_licensePlate(rs.getString("v_licensePlate"));
+                list.add(bt);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BusTripDAO.class.getName()).log(Level.SEVERE, "Lỗi khi tìm kiếm chuyến xe", ex);
+        }
+        return list;
+    }
+    
+    //đếm tổng số bản ghi khớp với tiêu chí tìm kiếm
+    public int getTotalBusTrips(String date, String routeId) {
+    int count = 0;
+    String sql = "SELECT COUNT(*) FROM BusTrips bt WHERE 1=1";
+    
+    if (date != null && !date.trim().isEmpty()) {
+        sql += " AND bt.bt1_date = ?";
+    }
+    if (routeId != null && !routeId.trim().isEmpty()) {
+        sql += " AND bt.br_id = ?";
+    }
+
+    try (PreparedStatement ps = connection.prepareStatement(sql)) {
+        int paramIndex = 1;
+        if (date != null && !date.trim().isEmpty()) {
+            ps.setDate(paramIndex++, Date.valueOf(date));
+        }
+        if (routeId != null && !routeId.trim().isEmpty()) {
+            ps.setInt(paramIndex++, Integer.parseInt(routeId));
+        }
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            count = rs.getInt(1);
+        }
+    } catch (SQLException e) {
+        Logger.getLogger(BusTripDAO.class.getName()).log(Level.SEVERE, "Lỗi khi đếm tổng số chuyến xe", e);
+    }
+    return count;
+}
+
     public List<Integer> insertBusTripForMonth(int year, int month, BusTrips busTrips) {
         List<Integer> generatedIds = new ArrayList<>();
         String sql = "INSERT INTO [dbo].[BusTrips]([bt1_date],[bt1_departureTime],[bt1_arrivalTime],[bt1_status],[br_id]) "
@@ -140,6 +221,24 @@ public class BusTripDAO extends DBContext<BusTrips> {
         return null;
     }
 
+    public int getTotalBusTrips() {
+        int count = 0;
+        String sql = "SELECT COUNT(DISTINCT bt.bt1_id) "
+                + "FROM BusTrips bt "
+                + "LEFT JOIN BusRoutes br ON br.br_id = bt.br_id "
+                + "LEFT JOIN Seats s ON bt.bt1_id = s.bt1_id "
+                + "LEFT JOIN Vehicles v ON v.v_id = s.v_id";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                count = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(BusTripDAO.class.getName()).log(Level.SEVERE, "Lỗi khi đếm tổng số chuyến xe", e);
+        }
+        return count;
+    }
+
     public int getTotalBusTrips(String baseSql, List<Object> params) {
         int count = 0;
         String sql = "SELECT COUNT(DISTINCT bt.bt1_id)" + baseSql;
@@ -158,13 +257,77 @@ public class BusTripDAO extends DBContext<BusTrips> {
         return count;
     }
 
-    @Override
-    public ArrayList<BusTrips> list() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    //@Override
+    public ArrayList<BusTrips> list(int page, int pageSize) {
+        ArrayList<BusTrips> list = new ArrayList<>();
+        String sql = "select DISTINCT bt.bt1_id,bt.bt1_date, bt.bt1_departureTime, bt.bt1_arrivalTime,\n"
+                + "bt.bt1_status,br.br_id, v.v_licensePlate\n"
+                + "from BusRoutes br join BusTrips bt \n"
+                + "on br.br_id = bt.br_id\n"
+                + "join Seats s\n"
+                + "on bt.bt1_id = s.bt1_id\n"
+                + "join vehicles v\n"
+                + "on v.v_id= s.v_id\n"
+                + "ORDER BY bt.bt1_id DESC \n"
+                + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY;";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            int offset = (page - 1) * pageSize; // Tính vị trí bắt đầu
+            st.setInt(1, offset);
+            st.setInt(2, pageSize);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                BusTrips bt = new BusTrips();
+                bt.setBt1_id(rs.getInt("bt1_id"));
+                bt.setBt1_date(rs.getDate("bt1_date").toLocalDate());
+                bt.setBt1_departureTime(rs.getTime("bt1_departureTime").toLocalTime());
+                bt.setBt1_arrivalTime(rs.getTime("bt1_arrivalTime").toLocalTime());
+                bt.setBt1_status(rs.getString("bt1_status"));
+                bt.setBr_id(rs.getInt("br_id"));
+                bt.setV_licensePlate(rs.getString("v_licensePlate"));
+                list.add(bt);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BusTripDAO.class.getName()).log(Level.SEVERE, "Lỗi khi lấy danh sách chuyến xe", ex);
+        }
+        return list;
     }
 
     @Override
-    public void insert(BusTrips entity) {
+    public ArrayList<BusTrips> list() {
+        ArrayList<BusTrips> list = new ArrayList<>();
+        String sql = "select bt.bt1_id,bt.bt1_date, bt.bt1_departureTime, bt.bt1_arrivalTime,\n"
+                + "bt.bt1_status,br.br_id, v.v_licensePlate\n"
+                + "from BusRoutes br join BusTrips bt \n"
+                + "on br.br_id = bt.br_id\n"
+                + "join Seats s\n"
+                + "on bt.bt1_id = s.bt1_id\n"
+                + "join vehicles v\n"
+                + "on v.v_id= s.v_id\n"
+                + "ORDER BY bt.bt1_id DESC;";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                BusTrips bt = new BusTrips();
+                bt.setBt1_id(rs.getInt("bt1_id"));
+                bt.setBt1_date(rs.getDate("bt1_date").toLocalDate());
+                bt.setBt1_departureTime(rs.getTime("bt1_departureTime").toLocalTime());
+                bt.setBt1_arrivalTime(rs.getTime("bt1_arrivalTime").toLocalTime());
+                bt.setBt1_status(rs.getString("bt1_status"));
+                bt.setBr_id(rs.getInt("br_id"));
+                bt.setV_licensePlate(rs.getString("v_licensePlate"));
+                list.add(bt);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BusTripDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+
+    @Override
+    public void insert(BusTrips entity
+    ) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

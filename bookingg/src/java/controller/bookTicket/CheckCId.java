@@ -9,12 +9,9 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import model.Customer;
 
-
-/**
- *
- * @author Nguyen Minh Duc
- */
 public class CheckCId extends HttpServlet {
 
     /**
@@ -29,40 +26,43 @@ public class CheckCId extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String c_id = request.getParameter("c_id");
+        HttpSession session = request.getSession();
 
-        // Nếu chưa đăng nhập, chuyển hướng về trang login.jsp
-        if (c_id.equals("null")) {
-            response.sendRedirect("login.jsp");
-            return;
-        } else {
+        Customer customer = (Customer) session.getAttribute("customer");
+        if (customer == null) {
+            // Lưu thông tin chuyến xe vào session
+            session.setAttribute("routeId", request.getParameter("brId"));
+            session.setAttribute("from", request.getParameter("from"));
+            session.setAttribute("to", request.getParameter("to"));
+            session.setAttribute("departureTime", request.getParameter("departureTime"));
+            session.setAttribute("arrivalTime", request.getParameter("arrivalTime"));
+            session.setAttribute("price", request.getParameter("price"));
+            session.setAttribute("description", request.getParameter("description"));
+            session.setAttribute("distance", request.getParameter("distance"));
+            session.setAttribute("vehicleId", request.getParameter("vId"));
+            session.setAttribute("tripId", request.getParameter("bt1Id"));
+            session.setAttribute("tripDate", request.getParameter("bt1_date"));
 
-            String brId = request.getParameter("brId");
-            String from = request.getParameter("from");
-            String to = request.getParameter("to");
-            String departureTime = request.getParameter("departureTime");
-            String arrivalTime = request.getParameter("arrivalTime");
-            String price = request.getParameter("price");
-            String description = request.getParameter("description");
-            String distance = request.getParameter("distance");
-            String vId = request.getParameter("vId");
-            String bt1Id = request.getParameter("bt1Id");
-
-            request.setAttribute("c_id", c_id);
-            request.setAttribute("brId", brId);
-            request.setAttribute("from", from);
-            request.setAttribute("to", to);
-            request.setAttribute("departureTime", departureTime);
-            request.setAttribute("arrivalTime", arrivalTime);
-            request.setAttribute("price", price);
-            request.setAttribute("description", description);
-            request.setAttribute("distance", distance);
-            request.setAttribute("vId", vId);
-            request.setAttribute("bt1Id", bt1Id);
-            request.getRequestDispatcher("SeatURL").forward(request, response);
+            // Đặt flag = 1 để sau khi đăng nhập chuyển đến SeatControllerServlet
+            session.setAttribute("flag", 1);
+            request.setAttribute("message", "Vui lòng đăng nhập để tiếp tục.");
+            request.getRequestDispatcher("login.jsp").forward(request, response);
             return;
         }
 
+        // Nếu đã đăng nhập, lưu thông tin vào session và chuyển thẳng đến SeatControllerServlet
+        session.setAttribute("routeId", request.getParameter("brId"));
+        session.setAttribute("from", request.getParameter("from"));
+        session.setAttribute("to", request.getParameter("to"));
+        session.setAttribute("departureTime", request.getParameter("departureTime"));
+        session.setAttribute("arrivalTime", request.getParameter("arrivalTime"));
+        session.setAttribute("price", request.getParameter("price"));
+        session.setAttribute("description", request.getParameter("description"));
+        session.setAttribute("distance", request.getParameter("distance"));
+        session.setAttribute("vehicleId", request.getParameter("vId"));
+        session.setAttribute("tripId", request.getParameter("bt1Id"));
+        session.setAttribute("tripDate", request.getParameter("bt1_date"));
+        request.getRequestDispatcher("SeatURL").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

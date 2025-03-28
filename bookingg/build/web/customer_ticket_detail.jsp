@@ -133,8 +133,8 @@
                     <div class="row align-items-center">
                         <div class="col-lg-7">
                             <ul class="header_contact_info ul_li clearfix">
-                                <li><i class="fal fa-envelope"></i> rotorsmail@email.com</li>
-                                <li><i class="fal fa-phone"></i> +1-202-555-0156</li>
+                                <li><i class="fal fa-envelope"></i> Busgo@email.com</li>
+                                <li><i class="fal fa-phone"></i> 0398 996 177</li>
                             </ul>
                         </div>
                         <div class="col-lg-5">
@@ -163,13 +163,15 @@
                         <div class="col-lg-6 col-md-12">
                             <nav class="main_menu clearfix">
                                 <ul class="ul_li_center clearfix">
-                                    <li><a href="home.jsp">Home</a></li>
-                                    <li><a href="booking">Booking Ticket</a></li>
+                                    <li>
+                                        <a href="home.jsp">Trang chủ</a>
+                                    </li>
+                                    <li><a href="booking">Đặt vé</a></li>
                                     <li><a href="cuslistblog">Blog</a></li>
                                     <li>
-                                        <a href="contact.jsp">Contact Us</a>
+                                        <a href="contact.jsp">Liên hệ</a>
                                     </li>
-                                    <li><a href="employee_login.jsp">Employee Login</a></li>
+                                    <li><a href="employee_login.jsp">Nhân viên</a></li>
                                 </ul>
                             </nav>
                         </div>

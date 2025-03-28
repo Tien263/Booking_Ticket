@@ -13,8 +13,8 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Liên Hệ - Rotors</title>
-        <link rel="shortcut icon" href="assets/images/logo/favourite_icon.png">
+        <title>Liên Hệ - BusGo</title>
+        <link rel="shortcut icon" href="assets/images/logo/logo_01_1.png">
 
         <!-- Framework - CSS include -->
         <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">

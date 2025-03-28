@@ -16,14 +16,6 @@ import model.promotion.Promotions_By_Code;
 
 public class BookTicketController extends HttpServlet {
 
-    /**
-     * Xử lý yêu cầu cho cả phương thức HTTP <code>GET</code> và <code>POST</code>.
-     *
-     * @param request yêu cầu servlet
-     * @param response phản hồi servlet
-     * @throws ServletException nếu xảy ra lỗi đặc thù của servlet
-     * @throws IOException nếu xảy ra lỗi I/O
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -31,48 +23,55 @@ public class BookTicketController extends HttpServlet {
         try {
             HttpSession session = request.getSession();
 
-            // Kiểm tra xem người dùng đã đăng nhập chưa bằng cách kiểm tra c_id trong session
+            // Kiểm tra đăng nhập
             Object userIdObj = session.getAttribute("c_id");
             if (userIdObj == null) {
-                // Nếu c_id là null, người dùng chưa đăng nhập
                 handleError(request, response, "Vui lòng đăng nhập để đặt vé!");
                 return;
             }
 
-            // Ép kiểu an toàn sau khi đã kiểm tra null
             int userId = (int) userIdObj;
 
             BookTicketDAO ticketsDAO = new BookTicketDAO();
             SeatsDAO seatsDAO = new SeatsDAO();
             PromotionByCodeDAO promoDAO = new PromotionByCodeDAO();
 
-            // Lấy giá trị từ session và kiểm tra trước khi chuyển đổi
+            // Lấy thông tin từ session
             String tripIdStr = (String) session.getAttribute("tripId");
             Integer tripId = (tripIdStr != null && !tripIdStr.isEmpty()) ? Integer.parseInt(tripIdStr) : null;
-
-            // Lấy danh sách ghế đã chọn từ session
             List<Integer> seatIds = (List<Integer>) session.getAttribute("seatIds");
 
-            // Kiểm tra nếu dữ liệu bị thiếu
             if (tripId == null || seatIds == null || seatIds.isEmpty()) {
                 handleError(request, response, "Không có ghế nào được chọn hoặc thiếu dữ liệu!");
                 return;
             }
 
             double totalAmount = (double) session.getAttribute("totalPrice");
+
+            // Tạo và đặt vé
             int bookingId = ticketsDAO.createAndBookTickets(userId, seatIds, tripId, totalAmount);
             if (bookingId == -1) {
                 handleError(request, response, "Đặt vé thất bại!");
                 return;
             }
 
-            // Cập nhật trạng thái ghế đã đặt
+            // Cập nhật trạng thái ghế thành "booked"
             for (Integer seatId : seatIds) {
                 boolean success = seatsDAO.isSeatBooked(seatId, "booked");
                 if (!success) {
                     handleError(request, response, "Lỗi khi cập nhật trạng thái ghế! Vui lòng liên hệ hỗ trợ.");
                     return;
                 }
+            }
+
+            // Cập nhật trạng thái BookTickets và Tickets thành "confirmed"
+            BookTicket bt = new BookTicket();
+            bt.setBt_id(bookingId);
+            bt.setBt_status("pending");
+            boolean statusUpdated = ticketsDAO.updateStatus(bt);
+            if (!statusUpdated) {
+                handleError(request, response, "Lỗi khi cập nhật trạng thái vé thành 'confirmed'!");
+                return;
             }
 
             // Lấy danh sách vé đã đặt
@@ -89,12 +88,10 @@ public class BookTicketController extends HttpServlet {
             if (promoCode != null && !promoCode.trim().isEmpty()) {
                 Promotions_By_Code promo = promoDAO.getPromotionByCode(promoCode);
                 if (promo != null) {
-                    // Áp dụng giảm giá
                     double discountPercentage = promo.getDiscount();
                     discountApplied = totalAmount * (discountPercentage / 100);
                     totalPriceAfterDiscount = totalAmount - discountApplied;
 
-                    // Cập nhật BookTickets với giá mới và pbc_id
                     boolean success = ticketsDAO.applyPromotion(bookingId, totalPriceAfterDiscount, promo.getId(), promoDAO);
                     if (!success) {
                         handleError(request, response, "Lỗi khi áp dụng mã khuyến mãi!");
@@ -105,14 +102,14 @@ public class BookTicketController extends HttpServlet {
                 }
             }
 
-            // Lưu thông tin vào request và session để hiển thị trên JSP
+            // Lưu thông tin vào request và session
             request.setAttribute("totalPrice", totalAmount);
-            session.setAttribute("totalPrice", totalAmount); // Lưu vào session để sử dụng lại
+            session.setAttribute("totalPrice", totalAmount);
             if (totalPriceAfterDiscount != null) {
                 request.setAttribute("totalPriceAfterDiscount", totalPriceAfterDiscount);
                 request.setAttribute("discountApplied", discountApplied);
-                session.setAttribute("totalPriceAfterDiscount", totalPriceAfterDiscount); // Lưu vào session
-                session.setAttribute("discountApplied", discountApplied); // Lưu số tiền giảm giá vào session
+                session.setAttribute("totalPriceAfterDiscount", totalPriceAfterDiscount);
+                session.setAttribute("discountApplied", discountApplied);
             }
 
             // Xóa các thuộc tính không cần thiết trong session
@@ -123,6 +120,8 @@ public class BookTicketController extends HttpServlet {
             session.removeAttribute("to");
             session.removeAttribute("departureTime");
             session.removeAttribute("arrivalTime");
+            session.removeAttribute("tripId");
+            session.removeAttribute("seatIds");
 
             request.setAttribute("bookedTickets", bookedTickets);
             session.setAttribute("bookId", bookingId);
@@ -136,56 +135,27 @@ public class BookTicketController extends HttpServlet {
         }
     }
 
-    /**
-     * Xử lý lỗi và chuyển hướng đến trang lỗi.
-     *
-     * @param request yêu cầu servlet
-     * @param response phản hồi servlet
-     * @param errorMessage thông báo lỗi
-     * @throws ServletException nếu xảy ra lỗi đặc thù của servlet
-     * @throws IOException nếu xảy ra lỗi I/O
-     */
     private void handleError(HttpServletRequest request, HttpServletResponse response, String errorMessage)
             throws ServletException, IOException {
         request.setAttribute("message", errorMessage);
         request.getRequestDispatcher("error.jsp").forward(request, response);
     }
 
-    /**
-     * Xử lý phương thức HTTP <code>GET</code>.
-     *
-     * @param request yêu cầu servlet
-     * @param response phản hồi servlet
-     * @throws ServletException nếu xảy ra lỗi đặc thù của servlet
-     * @throws IOException nếu xảy ra lỗi I/O
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /**
-     * Xử lý phương thức HTTP <code>POST</code>.
-     *
-     * @param request yêu cầu servlet
-     * @param response phản hồi servlet
-     * @throws ServletException nếu xảy ra lỗi đặc thù của servlet
-     * @throws IOException nếu xảy ra lỗi I/O
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /**
-     * Trả về mô tả ngắn gọn của servlet.
-     *
-     * @return một chuỗi chứa mô tả của servlet
-     */
     @Override
     public String getServletInfo() {
         return "Xử lý việc đặt vé và áp dụng khuyến mãi.";
     }
+    
 }

@@ -9,22 +9,24 @@ public class Employee {
     private String address;
     private boolean gender;
     private int RoleID;
+    private Role role;
 
-    public Employee(int id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
-    public Employee() {
-    }
-
-    public Employee(int id, String name, String phone, String address, boolean gender) {
+    public Employee(int id, String name, String phone, String address, boolean gender, int RoleID, Role role) {
         this.id = id;
         this.name = name;
         this.phone = phone;
         this.address = address;
         this.gender = gender;
+        this.RoleID = RoleID;
+        this.role = role;
     }
+
+    
+
+    public Employee() {
+    }
+
+    
 
     public Employee(int id, String name, String phone, String address, boolean gender, int RoleID) {
         this.id = id;
@@ -82,4 +84,13 @@ public class Employee {
     public void setRoleID(int roleID) {
         RoleID = roleID;
     }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+    
 }

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package controller.promotion;
 
 import dal.promotion.PromotionByCodeDAO;
@@ -16,34 +12,55 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.promotion.Promotions_By_Code;
 
-/**
- * Servlet điều khiển quản lý mã giảm giá
- */
-@WebServlet(name = "PromotionByCodeController", urlPatterns = {"/promotion/promotion_code", "/promotion/editPromotion", "/promotion/deletePromotion"})
+@WebServlet(name = "PromotionByCodeController", urlPatterns = {"/promotion/promotion_code", "/promotion/editPromotion"})
 public class PromotionByCodeController extends HttpServlet {
 
     private PromotionByCodeDAO promotionDAO = new PromotionByCodeDAO();
+    private static final int PAGE_SIZE = 10; // Số lượng mã giảm giá trên mỗi trang
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String action = request.getServletPath();
+        String action = request.getParameter("action");
+        String filterName = request.getParameter("filterName");
+        String filterDiscount = request.getParameter("filterDiscount");
+        String filterStatus = request.getParameter("filterStatus");
+        int page = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
 
-        if ("/editPromotion".equals(action)) {
+        if ("delete".equals(action)) {
             int id = Integer.parseInt(request.getParameter("id"));
             Promotions_By_Code promotion = promotionDAO.get(id);
-            request.setAttribute("promotion", promotion);
-            request.getRequestDispatcher("codePromo.jsp").forward(request, response);
-        } else if ("/deletePromotion".equals(action)) {
-            int id = Integer.parseInt(request.getParameter("id"));
-            promotionDAO.delete(id);
-            response.sendRedirect("promotion_code"); // Quay về trang danh sách
-        } else {
-            // Lấy danh sách mã giảm giá
-            List<Promotions_By_Code> promotions = promotionDAO.list();
-            request.setAttribute("promotions", promotions);
-            request.getRequestDispatcher("codePromo.jsp").forward(request, response);
+            if (promotion != null) {
+                promotionDAO.delete(promotion);
+                request.setAttribute("successMessage", "Xóa mã giảm giá thành công!");
+            } else {
+                request.setAttribute("errorMessage", "Không tìm thấy mã giảm giá với ID: " + id);
+            }
         }
+
+        // Tính toán phân trang
+        List<Promotions_By_Code> allPromotions;
+        if ((filterName != null && !filterName.trim().isEmpty()) || 
+            (filterDiscount != null && !filterDiscount.trim().isEmpty()) || 
+            (filterStatus != null && !filterStatus.trim().isEmpty())) {
+            Double discount = filterDiscount != null && !filterDiscount.isEmpty() ? Double.parseDouble(filterDiscount) : null;
+            Boolean isActive = filterStatus != null && !filterStatus.isEmpty() ? filterStatus.equals("active") : null;
+            allPromotions = promotionDAO.filter(filterName, discount, isActive);
+        } else {
+            allPromotions = promotionDAO.list();
+        }
+
+        int totalPromotions = allPromotions.size();
+        int totalPages = (int) Math.ceil((double) totalPromotions / PAGE_SIZE);
+        int start = (page - 1) * PAGE_SIZE;
+        int end = Math.min(start + PAGE_SIZE, totalPromotions);
+        List<Promotions_By_Code> promotions = allPromotions.subList(start, end);
+
+        request.setAttribute("promotions", promotions);
+        request.setAttribute("currentPage", page);
+        request.setAttribute("totalPages", totalPages);
+
+        request.getRequestDispatcher("codePromo.jsp").forward(request, response);
     }
 
     @Override
@@ -88,7 +105,7 @@ public class PromotionByCodeController extends HttpServlet {
                 try {
                     discount = Double.parseDouble(discountStr);
                     if (discount <= 0 || discount > 100) {
-                        request.setAttribute("discountError", "Giá trị giảm giá phải từ 1 đến 100!");
+                        request.setAttribute("discountError", "Giá trị giảm giá phải từ 1 đến 100%!");
                         hasError = true;
                     }
                 } catch (NumberFormatException e) {
@@ -136,6 +153,8 @@ public class PromotionByCodeController extends HttpServlet {
 
             // Nếu có lỗi, quay lại trang thêm/sửa
             if (hasError) {
+                List<Promotions_By_Code> promotions = promotionDAO.list();
+                request.setAttribute("promotions", promotions);
                 request.getRequestDispatcher("codePromo.jsp").forward(request, response);
                 return;
             }
@@ -145,13 +164,19 @@ public class PromotionByCodeController extends HttpServlet {
 
             if (id > 0) {
                 promotionDAO.update(promotion);
+                request.setAttribute("successMessage", "Cập nhật mã giảm giá thành công!");
             } else {
                 promotionDAO.insert(promotion);
+                request.setAttribute("successMessage", "Thêm mã giảm giá thành công!");
             }
 
-            response.sendRedirect("promotion_code"); // Quay lại danh sách sau khi thêm/sửa
+            List<Promotions_By_Code> promotions = promotionDAO.list();
+            request.setAttribute("promotions", promotions);
+            request.getRequestDispatcher("odePromo.jsp").forward(request, response);
         } catch (Exception e) {
             request.setAttribute("errorMessage", "Lỗi khi xử lý mã giảm giá: " + e.getMessage());
+            List<Promotions_By_Code> promotions = promotionDAO.list();
+            request.setAttribute("promotions", promotions);
             request.getRequestDispatcher("codePromo.jsp").forward(request, response);
         }
     }

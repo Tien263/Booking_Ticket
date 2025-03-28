@@ -34,6 +34,15 @@ public class Promotions_By_Date {
         this.priority = priority;
     }
     
+    public Promotions_By_Date(int id, String name, double discount, Date startDate, Date endDate) {
+        this.id = id;
+        this.name = name;
+        this.discount = discount;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.quantity = 0; // Giá trị mặc định
+    }
+    
     public Promotions_By_Date(int id, String name, Date startDate, Date endDate, double discount, int quantity) {
         this.id = id;
         this.name = name;

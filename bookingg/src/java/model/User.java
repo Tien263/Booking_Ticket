@@ -9,6 +9,15 @@ public class User {
     private int eId = -1; // Default is -1 if no Employee
     private ArrayList<Employee> emp = new ArrayList<>();
     private int RoleID;
+    private Role role;
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
 
     public int getFirstEmployeeId() {
         if (!emp.isEmpty()) {

@@ -6,19 +6,26 @@ package controller.accesscontrol;
 
 import MD5.BCrypt;
 import dal.CustomerDao;
+import dal.OTPDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import model.Customer;
+import model.Email;
+import model.OTP;
 
 /**
  *
  * @author ADMIN
  */
 public class RegisterController extends HttpServlet {
+
+    private CustomerDao customerDao = new CustomerDao();
+    private OTPDBContext otpDao = new OTPDBContext();
 
     public boolean isValidEmail(String email) {
         String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
@@ -29,8 +36,7 @@ public class RegisterController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String username = request.getParameter("username");
-        CustomerDao cd = new CustomerDao();
-        boolean exists = cd.checkUsernameExist(username);
+        boolean exists = customerDao.checkUsernameExist(username);
 
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
@@ -38,147 +44,163 @@ public class RegisterController extends HttpServlet {
     }
 
     @Override
-    public void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String fullname = request.getParameter("fullname");
-        String email = request.getParameter("email");
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        String confirmpass = request.getParameter("confirmpass");
-        String phone = request.getParameter("phone");
-        String address = request.getParameter("address");
-        Boolean gender = Boolean.parseBoolean(request.getParameter("gender"));
+        String action = request.getParameter("action");
+        HttpSession session = request.getSession();
 
-        System.out.println(String.valueOf(gender));
-        CustomerDao cd = new CustomerDao();
-        // **Mã hóa mật khẩu trước khi lưu vào cơ sở dữ liệu**
-        String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
+        if (action == null || "submitRegister".equals(action)) {
+            String fullname = request.getParameter("fullname");
+            String email = request.getParameter("email");
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
+            String confirmpass = request.getParameter("confirmpass");
+            String phone = request.getParameter("phone");
+            String address = request.getParameter("address");
+            String genderStr = request.getParameter("gender");
+            Boolean gender = "1".equals(genderStr);
+            // Kiểm tra mật khẩu
+            boolean hasUppercase = password.matches(".*[A-Z].*");
+            boolean hasDigit = password.matches(".*\\d.*");
+            boolean hasSpecialChar = password.matches(".*[@$!%*?&].*");
+            boolean validLength = password.length() >= 8 && password.length() <= 16;
 
-        Customer c = new Customer(email, fullname, phone, address, gender, username, hashedPassword);
+            int validConditions = 0;
+            if (hasUppercase) {
+                validConditions++;
+            }
+            if (hasDigit) {
+                validConditions++;
+            }
+            if (hasSpecialChar) {
+                validConditions++;
+            }
+            if (validLength) {
+                validConditions++;
+            }
 
-        // Kiểm tra từng điều kiện riêng lẻ
-        boolean hasUppercase = password.matches(".*[A-Z].*");
-        boolean hasDigit = password.matches(".*\\d.*");
-        boolean hasSpecialChar = password.matches(".*[@$!%*?&].*");
-        boolean validLength = password.length() >= 8 && password.length() <= 16;
+            if (validConditions < 3) {
+                request.setAttribute("error", "Mật khẩu phải thỏa mãn ít nhất 3 trong 4 yêu cầu: 8-16 ký tự, 1 chữ hoa, 1 số, 1 ký tự đặc biệt.");
+                setFormAttributes(request, fullname, email, username, phone, address, gender);
+                request.getRequestDispatcher("login.jsp").forward(request, response);
+                return;
+            }
 
-// Đếm số điều kiện thỏa mãn
-        int validConditions = 0;
-        if (hasUppercase) {
-            validConditions++;
-        }
-        if (hasDigit) {
-            validConditions++;
-        }
-        if (hasSpecialChar) {
-            validConditions++;
-        }
-        if (validLength) {
-            validConditions++;
-        }
+            if (!isValidEmail(email)) {
+                request.setAttribute("error", "Email không hợp lệ! Vui lòng nhập đúng định dạng.");
+                setFormAttributes(request, fullname, email, username, phone, address, gender);
+                request.getRequestDispatcher("login.jsp").forward(request, response);
+                return;
+            }
 
-// Kiểm tra xem có ít nhất 3 điều kiện được thỏa mãn hay không
-        if (validConditions < 3) {
-            request.setAttribute("error", "Mật khẩu phải thỏa mãn ít nhất 3 trong 4 yêu cầu: 8-16 ký tự, 1 chữ hoa, 1 số, 1 ký tự đặc biệt.");
-            request.setAttribute("fullname", fullname);
+            if (customerDao.checkEmailExist(email)) {
+                request.setAttribute("error", "Email đã tồn tại. Chọn email khác!");
+                setFormAttributes(request, fullname, email, username, phone, address, gender);
+                request.getRequestDispatcher("login.jsp").forward(request, response);
+                return;
+            }
+
+            if (!confirmpass.equals(password)) {
+                request.setAttribute("error", "Mật khẩu xác nhận không khớp. Nhập lại!");
+                setFormAttributes(request, fullname, email, username, phone, address, gender);
+                request.getRequestDispatcher("login.jsp").forward(request, response);
+                return;
+            }
+
+            if (customerDao.checkUsernameExist(username)) {
+                request.setAttribute("error", "Tên người dùng đã tồn tại. Chọn tên khác!");
+                setFormAttributes(request, fullname, email, username, phone, address, gender);
+                request.getRequestDispatcher("login.jsp").forward(request, response);
+                return;
+            }
+
+            if (!phone.matches("\\d{10}")) {
+                request.setAttribute("error", "Định dạng số điện thoại sai! Phải có 10 chữ số!");
+                setFormAttributes(request, fullname, email, username, phone, address, gender);
+                request.getRequestDispatcher("login.jsp").forward(request, response);
+                return;
+            }
+
+            if (customerDao.checkPhoneExist(phone)) {
+                request.setAttribute("error", "Số điện thoại đã tồn tại. Chọn số khác!");
+                setFormAttributes(request, fullname, email, username, phone, address, gender);
+                request.getRequestDispatcher("login.jsp").forward(request, response);
+                return;
+            }
+
+            // Mã hóa mật khẩu
+            String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
+
+            // Lưu thông tin vào session
+            session.setAttribute("registerFullname", fullname);
+            session.setAttribute("registerEmail", email);
+            session.setAttribute("registerUsername", username);
+            session.setAttribute("registerPhone", phone);
+            session.setAttribute("registerAddress", address);
+            session.setAttribute("registerGender", gender);
+            session.setAttribute("registerPassword", hashedPassword);
+
+            // Tạo và lưu OTP
+            OTP otp = new OTP();
+            otp.setEmail(email);
+            otpDao.insert(otp); // Lưu OTP vào DB, mã OTP được sinh tự động trong insert
+
+            // Lấy mã OTP mới nhất từ DB
+            String otpCode = otpDao.getOTP(email);
+            if (otpCode == null) {
+                request.setAttribute("error", "Không thể tạo mã OTP. Vui lòng thử lại.");
+                setFormAttributes(request, fullname, email, username, phone, address, gender);
+                request.getRequestDispatcher("login.jsp").forward(request, response);
+                return;
+            }
+
+            // Gửi email
+            Email emailSender = new Email();
+            String subject = "Xác minh đăng ký tài khoản BusGo";
+            String content = "Mã OTP của bạn là: " + otpCode + ". Vui lòng sử dụng mã này để hoàn tất đăng ký.";
+            emailSender.sendEmail(email, subject, content);
+
+            // Chuyển đến trang nhập OTP
             request.setAttribute("email", email);
-            request.setAttribute("username", username);
-            request.setAttribute("phone", phone);
-            request.setAttribute("address", address);
-            request.setAttribute("gender", gender);
-            request.getRequestDispatcher("login.jsp").forward(request, response);
-            return;
-        }
+            request.getRequestDispatcher("otp_register.jsp").forward(request, response);
 
-        if (!isValidEmail(email)) {
-            request.setAttribute("error", "Email không hợp lệ! Vui lòng nhập đúng định dạng.");
-            request.setAttribute("fullname", fullname);
-            request.setAttribute("username", username);
-            request.setAttribute("password", password);
-            request.setAttribute("confirmpass", confirmpass);
-            request.setAttribute("phone", phone);
-            request.setAttribute("address", address);
-            request.setAttribute("gender", gender);
+        } else if ("resendRegisterOTP".equals(action)) {
+            String email = (String) session.getAttribute("registerEmail");
+            OTP otp = new OTP();
+            otp.setEmail(email);
+            otpDao.insert(otp); // Lưu OTP mới vào DB
 
-            request.getRequestDispatcher("login.jsp").forward(request, response);
-            return;
-        }
+            // Lấy mã OTP mới nhất từ DB
+            String otpCode = otpDao.getOTP(email);
+            if (otpCode == null) {
+                request.setAttribute("error", "Không thể tạo mã OTP mới. Vui lòng thử lại.");
+                request.setAttribute("email", email);
+                request.getRequestDispatcher("otp_register.jsp").forward(request, response);
+                return;
+            }
 
-        if (cd.checkEmailExist(email)) {
-            request.setAttribute("error", "Email exists. Choose another email!");
-            request.setAttribute("fullname", fullname);
-            request.setAttribute("username", username);
-            request.setAttribute("password", password);
-            request.setAttribute("confirmpass", confirmpass);
-            request.setAttribute("phone", phone);
-            request.setAttribute("address", address);
-            request.setAttribute("gender", gender);
+            Email emailSender = new Email();
+            String subject = "Xác minh đăng ký tài khoản BusGo (Gửi lại)";
+            String content = "Mã OTP mới của bạn là: " + otpCode + ". Vui lòng sử dụng mã này để hoàn tất đăng ký.";
+            emailSender.sendEmail(email, subject, content);
 
-            request.getRequestDispatcher("login.jsp").forward(request, response);
-            return;
-        }
-
-        if (!confirmpass.equals(password)) {
-            request.setAttribute("error", "Password is not matched. Type again!");
-            request.setAttribute("fullname", fullname);
             request.setAttribute("email", email);
-            request.setAttribute("phone", phone);
-            request.setAttribute("address", address);
-            request.setAttribute("gender", gender);
-
-            request.getRequestDispatcher("login.jsp").forward(request, response);
-            return;
+            request.getRequestDispatcher("otp_register.jsp").forward(request, response);
         }
+    }
 
-        if (cd.checkUsernameExist(username)) {
-            request.setAttribute("error", "Username exists. Choose another username!");
-            request.setAttribute("fullname", fullname);
-            request.setAttribute("email", email);
-            request.setAttribute("password", password);
-            request.setAttribute("confirmpass", confirmpass);
-            request.setAttribute("phone", phone);
-            request.setAttribute("address", address);
-            request.setAttribute("gender", gender);
-
-            request.getRequestDispatcher("login.jsp").forward(request, response);
-            return;
-        }
-        if (!phone.matches("\\d{10}")) {
-            request.setAttribute("error", "Wrong phone format! Must be 10 digits!");
-            request.setAttribute("fullname", fullname);
-            request.setAttribute("email", email);
-            request.setAttribute("username", username);
-            request.setAttribute("password", password);
-            request.setAttribute("confirmpass", confirmpass);
-            request.setAttribute("phone", phone);
-            request.setAttribute("address", address);
-            request.setAttribute("gender", gender);
-
-            request.getRequestDispatcher("login.jsp").forward(request, response);
-            return;
-        }
-        if (cd.checkPhoneExist(phone)) {
-            request.setAttribute("error", "Phone exists. Choose another phone!");
-            request.setAttribute("fullname", fullname);
-            request.setAttribute("email", email);
-            request.setAttribute("username", username);
-            request.setAttribute("password", password);
-            request.setAttribute("confirmpass", confirmpass);
-            request.setAttribute("address", address);
-            request.setAttribute("gender", gender);
-
-            request.getRequestDispatcher("login.jsp").forward(request, response);
-            return;
-        }
-
-        cd.insert(c);
-        request.setAttribute("success", "Đăng ký thành công!");
-        request.getRequestDispatcher("login.jsp").forward(request, response);
+    private void setFormAttributes(HttpServletRequest request, String fullname, String email, String username,
+            String phone, String address, Boolean gender) {
+        request.setAttribute("fullname", fullname);
+        request.setAttribute("email", email);
+        request.setAttribute("username", username);
+        request.setAttribute("phone", phone);
+        request.setAttribute("address", address);
+        request.setAttribute("gender", String.valueOf(gender));
     }
 
     @Override
     public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
+        return "Handles customer registration with OTP verification";
+    }
 }

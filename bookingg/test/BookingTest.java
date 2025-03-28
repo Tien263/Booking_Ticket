@@ -1,5 +1,5 @@
-import controller.bookTicket.booking;
-import dal.bookTicket.bookingDAO;
+import controller.bookTicket.Booking;
+import dal.bookTicket.BookingDAO;
 import model.bookTicket.BusTrip;
 import org.junit.*;
 import static org.junit.Assert.*;
@@ -17,21 +17,21 @@ import java.util.List;
 
 public class BookingTest {
 
-    private booking bookingServlet;
+    private Booking bookingServlet;
     private HttpServletRequest request;
     private HttpServletResponse response;
     private HttpSession session;
     private RequestDispatcher dispatcher;
-    private bookingDAO bookingDAO;
+    private BookingDAO bookingDAO;
 
     @Before
     public void setUp() {
-        bookingServlet = new booking();
+        bookingServlet = new Booking();
         request = Mockito.mock(HttpServletRequest.class);
         response = Mockito.mock(HttpServletResponse.class);
         session = Mockito.mock(HttpSession.class);
         dispatcher = Mockito.mock(RequestDispatcher.class);
-        bookingDAO = Mockito.mock(bookingDAO.class);
+        bookingDAO = Mockito.mock(BookingDAO.class);
 
         Mockito.when(request.getSession()).thenReturn(session);
         Mockito.when(request.getRequestDispatcher(Mockito.anyString())).thenReturn(dispatcher);
@@ -46,7 +46,7 @@ public class BookingTest {
         Mockito.when(request.getParameter("minute")).thenReturn("45");
         Mockito.when(request.getParameter("travelDate")).thenReturn("2024-03-15");
 
-        Mockito.when(bookingDAO.getBusTrips("Hà Nội", "Hồ Chí Minh", "09:45", "2024-03-15")).thenReturn(new ArrayList<>());
+        Mockito.when(bookingDAO.getBusTrips("Hà Nội", "Hồ Chí Minh", "2024-03-15")).thenReturn(new ArrayList<>());
 
         bookingServlet.processRequest(request, response);
 

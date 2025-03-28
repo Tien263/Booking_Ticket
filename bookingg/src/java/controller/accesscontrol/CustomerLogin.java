@@ -86,8 +86,8 @@ public class CustomerLogin extends HttpServlet {
                      response.sendRedirect("home.jsp");
                      return;
                 }
-                if (flag == 1) {
-                     response.sendRedirect("booking");
+                if (flag != 0) {
+                     response.sendRedirect("SeatURL");
                      return;
                 }
                 response.sendRedirect("home.jsp");

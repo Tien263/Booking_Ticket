@@ -4,10 +4,8 @@
  */
 package controller.bookTicket;
 
-import dal.CustomerDao;
 import dal.bookTicket.SeatsDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -36,46 +34,39 @@ public class SeatController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
-        session.setAttribute("vehicleId", request.getParameter("vId"));
-        session.setAttribute("tripId", request.getParameter("bt1Id"));
-        session.setAttribute("routeId", request.getParameter("brId"));
-//        session.setAttribute("customerId", request.getParameter("c_id"));
-        session.setAttribute("price", request.getParameter("price"));
-        session.setAttribute("from", request.getParameter("from"));
-        session.setAttribute("to", request.getParameter("to"));
-        session.setAttribute("departureTime", request.getParameter("departureTime"));
-        session.setAttribute("arrivalTime", request.getParameter("arrivalTime"));
-       
-       //kiểm 
-       int c_id = 0;
-       try {
-           session.setAttribute("flag",1 );
-           c_id = (int) session.getAttribute("c_id");
-       } catch (Exception e) {
-            response.sendRedirect("login.jsp");
+        // Kiểm tra trạng thái đăng nhập
+        Customer customer = (Customer) session.getAttribute("customer");
+        if (customer == null) {
+            request.setAttribute("message", "Không tìm thấy thông tin khách hàng.");
+            request.getRequestDispatcher("login.jsp").forward(request, response);
             return;
-       }
-       
-            CustomerDao dao = new CustomerDao();
-            Customer cus = new Customer();
-            cus = dao.getByID(c_id);
-            // Lấy tripId và vehicleId từ request
-            String tripIdStr = request.getParameter("bt1Id");
-            String vehicleIdStr = request.getParameter("vId");
+        }
+        // Lấy tripId và vehicleId từ request
+        String tripIdStr = (String) session.getAttribute("tripId");
+        String vehicleIdStr = (String) session.getAttribute("vehicleId");
 
-            // Kiểm tra xem có giá trị hay không, nếu có thì chuyển đổi sang int
-            int tripId = (tripIdStr != null && !tripIdStr.isEmpty()) ? Integer.parseInt(tripIdStr) : 0;
-            int vehicleId = (vehicleIdStr != null && !vehicleIdStr.isEmpty()) ? Integer.parseInt(vehicleIdStr) : 0;
-
+       try {
+            int tripId = Integer.parseInt(tripIdStr);
+            int vehicleId = Integer.parseInt(vehicleIdStr);
+            
+            // Lấy thông tin ghế ngồi
             SeatsDAO seatDao = new SeatsDAO();
             List<Seats> seats = seatDao.getSeats(tripId, vehicleId);
 
-            // Đưa danh sách ghế vào request attribute
-            request.setAttribute("customer", cus);
+            // Đặt dữ liệu cho JSP
+            request.setAttribute("customer", customer);
             request.setAttribute("seats", seats);
+
+            // Chuyển hướng đến trang chọn ghế
             request.getRequestDispatcher("selectSeat.jsp").forward(request, response);
+        } catch (NumberFormatException e) {
+            request.setAttribute("error", "Dữ liệu không hợp lệ!");
+            request.getRequestDispatcher("error.jsp").forward(request, response);
+        } catch (Exception e) {
+            request.setAttribute("error", "Đã xảy ra lỗi khi lấy thông tin ghế!");
+            request.getRequestDispatcher("error.jsp").forward(request, response);
         }
-    
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

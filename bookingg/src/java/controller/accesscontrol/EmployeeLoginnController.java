@@ -34,6 +34,13 @@ public class EmployeeLoginnController extends HttpServlet {
         HttpSession session = request.getSession();
         session.setAttribute("user", user); // Lưu user vào session
 
+        // Kiểm tra e_id của user
+        if (!user.hasEmployeeInfo()) { // Nếu e_id <= 0 (tức là chưa có thông tin nhân viên)
+            request.setAttribute("message", "Please update your employee information.");
+            request.getRequestDispatcher("update_employee.jsp").forward(request, response);
+            return;
+        }
+
         // Xử lý "Remember Me"
         if ("ON".equals(rememberMe)) {
             cUsername.setMaxAge(7 * 24 * 60 * 60);
@@ -42,13 +49,19 @@ public class EmployeeLoginnController extends HttpServlet {
         }
         response.addCookie(cUsername);
 
-        // Chuyển hướng theo vai trò của user
+        // Phân quyền theo roleID nếu đã có e_id
+        redirectBasedOnRole(user, request, response);
+    }
+
+    // Hàm phân quyền dựa trên roleID
+    private void redirectBasedOnRole(User user, HttpServletRequest request, HttpServletResponse response)
+            throws IOException {
         switch (user.getRoleID()) {
             case 1:
                 response.sendRedirect(request.getContextPath() + "/blog/createblog");
                 break;
-            case 2:
-                response.sendRedirect(request.getContextPath() + "/seller");
+            case 8:
+                response.sendRedirect(request.getContextPath() + "/admin/menu.jsp");
                 break;
             case 3:
                 response.sendRedirect(request.getContextPath() + "/BusTripURL?service=listOfAll");
@@ -57,7 +70,7 @@ public class EmployeeLoginnController extends HttpServlet {
                 response.sendRedirect(request.getContextPath() + "/BusRouteURL?service=listOfAll");
                 break;
             case 5:
-                response.sendRedirect(request.getContextPath() + "/promotion/Promotion.jsp");
+                response.sendRedirect(request.getContextPath() + "/promotion/promotion_code");
                 break;
             case 6:
                 response.sendRedirect(request.getContextPath() + "/vehicle/vehicle");

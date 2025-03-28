@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.User;
+import model.Role;
 
 /**
  *
@@ -33,6 +34,7 @@ public class UserDBContext extends DBContext<User> {
                 User user = new User();
                 user.setUsername(rs.getString("u_username"));
                 user.setPassword(rs.getString("u_password"));
+                user.seteId(rs.getInt("e_id"));
                 user.setRoleID(rs.getInt("r_id"));
                 return user;
             }
@@ -40,15 +42,19 @@ public class UserDBContext extends DBContext<User> {
             Logger.getLogger(UserDBContext.class.getName()).log(Level.SEVERE, null, e);
         } finally {
             try {
-                if (rs != null) rs.close();
-                if (stmt != null) stmt.close();
+                if (rs != null) {
+                    rs.close();
+                }
+                if (stmt != null) {
+                    stmt.close();
+                }
             } catch (Exception e) {
                 Logger.getLogger(UserDBContext.class.getName()).log(Level.SEVERE, null, e);
             }
         }
         return null;
     }
-    
+
     public List<String> getRolesByUsername(String username) {
         List<String> roles = new ArrayList<>();
         String sql = "SELECT r.r_name FROM Roles r "
@@ -130,7 +136,25 @@ public class UserDBContext extends DBContext<User> {
 
     @Override
     public void insert(User entity) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String sql = "INSERT INTO [dbo].[Users] ([u_username], [u_password], [r_id]) VALUES (?, ?, ?)";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, entity.getUsername());
+            ps.setString(2, entity.getPassword());
+            ps.setInt(3, entity.getRole().getId());
+            ps.executeUpdate();
+//            int rowsAffected = ps.executeUpdate();
+//            if (rowsAffected > 0) {
+//                ResultSet generatedKeys = ps.getGeneratedKeys();
+//                if (generatedKeys.next()) {
+//                    entity.set(generatedKeys.getInt(1)); // Cập nhật e_id cho Employee
+//                }
+//                return true;
+//            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     @Override

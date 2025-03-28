@@ -74,7 +74,7 @@
         <div class="preloader">
             <div class="animation_preloader">
                 <div class="spinner"></div>
-                <p class="text-center">Loading</p>
+                <p class="text-center">Đang tải</p>
             </div>
             <div class="loader">
                 <div class="row vh-100">
@@ -231,6 +231,7 @@
                                         <a href="home.jsp">Trang chủ</a>
                                     </li>
                                     <li><a href="booking">Đặt vé</a></li>
+                                    <li><a href="inputBookId.jsp">Hóa đơn</a></li>
                                     <li><a href="cuslistblog">Blog</a></li>
                                     <li>
                                         <a href="contact.jsp">Liên hệ</a>
