@@ -37,25 +37,19 @@ public class SelectSeatController extends HttpServlet {
 
         try (PrintWriter out = response.getWriter()) {
             String service = request.getParameter("service");
-            if (service == null) {
-                request.setAttribute("message", "Invalid request!");
-                request.getRequestDispatcher("error.jsp").forward(request, response);
-                return;
-            }
-
             if ("selectSeat".equals(service)) {
                 SeatsDAO seatsDAO = new SeatsDAO();
                 try {
                     HttpSession session = request.getSession(false); // Không tạo mới session nếu chưa có
                     if (session == null || session.getAttribute("price") == null) {
-                        response.sendRedirect("errorPage.jsp"); // Chuyển hướng nếu session không tồn tại
+                        response.sendRedirect("error.jsp"); // Chuyển hướng nếu session không tồn tại
                         return;
                     }
                     String priceStr = (String) session.getAttribute("price");
                     Double price = Double.parseDouble(priceStr);
                     String[] seatIdsArray = request.getParameterValues("seatIds");
                     if (seatIdsArray == null || seatIdsArray.length == 0) {
-                        request.setAttribute("message", "No seat selected!");
+                        request.setAttribute("message", "Đã xảy ra lỗi khi chọn ghế");
                         request.getRequestDispatcher("error.jsp").forward(request, response);
                         return;
                     }
@@ -79,7 +73,7 @@ public class SelectSeatController extends HttpServlet {
                     request.getRequestDispatcher("error.jsp").forward(request, response);
                 }
             } else {
-                request.setAttribute("message", "Invalid request!");
+                request.setAttribute("message", "Yêu cầu bị từ chối. Vui lòng tạo lại!");
                 request.getRequestDispatcher("error.jsp").forward(request, response);
             }
         }

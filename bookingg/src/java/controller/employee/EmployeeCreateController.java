@@ -24,9 +24,21 @@ public class EmployeeCreateController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RoleDao rd = new RoleDao();
+       RoleDao rd = new RoleDao();
         ArrayList<Role> roles = rd.list();
-        request.setAttribute("roles", roles);
+
+        // Lọc bỏ vai trò "Admin"
+        ArrayList<Role> filteredRoles = new ArrayList<>();
+        for (Role role : roles) {
+            // Giả sử vai trò "Admin" có tên là "Admin" hoặc r_id = 1
+            // Bạn có thể thay đổi điều kiện này dựa trên dữ liệu thực tế
+            if (!role.getName().equalsIgnoreCase("Admin") && role.getId() != 1) {
+                filteredRoles.add(role);
+            }
+        }
+
+        // Đặt danh sách vai trò đã lọc vào request
+        request.setAttribute("roles", filteredRoles);
         request.getRequestDispatcher("employeecreate.jsp").forward(request, response);
     }
 

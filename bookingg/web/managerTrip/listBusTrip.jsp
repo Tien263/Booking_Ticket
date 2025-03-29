@@ -15,8 +15,9 @@
     <head>
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <title>My Bus - Danh Sách Chuyến Xe</title>
-        <link rel="shortcut icon" href="assets/images/logo/favourite_icon.png">
+        
+        <title>Hiển thị thông tin chuyến - BusGo</title>
+        <link rel="shortcut icon" href="assets/images/logo/logo_01_1.png">
 
         <!-- CSS Libraries -->
         <link rel="stylesheet" href="assets/css/bootstrap.min.css">
@@ -121,7 +122,7 @@
             <div class="col-md-10 ml-sm-auto px-4">
                 <div class="d-flex justify-content-between align-items-center py-3">
                     <h2>Danh Sách Chuyến Xe</h2>
-                    <li><a href="logout"><i class="fal fa-sign-out"></i> Logout</a></li>    
+                    <li><a href="logout"><i class="fal fa-sign-out"></i> Đăng xuất</a></li>    
                 </div>  
                 <nav>
                     <ol class="breadcrumb">

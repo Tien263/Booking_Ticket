@@ -172,7 +172,7 @@
                             <label>
                                 <input type="radio" name="trip_type" value="oneway" checked> Một chiều
                             </label>
-                            <a href="#">Ticket booking guide</a>
+                            <a href="#">Hướng dẫn đặt vé</a>
                         </div>
 
                         <!-- Các trường nằm trên cùng một hàng -->

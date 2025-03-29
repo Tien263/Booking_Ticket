@@ -112,17 +112,6 @@ public class BookTicketController extends HttpServlet {
                 session.setAttribute("discountApplied", discountApplied);
             }
 
-            // Xóa các thuộc tính không cần thiết trong session
-            session.removeAttribute("vehicleId");
-            session.removeAttribute("routeId");
-            session.removeAttribute("price");
-            session.removeAttribute("from");
-            session.removeAttribute("to");
-            session.removeAttribute("departureTime");
-            session.removeAttribute("arrivalTime");
-            session.removeAttribute("tripId");
-            session.removeAttribute("seatIds");
-
             request.setAttribute("bookedTickets", bookedTickets);
             session.setAttribute("bookId", bookingId);
             request.getRequestDispatcher("BookTicket.jsp").forward(request, response);

@@ -1,416 +1,251 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="java.util.Date" %>
 
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Update Blog - Rotors</title>
-        <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/images/logo/logo_01_1.png">
-
-        <!-- framework - css include -->
-        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/bootstrap.min.css">
-        <!-- icon - css include -->
-        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/fontawesome.css">
-        <!-- animation - css include -->
-        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/aos.css">
-        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/animate.css">
-        <!-- carousel - css include -->
-        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/slick.css">
-        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/slick-theme.css">
-        <!-- popup - css include -->
-        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/magnific-popup.css">
-        <!-- select options - css include -->
-        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/nice-select.css">
-        <!-- pricing range - css include -->
-        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/jquery-ui.css">
-        <!-- custom - css include -->
-        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/style.css">
-    </head>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cập Nhật Blog - BusGo</title>
+    <link rel="shortcut icon" href="assets/images/logo/logo_01_1.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        .form_item {
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+        }
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 250px;
+            background-color: #fff;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            padding-top: 20px;
+        }
+        .sidebar .logo {
+            text-align: center;
             margin-bottom: 20px;
         }
-        #previewImage {
+        .sidebar .logo img {
+            width: 100px;
+        }
+        .sidebar .nav-link {
+            color: #333;
+            padding: 10px 20px;
+            display: block;
+        }
+        .sidebar .nav-link:hover {
+            background-color: #f8f9fa;
+        }
+        .sidebar .nav-link.active {
+            background-color: #e9ecef;
+            font-weight: bold;
+        }
+        .content {
+            margin-left: 250px;
+            padding: 20px;
+        }
+        .header {
+            background-color: #fff;
+            padding: 15px 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .header h2 {
+            margin: 0;
+            color: #007bff;
+        }
+        .breadcrumb {
+            background-color: transparent;
+            margin: 0;
+        }
+        .form-container {
+            background-color: #fff;
+            padding: 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .form-container .form-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .form-container label {
+            width: 100px;
+            font-size: 14px;
+            margin-bottom: 0;
+        }
+        .form-container input[type="text"],
+        .form-container textarea,
+        .form-container select,
+        .form-container input[type="file"] {
+            width: 100%;
+            padding: 6px;
+            font-size: 14px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .form-container textarea[name="content"] {
+            height: 300px; /* Chiều cao cho Nội dung */
+        }
+        .form-container textarea[name="brief"] {
+            height: 80px; /* Chiều cao cho Tóm tắt */
+        }
+        .form-container .preview-image {
             max-width: 300px;
+            height: auto;
             margin-top: 10px;
+            display: block;
         }
-        textarea[name="brief"] {
-            height: 100px; /* Chiều cao nhỏ hơn cho phần Tóm tắt */
+        .form-container .submit-btn {
+            text-align: center;
+            margin-top: 15px;
         }
-        textarea[name="content"] {
-            height: 200px; /* Chiều cao lớn hơn cho phần Nội dung */
+        .form-container .submit-btn button,
+        .form-container .submit-btn a {
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 14px;
+            margin: 0 10px;
         }
-        textarea[name="content"] {
-            height: 500px; /* Tăng chiều cao phần Nội dung lên 300px */
-
+        .form-container .submit-btn button {
+            background-color: #007bff;
+            color: white;
+            border: none;
         }
-        textarea[name="brief"] {
-            height: 20px; /* Giảm chiều cao phần Tóm tắt xuống 80px */
+        .form-container .submit-btn button:hover {
+            background-color: #0056b3;
+        }
+        .form-container .submit-btn a {
+            background-color: #17a2b8;
+            color: white;
+            text-decoration: none;
+        }
+        .form-container .submit-btn a:hover {
+            background-color: #138496;
+        }
+        .alert {
+            font-size: 14px;
         }
     </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="text-center mb-4">
+            <img src="logo_hoadon.jpg" srcset="logo_hoadon.jpg 2x" alt="logo_not_found" width="50%">
+            <h4 class="mt-2">BusGo</h4>
+        </div>
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link active" href="updateblog"><i class="fas fa-road me-2"></i>Cập nhật Blog</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="listblog"><i class="fas fa-bus me-2"></i>Quản lý Blog</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="createblog"><i class="fas fa-blog me-2"></i>Tạo Blog</a>
+            </li>
+            <c:if test="${not empty sessionScope.user}">
+                <li class="nav-item mt-auto">
+                    <a class="nav-link" href="/bookingg/logout" onclick="return confirm('Bạn có chắc chắn muốn đăng xuất?');">
+                        <i class="fas fa-sign-out-alt me-2"></i>Đăng xuất
+                    </a>
+                </li>
+            </c:if>
+        </ul>
+    </div>
 
-    <body>
-        <div class="sidebar-menu-wrapper">
-            <div class="mobile_sidebar_menu">
-                <button type="button" class="close_btn"><i class="fal fa-times"></i></button>
-
-                <div class="about_content mb_60">
-                    <div class="brand_logo mb_15">
-                        <a href="home.jsp">
-                            <img src="/bookingg/assets/images/logo/logo_01_1.png" srcset="/bookingg/assets/images/logo/logo_01_1.png 2x" alt="logo_not_found">
-                        </a>
-                    </div>
-                    <p class="mb-0">
-                        BusGo cam kết cung cấp dịch vụ đặt vé xe buýt đáng tin cậy và chất lượng cao với thông tin minh bạch, giá cả rõ ràng và hỗ trợ khách hàng tận tâm, đảm bảo hành trình của bạn luôn thuận tiện và an toàn.                        </p>
-                </div>
-
-                <div class="menu_list mb_60 clearfix">
-                    <h3 class="title_text text-white">Danh mục</h3>
-                    <ul class="ul_li_block clearfix">
-                        <li class="active dropdown">
-                            <a href="#!" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Trang chủ</a>
-                            <ul class="dropdown-menu">
-                                <li><a href="home.jsp">Trang chủ</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="booking">Đặt vé</a></li>
-                        <li><a href="cuslistblog">Blog</a></li>
-                        <li><a href="contact.jsp">Liên hệ</a></li>
-
-                    </ul>
-                </div>
-
-                <div class="booking_car_form">
-                    <h3 class="title_text text-white mb-2">Đặt vé</h3>
-                    <p class="mb_15">
-                    </p>
-                    <form action="#">
-                        <div class="form_item">
-                            <h4 class="input_title text-white">Pick Up Location</h4>
-                            <div class="position-relative">
-                                <input id="location_one" type="text" name="location" placeholder="City, State or Airport Code">
-                                <label for="location_one" class="input_icon"><i class="fas fa-map-marker-alt"></i></label>
-                            </div>
-                        </div>
-                        <div class="form_item">
-                            <h4 class="input_title text-white">Pick A Date</h4>
-                            <input type="date" name="date">
-                        </div>
-                        <button type="submit" class="custom_btn bg_default_red btn_width text-uppercase">Book A Car <img src="assets/images/icons/icon_01.png" alt="icon_not_found"></button>
-                    </form>
-                </div>
-
-            </div>
-            <div class="overlay"></div>
+    <!-- Content -->
+    <div class="content">
+        <!-- Header -->
+        <div class="header">
+            <h2>Cập Nhật Blog</h2>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Trang Chủ</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Cập Nhật Blog</li>
+                </ol>
+            </nav>
         </div>
 
-        <!-- backtotop - start -->
-        <div id="thetop"></div>
-        <div class="backtotop">
-            <a href="#" class="scroll">
-                <i class="far fa-arrow-up"></i>
-            </a>
+        <!-- Form Cập Nhật Blog -->
+        <div class="form-container">
+            <!-- Hiển thị thông báo lỗi chung -->
+            <c:if test="${not empty errorMessage}">
+                <div class="alert alert-danger text-center">${errorMessage}</div>
+            </c:if>
+
+            <form action="${pageContext.request.contextPath}/blog/updateblog" method="POST" enctype="multipart/form-data" id="updateBlogForm">
+                <input type="hidden" name="id" value="${requestScope.b.getId()}"/>
+                <div class="row">
+                    <!-- Cột bên trái: Tiêu đề, Tóm tắt -->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="title">Tiêu đề:</label>
+                            <input type="text" name="title" id="title" value="${requestScope.b.title}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="brief">Tóm tắt:</label>
+                            <textarea name="brief" id="brief" required>${requestScope.b.brief}</textarea>
+                        </div>
+                    </div>
+
+                    <!-- Cột bên phải: Hình ảnh, Thời gian hiện tại -->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="image">Hình ảnh:</label>
+                            <input type="file" name="image" id="image" accept="image/*">
+                            <c:if test="${not empty requestScope.b.image}">
+                                <img id="previewImage" class="preview-image" src="${requestScope.b.image}" alt="Ảnh hiện tại">
+                                <input type="hidden" name="currentImage" value="${requestScope.b.image}">
+                            </c:if>
+                            <c:if test="${empty requestScope.b.image}">
+                                <img id="previewImage" class="preview-image" src="" alt="Ảnh xem trước">
+                            </c:if>
+                        </div>
+                        <div class="form-group">
+                            <label>Thời gian:</label>
+                            <p><b><%= new Date() %></b></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Nội dung: Chiếm toàn bộ chiều rộng -->
+                <div class="form-group">
+                    <label for="content">Nội dung:</label>
+                    <textarea name="content" id="content" required>${requestScope.b.content}</textarea>
+                </div>
+
+                <!-- Nút Lưu và Xem danh sách bài viết -->
+                <div class="submit-btn">
+                    <button type="submit"><i class="fas fa-save me-2"></i>Lưu</button>
+                    <a href="listblog"><i class="fas fa-list me-2"></i>Xem danh sách bài viết</a>
+                </div>
+            </form>
         </div>
-        <!-- backtotop - end -->
+    </div>
 
-        <!-- preloader - start -->
-        <div class="preloader">
-            <div class="animation_preloader">
-                <div class="spinner"></div>
-                <p class="text-center">Loading</p>
-            </div>
-            <div class="loader">
-                <div class="row vh-100">
-                    <div class="col-3 loader_section section-left"><div class="bg"></div></div>
-                    <div class="col-3 loader_section section-left"><div class="bg"></div></div>
-                    <div class="col-3 loader_section section-right"><div class="bg"></div></div>
-                    <div class="col-3 loader_section section-right"><div class="bg"></div></div>
-                </div>
-            </div>
-        </div>
-        <!-- preloader - end -->
+    <!-- JavaScript for Image Preview -->
+    <script>
+        document.getElementById('image').addEventListener('change', function (event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const previewImage = document.getElementById('previewImage');
+                    previewImage.src = e.target.result;
+                    previewImage.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
 
-        <!-- header_section - start -->
-        <header class="header_section secondary_header sticky text-white clearfix">
-            <div class="header_top clearfix">
-                <div class="container">
-                    <div class="row align-items-center">
-                        <div class="col-lg-7">
-                            <ul class="header_contact_info ul_li clearfix">
-                                <li><i class="fal fa-envelope"></i> BusGo@gmail.com</li>
-                                <li><i class="fal fa-phone"></i> 0398 996 177</li>
-                            </ul>
-                        </div>
-                        <div class="col-lg-5">
-                            <ul class="primary_social_links ul_li_right clearfix">
-                                <li><a href="#!"><i class="fab fa-facebook-f"></i></a></li>
-                                <li><a href="#!"><i class="fab fa-instagram"></i></a></li>
-                                <li><a href="#!"><i class="fab fa-twitter"></i></a></li>
-                                <li><a href="#!"><i class="fab fa-youtube"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="header_bottom clearfix">
-                <div class="container">
-                    <div class="row align-items-center">
-                        <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-                            <div class="brand_logo">
-                                <a href="home.jsp">
-                                    <img src="logo_01_1.png" srcset="logo_01_1.png 2x" alt="logo_not_found" width="35%">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-sm-6 col-6 order-last">
-                            <ul class="header_action_btns ul_li_right clearfix">
-
-
-                                <li class="dropdown">
-                                    <button type="button" class="user_btn" id="user_dropdown" 
-                                            <c:choose>
-                                                <c:when test="${not empty sessionScope.user}">
-                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                                </c:when>
-                                                <c:otherwise>
-                                                    onclick="window.location.href = 'login.jsp'"
-                                                </c:otherwise>
-                                            </c:choose>
-                                            >
-                                        <i class="fal fa-user"></i>
-                                    </button>
-
-                                    <c:if test="${not empty sessionScope.user}">
-                                        <div class="user_dropdown rotors_dropdown dropdown-menu clearfix" aria-labelledby="user_dropdown">
-                                            <div class="profile_info clearfix">
-                                                <a href="#!" class="user_thumbnail">
-                                                    <img src="img_01.png" alt="thumbnail_not_found" width="35%">
-                                                </a>
-                                                <div class="user_content">
-                                                    <span class="user_title">${sessionScope.username}</span>
-                                                </div>
-                                            </div>
-                                            <ul class="ul_li_block clearfix">
-                                                <li><a href="account"><i class="fal fa-user-circle"></i> Profile</a></li>
-                                                <li><a href="settings.jsp"><i class="fal fa-user-cog"></i> Settings</a></li>
-                                                <li><a href="employee_login.jsp"><i class="fal fa-sign-out"></i> Logout</a></li>
-                                            </ul>
-                                        </div>
-                                    </c:if>
-                                </li>
-                                <li>
-                                    <button type="button" class="mobile_sidebar_btn"><i class="fal fa-align-right"></i></button>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-lg-6 col-md-12">
-                            <nav class="main_menu clearfix">
-
-                            </nav>
-                        </div>
-
-
-                    </div>
-                </div>
-        </header>
-
-        <!-- main body - start -->
-        <main>
-            <!-- breadcrumb_section - start -->
-            <section class="breadcrumb_section text-center clearfix">
-                <div class="page_title_area has_overlay d-flex align-items-center clearfix" data-bg-image="${pageContext.request.contextPath}/assets/images/breadcrumb/bg_08_1.png">
-                    <div class="container" data-aos="fade-up" data-aos-delay="100">
-                        <h1 class="page_title text-white mb-0">Update Blog</h1>
-                    </div>
-                </div>
-                <div class="breadcrumb_nav clearfix" data-bg-color="#F2F2F2">
-                    <div class="container">
-                        <ul class="ul_li clearfix">
-                            <li><a href="index.html">Home</a></li>
-                            <li>Update Blog</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-            <!-- breadcrumb_section - end -->
-
-            <!-- register_section - start -->
-            <section class="register_section sec_ptb_100 clearfix">
-                <div class="container">
-                    <div class="register_card mb-0" data-bg-color="#F2F2F2" data-aos="fade-up" data-aos-delay="100">
-                        <div class="section_title mb_30 text-center">
-                            <h2 class="title_text mb-0" data-aos="fade-up" data-aos-delay="300">
-                                <span>Cập nhật bài Blog</span>
-                            </h2>
-                        </div>
-                        <form action="updateblog" method="POST" enctype="multipart/form-data" id="updateBlogForm">
-                            <input type="hidden" name="id" value="${requestScope.b.getId()}"/>
-                            <div class="row">
-                                <!-- Single column -->
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" data-aos="fade-up" data-aos-delay="500">
-                                    <c:if test="${not empty errorMessage}">
-                                        <div class="form_item text-center" style="color: red; font-weight: bold;">
-                                            ${errorMessage}
-                                        </div>
-                                    </c:if>
-                                    <div class="form_item">
-                                        <label for="title">Tiêu đề</label>
-                                        <input type="text" name="title" id="title" value="${requestScope.b.title}" required>
-                                    </div>
-                                    <div class="form_item">
-                                        <label for="brief">Tóm tắt</label>
-                                        <textarea name="brief" id="brief" required>${requestScope.b.brief}</textarea>
-                                    </div>
-                                    <div class="form_item">
-                                        <label for="content">Nội dung</label>
-                                        <textarea name="content" id="content" required>${requestScope.b.content}</textarea>
-                                    </div>
-                                    <div class="form_item">
-                                        <label for="image">Hình ảnh</label>
-                                        <input type="file" name="image" id="image" accept="image/*">
-                                        <c:if test="${not empty requestScope.b.image}">
-                                            <img id="previewImage" src="${requestScope.b.image}" alt="Ảnh hiện tại" style="display: block;">
-                                            <input type="hidden" name="currentImage" value="${requestScope.b.image}">
-                                        </c:if>
-                                        <c:if test="${empty requestScope.b.image}">
-                                            <img id="previewImage" src="" alt="Ảnh xem trước">
-                                        </c:if>
-                                    </div>
-                                    <div class="form_item text-center">
-                                        <p><b>Thời gian hiện tại:</b> <%= new Date() %></p>
-                                    </div>
-                                    <div class="form_item text-center mt-4">
-                                        <button type="submit" class="custom_btn bg_default_red text-uppercase">Lưu</button>
-                                    </div>
-                                    <div class="form_item text-center mt-4">
-                                        <a href="listblog" class="custom_btn bg_default_blue text-uppercase">Xem danh sách bài viết</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </section>
-            <!-- register_section - end -->
-        </main>
-        <!-- main body - end -->
-
-        <!-- footer_section - start -->
-        <footer class="footer_section clearfix" data-bg-color="#F2F2F2">
-            <div class="footer_widget_area sec_ptb_100 clearfix">
-                <div class="container">
-                    <div class="row justify-content-lg-between">
-                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                            <div class="footer_about" data-aos="fade-up" data-aos-delay="100">
-                                <div class="brand_logo mb_30">
-                                    <a href="index.html">
-                                        <img src="${pageContext.request.contextPath}/assets/images/logo/logo_01_1.png" srcset="${pageContext.request.contextPath}/assets/images/logo/logo_01_1.png 2x" alt="Logo">
-                                    </a>
-                                </div>
-                                <p class="mb_15">
-                                    BusGo cam kết cung cấp dịch vụ đặt vé xe buýt đáng tin cậy và chất lượng cao với thông tin minh bạch, giá cả rõ ràng và hỗ trợ khách hàng tận tình, đảm bảo hành trình của bạn luôn thuận tiện và an toàn.
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-3 col-md-4 col-sm-12 col-sm-12">
-                            <div class="footer_contact_info" data-aos="fade-up" data-aos-delay="200">
-                                <h3 class="footer_widget_title">Liên hệ:</h3>
-                                <ul class="ul_li_block clearfix">
-                                    <li><i class="fas fa-map-marker-alt"></i> Khu công nghệ cao Hòa Lạc - Thạch Thất - Hà Nội</li>
-                                    <li><i class="fas fa-clock"></i> 7:00 - 22:00</li>
-                                    <li><i class="fas fa-envelope"></i> BusGo@gmail.com</li>
-                                    <li><i class="fas fa-phone"></i> 0398 996 177</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                            <div class="footer_useful_links" data-aos="fade-up" data-aos-delay="300">
-                                <h3 class="footer_widget_title">Thông tin:</h3>
-                                <ul class="ul_li_block clearfix">
-                                    <li><a href="booking"><i class="fal fa-angle-right"></i> Find a Car for Rent in the Nearest Location</a></li>
-                                    <li><a href="contact.jsp"><i class="fal fa-angle-right"></i> Liên hệ với chúng tôi</a></li>
-                                    <li><a href="#!"><i class="fal fa-angle-right"></i> Trung tâm hỗ trợ</a></li>
-                                    <li><a href="policy.jsp"><i class="fal fa-angle-right"></i> Chính sách bảo mật</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="footer_bottom text-white clearfix" data-bg-color="#000C21">
-                <div class="container">
-                    <div class="row align-items-center justify-content-lg-between">
-                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                            <p class="copyright_text mb-0">Copyright © 2020. Rotors by <a class="author_links text-white" href="#!">Merkulove</a></p>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                            <ul class="primary_social_links ul_li_right clearfix">
-                                <li><a href="#!"><i class="fab fa-facebook-f"></i></a></li>
-                                <li><a href="#!"><i class="fab fa-instagram"></i></a></li>
-                                <li><a href="#!"><i class="fab fa-twitter"></i></a></li>
-                                <li><a href="#!"><i class="fab fa-youtube"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </footer>
-        <!-- footer_section - end -->
-
-        <!-- JavaScript for Image Preview -->
-        <script>
-            document.getElementById('image').addEventListener('change', function (event) {
-                const file = event.target.files[0];
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = function (e) {
-                        const previewImage = document.getElementById('previewImage');
-                        previewImage.src = e.target.result;
-                        previewImage.style.display = 'block';
-                    };
-                    reader.readAsDataURL(file);
-                }
-            });
-        </script>
-
-        <!-- framework - jquery include -->
-        <script src="${pageContext.request.contextPath}/assets/js/jquery-3.5.1.min.js"></script>
-        <script src="${pageContext.request.contextPath}/assets/js/popper.min.js"></script>
-        <script src="${pageContext.request.contextPath}/assets/js/bootstrap.min.js"></script>
-        <!-- animation - jquery include -->
-        <script src="${pageContext.request.contextPath}/assets/js/aos.js"></script>
-        <script src="${pageContext.request.contextPath}/assets/js/parallaxie.js"></script>
-        <!-- carousel - jquery include -->
-        <script src="${pageContext.request.contextPath}/assets/js/slick.min.js"></script>
-        <!-- popup - jquery include -->
-        <script src="${pageContext.request.contextPath}/assets/js/magnific-popup.min.js"></script>
-        <!-- select options - jquery include -->
-        <script src="${pageContext.request.contextPath}/assets/js/nice-select.min.js"></script>
-        <!-- isotope - jquery include -->
-        <script src="${pageContext.request.contextPath}/assets/js/isotope.pkgd.js"></script>
-        <script src="${pageContext.request.contextPath}/assets/js/imagesloaded.pkgd.min.js"></script>
-        <script src="${pageContext.request.contextPath}/assets/js/masonry.pkgd.min.js"></script>
-        <!-- google map - jquery include -->
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDk2HrmqE4sWSei0XdKGbOMOHN3Mm2Bf-M&ver=2.1.6"></script>
-        <script src="${pageContext.request.contextPath}/assets/js/gmaps.min.js"></script>
-        <!-- pricing range - jquery include -->
-        <script src="${pageContext.request.contextPath}/assets/js/jquery-ui.js"></script>
-        <!-- counter - jquery include -->
-        <script src="${pageContext.request.contextPath}/assets/js/waypoint.js"></script>
-        <script src="${pageContext.request.contextPath}/assets/js/counterup.min.js"></script>
-        <!-- contact form - jquery include -->
-        <script src="${pageContext.request.contextPath}/assets/js/validate.js"></script>
-        <!-- mobile menu - jquery include -->
-        <script src="${pageContext.request.contextPath}/assets/js/mCustomScrollbar.js"></script>
-        <!-- custom - jquery include -->
-        <script src="${pageContext.request.contextPath}/assets/js/custom.js"></script>
-    </body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>

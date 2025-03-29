@@ -1,402 +1,282 @@
-<%-- 
-    Document   : emplist
-    Created on : Mar 24, 2025, 7:49:31 PM
-    Author     : ADMIN
---%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html" pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%
+    // Ngăn cache
+    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+    response.setHeader("Pragma", "no-cache");
+    response.setHeader("Expires", "0");
+
+    // Kiểm tra đăng nhập
+    if (session.getAttribute("user") == null) {
+        response.sendRedirect("login.jsp");
+        return;
+    }
+%>
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Employee List - BusGo</title>
-        <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/images/logo/favourite_icon.png">
-
-        <!-- framework - css include -->
-        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/fontawesome.css">
-        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/aos.css">
-        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/animate.css">
-        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/slick.css">
-        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/slick-theme.css">
-        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/magnific-popup.css">
-        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/nice-select.css">
-        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/jquery-ui.css">
-        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/style.css">
-
-        <style>
-            .table-responsive {
-                margin-top: 30px;
-                max-width: 1200px; /* Giới hạn chiều rộng tối đa */
-                margin-left: auto; /* Căn giữa */
-                margin-right: auto; /* Căn giữa */
-                position: relative;
-            }
-            table {
-                width: 100%;
-                border-collapse: collapse;
-                font-size: 14px; /* Cỡ chữ 14px cho toàn bảng */
-            }
-            th, td {
-                border: 1px solid #ddd;
-                padding: 12px;
-                text-align: left;
-                vertical-align: top;
-                font-size: 14px; /* Cỡ chữ 14px cho tiêu đề và ô dữ liệu */
-            }
-            th {
-                background-color: #f2f2f2;
-                font-weight: bold;
-            }
-            .btn-action {
-                margin-right: 5px;
-                font-size: 14px; /* Cỡ chữ 14px cho nút hành động */
-                padding: 6px 10px; /* Giảm padding để nút nhỏ hơn */
-                background-color: #007bff;
-                color: white;
-                text-decoration: none;
-                border-radius: 5px;
-                display: inline-block;
-            }
-            .btn-action-danger {
-                background-color: #dc3545;
-            }
-            .btn-action:hover {
-                background-color: #0056b3;
-                color: white;
-            }
-            .btn-action-danger:hover {
-                background-color: #c82333;
-            }
-            /* Định dạng cột Hành động */
-            th:nth-child(7), td:nth-child(7) {
-                width: 110px; /* Chiều rộng cố định cho cột Hành động */
-                min-width: 110px; /* Chiều rộng tối thiểu */
-            }
-        </style>
-    </head>
-
-    <body>
-        <!-- backtotop - start -->
-        <div id="thetop"></div>
-        <div class="backtotop">
-            <a href="#" class="scroll">
-                <i class="far fa-arrow-up"></i>
-            </a>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản Lý Nhân Viên - BusGo</title>
+    <link rel="shortcut icon" href="assets/images/logo/logo_01_1.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+        }
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 250px;
+            background-color: #fff;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            padding-top: 20px;
+        }
+        .sidebar .logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .sidebar .logo img {
+            width: 100px;
+        }
+        .sidebar .nav-link {
+            color: #333;
+            padding: 10px 20px;
+            display: block;
+        }
+        .sidebar .nav-link:hover {
+            background-color: #f8f9fa;
+        }
+        .sidebar .nav-link.active {
+            background-color: #e9ecef;
+            font-weight: bold;
+        }
+        .content {
+            margin-left: 250px;
+            padding: 20px;
+        }
+        .header {
+            background-color: #fff;
+            padding: 15px 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .header h2 {
+            margin: 0;
+            color: #007bff;
+        }
+        .breadcrumb {
+            background-color: transparent;
+            margin: 0;
+        }
+        .search-form {
+            background-color: #fff;
+            padding: 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .search-form .row {
+            align-items: flex-start;
+        }
+        .search-form .form-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .search-form label {
+            width: 100px;
+            font-size: 14px;
+            margin-bottom: 0;
+        }
+        .search-form input[type="text"],
+        .search-form select {
+            width: 150px;
+            padding: 6px;
+            font-size: 14px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .search-form input[type="radio"] {
+            margin: 0 5px 0 15px;
+        }
+        .search-form .submit-btn {
+            text-align: center;
+            margin-top: 15px;
+        }
+        .search-form .submit-btn button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        .search-form .submit-btn button:hover {
+            background-color: #0056b3;
+        }
+        .table-container {
+            background-color: #fff;
+            padding: 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .table th, .table td {
+            vertical-align: middle;
+        }
+        .btn-add {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="text-center mb-4">
+            <img src="logo_hoadon.jpg" srcset="logo_hoadon.jpg 2x" alt="logo_not_found" width="50%">
+            <h4 class="mt-2">BusGo</h4>
         </div>
-        <!-- backtotop - end -->
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link active" href="employeelist"><i class="fas fa-users me-2"></i>Quản lý nhân viên</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="listbusroute"><i class="fas fa-road me-2"></i>Quản lý tuyến xe</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="listbustrip"><i class="fas fa-bus me-2"></i>Quản lý chuyến xe</a>
+            </li>
+            <c:if test="${not empty sessionScope.user}">
+                <li class="nav-item mt-auto">
+                    <a class="nav-link" href="/bookingg/logout" onclick="return confirm('Bạn có chắc chắn muốn đăng xuất?');">
+                        <i class="fas fa-sign-out-alt me-2"></i>Đăng xuất
+                    </a>
+                </li>
+            </c:if>
+        </ul>
+    </div>
 
-        <!-- preloader - start -->
-        <div class="preloader">
-            <div class="animation_preloader">
-                <div class="spinner"></div>
-                <p class="text-center">Loading</p>
-            </div>
-            <div class="loader">
-                <div class="row vh-100">
-                    <div class="col-3 loader_section section-left"><div class="bg"></div></div>
-                    <div class="col-3 loader_section section-left"><div class="bg"></div></div>
-                    <div class="col-3 loader_section section-right"><div class="bg"></div></div>
-                    <div class="col-3 loader_section section-right"><div class="bg"></div></div>
-                </div>
-            </div>
+    <!-- Content -->
+    <div class="content">
+        <!-- Header -->
+        <div class="header">
+            <h2>Danh Sách Nhân Viên</h2>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Trang Chủ</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Danh Sách Nhân Viên</li>
+                </ol>
+            </nav>
         </div>
-        <!-- preloader - end -->
 
-        <!-- header_section - start -->
-        <header class="header_section secondary_header sticky text-white clearfix">
-            <div class="header_top clearfix">
-                <div class="container">
-                    <div class="row align-items-center">
-                        <div class="col-lg-7">
-                            <ul class="header_contact_info ul_li clearfix">
-                                <li><i class="fal fa-envelope"></i> BusGo@gmail.com</li>
-                                <li><i class="fal fa-phone"></i> 0398 996 177</li>
-                            </ul>
+        <!-- Nút Thêm Nhân Viên -->
+        <a href="employeecreate" class="btn btn-success btn-add">
+            <i class="fas fa-plus me-2"></i>Thêm Nhân Viên
+        </a>
+
+        <!-- Form Tìm Kiếm -->
+        <div class="search-form">
+            <form action="${pageContext.request.contextPath}/admin/employeelist" method="get" class="w-100">
+                <div class="row">
+                    <!-- Cột bên trái: ID, Tên, Giới tính -->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>ID:</label>
+                            <input type="text" name="id" value="${param.id}" />
                         </div>
-                        <div class="col-lg-5">
-                            <ul class="primary_social_links ul_li_right clearfix">
-                                <li><a href="#!"><i class="fab fa-facebook-f"></i></a></li>
-                                <li><a href="#!"><i class="fab fa-instagram"></i></a></li>
-                                <li><a href="#!"><i class="fab fa-twitter"></i></a></li>
-                                <li><a href="#!"><i class="fab fa-youtube"></i></a></li>
-                            </ul>
+                        <div class="form-group">
+                            <label>Tên:</label>
+                            <input type="text" name="name" value="${param.name}" />
+                        </div>
+                        <div class="form-group">
+                            <label>Giới tính:</label>
+                            <input type="radio" name="gender" ${param.gender ne null && param.gender eq "male" ? "checked" : ""} value="male" /> Nam
+                            <input type="radio" name="gender" ${param.gender ne null && param.gender eq "female" ? "checked" : ""} value="female" /> Nữ
+                            <input type="radio" name="gender" ${param.gender eq null || param.gender eq "both" ? "checked" : ""} value="both" /> Tất cả
                         </div>
                     </div>
-                </div>
-            </div>
 
-            <div class="header_bottom clearfix">
-                <div class="container">
-                    <div class="row align-items-center">
-                        <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-                            <div class="brand_logo">
-                                <a href="home.jsp">
-                                    <img src="${pageContext.request.contextPath}/assets/images/logo/logo_01_1.png" srcset="${pageContext.request.contextPath}/assets/images/logo/logo_01_1.png 2x" alt="logo_not_found" width="35%">
-                                </a>
-                            </div>
+                    <!-- Cột bên phải: Địa chỉ, Số điện thoại, Vai trò -->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Địa chỉ:</label>
+                            <input type="text" name="address" value="${param.address}" />
                         </div>
-                        <div class="col-lg-3 col-md-6 col-sm-6 col-6 order-last">
-                            <ul class="header_action_btns ul_li_right clearfix">
-                                <li class="dropdown">
-                                    <button type="button" class="user_btn" id="user_dropdown" 
-                                            <c:choose>
-                                                <c:when test="${not empty sessionScope.user}">
-                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                                </c:when>
-                                                <c:otherwise>
-                                                    onclick="window.location.href = 'login.jsp'"
-                                                </c:otherwise>
-                                            </c:choose>
-                                            >
-                                        <i class="fal fa-user"></i>
-                                    </button>
-
-                                    <c:if test="${not empty sessionScope.user}">
-                                        <div class="user_dropdown rotors_dropdown dropdown-menu clearfix" aria-labelledby="user_dropdown">
-                                            <div class="profile_info clearfix">
-                                                <a href="#!" class="user_thumbnail">
-                                                    <img src="${pageContext.request.contextPath}/assets/images/meta/img_01.png" alt="thumbnail_not_found" width="35%">
-                                                </a>
-                                                <div class="user_content">
-                                                    <span class="user_title">${sessionScope.user}</span>
-                                                </div>
-                                            </div>
-                                            <ul class="ul_li_block clearfix">
-                                                <li><a href="account"><i class="fal fa-user-circle"></i> Profile</a></li>
-                                                <li><a href="settings.jsp"><i class="fal fa-user-cog"></i> Settings</a></li>
-                                                <li><a href="employee_login.jsp"><i class="fal fa-sign-out"></i> Logout</a></li>
-                                            </ul>
-                                        </div>
-                                    </c:if>
-                                </li>
-                                <li>
-                                    <button type="button" class="mobile_sidebar_btn"><i class="fal fa-align-right"></i></button>
-                                </li>
-                            </ul>
+                        <div class="form-group">
+                            <label>Số điện thoại:</label>
+                            <input type="text" name="phone" value="${param.phone}" />
                         </div>
-                        <div class="col-lg-6 col-md-12">
-                            <nav class="main_menu clearfix">
-                                <!-- Optional: Add navigation here if needed -->
-                            </nav>
+                        <div class="form-group">
+                            <label>Vai trò:</label>
+                            <select name="roleId">
+                                <option value="-1">Tất cả vai trò</option>
+                                <c:forEach items="${roles}" var="r">
+                                    <option ${param.roleId ne null && param.roleId eq r.id ? "selected" : ""} value="${r.id}">${r.name}</option>
+                                </c:forEach>
+                            </select>
                         </div>
                     </div>
                 </div>
-            </div>
-        </header>
-        <!-- header_section - end -->
 
-        <!-- main body - start -->
-        <main>
-            <!-- breadcrumb_section - start -->
-            <section class="breadcrumb_section text-center clearfix">
-                <div class="page_title_area has_overlay d-flex align-items-center clearfix" data-bg-image="${pageContext.request.contextPath}/assets/images/breadcrumb/bg_08_1.jpg">
-                    <div class="container" data-aos="fade-up" data-aos-delay="100">
-                        <h1 class="page_title text-white mb-0">Employee List</h1>
-                    </div>
+                <!-- Nút Tìm kiếm ở giữa -->
+                <div class="submit-btn">
+                    <button type="submit"><i class="fas fa-search me-2"></i>Tìm kiếm</button>
                 </div>
-                <div class="breadcrumb_nav clearfix" data-bg-color="#F2F2F2">
-                    <div class="container">
-                        <ul class="ul_li clearfix">
-                            <li><a href="home.jsp">Home</a></li>
-                            <li>Employee List</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-            <!-- breadcrumb_section - end -->
+            </form>
+        </div>
 
-            <!-- employee_list_section - start -->
-            <section class="register_section sec_ptb_100 clearfix">
-                <div class="register_card mb-0" data-bg-color="#F2F2F2" data-aos="fade-up" data-aos-delay="100">
-                    <div class="section_title mb_30 text-center">
-                        <h2 class="title_text mb-0" data-aos="fade-up" data-aos-delay="300">
-                            <span>Employee List</span>
-                        </h2>
-                    </div>
-                    <div class="table-responsive" data-aos="fade-up" data-aos-delay="500">
-                        <table>
-                            <thead>
+        <!-- Bảng danh sách nhân viên -->
+        <div class="table-container">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Employee ID</th>
+                        <th>Employee Name</th>
+                        <th>Gender</th>
+                        <th>Address</th>
+                        <th>Role</th>
+                        <th>Phone</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:choose>
+                        <c:when test="${not empty emps}">
+                            <c:forEach items="${emps}" var="e">
                                 <tr>
-                                    <th>Employee ID</th>
-                                    <th>Employee Name</th>
-                                    <th>Gender</th>
-                                    <th>Address</th>
-                                    <th>Role</th>
-                                    <th>Phone</th>
-                                    <!-- Uncomment if you want the Action column -->
-                                    <!-- <th>Hành động</th> -->
+                                    <td>${e.id}</td>
+                                    <td>${e.name}</td>
+                                    <td>
+                                        <c:choose>
+                                            <c:when test="${e.gender}">
+                                                Nam
+                                            </c:when>
+                                            <c:otherwise>
+                                                Nữ
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </td>
+                                    <td>${e.address}</td>
+                                    <td>${e.role.name}</td>
+                                    <td>${e.phone}</td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                <c:choose>
-                                    <c:when test="${not empty emps}">
-                                        <c:forEach items="${emps}" var="e">
-                                            <tr>
-                                                <td>${e.id}</td>
-                                                <td>${e.name}</td>
-                                                <td>
-                                                    <c:choose>
-                                                        <c:when test="${e.gender}">
-                                                            Male
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            Female
-                                                        </c:otherwise>
-                                                    </c:choose>
-                                                </td>
-                                                <td>${e.address}</td>
-                                                <td>${e.role.name}</td>
-                                                <td>${e.phone}</td>
-                                                <!-- Uncomment and adjust if you want the Action column -->
-                                                <!-- 
-                                                <td>
-                                                    <button type="button" class="btn-action btn-action-danger" onclick="removeEmployee(${e.id})">
-                                                        <i class="fas fa-trash-alt"></i>
-                                                    </button>
-                                                    <form id="removeEmployee${e.id}" action="delete" method="POST" style="display:none;">
-                                                        <input type="hidden" name="id" value="${e.id}"/>
-                                                    </form>
-                                                </td>
-                                                -->
-                                            </tr>
-                                        </c:forEach>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <tr>
-                                            <td colspan="6" class="text-center">No employees found.</td>
-                                        </tr>
-                                    </c:otherwise>
-                                </c:choose>
-                            </tbody>
-                        </table>
-                    </div>
-                    <!--<p class="text-center mt-3">Size of emps: ${fn:length(emps)}</p>-->
-                </div>
-                <div class="d-flex justify-content-between mt-4">
-                    <!-- Nút Tạo mới nhân viên -->
-                    <a href="employeecreate" class="btn btn-primary">Tạo mới nhân viên</a>
+                            </c:forEach>
+                        </c:when>
+                        <c:otherwise>
+                            <tr>
+                                <td colspan="6" class="text-center">Không có nhân viên nào để hiển thị.</td>
+                            </tr>
+                        </c:otherwise>
+                    </c:choose>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
-                    <!-- Nút Filter -->
-                    <a href="employeesearch" class="btn btn-primary">Lọc nhân viên</a>
-                </div>
-
-            </section>
-            <!-- employee_list_section - end -->
-        </main>
-        <!-- main body - end -->
-
-        <!-- footer_section - start -->
-        <footer class="footer_section clearfix" data-bg-color="#F2F2F2">
-            <div class="footer_widget_area sec_ptb_100 clearfix">
-                <div class="container">
-                    <div class="row justify-content-lg-between">
-                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                            <div class="footer_about" data-aos="fade-up" data-aos-delay="100">
-                                <div class="brand_logo mb_30">
-                                    <a href="home.jsp">
-                                        <img src="${pageContext.request.contextPath}/assets/images/logo/logo_01_1.png" srcset="${pageContext.request.contextPath}/assets/images/logo/logo_01_1.png 2x" alt="Logo">
-                                    </a>
-                                </div>
-                                <p class="mb_15">
-                                    BusGo cam kết cung cấp dịch vụ đặt vé xe buýt đáng tin cậy và chất lượng cao với thông tin minh bạch, giá cả rõ ràng và hỗ trợ khách hàng tận tình, đảm bảo hành trình của bạn luôn thuận tiện và an toàn.
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
-                            <div class="footer_contact_info" data-aos="fade-up" data-aos-delay="200">
-                                <h3 class="footer_widget_title">Liên hệ:</h3>
-                                <ul class="ul_li_block clearfix">
-                                    <li><i class="fas fa-map-marker-alt"></i> Khu công nghệ cao Hòa Lạc - Thạch Thất - Hà Nội</li>
-                                    <li><i class="fas fa-clock"></i> 7:00 - 22:00</li>
-                                    <li><i class="fas fa-envelope"></i> BusGo@gmail.com</li>
-                                    <li><i class="fas fa-phone"></i> 0398 996 177</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                            <div class="footer_useful_links" data-aos="fade-up" data-aos-delay="300">
-                                <h3 class="footer_widget_title">Thông tin:</h3>
-                                <ul class="ul_li_block clearfix">
-                                    <li><a href="booking"><i class="fal fa-angle-right"></i> Find a Car for Rent in the Nearest Location</a></li>
-                                    <li><a href="contact.jsp"><i class="fal fa-angle-right"></i> Liên hệ với chúng tôi</a></li>
-                                    <li><a href="#!"><i class="fal fa-angle-right"></i> Trung tâm hỗ trợ</a></li>
-                                    <li><a href="policy.jsp"><i class="fal fa-angle-right"></i> Chính sách bảo mật</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="footer_bottom text-white clearfix" data-bg-color="#000C21">
-                <div class="container">
-                    <div class="row align-items-center justify-content-lg-between">
-                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                            <p class="copyright_text mb-0">Copyright © 2020. BusGo by <a class="author_links text-white" href="home.jsp">BusGo</a></p>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                            <ul class="primary_social_links ul_li_right clearfix">
-                                <li><a href="#!"><i class="fab fa-facebook-f"></i></a></li>
-                                <li><a href="#!"><i class="fab fa-instagram"></i></a></li>
-                                <li><a href="#!"><i class="fab fa-twitter"></i></a></li>
-                                <li><a href="#!"><i class="fab fa-youtube"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </footer>
-        <!-- footer_section - end -->
-
-        <!-- JavaScript -->
-        <!-- Uncomment and include this script if you want the remove functionality -->
-        <!--
-        <script>
-            function removeEmployee(id) {
-                var result = confirm("Are you sure you want to delete this employee?");
-                if (result) {
-                    document.getElementById("removeEmployee" + id).submit();
-                }
-            }
-        </script>
-        -->
-
-        <!-- framework - jquery include -->
-        <script src="${pageContext.request.contextPath}/assets/js/jquery-3.5.1.min.js"></script>
-        <script src="${pageContext.request.contextPath}/assets/js/popper.min.js"></script>
-        <script src="${pageContext.request.contextPath}/assets/js/bootstrap.min.js"></script>
-        <!-- animation - jquery include -->
-        <script src="${pageContext.request.contextPath}/assets/js/aos.js"></script>
-        <script src="${pageContext.request.contextPath}/assets/js/parallaxie.js"></script>
-        <!-- carousel - jquery include -->
-        <script src="${pageContext.request.contextPath}/assets/js/slick.min.js"></script>
-        <!-- popup - jquery include -->
-        <script src="${pageContext.request.contextPath}/assets/js/magnific-popup.min.js"></script>
-        <!-- select options - jquery include -->
-        <script src="${pageContext.request.contextPath}/assets/js/nice-select.min.js"></script>
-        <!-- isotope - jquery include -->
-        <script src="${pageContext.request.contextPath}/assets/js/isotope.pkgd.js"></script>
-        <script src="${pageContext.request.contextPath}/assets/js/imagesloaded.pkgd.min.js"></script>
-        <script src="${pageContext.request.contextPath}/assets/js/masonry.pkgd.min.js"></script>
-        <!-- google map - jquery include -->
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDk2HrmqE4sWSei0XdKGbOMOHN3Mm2Bf-M&ver=2.1.6"></script>
-        <script src="${pageContext.request.contextPath}/assets/js/gmaps.min.js"></script>
-        <!-- pricing range - jquery include -->
-        <script src="${pageContext.request.contextPath}/assets/js/jquery-ui.js"></script>
-        <!-- counter - jquery include -->
-        <script src="${pageContext.request.contextPath}/assets/js/waypoint.js"></script>
-        <script src="${pageContext.request.contextPath}/assets/js/counterup.min.js"></script>
-        <!-- contact form - jquery include -->
-        <script src="${pageContext.request.contextPath}/assets/js/validate.js"></script>
-        <!-- mobile menu - jquery include -->
-        <script src="${pageContext.request.contextPath}/assets/js/mCustomScrollbar.js"></script>
-        <!-- custom - jquery include -->
-        <script src="${pageContext.request.contextPath}/assets/js/custom.js"></script>
-    </body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>

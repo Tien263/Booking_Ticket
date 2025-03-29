@@ -16,9 +16,10 @@
     <head>
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <title>My Bus - Danh Sách vé Xe</title>
+        
+        <title>Danh sách vé - BusGo</title>
+        <link rel="shortcut icon" href="assets/images/logo/logo_01_1.png">
 
-        <link rel="shortcut icon" href="assets/images/logo/favourite_icon.png">
         <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="assets/css/fontawesome.css">
         <link rel="stylesheet" type="text/css" href="assets/css/aos.css">

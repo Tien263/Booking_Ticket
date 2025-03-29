@@ -1,62 +1,33 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package controller.employee;
 
 import dal.managerTrip.BusTripDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.ArrayList;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
 import model.managerTrip.BusTrips;
 
 public class ManageTripController extends HttpServlet {
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ManageTripController</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ManageTripController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
+    private static final int ITEMS_PER_PAGE = 14; // Số chuyến xe mỗi trang
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         BusTripDAO btd = new BusTripDAO();
-        int pageSize = 20; // Số bản ghi trên mỗi trang
-        int page = 1; // Trang mặc định
 
         // Lấy số trang từ request (nếu có)
         String pageStr = request.getParameter("page");
-        if (pageStr != null && !pageStr.isEmpty()) {
-            try {
-                page = Integer.parseInt(pageStr);
-                if (page < 1) {
-                    page = 1; // Đảm bảo page không nhỏ hơn 1
-                }
-            } catch (NumberFormatException e) {
-                page = 1; // Nếu không parse được, mặc định là trang 1
-            }
-        }
+        int currentPage = (pageStr != null && !pageStr.isEmpty()) ? Integer.parseInt(pageStr) : 1;
+        if (currentPage < 1) currentPage = 1;
 
         // Lấy tham số tìm kiếm từ request
         String date = request.getParameter("bt1_date");
         String routeId = request.getParameter("br_id");
-        String action = request.getParameter("action"); // Để xử lý nút "Xóa"
+        String action = request.getParameter("action");
 
         ArrayList<BusTrips> bt;
         int totalTrips;
@@ -67,25 +38,27 @@ public class ManageTripController extends HttpServlet {
             date = null;
             routeId = null;
             totalTrips = btd.getTotalBusTrips();
-            totalPages = (int) Math.ceil((double) totalTrips / pageSize);
-            bt = btd.list(page, pageSize);
+            totalPages = (int) Math.ceil((double) totalTrips / ITEMS_PER_PAGE);
+            bt = btd.list(currentPage, ITEMS_PER_PAGE);
         } else if ((date != null && !date.trim().isEmpty()) || (routeId != null && !routeId.trim().isEmpty())) {
             // Nếu có tham số tìm kiếm, gọi phương thức search
             totalTrips = btd.getTotalBusTrips(date, routeId);
-            totalPages = (int) Math.ceil((double) totalTrips / pageSize);
-            bt = btd.searchBusTrips(date, routeId, page, pageSize);
+            totalPages = (int) Math.ceil((double) totalTrips / ITEMS_PER_PAGE);
+            bt = btd.searchBusTrips(date, routeId, currentPage, ITEMS_PER_PAGE);
         } else {
             // Nếu không có tham số, liệt kê toàn bộ
             totalTrips = btd.getTotalBusTrips();
-            totalPages = (int) Math.ceil((double) totalTrips / pageSize);
-            bt = btd.list(page, pageSize);
+            totalPages = (int) Math.ceil((double) totalTrips / ITEMS_PER_PAGE);
+            bt = btd.list(currentPage, ITEMS_PER_PAGE);
         }
+
+        // Đảm bảo currentPage không vượt quá totalPages
+        if (currentPage > totalPages) currentPage = totalPages > 0 ? totalPages : 1;
 
         // Đặt các thuộc tính vào request để JSP sử dụng
         request.setAttribute("bt", bt);
-        request.setAttribute("currentPage", page);
+        request.setAttribute("currentPage", currentPage);
         request.setAttribute("totalPages", totalPages);
-        request.setAttribute("pageSize", pageSize);
         request.setAttribute("bt1_date", date);
         request.setAttribute("br_id", routeId);
 
@@ -95,12 +68,11 @@ public class ManageTripController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        doGet(request, response); // Chuyển POST sang GET để xử lý tìm kiếm
     }
 
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
-
+    }
 }

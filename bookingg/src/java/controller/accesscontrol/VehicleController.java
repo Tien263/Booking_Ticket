@@ -1,92 +1,72 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package controller.accesscontrol;
 
 import dal.VehicleDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.util.List;
 import model.Vehicle;
 
-/**
- *
- * @author Quang Anh
- */
 public class VehicleController extends HttpServlet {
 
     private VehicleDAO vehicleDAO = new VehicleDAO();
+    private static final int VEHICLES_PER_PAGE = 5; // Số phương tiện trên mỗi trang
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet VehicleController</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet VehicleController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         String licensePlate = request.getParameter("licensePlate");
         String type = request.getParameter("type");
 
-        List<Vehicle> vehicles;
+        List<Vehicle> allVehicles;
 
+        // Lấy danh sách phương tiện dựa trên tìm kiếm
         if (licensePlate != null && !licensePlate.trim().isEmpty()) {
-            vehicles = vehicleDAO.searchByLicensePlate(licensePlate);
+            allVehicles = vehicleDAO.searchByLicensePlate(licensePlate);
         } else if (type != null && !type.trim().isEmpty()) {
-            vehicles = vehicleDAO.searchByType(type);
+            allVehicles = vehicleDAO.searchByType(type);
         } else {
-            vehicles = vehicleDAO.getAllVehicles();
+            allVehicles = vehicleDAO.getAllVehicles();
         }
 
-        request.setAttribute("vehicles", vehicles);
+        // Tính tổng số trang
+        int totalVehicles = allVehicles.size();
+        int totalPages = (int) Math.ceil((double) totalVehicles / VEHICLES_PER_PAGE);
+
+        // Lấy số trang hiện tại từ tham số "page" trong URL
+        String pageParam = request.getParameter("page");
+        int currentPage = (pageParam != null && !pageParam.isEmpty()) ? Integer.parseInt(pageParam) : 1;
+        if (currentPage < 1) {
+            currentPage = 1;
+        } else if (currentPage > totalPages && totalPages > 0) {
+            currentPage = totalPages;
+        }
+
+        // Tính chỉ số bắt đầu và kết thúc của phương tiện trong trang hiện tại
+        int startIndex = (currentPage - 1) * VEHICLES_PER_PAGE;
+        int endIndex = Math.min(startIndex + VEHICLES_PER_PAGE, totalVehicles);
+
+        // Lấy danh sách phương tiện cho trang hiện tại
+        List<Vehicle> vehiclesForPage = new ArrayList<>();
+        if (totalVehicles > 0) {
+            vehiclesForPage = allVehicles.subList(startIndex, endIndex);
+        }
+
+        // Đặt các thuộc tính vào request để JSP sử dụng
+        request.setAttribute("vehicles", vehiclesForPage);
+        request.setAttribute("currentPage", currentPage);
+        request.setAttribute("totalPages", totalPages);
+        request.setAttribute("licensePlate", licensePlate); // Giữ giá trị tìm kiếm
+        request.setAttribute("type", type); // Giữ giá trị tìm kiếm
+
+        // Chuyển hướng đến vehicles.jsp
         request.getRequestDispatcher("vehicles.jsp").forward(request, response);
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -175,19 +155,14 @@ public class VehicleController extends HttpServlet {
         } else if ("delete".equals(action)) {
             int id = Integer.parseInt(request.getParameter("id"));
             vehicleDAO.deleteVehicle(id);
+            session.setAttribute("successMessage", "Xóa phương tiện thành công!");
         }
 
         response.sendRedirect("vehicle");
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
+        return "Servlet to manage vehicles with pagination";
+    }
 }

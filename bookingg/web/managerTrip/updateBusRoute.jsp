@@ -17,7 +17,9 @@
     <head>
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <title>My Bus - Sửa tuyến xe</title>
+        <title>Cập nhập tuyến xe - BusGo</title>
+        <link rel="shortcut icon" href="assets/images/logo/logo_01_1.png">
+
         <link rel="stylesheet" href="assets/css/bootstrap.min.css">
         <link rel="stylesheet" href="assets/css/fontawesome.css">
         <link rel="stylesheet" href="assets/css/style.css">
@@ -108,9 +110,12 @@
                                 <label class="form-label">Mô tả</label>
                                 <input type="text" class="form-control" name="br_description" value="<%=busRoute.getBr_description()%>" required>
                             </div>
-                            <div class="col-md-6">
-                                <label class="form-label">Trạng thái</label>
-                                <input type="text" class="form-control" name="br_status" value="<%=busRoute.getBr_status()%>">
+                            <div class="col-md-6 d-flex flex-column">
+                                <label class="form-label" for="br_status">Trạng thái</label>
+                                <select class="form-select" id="br_status" name="br_status">
+                                    <option value="active" <%= "active".equals(busRoute.getBr_status()) ? "selected" : "" %>>active</option>
+                                    <option value="inactive" <%= "inactive".equals(busRoute.getBr_status()) ? "selected" : "" %>>inactive</option>
+                                </select>
                             </div>
                         </div>
                         <div class="mt-4">

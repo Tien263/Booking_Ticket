@@ -5,7 +5,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quản Lý Mã Giảm Giá</title>
+    <title>Quản Lý Mã Giảm Giá - BusGo</title>
+    <link rel="shortcut icon" href="assets/images/logo/logo_01_1.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -98,7 +99,6 @@
                 });
             });
 
-            // Xử lý nút xóa
             let deleteButtons = document.querySelectorAll(".delete-btn");
             deleteButtons.forEach(button => {
                 button.addEventListener("click", function () {
@@ -115,11 +115,10 @@
     <!-- Sidebar -->
     <div class="sidebar">
         <div class="text-center mb-4">
-                    <img src="assets/images/logo/logo_01_1.png" srcset="assets/images/logo/logo_01_1.png 2x" alt="logo_not_found">
-                    <h4 class="mt-2">BusGo</h4>
-                </div>
+            <img src="logo_hoadon.jpg" srcset="logo_hoadon.jpg 2x" alt="logo_not_found" width="50%">
+            <h4 class="mt-2">BusGo</h4>
+        </div>
         <ul class="nav flex-column">
-            
             <li class="nav-item">
                 <a class="nav-link active" href="promotion_passenger"><i class="fas fa-bus me-2"></i>Khuyến mãi theo hạng thành viên</a>
             </li>
@@ -129,6 +128,14 @@
             <li class="nav-item">
                 <a class="nav-link" href="promotion_date"><i class="fas fa-list me-2"></i> Khuyến Mãi Theo Ngày</a>
             </li>
+            <!-- Nút logout với kiểm tra phân quyền -->
+            <c:if test="${not empty sessionScope.user}">
+                <li class="nav-item mt-auto">
+                    <a class="nav-link" href="/bookingg/logout" onclick="return confirm('Bạn có chắc chắn muốn đăng xuất?');">
+                        <i class="fas fa-sign-out-alt me-2"></i> Đăng xuất
+                    </a>
+                </li>
+            </c:if>
         </ul>
     </div>
 
@@ -150,7 +157,6 @@
         <button type="button" class="btn btn-success btn-add" data-bs-toggle="modal" data-bs-target="#addCodePromoModal">
             <i class="fas fa-plus me-2"></i> Thêm Mã Giảm Giá
         </button>
-        <li><a href="logout"><i class="fal fa-sign-out"></i> Logout</a></li>    
 
         <!-- Form lọc -->
         <div class="filter-form">

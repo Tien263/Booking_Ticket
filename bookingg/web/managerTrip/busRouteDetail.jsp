@@ -14,7 +14,8 @@
 <html lang="vi">
     <head>
         <meta charset="UTF-8">
-        <title>Chi Tiết Tuyến Xe</title>
+        <title>Chi Tiết Tuyến Xe - BusGo</title>
+        <link rel="shortcut icon" href="assets/images/logo/logo_01_1.png">
         <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     </head>
     <body class="container mt-4">

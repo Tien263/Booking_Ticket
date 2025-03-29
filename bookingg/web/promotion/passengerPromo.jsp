@@ -116,9 +116,10 @@
 <body>
     <!-- Sidebar -->
     <div class="sidebar">
-        <div class="logo">
-            <img src="https://via.placeholder.com/100x50?text=BusGo" alt="BusGo Logo">
-        </div>
+        <div class="text-center mb-4">
+            <img src="logo_hoadon.jpg" srcset="logo_hoadon.jpg 2x" alt="logo_not_found" width="50%">
+                    <h4 class="mt-2">BusGo</h4>
+                </div>
         <ul class="nav flex-column">
             
             <li class="nav-item">

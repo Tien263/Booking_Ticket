@@ -17,9 +17,8 @@
     <head>
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <title>My Bus - Sửa chuyến xe</title>
-
-        <link rel="shortcut icon" href="assets/images/logo/favourite_icon.png">
+                <title>Cập nhập chuyến xe - BusGo</title>
+        <link rel="shortcut icon" href="assets/images/logo/logo_01_1.png">
 
         <!-- Framework - CSS include -->
         <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
@@ -130,10 +129,9 @@
                             <div class="col-md-6 d-flex flex-column">
                                 <label for="bt1_status" class="form-label">Trạng thái</label>
                                 <select class="form-select" id="bt1_status" name="bt1_status">
-                                    <option value="<%=busTrips.getBt1_status()%>"><%=busTrips.getBt1_status()%></option>
-                                    <option value="active">active</option>
-                                    <option value="inactive">inactive</option>
-                                    <option value="complete">complete</option>
+                                    <option value="active" <%= "active".equals(busTrips.getBt1_status()) ? "selected" : "" %>>active</option>
+                                    <option value="inactive" <%= "inactive".equals(busTrips.getBt1_status()) ? "selected" : "" %>>inactive</option>
+                                    <option value="complete" <%= "complete".equals(busTrips.getBt1_status()) ? "selected" : "" %>>complete</option>
                                 </select>
                             </div>
                             <div class="col-md-6">

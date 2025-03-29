@@ -15,8 +15,9 @@
     <head>
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <title>My Bus - Thêm chuyến xe</title>
-        <link rel="shortcut icon" href="assets/images/logo/favourite_icon.png">
+        
+        <title>Thêm tuyến xe - BusGo</title>
+        <link rel="shortcut icon" href="assets/images/logo/logo_01_1.png">
 
         <!-- CSS Libraries -->
         <link rel="stylesheet" href="assets/css/bootstrap.min.css">

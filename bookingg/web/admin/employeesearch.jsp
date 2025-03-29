@@ -11,8 +11,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Employee Search - BusGo</title>
-    <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/images/logo/favourite_icon.png">
+    <title>Tìm kiếm nhân viên - BusGo</title>
+    <link rel="shortcut icon" href="assets/images/logo/logo_01_1.png">
 
     <!-- framework - css include -->
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/bootstrap.min.css">
